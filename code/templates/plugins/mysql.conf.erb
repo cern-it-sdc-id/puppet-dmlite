@@ -1,0 +1,30 @@
+<%if @enable_ns -%>
+# Load namespace only (LFC)
+LoadPlugin plugin_mysql_ns /usr/<%= @libdir %>/dmlite/plugin_mysql.so
+<% end -%>
+
+<%if @enable_dpm -%>
+# Load namespace and pool manager (DPM)
+LoadPlugin plugin_mysql_dpm /usr/<%= @libdir %>/dmlite/plugin_mysql.so
+<% end %>
+
+# MySQL connection parameters
+MySqlHost 	<%= @mysql_host %>
+MySqlUsername 	<%= @mysql_username %>
+MySqlPassword 	<%= @mysql_password %>
+MySqlPort	<%= @mysql_port %>
+
+# NS database
+NsDatabase <%= @ns_db %>
+
+# DPM database
+DpmDatabase <%= @dpm_db %>
+
+# Connection pool size
+NsPoolSize <%= @dbpool_size %>
+
+# Grid mapfile
+MapFile <%= @mapfile %>
+
+# Give too access to the host DN
+HostDNIsRoot <%= @host_dn_is_root %>

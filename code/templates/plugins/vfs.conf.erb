@@ -1,0 +1,9 @@
+<%if @enable_vfs -%>
+# Load the VFS plugin
+LoadPlugin plugin_vfs /usr/<%= @libdir %>/dmlite/plugin_vfs.so
+<% end -%>
+
+# Token generation
+TokenPassword	<%= @token_password %>
+TokenId		<%= @token_id %>
+TokenLife	<%= @token_life %>

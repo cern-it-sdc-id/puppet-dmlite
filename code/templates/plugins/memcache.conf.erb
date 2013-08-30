@@ -1,0 +1,25 @@
+<%if @enable_memcache -%>
+# Load memcache plugin
+LoadPlugin plugin_memcache /usr/<%= @libdir %>/dmlite/plugin_memcache.so
+<% end -%>
+
+# Can be set multiple times to use multiple caches, format <host>:<port>:<weight>
+MemcachedServer <%= @server %>
+
+# Number of memcached connections in the pool at startup
+MemcachedPoolSize <%= @pool_size %> 
+
+# Limit of symlinks to follow
+SymLinkLimit <%= @symlink_limit %>
+
+# Expiration of an entry in memcache (in seconds)
+MemcachedExpirationLimit <%= @expiration_limit %>
+
+# Use the 'ascii' or 'binary' protocol
+MemcachedProtocol <%= @protocol %>
+
+# use 'standard', or use 'consistent' for consistent hashing (useful when adding servers to the pool)
+MemcachedHashDistribution <%= @hash_distribution %>
+
+# 'on' or 'off', force to update the accessed time on every readDir()
+MemcachedStrictConsistency <%= @strict_consistency %>

@@ -1,0 +1,12 @@
+#
+# Sample configuration file for dmlite.
+#
+
+# First, the plugins to be loaded have to be specified. The order is relevant:
+# the last plugin in the stack will be the first called by the library (LIFO)
+
+<%if @enable_config -%>
+LoadPlugin plugin_config /usr/lib64/dmlite/plugin_config.so
+<% end -%>
+
+Include /etc/dmlite.conf.d/*.conf
