@@ -1,0 +1,9 @@
+<%if @enable_pool_driver -%>
+# Load the S3 plugin
+LoadPlugin plugin_s3_pooldriver /usr/<%= @libdir %>/dmlite/plugin_s3.so
+<% end -%>
+
+# specify the timeout either as seconds (as seen) or with
+# m for month, w for week, d for day or h for hour and any combination
+# e.g.: 2m4d, 2w, 3w8h, or 10m2h, ...
+S3Timeout <%= @timeout %>
