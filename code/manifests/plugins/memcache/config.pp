@@ -3,7 +3,7 @@ class dmlite::plugins::memcache::config (
 ) inherits dmlite::plugins::memcache::params {
 
     file {
-      "/etc/dmlite.conf.d/memcache.conf":
+      "/etc/dmlite.conf.d/zmemcache.conf":
         content => template("dmlite/plugins/memcache.conf.erb"),
         require => Package["dmlite-plugins-memcache"]
     }

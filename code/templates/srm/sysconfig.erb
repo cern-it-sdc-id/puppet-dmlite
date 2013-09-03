@@ -52,3 +52,5 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ORACLE_HOME/lib:$ORACLE_HOME/lib64
 # https://its.cern.ch/jira/browse/LCGDM-932
 export LD_PRELOAD=/usr/lib64/libglobus_gssapi_gsi.so.4
 <% end %>
+# - make sure we use globus pthread model$
+export GLOBUS_THREAD_MODEL="pthread"

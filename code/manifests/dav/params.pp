@@ -3,12 +3,12 @@ class dmlite::dav::params (
     $dmlite_conf	= "/etc/dmlite.conf"
     $ns_type		= "Head"
     $ns_prefix		= "dpm"
-    $ns_flags		= undef 
+    $ns_flags		= "Write"
     $ns_anon		= "nobody:nogroup"
     $ns_max_replicas	= 3
     $ns_secure_redirect = "Off"
     $ns_trusted_dns	= undef
-    $disk_flags		= undef
+    $disk_flags		= "Write"
     $disk_anon		= "nobody:nogroup"
     $ssl_cert		= "/etc/grid-security/hostcert.pem"
     $ssl_key 		= "/etc/grid-security/hostkey.pem"

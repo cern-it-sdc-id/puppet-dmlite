@@ -24,8 +24,8 @@ class dmlite {
 
   Class[Dmlite::Install] -> Class[Dmlite::Config]
 
-  class{"dmlite::config":}
-  class{"dmlite::install":}
+  include "dmlite::install"
+  include "dmlite::config"
 
 }
 
