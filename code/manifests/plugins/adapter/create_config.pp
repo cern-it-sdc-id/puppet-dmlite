@@ -1,4 +1,4 @@
-class dmlite::plugins::adapter::config (
+define dmlite::plugins::adapter::create_config (
   $config_dir_name    = "dmlite",
   $dpm_host           = $dmlite::plugins::adapter::params::dpm_host,
   $ns_host            = $dmlite::plugins::adapter::params::ns_host,
@@ -15,26 +15,14 @@ class dmlite::plugins::adapter::config (
   $token_id           = $dmlite::params::token_id,
   $token_life         = $dmlite::params::token_life,
   $enable_config      = $dmlite::params::enable_config
-) inherits dmlite::plugins::adapter::params {
+) {
+  Class[Dmlite::Params] -> Dmlite::Plugins::Adapter::Create_config <| |>
 
-  Class[Dmlite::Plugins::Adapter::Install] -> Class[Dmlite::Plugins::Adapter::Config]
+  $libdir = $dmlite::params::libdir
 
-  dmlite::plugins::adapter::create_config{"default_config":
-    config_dir_name    => $config_dir_name,   # put file in /etc/dmlite.conf.d/adapter.conf
-    dpm_host           => $dpm_host,
-    ns_host            => $ns_host,
-    connection_timeout => $connection_timeout,
-    retry_limit        => $retry_limit,
-    retry_interval     => $retry_interval,
-    enable_dpm         => $enable_dpm,
-    enable_io          => $enable_io,
-    enable_rfio        => $enable_rfio,
-    enable_ns          => $enable_ns,
-    enable_pooldriver  => $enable_pooldriver,
-    token_password     => $token_password,
-    token_id           => $token_id,
-    token_life         => $token_life,
-    enable_config      => $enable_config
-  }
-
+    file {
+      "/etc/${config_dir_name}.conf.d/adapter.conf":
+        content => template("dmlite/plugins/adapter.conf.erb"),
+        require => [Package["dmlite-plugins-adapter"], File["/etc/${config_dir_name}.conf.d"]]
+    }
 }

@@ -8,7 +8,7 @@ class dmlite::plugins::mysql::config (
     $dbpool_size	= $dmlite::plugins::mysql::params::dbpool_size,
     $mapfile		= $dmlite::plugins::mysql::params::mapfile,
     $host_dn_is_root	= $dmlite::plugins::mysql::params::host_dn_is_root,
-    $enable_ns		= $dmlite::plugins::mysql::params::enable_ns,
+    $enable_dpm		= $dmlite::plugins::mysql::params::enable_dpm,
     $enable_ns		= $dmlite::plugins::mysql::params::enable_ns
 ) inherits dmlite::plugins::mysql::params {
 

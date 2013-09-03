@@ -6,7 +6,7 @@
 # the last plugin in the stack will be the first called by the library (LIFO)
 
 <%if @enable_config -%>
-LoadPlugin plugin_config /usr/lib64/dmlite/plugin_config.so
+LoadPlugin plugin_config /usr/<%= @libdir %>/dmlite/plugin_config.so
 <% end -%>
 
-Include /etc/dmlite.conf.d/*.conf
+Include /etc/<%= @config_file_name -%>.conf.d/*.conf

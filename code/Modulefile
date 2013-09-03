@@ -1,5 +1,5 @@
 name    'rocha-dmlite'
-version '0.0.1'
+version '0.0.3'
 source 'UNKNOWN'
 author 'DPM'
 license 'Apache License, Version 2.0'
@@ -9,3 +9,5 @@ project_page 'https://svnweb.cern.ch/trac/lcgdm'
 
 ## Add dependencies, if any:
 # dependency 'username/name', '>= 1.2.0'
+dependency 'lcgdm/fetchcrl'
+dependency 'puppetlabs/stdlib'
