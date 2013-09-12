@@ -6,7 +6,7 @@ class dmlite::plugins::mysql::params (
     $mysql_port		= 0
     $ns_db		= "cns_db"
     $dpm_db		= "dpm_db"
-    $dbpool_size	= 32
+    $dbpool_size	= 100
     $mapfile		= "/etc/lcgdm-mapfile"
     $host_dn_is_root	= "no"
 
