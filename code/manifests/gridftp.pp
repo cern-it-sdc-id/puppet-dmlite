@@ -29,7 +29,8 @@ class dmlite::gridftp (
 
     }
     class{"gridftp::install":}
-    class{"gridftp::service":
+    service{"dpm-gsiftp":
+        ensure  => running,
         require => Package["dpm-dsi"]
     }
 }
