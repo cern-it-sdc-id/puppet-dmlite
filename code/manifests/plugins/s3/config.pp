@@ -5,6 +5,8 @@ class dmlite::plugins::s3::config (
 
     file {
       "/etc/dmlite.conf.d/s3.conf":
+        owner   => "root",
+        mode    => 0600,
         content => template("dmlite/plugins/s3.conf.erb"),
         require => Package["dmlite-plugins-s3"]
     }

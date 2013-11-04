@@ -4,6 +4,8 @@ class dmlite::plugins::profiler::config (
 
     file {
       "/etc/dmlite.conf.d/profiler.conf":
+        owner   => "root",
+        mode    => 0600,
         content => template("dmlite/plugins/profiler.conf.erb"),
         require => Package["dmlite-plugins-profiler"]
     }

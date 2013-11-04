@@ -4,6 +4,8 @@ class dmlite::plugins::librarian::config (
 
     file {
       "/etc/dmlite.conf.d/librarian.conf":
+        owner   => "root",
+        mode    => 0600,
         content => template("dmlite/plugins/librarian.conf.erb"),
         require => Package["dmlite-plugins-librarian"]
     }

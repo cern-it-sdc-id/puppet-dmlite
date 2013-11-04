@@ -36,5 +36,4 @@ class dmlite::plugins::adapter::config (
     token_life         => $token_life,
     enable_config      => $enable_config
   }
-
 }

@@ -18,6 +18,8 @@ class dmlite::plugins::hdfs::config (
 
     file {
       "/etc/dmlite.conf.d/hdfs.conf":
+        owner   => "root",
+        mode    => 0600,
         content => template("dmlite/plugins/hdfs.conf.erb"),
         require => Package["dmlite-plugins-hdfs"]
     }

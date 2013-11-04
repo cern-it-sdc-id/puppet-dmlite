@@ -11,6 +11,8 @@ class dmlite::plugins::oracle::config (
 
     file {
       "/etc/dmlite.conf.d/oracle.conf":
+        owner   => "root",
+        mode    => 0600,
         content => template("dmlite/plugins/oracle.conf.erb"),
         require => Package["dmlite-plugins-oracle"]
     }

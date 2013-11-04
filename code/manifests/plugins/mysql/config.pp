@@ -14,6 +14,8 @@ class dmlite::plugins::mysql::config (
 
     file {
       "/etc/dmlite.conf.d/mysql.conf":
+        owner   => "root",
+        mode    => 0600,
         content => template("dmlite/plugins/mysql.conf.erb"),
         require => Package["dmlite-plugins-mysql"]
     }

@@ -22,6 +22,8 @@ define dmlite::plugins::adapter::create_config (
 
     file {
       "/etc/${config_dir_name}.conf.d/adapter.conf":
+        owner   => "root",
+        mode    => 0600,
         content => template("dmlite/plugins/adapter.conf.erb"),
         require => [Package["dmlite-plugins-adapter"], File["/etc/${config_dir_name}.conf.d"]]
     }

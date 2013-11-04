@@ -14,6 +14,5 @@ class dmlite::config (
     token_life       => $token_life,
     enable_config    => $enable_config
   }
-
 }
 
