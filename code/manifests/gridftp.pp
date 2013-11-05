@@ -5,12 +5,21 @@ class dmlite::gridftp (
   $log_single          = "/var/log/dpm-gsiftp/gridftp.log",
   $log_transfer        = "/var/log/dpm-gsiftp/dpm-gsiftp.log",
   $log_level           = "ALL",
-  $port                = 2811
+  $port                = 2811,
+  $dpmhost,
+  $nshost              = $dpmhost
 ) {
   File["/var/log/dpm-gsiftp"] -> Class[Gridftp::Config]
   Package["dpm-dsi"] -> Class[Gridftp::Config]
+  Package["dpm-dsi"] -> File["/etc/sysconfig/dpm-gsiftp"]
 
   package{"dpm-dsi": ensure => present}
+
+  file {
+    "/etc/sysconfig/dpm-gsiftp":
+      ensure  => present,
+      content => template("dmlite/gridftp/sysconfig.erb")
+  }
 
   # gridftp configuration
   file {
@@ -28,8 +37,9 @@ class dmlite::gridftp (
     log_level           => $log_level,
     login_msg           => "Disk Pool Manager (dmlite)",
     port                => $port,
-    thread_model        => "pthread",
-    service             => "dpm-gsiftp"
+    service             => "dpm-gsiftp",
+    sysconfigfile       => "/etc/sysconfig/globus",
+    thread_model        => "pthread"
   }
   class{"gridftp::service":
     service => "dpm-gsiftp"
