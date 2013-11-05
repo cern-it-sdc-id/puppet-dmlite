@@ -11,5 +11,5 @@ class dmlite::plugins::mysql::params (
     $host_dn_is_root  = "no"
 
     $enable_dpm       = true
-    $enable_ns        = false
+    $enable_ns        = true
 }
