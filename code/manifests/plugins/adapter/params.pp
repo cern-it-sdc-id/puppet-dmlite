@@ -5,9 +5,9 @@ class dmlite::plugins::adapter::params (
     $connection_timeout	= 2
     $retry_limit	= 3
     $retry_interval	= 2
-    $enable_dpm		= true
+    $enable_dpm		= false
     $enable_ns		= false
-    $enable_io		= true
-    $enable_rfio	= false
+    $enable_io		= false
+    $enable_rfio	= true
     $enable_pooldriver	= true
 }
