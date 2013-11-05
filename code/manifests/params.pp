@@ -4,9 +4,9 @@ class dmlite::params {
       default  => "lib",
     }
 
-    $token_password	= "change-this"
-    $token_id		= "ip"
-    $token_life		= 1000
-    $enable_config	= true
+    $token_password = "change-this"
+    $token_id       = "ip"
+    $token_life     = 1000
+    $enable_config  = true
 
 }
