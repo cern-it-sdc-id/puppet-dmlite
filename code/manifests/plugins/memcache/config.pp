@@ -1,6 +1,8 @@
 class dmlite::plugins::memcache::config (
-    $enable_memcache	= $dmlite::plugins::memcache::params::enable_memcache,
-    $pool_size = $dmlite::plugins::memcache::params::pool_size
+    $enable_memcache  = $dmlite::plugins::memcache::params::enable_memcache,
+    $pool_size        = $dmlite::plugins::memcache::params::pool_size,
+    $user             = $dmlite::params::user,
+    $group            = $dmlite::params::group
 ) inherits dmlite::plugins::memcache::params {
 
     file {
@@ -10,7 +12,8 @@ class dmlite::plugins::memcache::config (
 
     file {
       "/etc/dmlite.conf.d/zmemcache.conf":
-        owner   => "root",
+        owner     => $user,
+        group     => $group,
         mode    => 0600,
         content => template("dmlite/plugins/memcache.conf.erb"),
         require => Package["dmlite-plugins-memcache"]

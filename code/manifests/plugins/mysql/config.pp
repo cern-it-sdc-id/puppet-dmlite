@@ -9,12 +9,15 @@ class dmlite::plugins::mysql::config (
   $mapfile          = $dmlite::plugins::mysql::params::mapfile,
   $host_dn_is_root  = $dmlite::plugins::mysql::params::host_dn_is_root,
   $enable_dpm       = $dmlite::plugins::mysql::params::enable_dpm,
-  $enable_ns        = $dmlite::plugins::mysql::params::enable_ns
+  $enable_ns        = $dmlite::plugins::mysql::params::enable_ns,
+  $user             = $dmlite::params::user,
+  $group            = $dmlite::params::group
 ) inherits dmlite::plugins::mysql::params {
 
     file {
       "/etc/dmlite.conf.d/mysql.conf":
-        owner   => "root",
+        owner   => $user,
+        group   => $group,
         mode    => 0600,
         content => template("dmlite/plugins/mysql.conf.erb"),
         require => Package["dmlite-plugins-mysql"]

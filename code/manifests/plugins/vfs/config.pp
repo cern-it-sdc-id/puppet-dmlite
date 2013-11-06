@@ -1,12 +1,15 @@
 class dmlite::plugins::vfs::config (
-    $enable_vfs	= $dmlite::plugins::vfs::params::enable_vfs
+  $enable_vfs = $dmlite::plugins::vfs::params::enable_vfs,
+  $user       = $dmlite::params::user,
+  $group      = $dmlite::params::group
 ) inherits dmlite::plugins::vfs::params {
 
-    file {
-      "/etc/dmlite.conf.d/vfs.conf":
-        owner   => "root",
-        mode    => 0600,
-        content => template("dmlite/plugins/vfs.conf.erb"),
-        require => Package["dmlite-plugins-vfs"]
-    }
+  file {
+    "/etc/dmlite.conf.d/vfs.conf":
+      owner   => $user,
+      group   => $group,
+      mode    => 0600,
+      content => template("dmlite/plugins/vfs.conf.erb"),
+      require => Package["dmlite-plugins-vfs"]
+  }
 }

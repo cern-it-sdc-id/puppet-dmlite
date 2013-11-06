@@ -7,11 +7,14 @@ class dmlite::plugins::oracle::config (
     $mapfile		= $dmlite::plugins::oracle::params::mapfile,
     $host_dn_is_root	= $dmlite::plugins::oracle::params::host_dn_is_root,
     $enable_ns		= $dmlite::plugins::oracle::params::enable_ns
+    $user               = $dmlite::params::user,
+    $group              = $dmlite::params::group
 ) inherits dmlite::plugins::oracle::params {
 
     file {
       "/etc/dmlite.conf.d/oracle.conf":
-        owner   => "root",
+        owner   => $user,
+        group   => $group,
         mode    => 0600,
         content => template("dmlite/plugins/oracle.conf.erb"),
         require => Package["dmlite-plugins-oracle"]

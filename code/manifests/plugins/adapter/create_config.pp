@@ -14,17 +14,20 @@ define dmlite::plugins::adapter::create_config (
   $token_password     = $dmlite::params::token_password,
   $token_id           = $dmlite::params::token_id,
   $token_life         = $dmlite::params::token_life,
-  $enable_config      = $dmlite::params::enable_config
+  $enable_config      = $dmlite::params::enable_config,
+  $user               = $dmlite::params::user,
+  $group              = $dmlite::params::group
 ) {
   Class[Dmlite::Params] -> Dmlite::Plugins::Adapter::Create_config <| |>
 
   $libdir = $dmlite::params::libdir
 
-    file {
-      "/etc/${config_dir_name}.conf.d/adapter.conf":
-        owner   => "root",
-        mode    => 0600,
-        content => template("dmlite/plugins/adapter.conf.erb"),
-        require => [Package["dmlite-plugins-adapter"], File["/etc/${config_dir_name}.conf.d"]]
-    }
+  file {
+    "/etc/${config_dir_name}.conf.d/adapter.conf":
+      owner   => $user,
+      group   => $group,
+      mode    => 0600,
+      content => template("dmlite/plugins/adapter.conf.erb"),
+      require => [Package["dmlite-plugins-adapter"], File["/etc/${config_dir_name}.conf.d"]]
+  }
 }

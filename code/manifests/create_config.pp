@@ -3,7 +3,9 @@ define dmlite::create_config (
   $token_password   = $dmlite::params::token_password,
   $token_id         = $dmlite::params::token_id,
   $token_life       = $dmlite::params::token_life,
-  $enable_config    = $dmlite::params::enable_config
+  $enable_config    = $dmlite::params::enable_config,
+  $user             = $dmlite::params::user,
+  $group            = $dmlite::params::group
 ) {
   include dmlite::params
 
@@ -13,14 +15,16 @@ define dmlite::create_config (
 
   file {"/etc/${config_file_name}.conf":
     ensure  => present,
-    owner   => "root",
+    owner   => $user,
+    group   => $group,
     mode    => 0600,
     content => template("dmlite/dmlite.conf.erb")
   }
 
   file {"/etc/${config_file_name}.conf.d":
     ensure => directory,
-    owner   => "root",
-    mode    => 0600
+    owner   => $user,
+    group   => $group,
+    mode    => 0700
   }
 }
