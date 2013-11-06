@@ -7,7 +7,10 @@ class dmlite::gridftp (
   $log_level           = "ALL",
   $port                = 2811,
   $dpmhost,
-  $nshost              = $dpmhost
+  $nshost              = $dpmhost,
+  $user                = $dmlite::params::user,
+  $group               = $dmlite::params::group
+>>>>>>> ae0344d... make sure the gridftp log files are owned by the dmlite user
 ) {
   File["/var/log/dpm-gsiftp"] -> Class[Gridftp::Config]
   Package["dpm-dsi"] -> Class[Gridftp::Config]
@@ -18,12 +21,16 @@ class dmlite::gridftp (
   file {
     "/etc/sysconfig/dpm-gsiftp":
       ensure  => present,
+      owner   => $user,
+      group   => $group,
       content => template("dmlite/gridftp/sysconfig.erb")
   }
 
   # gridftp configuration
   file {
     "/var/log/dpm-gsiftp":
+      owner  => $user,
+      group  => $group,
       ensure => directory
   }
   class{"gridftp::install":}
