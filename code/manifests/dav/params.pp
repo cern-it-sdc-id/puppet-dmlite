@@ -1,6 +1,7 @@
 class dmlite::dav::params (
 ) inherits dmlite::params {
     $dmlite_conf        = "/etc/dmlite.conf"
+    $dmlite_disk_conf   = "/etc/dmlite-disk.conf"
     $ns_type            = "Head"
     $ns_prefix          = "dpm"
     $ns_flags           = "Write"
@@ -23,6 +24,6 @@ class dmlite::dav::params (
     $ulimit             = undef
     $enable_ns          = true
     $enable_disk        = true
-    $enable_ssl         = true
-    $enable_plain       = false
+    $enable_https       = true
+    $enable_http        = true
 }

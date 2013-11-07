@@ -22,8 +22,8 @@ class dmlite::dav::config (
     $ulimit             = $dmlite::dav::params::ulimit,
     $enable_ns          = $dmlite::dav::params::enable_ns,
     $enable_disk        = $dmlite::dav::params::enable_disk,
-    $enable_ssl         = $dmlite::dav::params::enable_ssl,
-    $enable_plain       = $dmlite::dav::params::enable_plain
+    $enable_https       = $dmlite::dav::params::enable_https,
+    $enable_http        = $dmlite::dav::params::enable_http
 ) inherits dmlite::dav::params {
 
     Class[Dmlite::Dav::Install] -> Class[Dmlite::Dav::Config]
