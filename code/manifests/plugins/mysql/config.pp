@@ -1,7 +1,7 @@
 class dmlite::plugins::mysql::config (
   $mysql_host       = $dmlite::plugins::mysql::params::mysql_host,
   $mysql_username   = $dmlite::plugins::mysql::params::mysql_username,
-  $mysql_password   = $dmlite::plugins::mysql::params::mysql_password,
+  $mysql_password,
   $mysql_port       = $dmlite::plugins::mysql::params::mysql_port,
   $ns_db            = $dmlite::plugins::mysql::params::ns_db,
   $dpm_db           = $dmlite::plugins::mysql::params::dpm_db,
