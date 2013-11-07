@@ -1,5 +1,5 @@
 define dmlite::create_config (
-  $config_file_name = "dmlite",
+  $config_file_name,
   $enable_config    = $dmlite::params::enable_config,
   $user             = $dmlite::params::user,
   $group            = $dmlite::params::group
