@@ -5,11 +5,10 @@ class dmlite::plugins::adapter::config::head (
   $retry_limit        = $dmlite::plugins::adapter::params::retry_limit,
   $retry_interval     = $dmlite::plugins::adapter::params::retry_interval,
 
-  $token_password     = $dmlite::params::token_password,
-  $token_id           = $dmlite::params::token_id,
-  $token_life         = $dmlite::params::token_life,
-  $enable_config      = $dmlite::params::enable_config
-) inherits dmlite::plugins::adapter::params {
+  $token_password,
+  $token_id           = $dmlite::plugins::adapter::params::token_id,
+  $token_life         = $dmlite::plugins::adapter::params::token_life,
+) inherits dmlite::plugins::adaptplugins::adapter::er::params {
 
   Class[Dmlite::Plugins::Adapter::Install] -> Class[Dmlite::Plugins::Adapter::Config::Head]
 
@@ -28,7 +27,6 @@ class dmlite::plugins::adapter::config::head (
     token_password     => $token_password,
     token_id           => $token_id,
     token_life         => $token_life,
-    enable_config      => $enable_config
   }
 
   dmlite::plugins::adapter::create_config{"disk_config_http":
@@ -46,7 +44,6 @@ class dmlite::plugins::adapter::config::head (
     token_password     => $token_password,
     token_id           => $token_id,
     token_life         => $token_life,
-    enable_config      => $enable_config
   }
 }
 

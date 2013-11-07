@@ -11,10 +11,9 @@ class dmlite::plugins::adapter::config (
   $enable_ns          = $dmlite::plugins::adapter::params::enable_ns,
   $enable_pooldriver  = $dmlite::plugins::adapter::params::enable_pooldriver,
 
-  $token_password     = $dmlite::params::token_password,
-  $token_id           = $dmlite::params::token_id,
-  $token_life         = $dmlite::params::token_life,
-  $enable_config      = $dmlite::params::enable_config
+  $token_password,
+  $token_id           = $dmlite::plugins::adapter::params::token_id,
+  $token_life         = $dmlite::plugins::adapter::params::token_life,
 ) inherits dmlite::plugins::adapter::params {
 
   Class[Dmlite::Plugins::Adapter::Install] -> Class[Dmlite::Plugins::Adapter::Config]
@@ -34,6 +33,5 @@ class dmlite::plugins::adapter::config (
     token_password     => $token_password,
     token_id           => $token_id,
     token_life         => $token_life,
-    enable_config      => $enable_config
   }
 }

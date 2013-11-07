@@ -10,4 +10,7 @@ class dmlite::plugins::adapter::params (
     $enable_io          = false
     $enable_rfio        = true
     $enable_pooldriver  = true
+
+    $token_id           = "id"
+    $token_life         = 1000
 }

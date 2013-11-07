@@ -11,10 +11,9 @@ define dmlite::plugins::adapter::create_config (
   $enable_ns          = $dmlite::plugins::adapter::params::enable_ns,
   $enable_pooldriver  = $dmlite::plugins::adapter::params::enable_pooldriver,
 
-  $token_password     = $dmlite::params::token_password,
-  $token_id           = $dmlite::params::token_id,
-  $token_life         = $dmlite::params::token_life,
-  $enable_config      = $dmlite::params::enable_config,
+  $token_password,
+  $token_id           = $dmlite::plugins::adapter::params::token_id,
+  $token_life         = $dmlite::plugins::adapter::params::token_life,
   $user               = $dmlite::params::user,
   $group              = $dmlite::params::group
 ) {
