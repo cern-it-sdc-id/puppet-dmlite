@@ -34,6 +34,8 @@ class dmlite::gridftp (
   }
   class{"gridftp::install":}
   class{"gridftp::config":
+    user                => "${user}",
+    group               => "${group}",
     auth_level          => 0,
     detach              => $detach,
     disable_usage_stats => $disable_usage_stats,

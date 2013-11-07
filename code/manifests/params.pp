@@ -6,6 +6,6 @@ class dmlite::params {
 
   $enable_config  = true
   $user           = $lcgdm::base::config::user
-  $group          = $lcgdm::base::config::group
+  $group          = $lcgdm::base::config::user
 
 }
