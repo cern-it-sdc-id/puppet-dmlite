@@ -10,7 +10,6 @@ class dmlite::gridftp (
   $nshost              = $dpmhost,
   $user                = $dmlite::params::user,
   $group               = $dmlite::params::group
->>>>>>> ae0344d... make sure the gridftp log files are owned by the dmlite user
 ) {
   File["/var/log/dpm-gsiftp"] -> Class[Gridftp::Config]
   Package["dpm-dsi"] -> Class[Gridftp::Config]
