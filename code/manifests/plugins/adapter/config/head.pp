@@ -8,7 +8,7 @@ class dmlite::plugins::adapter::config::head (
   $token_password,
   $token_id           = $dmlite::plugins::adapter::params::token_id,
   $token_life         = $dmlite::plugins::adapter::params::token_life,
-) inherits dmlite::plugins::adaptplugins::adapter::er::params {
+) inherits dmlite::plugins::adapter::params {
 
   Class[Dmlite::Plugins::Adapter::Install] -> Class[Dmlite::Plugins::Adapter::Config::Head]
 

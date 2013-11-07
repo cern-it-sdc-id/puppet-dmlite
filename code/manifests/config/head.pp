@@ -14,7 +14,7 @@ class dmlite::config::head (
   }
 
   dmlite::create_config{"disk_config_http":
-    config_file_name => "dmlite-disk",   # create /etc/dmlite.conf
+    config_file_name => "dmlite-disk",
     user             => $user,
     group            => $group,
     enable_config    => $enable_config
