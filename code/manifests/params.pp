@@ -4,8 +4,6 @@ class dmlite::params {
       default  => "lib",
     }
 
-    $token_id       = "ip"
-    $token_life     = 1000
     $enable_config  = true
     $user           = $lcgdm::base::config::user
     $group          = $lcgdm::base::config::group

@@ -1,8 +1,5 @@
 define dmlite::create_config (
   $config_file_name = "dmlite",
-  $token_password   = $dmlite::params::token_password,
-  $token_id         = $dmlite::params::token_id,
-  $token_life       = $dmlite::params::token_life,
   $enable_config    = $dmlite::params::enable_config,
   $user             = $dmlite::params::user,
   $group            = $dmlite::params::group
