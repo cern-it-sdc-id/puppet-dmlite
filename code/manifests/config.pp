@@ -1,5 +1,5 @@
 class dmlite::config (
-  $token_password = $dmlite::params::token_password,
+  $token_password,
   $token_id       = $dmlite::params::token_id,
   $token_life     = $dmlite::params::token_life,
   $enable_config  = $dmlite::params::enable_config,
