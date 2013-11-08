@@ -1,7 +1,7 @@
 class dmlite::head (
   $token_password,
-  $dpmhost   = "${::fqdn}",
-  $nshost    = "${::fqdn}",
+  $dpmhost    = "${::fqdn}",
+  $nshost     = "${::fqdn}",
   $debuginfo  = false,
 ) {
   class{"dmlite::config::disk":}

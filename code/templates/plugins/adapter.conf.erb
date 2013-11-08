@@ -28,8 +28,8 @@ LoadPlugin plugin_fs_pooldriver /usr/<%= @libdir %>/dmlite/plugin_adapter.so
 <% end -%>
 
 # Remote DPM/LFC host to connect to
-<%if @dpm_host -%>DpmHost <%= @dpm_host %><% end %>
-<%if @ns_host -%>NsHost <%= @ns_host %><% end %>
+<%if @dpmhost -%>DpmHost <%= @dpmhost %><% end %>
+<%if @nshost -%>NsHost <%= @nshost %><% end %>
 
 # Timeout when connection to the NsHost (in seconds)
 ConnectionTimeout <%= @connection_timeout %>

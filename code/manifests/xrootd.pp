@@ -2,8 +2,8 @@
 class dmlite::xrootd (
   $nodetype = ["head", "disk"], # head, disk
   $domain,
-  $dpm_host = $fqdn,
-  $ns_host = $fqdn,
+  $dpmhost = $fqdn,
+  $nshost = $fqdn,
   $ns_basepath = $dmlite::dpm::config::basepath,
   $xrootd_use_voms = true,
   $xrootd_monitor = undef,
@@ -65,7 +65,7 @@ class dmlite::xrootd (
     }
 
     dmlite::xrootd::create_config{"/etc/xrootd/xrootd-dpmdisk.cfg":
-      dpm_host       => $dpm_host,
+      dpm_host       => $dpmhost,
       all_adminpath  => "/var/spool/xrootd",
       all_pidpath    => "/var/run/xrootd",
       all_sitename   => $site_name,
@@ -106,7 +106,7 @@ class dmlite::xrootd (
     $ofs_authlib = "libXrdDPMRedirAcc.so.3"
 
     dmlite::xrootd::create_config{"/etc/xrootd/xrootd-dpmredir.cfg":
-      dpm_host              => $dpm_host,
+      dpm_host              => $dpmhost,
       all_adminpath         => "/var/spool/xrootd",
       all_pidpath           => "/var/run/xrootd",
       all_sitename          => $site_name,
@@ -137,7 +137,7 @@ class dmlite::xrootd (
     }
 
     $federation_defaults = {
-      dpm_host              => $dpm_host,
+      dpm_host              => $dpmhost,
       all_adminpath         => "/var/spool/xrootd", #
       all_pidpath           => "/var/run/xrootd", #
       all_sitename          => $site_name, #
@@ -180,8 +180,8 @@ class dmlite::xrootd (
     $xrootd_instances_options_fed
   )
 
-  $exports = { "DPM_HOST"             => $dpm_host,
-               "DPNS_HOST"            => $ns_host,
+  $exports = { "DPM_HOST"             => $dpmhost,
+               "DPNS_HOST"            => $nshost,
                "DPM_CONRETRY"         => 0,
                "DPNS_CONRETRY"        => 0,
                "XRD_MAXREDIRECTCOUNT" => 1

@@ -1,7 +1,7 @@
 class dmlite::plugins::adapter::config (
   $config_dir_name    = "dmlite",
-  $dpm_host           = $dmlite::plugins::adapter::params::dpm_host,
-  $ns_host            = $dmlite::plugins::adapter::params::ns_host,
+  $dpmhost            = $dmlite::plugins::adapter::params::dpmhost,
+  $nshost             = $dmlite::plugins::adapter::params::nshost,
   $connection_timeout = $dmlite::plugins::adapter::params::connection_timeout,
   $retry_limit        = $dmlite::plugins::adapter::params::retry_limit,
   $retry_interval     = $dmlite::plugins::adapter::params::retry_interval,
@@ -20,8 +20,8 @@ class dmlite::plugins::adapter::config (
 
   dmlite::plugins::adapter::create_config{"default_config":
     config_dir_name    => $config_dir_name,   # put file in /etc/dmlite.conf.d/adapter.conf
-    dpm_host           => $dpm_host,
-    ns_host            => $ns_host,
+    dpmhost            => $dpmhost,
+    nshost             => $nshost,
     connection_timeout => $connection_timeout,
     retry_limit        => $retry_limit,
     retry_interval     => $retry_interval,

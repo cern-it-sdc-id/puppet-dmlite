@@ -1,7 +1,7 @@
 define dmlite::plugins::adapter::create_config (
   $config_dir_name    = "dmlite",
-  $dpm_host           = $dmlite::plugins::adapter::params::dpm_host,
-  $ns_host            = $dmlite::plugins::adapter::params::ns_host,
+  $dpmhost            = $dmlite::plugins::adapter::params::dpmhost,
+  $nshost             = $dmlite::plugins::adapter::params::nshost,
   $connection_timeout = $dmlite::plugins::adapter::params::connection_timeout,
   $retry_limit        = $dmlite::plugins::adapter::params::retry_limit,
   $retry_interval     = $dmlite::plugins::adapter::params::retry_interval,
