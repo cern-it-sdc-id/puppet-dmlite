@@ -10,7 +10,7 @@ class dmlite::plugins::adapter::config::disk (
   $token_life         = $dmlite::plugins::adapter::params::token_life,
 ) inherits dmlite::plugins::adapter::params {
 
-  Class[Dmlite::Plugins::Adapter::Install] -> Class[Dmlite::Plugins::Adapter::Config::Head]
+  Class[Dmlite::Plugins::Adapter::Install] -> Class[Dmlite::Plugins::Adapter::Config::Disk]
 
   dmlite::plugins::adapter::create_config{"head_config":
     config_dir_name    => "dmlite",   # put file in /etc/dmlite.conf.d/adapter.conf
