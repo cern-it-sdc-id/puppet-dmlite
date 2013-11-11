@@ -26,6 +26,12 @@ class dmlite::dav::config (
   $enable_http        = $dmlite::dav::params::enable_http
 ) inherits dmlite::dav::params {
 
+  validate_bool($enable_ns)
+  validate_bool($enable_disk)
+  validate_bool($enable_https)
+  validate_bool($enable_http)
+
+
   Class[Dmlite::Dav::Install] -> Class[Dmlite::Dav::Config]
 
   selboolean{"httpd_can_network_connect": value => on, persistent => true }
