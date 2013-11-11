@@ -23,13 +23,13 @@
 class dmlite (
   $nodetype = "head"
 ) {
-  validate_re($nodetype, '^(head|disk)$',
-  "${nodetype} is not a valid node type for dmlite. It should be one of 'head' and 'disk'.")
-
-  include('dmlite::install')
-  if $nodetype == "head" {
-    include('dmlite::config::head')
-  } elsif $nodetype == "disk" {
-    include('dmlite::config::disk')
-  }
+  #  validate_re($nodetype, '^(head|disk)$',
+  #  "${nodetype} is not a valid node type for dmlite. It should be one of 'head' and 'disk'.")
+  #
+  #  include('dmlite::install')
+  #  if $nodetype == "head" {
+  #    include('dmlite::config::head')
+  #  } elsif $nodetype == "disk" {
+  #    include('dmlite::config::disk')
+  #  }
 }
