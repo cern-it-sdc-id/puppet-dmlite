@@ -71,6 +71,14 @@ class dmlite::dav::config (
       path   => "/etc/httpd/conf/httpd.conf"
     }
   }
+
+  file_line{"apache event":
+    ensure => present,
+    path   => "/etc/sysconfig/httpd",
+    line   => "HTTPD=/usr/sbin/httpd.event",
+    match  => "^#?HTTPD=/.*"
+  }
+
   if $ulimit {
     file_line {"apache ulimit":
       ensure => present,
