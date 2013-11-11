@@ -62,6 +62,9 @@ define dmlite::xrootd::create_config (
 ) {
   include xrootd::config
 
+  validate_bool($xrd_debug)
+  validate_bool($alice_token)
+
   file {"$filename":
     ensure  => file,
     owner  => $xrootd::config::xrootd_user,

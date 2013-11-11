@@ -21,6 +21,11 @@ class dmlite::xrootd (
   $dpm_xrootd_fedredirs = {}
 ) {
 
+  validate_bool($xrootd_use_voms)
+  validate_bool($xrd_dpmclassic)
+  validate_bool($dpm_xrootd_debug)
+  validate_bool($alice_token)
+
   Dmlite::Xrootd::Create_Config <| |> ~> Class[Xrootd::Service]
   Xrootd::Create_Sysconfig <| |> ~> Class[Xrootd::Service]
 
