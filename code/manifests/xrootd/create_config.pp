@@ -63,7 +63,9 @@ define dmlite::xrootd::create_config (
   include xrootd::config
 
   validate_bool($xrd_debug)
-  validate_bool($alice_token)
+  if $alice_token {
+    validate_bool($alice_token)
+  }
 
   file {"$filename":
     ensure  => file,
