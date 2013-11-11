@@ -1,4 +1,4 @@
-class dmlite::head (
+class dmlite::disk (
   $token_password,
   $dpmhost    = "${::fqdn}",
   $nshost     = "${::fqdn}",
