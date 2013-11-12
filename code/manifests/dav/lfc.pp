@@ -9,7 +9,8 @@ class dmlite::dav::lfc (
     ns_prefix    => "grid",
     ns_flags     => "NoAuthn",
     enable_disk  => false,
-    enable_plain => true,
+    enable_http  => true,
+    enable_https => true,
     user         => 'lfcmgr',
     group        => 'lfcmgr',
   }
