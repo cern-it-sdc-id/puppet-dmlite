@@ -1,5 +1,6 @@
 class dmlite::head (
   $token_password,
+  $token_id   = "ip",
   $mysql_username,
   $mysql_password,
   $mysql_host = "localhost",
@@ -13,6 +14,7 @@ class dmlite::head (
   }
   class{"dmlite::plugins::adapter::config::head":
     token_password => "${token_password}",
+    token_id       => "${token_id}",
     dpmhost        => "${dpmhost}",
     nshost         => "${nshost}"
   }
