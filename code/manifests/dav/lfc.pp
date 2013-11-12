@@ -5,13 +5,13 @@ class dmlite::dav::lfc (
 
   class{"dmlite::dav::install":}
   class{"dmlite::dav::config":
-	ns_type 	=> "LFC",
-	ns_prefix 	=> "grid",
-	ns_flags	=> "NoAuthn",
-        enable_disk	=> false,
-        enable_plain	=> true,
-        user            => 'lfcmgr',
-        group           => 'lfcmgr',
+    ns_type      => "LFC",
+    ns_prefix    => "grid",
+    ns_flags     => "NoAuthn",
+    enable_disk  => false,
+    enable_plain => true,
+    user         => 'lfcmgr',
+    group        => 'lfcmgr',
   }
   class{"dmlite::dav::service":}
 
