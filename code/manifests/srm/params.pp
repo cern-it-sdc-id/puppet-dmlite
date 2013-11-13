@@ -8,5 +8,7 @@ class dmlite::srm::params (
   $dpmhost   = $fqdn
   $nshost    = $fqdn
   $numthreads = 20
+  $user       = "dpmmgr"
+  $group      = "dpmmgr"
 
 }
