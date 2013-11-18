@@ -4,6 +4,5 @@ class dmlite::plugins::librarian {
 
   class{"dmlite::plugins::librarian::config":}
   class{"dmlite::plugins::librarian::install":}
-  class{"dmlite::plugins::librarian::service":}
 
 }
