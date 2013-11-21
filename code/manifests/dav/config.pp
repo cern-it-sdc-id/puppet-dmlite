@@ -1,6 +1,6 @@
 class dmlite::dav::config (
   $dmlite_conf        = $dmlite::dav::params::dmlite_conf,
-  $dmlite_disk_conf   = $dmlite::dav::params::dmlite_conf,
+  $dmlite_disk_conf   = $dmlite::dav::params::dmlite_disk_conf,
   $ns_type            = $dmlite::dav::params::ns_type,
   $ns_prefix          = $dmlite::dav::params::ns_prefix,
   $ns_flags           = $dmlite::dav::params::ns_flags,
