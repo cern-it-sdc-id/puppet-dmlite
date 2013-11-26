@@ -7,7 +7,7 @@ class dmlite::disk (
 ) {
   class{"dmlite::config::disk":}
   class{"dmlite::install":
-    debuginfo => "${debuginfo}"
+    debuginfo => $debuginfo
   }
   class{"dmlite::plugins::adapter::config::disk":
     token_password => "${token_password}",

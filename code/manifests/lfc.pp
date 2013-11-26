@@ -12,7 +12,7 @@ class dmlite::lfc (
 
   class{"dmlite::config::lfc":}
   class{"dmlite::install":
-    debuginfo => "${debuginfo}"
+    debuginfo => $debuginfo
   }
   class{"dmlite::plugins::adapter::config::lfc":
     token_password => "${token_password}",

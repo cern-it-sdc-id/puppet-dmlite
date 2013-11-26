@@ -10,7 +10,7 @@ class dmlite::head (
 ) {
   class{"dmlite::config::head":}
   class{"dmlite::install":
-    debuginfo => "${debuginfo}"
+    debuginfo => $debuginfo
   }
   class{"dmlite::plugins::adapter::config::head":
     token_password => "${token_password}",
