@@ -14,7 +14,7 @@ class dmlite::gridftp (
   File["/var/log/dpm-gsiftp"] -> Class[Gridftp::Config]
   Package["dpm-dsi"] -> Class[Gridftp::Config]
   Package["dpm-dsi"] -> File["/etc/sysconfig/dpm-gsiftp"]
-  Class["Gridftp::Config"] -> Exec["Remove_globus-gridftp-server_init_management"]
+  Class["Gridftp::Config"] -> Exec["remove_globus-gridftp-server_init_management"]
 
   package{"dpm-dsi": ensure => present}
 
