@@ -14,6 +14,7 @@ class dmlite::gridftp (
   File["/var/log/dpm-gsiftp"] -> Class[Gridftp::Config]
   Package["dpm-dsi"] -> Class[Gridftp::Config]
   Package["dpm-dsi"] -> File["/etc/sysconfig/dpm-gsiftp"]
+  Class["Gridftp::Config"] -> Exec["Remove_globus-gridftp-server_init_management"]
 
   package{"dpm-dsi": ensure => present}
 
@@ -48,6 +49,9 @@ class dmlite::gridftp (
     service             => "dpm-gsiftp",
     sysconfigfile       => "/etc/sysconfig/globus",
     thread_model        => "pthread"
+  }
+  exec{"remove_globus-gridftp-server_init_management":
+    command => "/sbin/chkconfig globus-gridftp-server off"
   }
   class{"gridftp::service":
     service => "dpm-gsiftp"
