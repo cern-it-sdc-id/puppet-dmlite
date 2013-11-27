@@ -1,11 +1,11 @@
 class dmlite::plugins::memcache::config (
-  $servers          = $dmlite::params::servers,
+  $servers          = $dmlite::plugins::memcache::params::servers,
   $enable_memcache  = $dmlite::plugins::memcache::params::enable_memcache,
   $pool_size        = $dmlite::plugins::memcache::params::pool_size,
   $user             = $dmlite::params::user,
   $group            = $dmlite::params::group,
-  $protocol         = $dmlite::params::protocol,
-  $expiration_limit = $dmlite::params::expiration_limit
+  $protocol         = $dmlite::plugins::memcache::params::protocol,
+  $expiration_limit = $dmlite::plugins::memcache::params::expiration_limit
 ) inherits dmlite::plugins::memcache::params {
 
   validate_array($servers)
