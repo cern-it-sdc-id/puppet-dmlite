@@ -3,8 +3,8 @@ class dmlite::dav (
 
   Class[Dmlite::Dav::Install] -> Class[Dmlite::Dav::Config] ~> Class[Dmlite::Dav::Service]
 
-  class{"dmlite::dav::install":}
-  class{"dmlite::dav::config":}
-  class{"dmlite::dav::service":}
+  include('dmlite::dav::install')
+  include('dmlite::dav::config')
+  include('dmlite::dav::service')
 
 }
