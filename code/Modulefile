@@ -9,5 +9,5 @@ project_page 'https://svnweb.cern.ch/trac/lcgdm'
 
 ## Add dependencies, if any:
 # dependency 'username/name', '>= 1.2.0'
-dependency 'lcgdm/fetchcrl'
+dependency 'CERNOps/fetchcrl'
 dependency 'puppetlabs/stdlib'
