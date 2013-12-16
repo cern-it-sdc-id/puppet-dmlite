@@ -15,7 +15,8 @@ define dmlite::plugins::adapter::create_config (
   $token_id           = $dmlite::plugins::adapter::params::token_id,
   $token_life         = $dmlite::plugins::adapter::params::token_life,
   $user               = $dmlite::params::user,
-  $group              = $dmlite::params::group
+  $group              = $dmlite::params::group,
+  $adminuser          = undef
 ) {
   Class[Dmlite::Params] -> Dmlite::Plugins::Adapter::Create_config <| |>
 
