@@ -44,3 +44,8 @@ TokenPassword <%= @token_password %>
 TokenId <%= @token_id %>
 TokenLife <%= @token_life %>
 <% end -%>
+
+<% if @adminuser -%>
+# Adminuser for replication and filesystem selection
+AdminUsername <%= @adminuser %>
+<% end -%>

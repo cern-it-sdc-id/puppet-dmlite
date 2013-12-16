@@ -11,7 +11,8 @@ class dmlite::plugins::mysql::config (
   $enable_dpm       = $dmlite::plugins::mysql::params::enable_dpm,
   $enable_ns        = $dmlite::plugins::mysql::params::enable_ns,
   $user             = $dmlite::params::user,
-  $group            = $dmlite::params::group
+  $group            = $dmlite::params::group,
+  $adminuser        = undef,
 ) inherits dmlite::plugins::mysql::params {
 
     file {

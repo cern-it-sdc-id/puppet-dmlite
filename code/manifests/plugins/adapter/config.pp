@@ -14,6 +14,7 @@ class dmlite::plugins::adapter::config (
   $token_password,
   $token_id           = $dmlite::plugins::adapter::params::token_id,
   $token_life         = $dmlite::plugins::adapter::params::token_life,
+  $adminuser          = undef,
 ) inherits dmlite::plugins::adapter::params {
 
   Class[Dmlite::Plugins::Adapter::Install] -> Class[Dmlite::Plugins::Adapter::Config]
