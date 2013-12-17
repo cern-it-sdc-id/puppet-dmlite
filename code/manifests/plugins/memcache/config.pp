@@ -13,10 +13,16 @@ class dmlite::plugins::memcache::config (
   validate_array($servers)
   validate_bool($enable_memcache)
   if is_numeric($expiration_limit) == false {
-    fail("The ${expiration_limit} provided is not a number. Please provide a positive integer.")
+    fail("The parameter '${expiration_limit}' provided is not a number. Please provide a positive integer.")
   }
   validate_re($protocol, '^(ascii|binary)$',
-    "${protocol} is not a valid memcached protocol. It should be 'ascii' or 'binary'.")
+    "'${protocol}' is not a valid memcached protocol. It should be 'ascii' or 'binary'.")
+
+  validate_re($func_counter, '^(on|off)$',
+    "'${func_counter}' is not a valid parameter. It should be 'on' or 'off'.")
+
+  validate_re($lookup_table, '^(on|off)$',
+    "'${lookup_table}' is not a valid parameter. It should be 'on' or 'off'.")
 
   file {
     "/etc/dmlite.conf.d/memcache.conf":
