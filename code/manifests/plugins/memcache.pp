@@ -19,7 +19,7 @@ class dmlite::plugins::memcache(
     group            => "${group}",
     protocol         => "${protocol}",
     posix            => "${posix}",
-    expiration_limit => $expiration_limit
+    expiration_limit => $expiration_limit,
     func_counter     => "${func_counter}",
     lookup_table     => "${lookup_table}",
   }
