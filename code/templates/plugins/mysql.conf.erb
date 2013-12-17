@@ -29,7 +29,7 @@ MapFile <%= @mapfile %>
 # Give too access to the host DN
 HostDNIsRoot <%= @host_dn_is_root %>
 
-<% if @adminuser -%>
+<% if @adminuser != "" -%>
 # Adminuser for replication and filesystem selection
 AdminUsername <%= @adminuser %>
 <% end -%>
