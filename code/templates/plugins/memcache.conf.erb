@@ -8,11 +8,10 @@ LoadPlugin plugin_memcache /usr/<%= @libdir %>/dmlite/plugin_memcache.so
 MemcachedServer <%= server %>
 <% end -%>
 
-# Number of memcached connections in the pool at startup
-MemcachedPoolSize <%= @pool_size %>
-
+# <% if @symlink_limit != "" -%>
 # Limit of symlinks to follow
 SymLinkLimit <%= @symlink_limit %>
+<% end -%>
 
 # Expiration of an entry in memcache (in seconds)
 MemcachedExpirationLimit <%= @expiration_limit %>
@@ -23,5 +22,11 @@ MemcachedProtocol <%= @protocol %>
 # use 'standard', or use 'consistent' for consistent hashing (useful when adding servers to the pool)
 MemcachedHashDistribution <%= @hash_distribution %>
 
-# 'on' or 'off', force to update the accessed time on every readDir()
-MemcachedStrictConsistency <%= @strict_consistency %>
+# 'on' or 'off', use recursive permission checking or not
+MemcachedPOSIX <%= @posix %>
+
+# Probabilistic counter for the function calls
+MemcachedFunctionCounter <%= @func_counter %>
+
+# Lookup table to avoid unnecessary calls to memcached
+MemcachedBloomFilter <%= @lookup_table %>
