@@ -2,7 +2,7 @@ define dmlite::dpm::vo(
   $domain = $dmlite::dpm::config::domain
 ) {
 
-  Dmlite::Domain[$domain] -> Dmlite::Vo[$name]
+  Dmlite::Dpm::Domain[$domain] -> Dmlite::Dpm::Vo[$name]
 
   $vopath = "/${dmlite::dpm::config::basepath}/${domain}/home/${name}"
 
