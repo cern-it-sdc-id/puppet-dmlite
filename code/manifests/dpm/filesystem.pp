@@ -8,21 +8,23 @@ define dmlite::dpm::filesystem(
 
     Class[Dmlite::Shell::Install] -> Dmlite::Dpm::Filesystem <| |>
 
+    ensure_packages(["dpm-python"])
+
     if $ensure == "present" {
-      $cmd = "dpm-addfs"
+      $cmd = "fsadd"
       $grep = "grep -q"
-      $pool_option = "--poolname ${pool}"
+      $options = "${fs} ${pool} ${server}"
     } else {
-      $cmd = "dpm-rmfs"
+      $cmd = "fsdel"
       $grep = "! grep -q"
-      $pool_option = "" # dpm-rmfs does not need/accept --poolname
+      $options = "${fs} ${server}"
     }
 
     exec{"$pool/$server:$fs":
-      path     => "/bin:/sbin:/usr/bin:/usr/sbin",
-      command  => "dmlite-shell -e \"ls\""
-      #command => "dmlite-shell -e \"\"",
-      #unless  => "dmlite-shell -e \"\" | ( ${grep} \"$server $fs\" )" # subshell required to invert return status with !
+      path    => "/bin:/sbin:/usr/bin:/usr/sbin",
+      command => "dmlite-shell -e \"${cmd} ${options}\"",
+      unless  => "dmlite-shell -e \"qryconf\" | ( ${grep} \"$server $fs\" )", # subshell required to invert return status with !
+      require => Ensure_packages["dpm-python"]
     }
 
 }

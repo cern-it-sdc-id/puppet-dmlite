@@ -7,8 +7,8 @@ define dmlite::dpm::pool(
 
   exec{"lcgdm_dpm_pool-${name}":
     path    => "/bin:/sbin:/usr/bin:/usr/sbin",
-    command => "dmlite-shell -e \"addpool ${name} ${pool_type}\"",
-    unless  => "dmlite-shell -e \"pools\" | grep \"^${name}\""
+    command => "dmlite-shell -e \"pooladd ${name} ${pool_type}\"",
+    unless  => "dmlite-shell -e \"poolinfo\" | grep \"^${name}\""
   }
 
 }
