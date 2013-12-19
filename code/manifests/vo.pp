@@ -4,7 +4,7 @@ define dmlite::vo(
 
   Dmlite::Domain[$domain] -> Dmlite::Vo[$name]
 
-  $vopath = "/${basepath}/${domain}/home/${name}"
+  $vopath = "/${dmlite::dpm::config::basepath}/${domain}/home/${name}"
 
   exec { "ns_vo_$domain_$name":
     path    => "/usr/bin:/usr/sbin",
