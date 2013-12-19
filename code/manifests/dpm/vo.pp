@@ -1,4 +1,4 @@
-define dmlite::vo(
+define dmlite::dpm::vo(
   $domain = $dmlite::dpm::config::domain
 ) {
 

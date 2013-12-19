@@ -1,4 +1,4 @@
-define dmlite::domain(
+define dmlite::dpm::domain(
 ) {
 
   Class[Dmlite::Shell::Install] -> Dmlite::Domain <| |>
