@@ -34,9 +34,10 @@ class dmlite::dav::config (
 
   Class[Dmlite::Dav::Install] -> Class[Dmlite::Dav::Config]
 
-  selboolean{"httpd_can_network_connect": value => on, persistent => true }
-
-  selboolean{"httpd_execmem": value => on, persistent => true }
+  if($::selinux != 'false') {
+    selboolean{"httpd_can_network_connect": value => on, persistent => true }
+    selboolean{"httpd_execmem": value => on, persistent => true }
+  }
 
   file {
     "/etc/httpd/conf.d/ssl.conf":
