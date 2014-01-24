@@ -61,7 +61,7 @@ class dmlite::xrootd (
       $sec_protocol_disk = "/usr/${xrootd::config::xrdlibdir} gsi -crl:3 -key:/etc/grid-security/${lcgdm::base::config::user}/dpmkey.pem -cert:/etc/grid-security/${lcgdm::base::config::user}/dpmcert.pem -md:sha256:sha1 -ca:2 -gmapopt:10 -vomsat:0"
     }
 
-    if $xrd_dpmclassic == "" {
+    if $xrd_dpmclassic == false {
       $ofs_tpc = "pgm /usr/bin/xrdcp --server"
     }
 
