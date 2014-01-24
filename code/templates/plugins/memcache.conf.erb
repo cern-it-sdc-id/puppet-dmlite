@@ -4,7 +4,7 @@ LoadPlugin plugin_memcache /usr/<%= @libdir %>/dmlite/plugin_memcache.so
 <% end -%>
 
 # Can be set multiple times to use multiple caches, format <host>:<port>:<weight>
-<% @servers.each do |server| -%>
+<% @servers.sort.each do |server| -%>
 MemcachedServer <%= server %>
 <% end -%>
 
