@@ -5,7 +5,7 @@ class dmlite::plugins::memcache::params (
     $expiration_limit   = 60
     $protocol           = "binary"
     $hash_distribution  = "default"
-    $posix              = "off"
+    $posix              = "on"
     $func_counter       = "off"
     $lookup_table       = "off"
 
