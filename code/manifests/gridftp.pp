@@ -4,7 +4,7 @@ class dmlite::gridftp (
   $disable_usage_stats = 1,
   $log_single          = "/var/log/dpm-gsiftp/gridftp.log",
   $log_transfer        = "/var/log/dpm-gsiftp/dpm-gsiftp.log",
-  $log_level           = "ALL",
+  $log_level           = "ERROR,WARN,INFO,TRANSFER",
   $port                = 2811,
   $dpmhost,
   $nshost              = $dpmhost,
