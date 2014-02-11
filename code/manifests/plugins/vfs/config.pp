@@ -16,6 +16,7 @@ class dmlite::plugins::vfs::config (
         ensure => directory,
         owner  => "dpmmgr",
         group  => "dpmmgr",
+        seltype => "httpd_sys_content_t",
         mode   => 0775;
     "${data_path}":
         ensure => directory,
