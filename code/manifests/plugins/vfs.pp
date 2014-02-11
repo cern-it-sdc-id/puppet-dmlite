@@ -6,6 +6,9 @@ class dmlite::plugins::vfs(
   $token_password,
   $token_id           = $dmlite::plugins::vfs::params::token_id,
   $token_life         = $dmlite::plugins::vfs::params::token_life,
+
+  $catalog_path       = $dmlite::plugins::vfs::params::catalog_path,
+  $data_path          = $dmlite::plugins::vfs::params::data_path,
 ) inherits dmlite::plugins::vfs::params {
 
   Class[Dmlite::Plugins::Vfs::Install] -> Class[Dmlite::Plugins::Vfs::Config]
@@ -17,6 +20,8 @@ class dmlite::plugins::vfs(
     token_password => "${token_password}",
     token_id       => "${token_id}",
     token_life     => "${token_life}",
+    catalog_path   => "${catalog_path}",
+    data_path      => "${data_path}",
   }
   class{"dmlite::plugins::vfs::install":}
 

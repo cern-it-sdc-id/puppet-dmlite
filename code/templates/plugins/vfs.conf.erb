@@ -7,3 +7,13 @@ LoadPlugin plugin_vfs /usr/<%= @libdir %>/dmlite/plugin_vfs.so
 TokenPassword	<%= @token_password %>
 TokenId		<%= @token_id %>
 TokenLife	<%= @token_life %>
+
+# global authz (default: Allow .*, AllowWrite .*)
+#Allow .*
+#AllowWrite .*
+#Deny
+#DenyWrite
+
+# directory prefix locations (default: empty)
+NSPrefix <%= @catalog_path %>
+DiskPrefix <%= @data_path %>
