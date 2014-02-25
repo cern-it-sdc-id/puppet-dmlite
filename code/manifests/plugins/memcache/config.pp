@@ -13,6 +13,9 @@ class dmlite::plugins::memcache::config (
 
   validate_array($servers)
   validate_bool($enable_memcache)
+  if is_numeric($pool_size) == false {
+    fail("The parameter '${pool_size}' provided is not a number. Please provide a positive integer.")
+  }
   if is_numeric($expiration_limit) == false {
     fail("The parameter '${expiration_limit}' provided is not a number. Please provide a positive integer.")
   }
