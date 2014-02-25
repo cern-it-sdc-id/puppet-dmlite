@@ -13,6 +13,9 @@ MemcachedServer <%= server %>
 SymLinkLimit <%= @symlink_limit %>
 <% end -%>
 
+# Size of the memcache connection pool
+MemcachedPoolSize <%= @pool_size %>
+
 # Expiration of an entry in memcache (in seconds)
 MemcachedExpirationLimit <%= @expiration_limit %>
 

@@ -1,6 +1,7 @@
 class dmlite::plugins::memcache::config (
   $servers          = $dmlite::plugins::memcache::params::servers,
   $enable_memcache  = $dmlite::plugins::memcache::params::enable_memcache,
+  $pool_size        = $dmlite::plugins::memcache::params::pool_size,
   $user             = $dmlite::params::user,
   $group            = $dmlite::params::group,
   $protocol         = $dmlite::plugins::memcache::params::protocol,
