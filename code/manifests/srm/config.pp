@@ -16,4 +16,7 @@ class dmlite::srm::config (
         mode    => 644,
         content => template("dmlite/srm/sysconfig.erb");
     }
+
+    class{"dmlite::gaiconfig":}
+  
 }
