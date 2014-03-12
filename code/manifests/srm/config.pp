@@ -17,6 +17,6 @@ class dmlite::srm::config (
         content => template("dmlite/srm/sysconfig.erb");
     }
 
-    class{"dmlite::gaiconfig":}
+    include dmlite::gaiconfig
   
 }

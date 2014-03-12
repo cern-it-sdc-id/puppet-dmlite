@@ -54,7 +54,7 @@ class dmlite::gridftp (
     command => "/sbin/chkconfig globus-gridftp-server off"
   }
 
-  class{"dmlite::gaiconfig":}
+  include dmlite::gaiconfig
 
   class{"gridftp::service":
     service => "dpm-gsiftp"
