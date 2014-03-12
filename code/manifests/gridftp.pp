@@ -53,6 +53,9 @@ class dmlite::gridftp (
   exec{"remove_globus-gridftp-server_init_management":
     command => "/sbin/chkconfig globus-gridftp-server off"
   }
+
+  class{"dmlite::gaiconfig":}
+
   class{"gridftp::service":
     service => "dpm-gsiftp"
   }
