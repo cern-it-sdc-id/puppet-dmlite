@@ -182,11 +182,11 @@ class dmlite::xrootd (
     $cmsd_instances_options_fed = {}
   }
 
-  $xrootd_instances_options_all = merge(
+  $xrootd_instances_options_all = [
     $xrootd_instances_options_redir,
     $xrootd_instances_options_disk,
     $xrootd_instances_options_fed
-  )
+  ]
 
   $exports = { "DPM_HOST"             => $dpmhost,
                "DPNS_HOST"            => $nshost,
