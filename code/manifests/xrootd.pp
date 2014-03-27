@@ -183,8 +183,8 @@ class dmlite::xrootd (
   }
 
   $xrootd_instances_options_all = merge(
-    $xrootd_instances_options_disk,
     $xrootd_instances_options_redir,
+    $xrootd_instances_options_disk,
     $xrootd_instances_options_fed
   )
 
