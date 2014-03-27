@@ -44,6 +44,7 @@ define dmlite::xrootd::create_config (
   $pss_origin = $xrootd::config::pss_origin,
 
   $dpm_listvoms = undef,
+  $dpm_mmreqhost = undef,
   $dpm_defaultprefix = undef,
   $dpm_xrootd_serverport = undef,
   $dpm_enablecmsclient = undef,
