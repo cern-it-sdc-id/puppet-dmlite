@@ -12,6 +12,7 @@ class dmlite::xrootd (
   $dpm_xrootd_debug = false,
   $dpm_xrootd_sharedkey = undef,
   $dpm_xrootd_serverport = 1095,
+  $dpm_mmreqhost = "localhost",
   $site_name = undef,
   $alice_token = false,
   $alice_token_conf = undef,
@@ -129,6 +130,7 @@ class dmlite::xrootd (
       xrd_debug             => $dpm_xrootd_debug,
       sec_protocol          => [ $sec_protocol_redir, $sec_protocol_local ],
       dpm_listvoms          => $dpm_listvoms,
+      dpm_mmreqhost         => "${dpm_mmreqhost}",
       dpm_defaultprefix     => "${domainpath}/home",
       dpm_xrootd_serverport => $dpm_xrootd_serverport,
       domainpath            => $domainpath,
@@ -164,7 +166,8 @@ class dmlite::xrootd (
       xrd_debug             => $dpm_xrootd_debug, #
       sec_protocol          => [ $sec_protocol_redir ],
       dpm_listvoms          => $dpm_listvoms,
-      #dpm_defaultprefix     => "${domainpath}/home",
+      dpm_mmreqhost         => "${dpm_mmreqhost}",
+      #dpm_defaultprefix    => "${domainpath}/home",
       dpm_xrootd_serverport => $dpm_xrootd_serverport
     }
 

@@ -45,6 +45,11 @@ dpm.fqan <%= @alice_fqans %>
 <% end -%>
 <% end -%>
 
+<%# needed for joining xrootd federations %>
+<% if @dpm_mmreqhost -%>
+dpm.mmreqhost <%= @dpm_mmreqhost %>
+<% end -%>
+
 <%# federation redirects for the main config file %>
 <% if @dpm_xrootd_fedredirs and not @paths -%>
 <% @dpm_xrootd_fedredirs.sort.each do |name, redir| -%>
