@@ -41,9 +41,11 @@ class dmlite::dav::config (
 
   file {
     "/etc/httpd/conf.d/ssl.conf":
-      ensure  => absent;
+      ensure  => present,
+      content => ""; # empty content, so an upgrade doesn't overwrite it
     "/etc/httpd/conf.d/zgridsite.conf":
-      ensure  => absent;
+      ensure  => present,
+      content => ""; # empty content, so an upgrade doesn't overwrite it
     "/etc/httpd/conf.d/zlcgdm-dav.conf":
       ensure	=> present,
       content => template("dmlite/dav/zlcgdm-dav.conf");
