@@ -33,12 +33,21 @@ class dmlite::plugins::memcache::config (
       ensure  => absent;
   }
 
-  file {
-    "/etc/dmlite.conf.d/zmemcache.conf":
-      owner     => $user,
-      group     => $group,
-      mode    => 0600,
-      content => template("dmlite/plugins/memcache.conf.erb"),
-      require => Package["dmlite-plugins-memcache"]
+  if $enable_memcache {
+    file {
+      "/etc/dmlite.conf.d/zmemcache.conf":
+        owner     => $user,
+        group     => $group,
+        mode    => 0600,
+        content => template("dmlite/plugins/memcache.conf.erb"),
+        require => Package["dmlite-plugins-memcache"]
+    }
   }
+  else {
+    file {
+      "/etc/dmlite.conf.d/zmemcache.conf":
+        ensure  => absent;
+    }
+  }
+
 }
