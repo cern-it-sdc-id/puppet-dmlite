@@ -1,9 +1,6 @@
-class dmlite::head (
+class dmlite::head_adapter (
   $token_password,
   $token_id   = "ip",
-  $mysql_username,
-  $mysql_password,
-  $mysql_host = "localhost",
   $dpmhost    = "${::fqdn}",
   $nshost     = "${::fqdn}",
   $adminuser  = undef,
@@ -19,15 +16,13 @@ class dmlite::head (
     dpmhost        => "${dpmhost}",
     nshost         => "${nshost}",
     adminuser      => "${adminuser}",
-    with_db_plugin => true,
+    with_db_plugin => false,
   }
   class{"dmlite::plugins::adapter::install":}
 
-  class{"dmlite::plugins::mysql::config":
-    mysql_host     => "${mysql_host}",
-    mysql_username => "${mysql_username}",
-    mysql_password => "${mysql_password}",
-    adminuser      => "${adminuser}",
-  }
-  class{"dmlite::plugins::mysql::install":}
+    file {
+      "/etc/dmlite.conf.d/mysql.conf":
+        ensure => absent,
+    }
 }
+

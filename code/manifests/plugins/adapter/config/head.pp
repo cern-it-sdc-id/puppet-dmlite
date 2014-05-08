@@ -4,6 +4,7 @@ class dmlite::plugins::adapter::config::head (
   $connection_timeout = $dmlite::plugins::adapter::params::connection_timeout,
   $retry_limit        = $dmlite::plugins::adapter::params::retry_limit,
   $retry_interval     = $dmlite::plugins::adapter::params::retry_interval,
+  $with_db_plugin     = $dmlite::plugins::adapter::params::with_db_plugin,
 
   $token_password,
   $token_id           = $dmlite::plugins::adapter::params::token_id,
@@ -13,6 +14,14 @@ class dmlite::plugins::adapter::config::head (
 
   Class[Dmlite::Plugins::Adapter::Install] -> Class[Dmlite::Plugins::Adapter::Config::Head]
 
+  if $with_db_plugin {
+    $enable_ns = false
+    $enable_dpm = false
+  } else {
+    $enable_ns = true
+    $enable_dpm = true
+  }
+
   dmlite::plugins::adapter::create_config{"head_config":
     config_dir_name    => "dmlite",   # put file in /etc/dmlite.conf.d/adapter.conf
     dpmhost            => $dpmhost,
@@ -20,10 +29,10 @@ class dmlite::plugins::adapter::config::head (
     connection_timeout => $connection_timeout,
     retry_limit        => $retry_limit,
     retry_interval     => $retry_interval,
-    enable_dpm         => false,
+    enable_dpm         => $enable_dpm,
     enable_io          => false,
     enable_rfio        => true,
-    enable_ns          => false,
+    enable_ns          => $enable_ns,
     enable_pooldriver  => true,
     token_password     => $token_password,
     token_id           => $token_id,
