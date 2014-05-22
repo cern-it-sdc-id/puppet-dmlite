@@ -192,7 +192,8 @@ class dmlite::xrootd (
                "DPNS_HOST"            => $nshost,
                "DPM_CONRETRY"         => 0,
                "DPNS_CONRETRY"        => 0,
-               "XRD_MAXREDIRECTCOUNT" => 1
+               "XRD_MAXREDIRECTCOUNT" => 1,
+               "MALLOC_ARENA_MAX"     => 4
   }
 
   if $dpm_xrootd_debug {
