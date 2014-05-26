@@ -38,7 +38,7 @@ dpm.defaultprefix <%= @dpm_defaultprefix %>
 <% if @alice_token -%>
 setenv TTOKENAUTHZ_AUTHORIZATIONFILE=<%= @alice_token_conf %>
 ofs.authlib <%= @ofs_authlib -%> <%= @alice_token_libname %>
-dpm.fixedidrestrict <%= @domainpath %>/alice
+dpm.fixedidrestrict <%= @domainpath %>/home/alice
 dpm.principal <%= @alice_token_principal %>
 <% if @alice_token_principal != "root" -%>
 dpm.fqan <%= @alice_fqans %>
