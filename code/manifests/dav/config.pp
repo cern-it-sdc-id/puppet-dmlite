@@ -23,7 +23,10 @@ class dmlite::dav::config (
   $enable_ns          = $dmlite::dav::params::enable_ns,
   $enable_disk        = $dmlite::dav::params::enable_disk,
   $enable_https       = $dmlite::dav::params::enable_https,
-  $enable_http        = $dmlite::dav::params::enable_http
+  $enable_http        = $dmlite::dav::params::enable_http,
+  #dav ports
+  $dav_http_port      = 80,
+  $dav_https_port     = 443,
 ) inherits dmlite::dav::params {
 
   validate_bool($enable_ns)
