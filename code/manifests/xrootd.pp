@@ -219,6 +219,5 @@ class dmlite::xrootd (
   }
 
 
-  include xrootd::install
   include xrootd::service
 }
