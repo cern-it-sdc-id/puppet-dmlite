@@ -2,7 +2,7 @@ class dmlite::plugins::adapter::params (
 ) inherits dmlite::params {
     $dpmhost            = undef
     $nshost             = undef
-    $connection_timeout = 2
+    $connection_timeout = 15
     $retry_limit        = 3
     $retry_interval     = 2
     $enable_dpm         = false
