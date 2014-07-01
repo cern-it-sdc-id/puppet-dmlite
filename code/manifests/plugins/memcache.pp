@@ -8,7 +8,6 @@ class dmlite::plugins::memcache(
   $posix            = $dmlite::plugins::memcache::params::posix,
   $expiration_limit = $dmlite::plugins::memcache::params::expiration_limit,
   $func_counter     = $dmlite::plugins::memcache::params::func_counter,
-  $lookup_table     = $dmlite::plugins::memcache::params::lookup_table,
 ) inherits dmlite::plugins::memcache::params {
 
   Class[Dmlite::Plugins::Memcache::Install] -> Class[Dmlite::Plugins::Memcache::Config]
@@ -23,7 +22,6 @@ class dmlite::plugins::memcache(
     posix            => "${posix}",
     expiration_limit => $expiration_limit,
     func_counter     => "${func_counter}",
-    lookup_table     => "${lookup_table}",
   }
   class{"dmlite::plugins::memcache::install":}
 
