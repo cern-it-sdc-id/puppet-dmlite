@@ -1,9 +1,9 @@
 class dmlite::plugins::memcache::params (
 ) inherits dmlite::params {
     $servers            = ["localhost:11211"]
-    $pool_size          = 2000
+    $pool_size          = 250
     $symlink_limit      = 5
-    $expiration_limit   = 60
+    $expiration_limit   = 600
     $protocol           = "binary"
     $hash_distribution  = "default"
     $posix              = "on"
