@@ -4,12 +4,12 @@ class dmlite::dav::params (
     $dmlite_disk_conf   = "/etc/dmlite-disk.conf"
     $ns_type            = "Head"
     $ns_prefix          = "dpm"
-    $ns_flags           = "Write"
+    $ns_flags           = "Write RemoteCopy"
     $ns_anon            = "nobody:nogroup"
     $ns_max_replicas    = 3
     $ns_secure_redirect = "Off"
     $ns_trusted_dns     = undef
-    $disk_flags         = "Write"
+    $disk_flags         = "Write RemoteCopy"
     $disk_anon          = "nobody:nogroup"
     $ssl_cert           = "/etc/grid-security/hostcert.pem"
     $ssl_key            = "/etc/grid-security/hostkey.pem"
