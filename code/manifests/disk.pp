@@ -4,8 +4,13 @@ class dmlite::disk (
   $dpmhost    = "${::fqdn}",
   $nshost     = "${::fqdn}",
   $debuginfo  = false,
+  $log_level      = $dmlite::params::log_level,
+  $logcomponents  = $dmlite::params::logcomponents
 ) {
-  class{"dmlite::config::disk":}
+  class{"dmlite::config::head":
+    log_level        => $log_level,
+    logcomponents    => $logcomponents
+  }
   class{"dmlite::install":
     debuginfo => $debuginfo
   }

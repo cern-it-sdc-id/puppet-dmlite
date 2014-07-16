@@ -7,5 +7,7 @@ class dmlite::params {
   $enable_config  = true
   $user           = $lcgdm::base::config::user
   $group          = $lcgdm::base::config::user
+  $log_level      = 1
+  $logcomponents  = undef
 
 }

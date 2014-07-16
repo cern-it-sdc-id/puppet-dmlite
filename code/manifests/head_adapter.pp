@@ -5,8 +5,13 @@ class dmlite::head_adapter (
   $nshost     = "${::fqdn}",
   $adminuser  = undef,
   $debuginfo  = false,
+  $log_level      = $dmlite::params::log_level,
+  $logcomponents  = $dmlite::params::logcomponents
 ) {
-  class{"dmlite::config::head":}
+  class{"dmlite::config::head":
+    log_level        => $log_level,
+    logcomponents    => $logcomponents
+  }
   class{"dmlite::install":
     debuginfo => $debuginfo
   }
