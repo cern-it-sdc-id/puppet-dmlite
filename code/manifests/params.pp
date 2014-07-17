@@ -8,6 +8,6 @@ class dmlite::params {
   $user           = hiera('dmlite::params::user', $lcgdm::base::config::user)
   $group          = hiera('dmlite::params::group', $lcgdm::base::config::user)
   $log_level      = hiera('dmlite::params::log_level', 1)
-  $logcomponents  = hiera('dmlite::params::logcomponents')
+  $logcomponents  = hiera('dmlite::params::logcomponents', undef)
 
 }
