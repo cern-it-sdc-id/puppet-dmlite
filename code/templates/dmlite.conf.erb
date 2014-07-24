@@ -10,7 +10,7 @@ LoadPlugin plugin_config /usr/<%= @libdir %>/dmlite/plugin_config.so
 <% end -%>
 
 # Global Log level configuration higher means more verbose
-log_level <%= @log_level %>
+LogLevel <%= @log_level %>
 
 # Individual components automatically register for being logged at startup
 # and the default is to log all of them
