@@ -22,9 +22,12 @@ log_level <%= @log_level %>
 # tells to the logging subsystem to *only* log the activity of the adapter plugin
 # Here are some examples with components names:
 # Log unregistered
-# Log adapter
-# Log mysql
-# Log oracle
+# Log Adapter
+# Log Memcache
+# Log Mysql
+# Log Oracle
+# Log Profiler
+# Log ProfilerTimings
 <% if @logcomponents -%>
 <% @logcomponents.sort.each do |component| -%>
 Log <%= component %>
