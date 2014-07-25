@@ -9,5 +9,7 @@ class dmlite::plugins::memcache::params (
     $posix              = "on"
     $func_counter       = "off"
 
-    $enable_memcache    = true
+    $enable_memcache       = true
+    $enable_memcache_cat   = true
+    $enable_memcache_pool  = true
 }

@@ -1,6 +1,14 @@
-<%if @enable_memcache -%>
+<%if @enable_memcache and not (@enable_memcache_cat or @enable_memcache_pool) -%>
 # Load memcache plugin
 LoadPlugin plugin_memcache /usr/<%= @libdir %>/dmlite/plugin_memcache.so
+<% end -%>
+<%if @enable_memcache_cat -%>
+# Load memcache plugin
+LoadPlugin plugin_memcache_ns /usr/<%= @libdir %>/dmlite/plugin_memcache.so
+<% end -%>
+<%if @enable_memcache_pool -%>
+# Load memcache plugin
+LoadPlugin plugin_memcache_pm /usr/<%= @libdir %>/dmlite/plugin_memcache.so
 <% end -%>
 
 # Can be set multiple times to use multiple caches, format <host>:<port>:<weight>
