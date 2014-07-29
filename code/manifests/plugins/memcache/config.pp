@@ -1,18 +1,21 @@
 class dmlite::plugins::memcache::config (
-  $servers          = $dmlite::plugins::memcache::params::servers,
-  $enable_memcache  = $dmlite::plugins::memcache::params::enable_memcache,
-  $pool_size        = $dmlite::plugins::memcache::params::pool_size,
-  $user             = $dmlite::params::user,
-  $group            = $dmlite::params::group,
-  $protocol         = $dmlite::plugins::memcache::params::protocol,
-  $posix            = $dmlite::plugins::memcache::params::posix,
-  $expiration_limit = $dmlite::plugins::memcache::params::expiration_limit,
-  $func_counter     = $dmlite::plugins::memcache::params::func_counter,
-  $lookup_table     = $dmlite::plugins::memcache::params::lookup_table,
+  $servers               = $dmlite::plugins::memcache::params::servers,
+  $enable_memcache       = $dmlite::plugins::memcache::params::enable_memcache,
+  $enable_memcache_cat   = $dmlite::plugins::memcache::params::enable_memcache_cat,
+  $enable_memcache_pool  = $dmlite::plugins::memcache::params::enable_memcache_pool,
+  $pool_size             = $dmlite::plugins::memcache::params::pool_size,
+  $user                  = $dmlite::params::user,
+  $group                 = $dmlite::params::group,
+  $protocol              = $dmlite::plugins::memcache::params::protocol,
+  $posix                 = $dmlite::plugins::memcache::params::posix,
+  $expiration_limit      = $dmlite::plugins::memcache::params::expiration_limit,
+  $func_counter          = $dmlite::plugins::memcache::params::func_counter,
 ) inherits dmlite::plugins::memcache::params {
 
   validate_array($servers)
   validate_bool($enable_memcache)
+  validate_bool($enable_memcache_cat)
+  validate_bool($enable_memcache_pool)
   if is_numeric($pool_size) == false {
     fail("The parameter '${pool_size}' provided is not a number. Please provide a positive integer.")
   }
@@ -24,9 +27,6 @@ class dmlite::plugins::memcache::config (
 
   validate_re($func_counter, '^(on|off)$',
     "'${func_counter}' is not a valid parameter. It should be 'on' or 'off'.")
-
-  validate_re($lookup_table, '^(on|off)$',
-    "'${lookup_table}' is not a valid parameter. It should be 'on' or 'off'.")
 
   file {
     "/etc/dmlite.conf.d/memcache.conf":

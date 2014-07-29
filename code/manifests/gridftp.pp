@@ -51,7 +51,8 @@ class dmlite::gridftp (
     thread_model        => "pthread"
   }
   exec{"remove_globus-gridftp-server_init_management":
-    command => "/sbin/chkconfig globus-gridftp-server off"
+    command => "/sbin/chkconfig globus-gridftp-server off",
+    onlyif  => "/sbin/chkconfig globus-gridftp-server"
   }
 
   include dmlite::gaiconfig
