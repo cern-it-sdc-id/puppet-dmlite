@@ -67,7 +67,7 @@ class dmlite::xrootd (
     }
 
     $xrootd_instances_options_disk = {
-      "disk" => "-l /var/log/xrootd/disk/xrootd.log -c /etc/xrootd/xrootd-dpmdisk.cfg"
+      "disk" => "-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-dpmdisk.cfg"
     }
 
     dmlite::xrootd::create_config{"/etc/xrootd/xrootd-dpmdisk.cfg":
@@ -106,7 +106,7 @@ class dmlite::xrootd (
     }
 
     $xrootd_instances_options_redir = {
-      "redir" => "-l /var/log/xrootd/redir/xrootd.log -c /etc/xrootd/xrootd-dpmredir.cfg"
+      "redir" => "-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-dpmredir.cfg"
     }
 
     $ofs_authlib = "libXrdDPMRedirAcc.so.3"
