@@ -224,4 +224,21 @@ class dmlite::xrootd (
 
 
   include xrootd::service
+
+  file { '/var/log/xrootd/redir':
+     ensure => directory,
+     owner   => $lcgdm::base::config::user,
+     group   => $lcgdm::base::config::user,
+     subscribe => [ File['/var/log/xrootd'] ],
+     require => Class["xrootd::config"],
+  }
+
+  file { '/var/log/xrootd/disk':
+     ensure => directory,
+     owner   => $lcgdm::base::config::user,
+     group   => $lcgdm::base::config::user,
+     subscribe => [ File['/var/log/xrootd'] ],
+     require => Class["xrootd::config"],
+  }
+
 }
