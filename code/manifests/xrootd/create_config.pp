@@ -1,5 +1,6 @@
 define dmlite::xrootd::create_config (
   $filename = $title,
+  $dmlite_conf,
   $dpm_host = $fqdn,
 
   $xrootd_user = $xrootd::config::xrootd_user,

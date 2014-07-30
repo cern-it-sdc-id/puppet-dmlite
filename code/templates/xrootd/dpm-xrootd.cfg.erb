@@ -35,6 +35,8 @@ dpm.replacementprefix <%= @dpm_replacementprefix %>
 dpm.defaultprefix <%= @dpm_defaultprefix %>
 <% end -%>
 
+dpm.dmconf <%= @dmlite_conf %>
+
 <% if @alice_token -%>
 setenv TTOKENAUTHZ_AUTHORIZATIONFILE=<%= @alice_token_conf %>
 ofs.authlib <%= @ofs_authlib -%> <%= @alice_token_libname %>

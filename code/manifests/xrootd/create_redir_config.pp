@@ -1,5 +1,6 @@
 define dmlite::xrootd::create_redir_config (
   $name = $title,
+  $dmlite_conf,
   $fed_host,
   $xrootd_port,
   $cmsd_port,
