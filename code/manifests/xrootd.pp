@@ -68,7 +68,7 @@ class dmlite::xrootd (
     }
 
     $xrootd_instances_options_disk = {
-      "disk" => "-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-dpmdisk.cfg"
+      "disk" => "-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-dpmdisk.cfg -k fifo"
     }
 
     dmlite::xrootd::create_config{"/etc/xrootd/xrootd-dpmdisk.cfg":
@@ -108,7 +108,7 @@ class dmlite::xrootd (
     }
 
     $xrootd_instances_options_redir = {
-      "redir" => "-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-dpmredir.cfg"
+      "redir" => "-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-dpmredir.cfg -k fifo"
     }
 
     $ofs_authlib = "libXrdDPMRedirAcc.so.3"
@@ -177,8 +177,8 @@ class dmlite::xrootd (
 
     create_resources('dmlite::xrootd::create_redir_config', $dpm_xrootd_fedredirs, $federation_defaults)
 
-    $xrootd_instances_options_fed = map_hash($dpm_xrootd_fedredirs, "-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-dpmfedredir_%s.cfg")
-    $cmsd_instances_options_fed = map_hash($dpm_xrootd_fedredirs, "-l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-dpmfedredir_%s.cfg")
+    $xrootd_instances_options_fed = map_hash($dpm_xrootd_fedredirs, "-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-dpmfedredir_%s.cfg -k fifo")
+    $cmsd_instances_options_fed = map_hash($dpm_xrootd_fedredirs, "-l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-dpmfedredir_%s.cfg -k fifo")
 
   } else {
     $xrootd_instances_options_redir = {}
