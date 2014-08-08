@@ -209,13 +209,13 @@ class dmlite::xrootd (
 
   if ($log_style_param == "-k fifo") {  # delete all non-fifo files
     exec{"delete .xrootd.log files":
-      command => "/bin/find /var/log/xrootd -type f -name .xrootd.log -exec ls {} \;",
+      command => "/bin/find /var/log/xrootd -type f -name .xrootd.log -exec rm {} \;",
       path    => "/bin/:/usr/bin/",
       unless  => '[ "`/bin/find /var/log/xrootd -type f -name .xrootd.log -type f`" = "" ]'
     }
   } else {  # do not use fifos, so delete all fifo files
     exec{"delete .xrootd.log files":
-      command => "/bin/find /var/log/xrootd -type f -name .xrootd.log -exec ls {} \;",
+      command => "/bin/find /var/log/xrootd -type f -name .xrootd.log -exec rm {} \;",
       path    => "/bin/:/usr/bin/",
       unless  => '[ "`/bin/find /var/log/xrootd -type f -name .xrootd.log -type p`" = "" ]'
     }
