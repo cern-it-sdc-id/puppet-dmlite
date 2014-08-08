@@ -20,7 +20,8 @@ class dmlite::xrootd (
   $alice_token_libname = undef,
   $alice_token_principal = undef,
   $alice_fqans = undef,
-  $dpm_xrootd_fedredirs = {}
+  $dpm_xrootd_fedredirs = {},
+  $log_style_param = "-k fifo"
 ) {
 
   validate_bool($xrootd_use_voms)
@@ -30,6 +31,8 @@ class dmlite::xrootd (
 
   Dmlite::Xrootd::Create_Config <| |> ~> Class[Xrootd::Service]
   Xrootd::Create_Sysconfig <| |> ~> Class[Xrootd::Service]
+  Exec["delete .xrootd.log files"] ~> Class[Xrootd::Service]
+  Exec["delete .xrootd.log files"] -> Xrootd::Create_sysconfig <| |>
 
   package {"dpm-xrootd":
     ensure => present
@@ -68,7 +71,7 @@ class dmlite::xrootd (
     }
 
     $xrootd_instances_options_disk = {
-      "disk" => "-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-dpmdisk.cfg -k fifo"
+      "disk" => "-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-dpmdisk.cfg ${log_style_param}"
     }
 
     dmlite::xrootd::create_config{"/etc/xrootd/xrootd-dpmdisk.cfg":
@@ -108,7 +111,7 @@ class dmlite::xrootd (
     }
 
     $xrootd_instances_options_redir = {
-      "redir" => "-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-dpmredir.cfg -k fifo"
+      "redir" => "-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-dpmredir.cfg ${log_style_param}"
     }
 
     $ofs_authlib = "libXrdDPMRedirAcc.so.3"
@@ -177,8 +180,8 @@ class dmlite::xrootd (
 
     create_resources('dmlite::xrootd::create_redir_config', $dpm_xrootd_fedredirs, $federation_defaults)
 
-    $xrootd_instances_options_fed = map_hash($dpm_xrootd_fedredirs, "-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-dpmfedredir_%s.cfg -k fifo")
-    $cmsd_instances_options_fed = map_hash($dpm_xrootd_fedredirs, "-l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-dpmfedredir_%s.cfg -k fifo")
+    $xrootd_instances_options_fed = map_hash($dpm_xrootd_fedredirs, "-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-dpmfedredir_%s.cfg ${log_style_param}")
+    $cmsd_instances_options_fed = map_hash($dpm_xrootd_fedredirs, "-l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-dpmfedredir_%s.cfg ${log_style_param}")
 
   } else {
     $xrootd_instances_options_redir = {}
@@ -204,6 +207,17 @@ class dmlite::xrootd (
     $daemon_corefile_limit = "unlimited"
   }
 
+  if ($log_style_param == "-k fifo") {  # delete all non-fifo files
+    exec{"delete .xrootd.log files":
+      command => "/bin/find /var/log/xrootd -type f -name .xrootd.log -exec ls {} \;",
+      unless  => '[ "`/bin/find /var/log/xrootd -type f -name .xrootd.log -type f`" = "" ]'
+    }
+  } else {  # do not use fifos, so delete all fifo files
+    exec{"delete .xrootd.log files":
+      command => "/bin/find /var/log/xrootd -type f -name .xrootd.log -exec ls {} \;",
+      unless  => '[ "`/bin/find /var/log/xrootd -type f -name .xrootd.log -type p`" = "" ]'
+    }
+  }
   xrootd::create_sysconfig{$xrootd::config::sysconfigfile:
     xrootd_user              => $lcgdm::base::config::user,
     xrootd_group             => $lcgdm::base::config::user,
