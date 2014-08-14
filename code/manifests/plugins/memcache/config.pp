@@ -10,6 +10,7 @@ class dmlite::plugins::memcache::config (
   $posix                 = $dmlite::plugins::memcache::params::posix,
   $expiration_limit      = $dmlite::plugins::memcache::params::expiration_limit,
   $func_counter          = $dmlite::plugins::memcache::params::func_counter,
+  $local_cache_size      = $dmlite::plugins::memcache::params::local_cache_size,
 ) inherits dmlite::plugins::memcache::params {
 
   validate_array($servers)
@@ -27,6 +28,10 @@ class dmlite::plugins::memcache::config (
 
   validate_re($func_counter, '^(on|off)$',
     "'${func_counter}' is not a valid parameter. It should be 'on' or 'off'.")
+
+  if is_numeric($local_cache_size) == false {
+    fail("The parameter '${local_cache_size}' provided is not a number. Please provide a positive integer.")
+  }
 
   file {
     "/etc/dmlite.conf.d/memcache.conf":
