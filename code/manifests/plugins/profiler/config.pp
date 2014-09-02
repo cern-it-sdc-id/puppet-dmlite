@@ -3,6 +3,7 @@ class dmlite::plugins::profiler::config (
   $user             = $dmlite::params::user,
   $group            = $dmlite::params::group,
   $collectors       = $dmlite::plugins::profiler::params::collectors,
+  $auth             = $dmlite::plugins::profiler::params::auth,
 ) inherits dmlite::plugins::profiler::params {
 
   validate_array($collectors)

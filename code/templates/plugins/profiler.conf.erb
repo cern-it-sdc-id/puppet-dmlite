@@ -9,3 +9,8 @@ Collector <%= collector %>
 SendLFN lfn
 Ops enabled
 Ssq enabled
+<% if @auth == "userdn" -%>
+SendAuth userdn
+<% elsif @auth == true -%>
+SendAuth NOuserdn
+<% end -%>
