@@ -21,7 +21,7 @@ class dmlite::xrootd (
   $alice_token_principal = undef,
   $alice_fqans = undef,
   $dpm_xrootd_fedredirs = {},
-  $log_style_param = "-k fifo"
+  $log_style_param = "" # set to "-k fifo" for xrootd4
 ) {
 
   validate_bool($xrootd_use_voms)
