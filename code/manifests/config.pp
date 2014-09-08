@@ -18,13 +18,14 @@ class dmlite::config (
   }
 
 
-  service{'rsyslog':
-	ensure => running;
+  service{rsyslog:
+	ensure => running,
+	enable=> true,
   }
  
   Class[Dmlite::Install] ->
-	file {'/etc/rsyslog.d/20-log-dmlite.conf':
-		notify => Service['rsyslog'],
+	file {"/etc/rsyslog.d/20-log-dmlite.conf":
+		notify => Service["rsyslog"],
   } 
 }
 
