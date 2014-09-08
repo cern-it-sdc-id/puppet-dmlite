@@ -16,5 +16,15 @@ class dmlite::config (
     log_level        => $log_level,
     logcomponents    => $logcomponents
   }
+
+
+  service{'rsyslog':
+	ensure => running;
+  }
+ 
+  Class[Dmlite::Install] ->
+	file {'/etc/rsyslog.d/20-log-dmlite.conf':
+		notify => Service['rsyslog'],
+  } 
 }
 
