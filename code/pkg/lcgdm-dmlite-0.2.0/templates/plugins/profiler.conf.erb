@@ -1,0 +1,7 @@
+<%if @enable_profiler -%>
+# Load the profiler plugin
+LoadPlugin plugin_profiler /usr/<%= @libdir %>/dmlite/plugin_profiler.so
+<% end -%>
+
+# This plugin has no configuration parameters
+# Output is send to syslog LOG_USER | LOG_DEBUG
