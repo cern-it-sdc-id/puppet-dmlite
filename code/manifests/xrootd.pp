@@ -21,7 +21,8 @@ class dmlite::xrootd (
   $alice_token_principal = undef,
   $alice_fqans = undef,
   $dpm_xrootd_fedredirs = {},
-  $log_style_param = "" # set to "-k fifo" for xrootd4
+  $log_style_param = "", # set to "-k fifo" for xrootd4
+  $vomsxrd_package = "vomsxrd",
 ) {
 
   validate_bool($xrootd_use_voms)
@@ -53,7 +54,7 @@ class dmlite::xrootd (
     $dpm_listvoms = true
   }
   if $xrootd_use_voms == true and $xrd_dpmclassic == false {
-    package{"vomsxrd":
+    package{"${vomsxrd_package}":
       ensure => present
     }
   }
