@@ -24,6 +24,7 @@ class dmlite::dav::config (
   $enable_disk        = $dmlite::dav::params::enable_disk,
   $enable_https       = $dmlite::dav::params::enable_https,
   $enable_http        = $dmlite::dav::params::enable_http,
+  $enable_keep_alive  = $dmlite::dav::params::enable_keep_alive,
   #dav ports
   $dav_http_port      = 80,
   $dav_https_port     = 443,
@@ -82,6 +83,14 @@ class dmlite::dav::config (
       line   => "CoreDumpDirectory ${coredump_dir}",
       path   => "/etc/httpd/conf/httpd.conf"
     }
+  }
+
+  if $enable_keep_alive {
+   file_line {"apache keepalive":
+      ensure => present,
+      line   => "KeepAlive On",
+      path   => "/etc/httpd/conf/httpd.conf"
+    }	 
   }
 
   file_line{"apache event":
