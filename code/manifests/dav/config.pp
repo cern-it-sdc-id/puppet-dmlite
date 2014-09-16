@@ -89,7 +89,8 @@ class dmlite::dav::config (
    file_line {"apache keepalive":
       ensure => present,
       line   => "KeepAlive On",
-      path   => "/etc/httpd/conf/httpd.conf"
+      path   => "/etc/httpd/conf/httpd.conf",
+      match  => "^#?KeepAlive .*" 
     }	 
   }
 
