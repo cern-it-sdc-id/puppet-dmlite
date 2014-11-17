@@ -11,7 +11,7 @@ class dmlite::dav::install (
 
    exec {"fetch-crl-patch":
        path        => "/usr/bin:/usr/sbin:/bin",
-       command     => "bash /tmp/fetch-crl-patch $filecontent",
+       command     => "bash $filecontent",
        unless      => "grep -q 'service httpd reload' '/etc/cron.d/fetch-crl'",
        require     => Class[fetchcrl],
        }
