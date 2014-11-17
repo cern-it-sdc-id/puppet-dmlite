@@ -1,7 +1,7 @@
 class dmlite::srm::service (
 ) inherits dmlite::srm::params {
 
-    Class[Lcgdm::Ns::Install] -> Class[Dmlite::Srm::Service] 
+    Class[Dmlite::Srm::Service] -> Class[Lcgdm::Ns::Install]
 
     service {"srmv2.2":
     	ensure		=> running,
