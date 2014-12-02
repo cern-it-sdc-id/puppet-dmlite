@@ -172,11 +172,12 @@ class dmlite::xrootd (
       xrd_network           => "nodnr", #
       xrd_report            => $xrd_report,
       xrd_debug             => $dpm_xrootd_debug, #
-      sec_protocol          => [ $sec_protocol_redir ],
+      sec_protocol          => [ $sec_protocol_redir, $sec_protocol_local ],
       dpm_listvoms          => $dpm_listvoms,
       dpm_mmreqhost         => "${dpm_mmreqhost}",
       #dpm_defaultprefix    => "${domainpath}/home",
-      dpm_xrootd_serverport => $dpm_xrootd_serverport
+      dpm_xrootd_serverport => $dpm_xrootd_serverport,
+      dpm_enablecmsclient   => true,
     }
 
     create_resources('dmlite::xrootd::create_redir_config', $dpm_xrootd_fedredirs, $federation_defaults)
