@@ -21,7 +21,7 @@ class dmlite::xrootd (
   $alice_token_principal = undef,
   $alice_fqans = undef,
   $dpm_xrootd_fedredirs = {},
-  $log_style_param = "", # set to "-k fifo" for xrootd4
+  $log_style_param = "-k fifo", #"-k fifo" for xrootd4
   $vomsxrd_package = "vomsxrd",
 ) {
 
@@ -166,7 +166,8 @@ class dmlite::xrootd (
       xrd_ofsosslib         => "libXrdDPMOss.so.3",
       cmsd_ofsosslib        => "libXrdPss.so",
       pss_setopt            => [ "ConnectTimeout 30",
-                                 "RequestTimeout 30" ],
+				 "RequestTimeout 30",
+				 "RedirectLimit 0" ],
       ofs_cmslib            => "libXrdDPMFinder.so.3",
       ofs_forward           => "all",
       xrd_network           => "nodnr", #
