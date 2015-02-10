@@ -1,4 +1,3 @@
-
 class dmlite::dav::install (
 ) inherits dmlite::dav::params {
 
