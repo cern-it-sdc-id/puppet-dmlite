@@ -8,7 +8,7 @@ class dmlite::plugins::memcache::params (
     $hash_distribution     = hiera('dmlite::plugins::memcache::params::hash_distribution', "default")
     $posix                 = hiera('dmlite::plugins::memcache::params::posix', "on")
     $func_counter          = hiera('dmlite::plugins::memcache::params::func_counter', "off")
-    $local_cache_size      = hiera('dmlite::plugins::memcache::params::local_cache_size', 1000)
+    $local_cache_size      = hiera('dmlite::plugins::memcache::params::local_cache_size', 0)
 
     $enable_memcache       = hiera('dmlite::plugins::memcache::params::enable_memcache', true)
     $enable_memcache_cat   = hiera('dmlite::plugins::memcache::params::enable_memcache_cat', false)

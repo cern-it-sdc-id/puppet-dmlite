@@ -25,6 +25,7 @@ class dmlite::dav::config (
   $enable_https       = $dmlite::dav::params::enable_https,
   $enable_http        = $dmlite::dav::params::enable_http,
   $enable_keep_alive  = $dmlite::dav::params::enable_keep_alive,
+  $mpm_model          = $dmlite::dav::params::mpm_model,
   #dav ports
   $dav_http_port      = 80,
   $dav_https_port     = 443,
@@ -94,10 +95,10 @@ class dmlite::dav::config (
     }	 
   }
 
-  file_line{"apache event":
+  file_line{"mpm model":
     ensure => present,
     path   => "/etc/sysconfig/httpd",
-    line   => "HTTPD=/usr/sbin/httpd.event",
+    line   => "HTTPD=${mpm_model}",
     match  => "^#?HTTPD=/.*"
   }
 
