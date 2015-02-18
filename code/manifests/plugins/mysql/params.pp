@@ -5,7 +5,7 @@ class dmlite::plugins::mysql::params (
     $mysql_port       = hiera("dmlite::plugins::mysql::params::mysql_port",      0)
     $ns_db            = hiera("dmlite::plugins::mysql::params::ns_db",           "cns_db")
     $dpm_db           = hiera("dmlite::plugins::mysql::params::dpm_db",          "dpm_db")
-    $dbpool_size      = hiera("dmlite::plugins::mysql::params::dbpool_size",     100)
+    $dbpool_size      = hiera("dmlite::plugins::mysql::params::dbpool_size",     128)
     $mapfile          = hiera("dmlite::plugins::mysql::params::mapfile",         "/etc/lcgdm-mapfile")
     $host_dn_is_root  = hiera("dmlite::plugins::mysql::params::host_dn_is_root", "no")
 
