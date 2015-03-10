@@ -8,6 +8,7 @@ class dmlite::plugins::mysql::config (
   $dbpool_size      = $dmlite::plugins::mysql::params::dbpool_size,
   $mapfile          = $dmlite::plugins::mysql::params::mapfile,
   $host_dn_is_root  = $dmlite::plugins::mysql::params::host_dn_is_root,
+  $host_cert        = $dmlite::plugins::mysql::params::host_cert,
   $enable_dpm       = $dmlite::plugins::mysql::params::enable_dpm,
   $enable_ns        = $dmlite::plugins::mysql::params::enable_ns,
   $user             = $dmlite::params::user,
