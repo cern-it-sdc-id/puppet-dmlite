@@ -1,7 +1,7 @@
 ## puppet-dmlite module
 
 This is the puppet-dmlite module, it configures the dmlite component and its plugins.
-It's the base component for the configuration of Datamanagement Service developed at CERN , IT-SDC-ID section
+It's the base puppet module for the configuration of Data Management components developed at CERN , IT-SDC-ID section
 
 
 ### License
