@@ -11,4 +11,4 @@ ASL 2.0
 Andrea Manzi <andrea.manzi@cern.ch>
 
 ## Support
-Tickets and issues at our [cern-it-sdc-id site](http://github.ch/cern-it-sdc-id)
+Tickets and issues at our [cern-it-sdc-id site](https://github.com/cern-it-sdc-id)
