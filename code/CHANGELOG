@@ -1,0 +1,4 @@
+2015-03-11  Andrea Manzi  <andrea.manzi@cern.ch>
+    * remove SSLv3 support from DAV
+    * added conf for HostCertificate in Mysql plugin
+

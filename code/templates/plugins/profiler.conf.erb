@@ -1,0 +1,16 @@
+<%if @enable_profiler -%>
+# Load the profiler plugin
+LoadPlugin plugin_profiler /usr/<%= @libdir %>/dmlite/plugin_profiler.so
+<% end -%>
+
+<% @collectors.sort.each do |collector| -%>
+Collector <%= collector %>
+<% end -%>
+SendLFN lfn
+Ops enabled
+Ssq enabled
+<% if @auth == "userdn" -%>
+SendAuth userdn
+<% elsif @auth == true -%>
+SendAuth NOuserdn
+<% end -%>
