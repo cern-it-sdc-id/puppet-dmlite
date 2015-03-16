@@ -6,7 +6,7 @@ class dmlite::plugins::oracle::config (
     $dbpool_max		= $dmlite::plugins::oracle::params::dbpool_max,
     $mapfile		= $dmlite::plugins::oracle::params::mapfile,
     $host_dn_is_root	= $dmlite::plugins::oracle::params::host_dn_is_root,
-    $enable_ns		= $dmlite::plugins::oracle::params::enable_ns
+    $enable_ns		= $dmlite::plugins::oracle::params::enable_ns,
     $user               = $dmlite::params::user,
     $group              = $dmlite::params::group
 ) inherits dmlite::plugins::oracle::params {
