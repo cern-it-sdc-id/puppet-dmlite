@@ -1,4 +1,0 @@
-class dmlite::python::params (
-) {
-  
-}
