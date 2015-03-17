@@ -5,7 +5,7 @@ It's the base puppet module for the configuration of Data Management components 
 
 ###CI builds
 
-[![Build Status](https://travis-ci.org/cern-it-sdc-id/puppet-dmlite.svg?branch=master)]([https://travis-ci.org/cern-it-sdc-id/puppet-dmlite.svg)
+[![Build Status](https://travis-ci.org/cern-it-sdc-id/puppet-dmlite.svg?branch=master)](https://travis-ci.org/cern-it-sdc-id/puppet-dmlite)
 
 ### License
 ASL 2.0
