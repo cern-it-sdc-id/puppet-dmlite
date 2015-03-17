@@ -3,7 +3,7 @@ class dmlite::plugins::profiler::install (
 
   include dmlite
 
-  package {"dmlite-plugins-profiler":
+  package {'dmlite-plugins-profiler':
     ensure => present;
   }
 

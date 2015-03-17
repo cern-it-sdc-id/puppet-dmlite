@@ -1,17 +1,17 @@
 define dmlite::xrootd::create_redir_config (
   $name = $title,
-  $dmlite_conf,
-  $fed_host,
-  $xrootd_port,
-  $cmsd_port,
-  $local_port,
-  $paths,
+  $dmlite_conf = undef,
+  $fed_host = undef,
+  $xrootd_port = undef,
+  $cmsd_port = undef,
+  $local_port = undef,
+  $paths = undef,
 
   $namelib_prefix = undef,
   $namelib = undef,
   $setenv = undef,
 
-  $dpm_host = $fqdn,
+  $dpm_host = $::fqdn,
 
   $xrootd_user = $xrootd::config::xrootd_user,
   $xrootd_group = $xrootd::config::xrootd_group,
@@ -67,12 +67,12 @@ define dmlite::xrootd::create_redir_config (
   $dpm_namelib = $namelib
   $dpm_namecheck = $namelib_prefix
 
-  file {"$filename":
+  file { "${filename}":
     ensure  => file,
-    owner  => $xrootd::config::xrootd_user,
-    group  => $xrootd::config::xrootd_group,
-    content => template($xrootd::config::configfile_template,
-                        "dmlite/xrootd/dpm-xrootd.cfg.erb")
+    owner   => $xrootd::config::xrootd_user,
+    group   => $xrootd::config::xrootd_group,
+    content => template($xrootd::config::configfile_template, 'dmlite/xrootd/dpm-xrootd.cfg.erb'
+    )
   }
 
 }

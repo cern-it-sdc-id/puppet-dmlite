@@ -17,11 +17,11 @@ class dmlite::plugins::mysql::config (
 ) inherits dmlite::plugins::mysql::params {
 
     file {
-      "/etc/dmlite.conf.d/mysql.conf":
+      '/etc/dmlite.conf.d/mysql.conf':
         owner   => $user,
         group   => $group,
-        mode    => 0600,
-        content => template("dmlite/plugins/mysql.conf.erb"),
-        require => Package["dmlite-plugins-mysql"]
+        mode    => '0600',
+        content => template('dmlite/plugins/mysql.conf.erb'),
+        require => Package['dmlite-plugins-mysql']
     }
 }

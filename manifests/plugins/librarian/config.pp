@@ -5,11 +5,11 @@ class dmlite::plugins::librarian::config (
 ) inherits dmlite::plugins::librarian::params {
 
   file {
-    "/etc/dmlite.conf.d/librarian.conf":
+    '/etc/dmlite.conf.d/librarian.conf':
       owner   => $user,
       group   => $group,
-      mode    => 0600,
-      content => template("dmlite/plugins/librarian.conf.erb"),
-      require => Package["dmlite-plugins-librarian"]
+      mode    => '0600',
+      content => template('dmlite/plugins/librarian.conf.erb'),
+      require => Package['dmlite-plugins-librarian']
   }
 }

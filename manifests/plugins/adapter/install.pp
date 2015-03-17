@@ -5,12 +5,12 @@ class dmlite::plugins::adapter::install (
   include dmlite
 
   package {
-    "dmlite-plugins-adapter":
+    'dmlite-plugins-adapter':
       ensure => present;
   }
 
   if $debuginfo {
-    package {"dmlite-plugins-adapter-debuginfo":
+    package {'dmlite-plugins-adapter-debuginfo':
       ensure => present;
     }
   }

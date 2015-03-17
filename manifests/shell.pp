@@ -3,7 +3,7 @@ class dmlite::shell (
 
   Class[Dmlite::Shell::Install] -> Class[Dmlite::Shell::Config]
 
-  class{"dmlite::shell::install":}
-  class{"dmlite::shell::config":}
+  class{'dmlite::shell::install':}
+  class{'dmlite::shell::config':}
 
 }

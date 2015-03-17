@@ -3,7 +3,7 @@ class dmlite::plugins::memcache::install (
 
   include dmlite
 
-  package {"dmlite-plugins-memcache":
+  package {'dmlite-plugins-memcache':
     ensure => present;
   }
 

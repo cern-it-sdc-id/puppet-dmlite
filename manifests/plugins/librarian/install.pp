@@ -3,7 +3,7 @@ class dmlite::plugins::librarian::install (
 
   include dmlite
 
-  package {"dmlite-plugins-librarian":
+  package {'dmlite-plugins-librarian':
     ensure => present;
   }
 

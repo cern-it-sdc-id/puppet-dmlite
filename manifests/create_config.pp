@@ -16,14 +16,14 @@ define dmlite::create_config (
     ensure  => present,
     owner   => $user,
     group   => $group,
-    mode    => 0600,
-    content => template("dmlite/dmlite.conf.erb")
+    mode    => '0600',
+    content => template('dmlite/dmlite.conf.erb')
   }
 
   file {"/etc/${config_file_name}.conf.d":
     ensure => directory,
-    owner   => $user,
-    group   => $group,
-    mode    => 0700
+    owner  => $user,
+    group  => $group,
+    mode   => '0700'
   }
 }

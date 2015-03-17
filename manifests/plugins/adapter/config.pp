@@ -1,5 +1,5 @@
 class dmlite::plugins::adapter::config (
-  $config_dir_name    = "dmlite",
+  $config_dir_name    = 'dmlite',
   $dpm_host            = $dmlite::plugins::adapter::params::dpmhost,
   $ns_host             = $dmlite::plugins::adapter::params::nshost,
   $connection_timeout = $dmlite::plugins::adapter::params::connection_timeout,
@@ -19,7 +19,7 @@ class dmlite::plugins::adapter::config (
 
   Class[Dmlite::Plugins::Adapter::Install] -> Class[Dmlite::Plugins::Adapter::Config]
 
-  dmlite::plugins::adapter::create_config{"default_config":
+  dmlite::plugins::adapter::create_config{'default_config':
     config_dir_name    => $config_dir_name,   # put file in /etc/dmlite.conf.d/adapter.conf
     dpmhost            => $dpm_host,
     nshost             => $ns_host,

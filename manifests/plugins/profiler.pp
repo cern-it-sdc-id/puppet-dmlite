@@ -5,10 +5,10 @@ class dmlite::plugins::profiler(
 
   Class[Dmlite::Plugins::Profiler::Install] -> Class[Dmlite::Plugins::Profiler::Config]
 
-  class{"dmlite::plugins::profiler::config":
+  class{'dmlite::plugins::profiler::config':
     collectors => $collectors,
     auth       => $auth
   }
-  class{"dmlite::plugins::profiler::install":}
+  class{'dmlite::plugins::profiler::install':}
 
 }

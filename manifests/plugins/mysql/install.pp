@@ -3,7 +3,7 @@ class dmlite::plugins::mysql::install (
 
   include dmlite
 
-  package {"dmlite-plugins-mysql":
+  package {'dmlite-plugins-mysql':
     ensure => present;
   }
 

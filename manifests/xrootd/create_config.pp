@@ -1,6 +1,6 @@
 define dmlite::xrootd::create_config (
   $filename = $title,
-  $dmlite_conf,
+  $dmlite_conf = undef,
   $dpm_host = $fqdn,
 
   $xrootd_user = $xrootd::config::xrootd_user,
@@ -69,12 +69,12 @@ define dmlite::xrootd::create_config (
     validate_bool($alice_token)
   }
 
-  file {"$filename":
+  file { "${filename}":
     ensure  => file,
-    owner  => $xrootd::config::xrootd_user,
-    group  => $xrootd::config::xrootd_group,
-    content => template($xrootd::config::configfile_template,
-                        "dmlite/xrootd/dpm-xrootd.cfg.erb")
+    owner   => $xrootd::config::xrootd_user,
+    group   => $xrootd::config::xrootd_group,
+    content => template($xrootd::config::configfile_template, 'dmlite/xrootd/dpm-xrootd.cfg.erb'
+    )
   }
 
 }

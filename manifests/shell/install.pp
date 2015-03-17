@@ -2,7 +2,7 @@ class dmlite::shell::install (
 ) inherits dmlite::dav::params {
 
     package {
-      "dmlite-shell":
+      'dmlite-shell':
         ensure => present;
     }
 

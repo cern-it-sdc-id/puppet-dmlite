@@ -12,8 +12,8 @@ class dmlite::plugins::adapter::config::lfc (
 
   Class[Dmlite::Plugins::Adapter::Install] -> Class[Dmlite::Plugins::Adapter::Config::Lfc]
 
-  dmlite::plugins::adapter::create_config{"head_config":
-    config_dir_name    => "dmlite",   # put file in /etc/dmlite.conf.d/adapter.conf
+  dmlite::plugins::adapter::create_config{'head_config':
+    config_dir_name    => 'dmlite',   # put file in /etc/dmlite.conf.d/adapter.conf
     dpmhost            => $dpmhost,
     nshost             => $nshost,
     connection_timeout => $connection_timeout,

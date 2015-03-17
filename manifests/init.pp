@@ -21,7 +21,7 @@
 #
 
 class dmlite (
-  $nodetype = "head"
+  $nodetype = 'head'
 ) {
   #  validate_re($nodetype, '^(head|disk)$',
   #  "${nodetype} is not a valid node type for dmlite. It should be one of 'head' and 'disk'.")

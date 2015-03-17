@@ -3,8 +3,10 @@ class dmlite::dpm::config (
   $flavor
 ) {
   case $flavor {
-    dpns: { $basepath = "dpm" }
-    lfc: { $basepath = "grid" }
+    dpns: { $basepath = 'dpm' }
+    lfc: { $basepath = 'grid' }
+    default: { fail("Flavor ${flavor} is not supported by puppet-dmlite") }
   }
+
   $headnode = $head
 }

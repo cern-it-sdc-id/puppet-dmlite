@@ -1,5 +1,5 @@
 define dmlite::plugins::adapter::create_config (
-  $config_dir_name    = "dmlite",
+  $config_dir_name    = 'dmlite',
   $dpmhost            = $dmlite::plugins::adapter::params::dpmhost,
   $nshost             = $dmlite::plugins::adapter::params::nshost,
   $connection_timeout = $dmlite::plugins::adapter::params::connection_timeout,
@@ -11,7 +11,7 @@ define dmlite::plugins::adapter::create_config (
   $enable_ns          = $dmlite::plugins::adapter::params::enable_ns,
   $enable_pooldriver  = $dmlite::plugins::adapter::params::enable_pooldriver,
 
-  $token_password,
+  $token_password     = '',
   $token_id           = $dmlite::plugins::adapter::params::token_id,
   $token_life         = $dmlite::plugins::adapter::params::token_life,
   $user               = $dmlite::params::user,
@@ -26,8 +26,8 @@ define dmlite::plugins::adapter::create_config (
     "/etc/${config_dir_name}.conf.d/adapter.conf":
       owner   => $user,
       group   => $group,
-      mode    => 0600,
-      content => template("dmlite/plugins/adapter.conf.erb"),
-      require => [Package["dmlite-plugins-adapter"], File["/etc/${config_dir_name}.conf.d"]]
+      mode    => '0600',
+      content => template('dmlite/plugins/adapter.conf.erb'),
+      require => [Package['dmlite-plugins-adapter'], File["/etc/${config_dir_name}.conf.d"]]
   }
 }
