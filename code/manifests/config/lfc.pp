@@ -8,8 +8,8 @@ class dmlite::config::lfc (
 
   Class[Dmlite::Install] -> Class[Dmlite::Config::Lfc]
 
-  dmlite::create_config{"head_config":
-    config_file_name => "dmlite",   # create /etc/dmlite.conf
+  dmlite::create_config{'head_config':
+    config_file_name => 'dmlite',   # create /etc/dmlite.conf
     user             => $user,
     group            => $group,
     enable_config    => $enable_config,

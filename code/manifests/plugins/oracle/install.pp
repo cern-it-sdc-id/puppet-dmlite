@@ -3,7 +3,7 @@ class dmlite::plugins::oracle::install (
 
   include dmlite
 
-  package {"dmlite-plugins-oracle":
+  package {'dmlite-plugins-oracle':
     ensure => present;
   }
 

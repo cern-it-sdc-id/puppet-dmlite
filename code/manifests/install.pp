@@ -4,12 +4,12 @@ class dmlite::install (
 
   validate_bool($debuginfo)
 
-  package {"dmlite-libs":
+  package {'dmlite-libs':
     ensure => present;
   }
 
   if $debuginfo {
-    package {"dmlite-debuginfo":
+    package {'dmlite-debuginfo':
       ensure => present;
     }
   }

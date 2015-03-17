@@ -3,7 +3,7 @@ class dmlite::plugins::hdfs::install (
 
   include dmlite
 
-  package {"dmlite-plugins-hdfs":
+  package {'dmlite-plugins-hdfs':
     ensure => present;
   }
 

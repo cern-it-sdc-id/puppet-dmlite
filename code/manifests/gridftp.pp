@@ -2,63 +2,63 @@
 class dmlite::gridftp (
   $detach              = 1,
   $disable_usage_stats = 1,
-  $log_single          = "/var/log/dpm-gsiftp/gridftp.log",
-  $log_transfer        = "/var/log/dpm-gsiftp/dpm-gsiftp.log",
-  $log_level           = "ERROR,WARN,INFO,TRANSFER",
+  $log_single          = '/var/log/dpm-gsiftp/gridftp.log',
+  $log_transfer        = '/var/log/dpm-gsiftp/dpm-gsiftp.log',
+  $log_level           = 'ERROR,WARN,INFO,TRANSFER',
   $port                = 2811,
-  $dpmhost,
+  $dpmhost             = '',
   $nshost              = $dpmhost,
   $user                = $dmlite::params::user,
   $group               = $dmlite::params::group
 ) {
-  File["/var/log/dpm-gsiftp"] -> Class[Gridftp::Config]
-  Package["dpm-dsi"] -> Class[Gridftp::Config]
-  Package["dpm-dsi"] -> File["/etc/sysconfig/dpm-gsiftp"]
-  Class["Gridftp::Config"] -> Exec["remove_globus-gridftp-server_init_management"]
+  File['/var/log/dpm-gsiftp'] -> Class[Gridftp::Config]
+  Package['dpm-dsi'] -> Class[Gridftp::Config]
+  Package['dpm-dsi'] -> File['/etc/sysconfig/dpm-gsiftp']
+  Class['Gridftp::Config'] -> Exec['remove_globus-gridftp-server_init_management']
 
-  package{"dpm-dsi": ensure => present}
+  package{'dpm-dsi': ensure => present}
 
   file {
-    "/etc/sysconfig/dpm-gsiftp":
+    '/etc/sysconfig/dpm-gsiftp':
       ensure  => present,
       owner   => $user,
       group   => $group,
-      content => template("dmlite/gridftp/sysconfig.erb")
+      content => template('dmlite/gridftp/sysconfig.erb')
   }
 
   # gridftp configuration
   file {
-    "/var/log/dpm-gsiftp":
+    '/var/log/dpm-gsiftp':
+      ensure => directory,
       owner  => $user,
       group  => $group,
-      ensure => directory
   }
-  class{"gridftp::install":}
-  class{"gridftp::config":
+  class{'gridftp::install':}
+  class{'gridftp::config':
     user                => "${user}",
     group               => "${group}",
     auth_level          => 0,
     detach              => $detach,
     disable_usage_stats => $disable_usage_stats,
-    load_dsi_module     => "dmlite",
+    load_dsi_module     => 'dmlite',
     log_single          => $log_single,
     log_transfer        => $log_transfer,
     log_level           => $log_level,
-    login_msg           => "Disk Pool Manager (dmlite)",
+    login_msg           => 'Disk Pool Manager (dmlite)',
     port                => $port,
-    service             => "dpm-gsiftp",
-    sysconfigfile       => "/etc/sysconfig/globus",
-    thread_model        => "pthread"
+    service             => 'dpm-gsiftp',
+    sysconfigfile       => '/etc/sysconfig/globus',
+    thread_model        => 'pthread'
   }
-  exec{"remove_globus-gridftp-server_init_management":
-    command => "/sbin/chkconfig globus-gridftp-server off",
-    onlyif  => "/sbin/chkconfig globus-gridftp-server"
+  exec{'remove_globus-gridftp-server_init_management':
+    command => '/sbin/chkconfig globus-gridftp-server off',
+    onlyif  => '/sbin/chkconfig globus-gridftp-server'
   }
 
   include dmlite::gaiconfig
 
-  class{"gridftp::service":
-    service => "dpm-gsiftp"
+  class{'gridftp::service':
+    service => 'dpm-gsiftp'
   }
 }
 

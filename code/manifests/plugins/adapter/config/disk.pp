@@ -12,8 +12,8 @@ class dmlite::plugins::adapter::config::disk (
 
   Class[Dmlite::Plugins::Adapter::Install] -> Class[Dmlite::Plugins::Adapter::Config::Disk]
 
-  dmlite::plugins::adapter::create_config{"head_config":
-    config_dir_name    => "dmlite",   # put file in /etc/dmlite.conf.d/adapter.conf
+  dmlite::plugins::adapter::create_config{'head_config':
+    config_dir_name    => 'dmlite',   # put file in /etc/dmlite.conf.d/adapter.conf
     dpmhost            => $dpmhost,
     nshost             => $nshost,
     connection_timeout => $connection_timeout,
@@ -29,8 +29,8 @@ class dmlite::plugins::adapter::config::disk (
     token_life         => $token_life,
   }
 
-  dmlite::plugins::adapter::create_config{"disk_config_http":
-    config_dir_name    => "dmlite-disk",   # put file in /etc/dmlite.conf.d/adapter.conf
+  dmlite::plugins::adapter::create_config{'disk_config_http':
+    config_dir_name    => 'dmlite-disk',   # put file in /etc/dmlite.conf.d/adapter.conf
     dpmhost            => $dpmhost,
     nshost             => $nshost,
     connection_timeout => $connection_timeout,

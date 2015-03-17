@@ -13,7 +13,7 @@ class dmlite::plugins::vfs(
 
   Class[Dmlite::Plugins::Vfs::Install] -> Class[Dmlite::Plugins::Vfs::Config]
 
-  class{"dmlite::plugins::vfs::config":
+  class{'dmlite::plugins::vfs::config':
     enable_vfs     => $enable_vfs,
     user           => "${user}",
     group          => "${group}",
@@ -23,6 +23,6 @@ class dmlite::plugins::vfs(
     catalog_path   => "${catalog_path}",
     data_path      => "${data_path}",
   }
-  class{"dmlite::plugins::vfs::install":}
+  class{'dmlite::plugins::vfs::install':}
 
 }

@@ -9,8 +9,8 @@ class dmlite::config::disk (
   Class[Dmlite::Install] -> Class[Dmlite::Config::Disk]
 
   # the head config is needed for xrootd and gridftp
-  dmlite::create_config{"head_config":
-    config_file_name => "dmlite",
+  dmlite::create_config{'head_config':
+    config_file_name => 'dmlite',
     user             => $user,
     group            => $group,
     enable_config    => $enable_config,
@@ -18,8 +18,8 @@ class dmlite::config::disk (
     logcomponents    => $logcomponents
   }
 
-  dmlite::create_config{"disk_config_http":
-    config_file_name => "dmlite-disk",
+  dmlite::create_config{'disk_config_http':
+    config_file_name => 'dmlite-disk',
     user             => $user,
     group            => $group,
     enable_config    => $enable_config,

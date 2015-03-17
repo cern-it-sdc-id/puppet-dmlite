@@ -12,26 +12,26 @@ class dmlite::plugins::vfs::config (
 ) inherits dmlite::plugins::vfs::params {
 
   file {
-    "${catalog_path}":
+    '${catalog_path}':
         ensure => directory,
-        owner  => "dpmmgr",
-        group  => "dpmmgr",
-        seltype => "httpd_sys_content_t",
-        mode   => 0775;
-    "${data_path}":
+        owner  => 'dpmmgr',
+        group  => 'dpmmgr',
+        seltype => 'httpd_sys_content_t',
+        mode   => '0775';
+    '${data_path}':
         ensure => directory,
-        owner  => "dpmmgr",
-        group  => "dpmmgr",
-        seltype => "httpd_sys_content_t",
-        mode   => 0775;
+        owner  => 'dpmmgr',
+        group  => 'dpmmgr',
+        seltype => 'httpd_sys_content_t',
+        mode   => '0775';
   }
 
   file {
-    "/etc/dmlite.conf.d/vfs.conf":
+    '/etc/dmlite.conf.d/vfs.conf':
       owner   => $user,
       group   => $group,
-      mode    => 0600,
-      content => template("dmlite/plugins/vfs.conf.erb"),
-      require => Package["dmlite-plugins-vfs"]
+      mode    => '0600',
+      content => template('dmlite/plugins/vfs.conf.erb'),
+      require => Package['dmlite-plugins-vfs']
   }
 }

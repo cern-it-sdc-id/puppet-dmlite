@@ -3,7 +3,7 @@ class dmlite::plugins::s3::install (
 
   include dmlite
 
-  package {"dmlite-plugins-s3":
+  package {'dmlite-plugins-s3':
     ensure => present;
   }
 

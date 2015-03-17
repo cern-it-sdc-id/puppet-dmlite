@@ -9,20 +9,20 @@ class dmlite::plugins::profiler::config (
   validate_array($collectors)
 
   file {
-    "/etc/dmlite.conf.d/profiler.conf":
+    '/etc/dmlite.conf.d/profiler.conf':
       owner   => $user,
       group   => $group,
-      mode    => 0600,
-      content => template("dmlite/plugins/profiler.conf.erb"),
-      require => Package["dmlite-plugins-profiler"]
+      mode    => '0600',
+      content => template('dmlite/plugins/profiler.conf.erb'),
+      require => Package['dmlite-plugins-profiler']
   }
 
   file {
-    "/etc/dmlite-disk.conf.d/profiler.conf":
+    '/etc/dmlite-disk.conf.d/profiler.conf':
       owner   => $user,
       group   => $group,
-      mode    => 0600,
-      content => template("dmlite/plugins/profiler.conf.erb"),
-      require => Package["dmlite-plugins-profiler"]
+      mode    => '0600',
+      content => template('dmlite/plugins/profiler.conf.erb'),
+      require => Package['dmlite-plugins-profiler']
   }
 }

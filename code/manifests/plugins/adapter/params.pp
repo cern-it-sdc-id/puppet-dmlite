@@ -12,6 +12,6 @@ class dmlite::plugins::adapter::params (
     $enable_pooldriver  = true
     $with_db_plugin     = false
 
-    $token_id           = "id"
+    $token_id           = 'id'
     $token_life         = 1000
 }
