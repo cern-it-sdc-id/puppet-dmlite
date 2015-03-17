@@ -8,8 +8,8 @@ class dmlite::config::head (
 
   Class[Dmlite::Install] -> Class[Dmlite::Config::Head]
 
-  dmlite::create_config{"head_config":
-    config_file_name => "dmlite",   # create /etc/dmlite.conf
+  dmlite::create_config{'head_config':
+    config_file_name => 'dmlite',   # create /etc/dmlite.conf
     user             => $user,
     group            => $group,
     enable_config    => $enable_config,
@@ -17,8 +17,8 @@ class dmlite::config::head (
     logcomponents    => $logcomponents
   }
 
-  dmlite::create_config{"disk_config_http":
-    config_file_name => "dmlite-disk",
+  dmlite::create_config{'disk_config_http':
+    config_file_name => 'dmlite-disk',
     user             => $user,
     group            => $group,
     enable_config    => $enable_config,

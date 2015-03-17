@@ -8,15 +8,15 @@ class dmlite::srm (
 
   Class[Dmlite::Srm::Install] -> Class[Dmlite::Srm::Config] -> Class[Dmlite::Srm::Service]
 
-  class{"dmlite::srm::install":
+  class{'dmlite::srm::install':
     user  => "${user}",
     group => "${group}"
   }
-  class{"dmlite::srm::config":
+  class{'dmlite::srm::config':
     dbflavor => "${dbflavor}",
     dpmhost  => "${dpmhost}",
     nshost   => "${nshost}"
   }
-  class{"dmlite::srm::service":}
+  class{'dmlite::srm::service':}
 
 }

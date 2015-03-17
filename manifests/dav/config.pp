@@ -39,74 +39,74 @@ class dmlite::dav::config (
 
   Class[Dmlite::Dav::Install] -> Class[Dmlite::Dav::Config]
 
-  if($::selinux != 'false') {
-    selboolean{"httpd_can_network_connect": value => on, persistent => true }
-    selboolean{"httpd_execmem": value => on, persistent => true }
+  if($::selinux != false) {
+    selboolean{'httpd_can_network_connect': value => on, persistent => true }
+    selboolean{'httpd_execmem': value => on, persistent => true }
   }
 
   file {
-    "/etc/httpd/conf.d/ssl.conf":
+    '/etc/httpd/conf.d/ssl.conf':
       ensure  => present,
-      content => ""; # empty content, so an upgrade doesn't overwrite it
-    "/etc/httpd/conf.d/zgridsite.conf":
+      content => ''; # empty content, so an upgrade doesn't overwrite it
+    '/etc/httpd/conf.d/zgridsite.conf':
       ensure  => present,
-      content => ""; # empty content, so an upgrade doesn't overwrite it
-    "/etc/httpd/conf.d/zlcgdm-dav.conf":
-      ensure	=> present,
-      content => template("dmlite/dav/zlcgdm-dav.conf");
+      content => ''; # empty content, so an upgrade doesn't overwrite it
+    '/etc/httpd/conf.d/zlcgdm-dav.conf':
+      ensure  => present,
+      content => template('dmlite/dav/zlcgdm-dav.conf');
   }
 
   # We need some additional tweaks to the httpd.conf.
   # Probably goes away if we start using a puppet module for apache.
   file_line {
-    "no apache mod_dav":
+    'no apache mod_dav':
       ensure => absent,
-      line   => "LoadModule dav_module modules/mod_dav.so",
-      path   => "/etc/httpd/conf/httpd.conf";
-    "no apache mod_dav_fs":
+      line   => 'LoadModule dav_module modules/mod_dav.so',
+      path   => '/etc/httpd/conf/httpd.conf';
+    'no apache mod_dav_fs':
       ensure => absent,
-      line   => "LoadModule dav_fs_module modules/mod_dav_fs.so",
-      path   => "/etc/httpd/conf/httpd.conf";
-    "apache user":
+      line   => 'LoadModule dav_fs_module modules/mod_dav_fs.so',
+      path   => '/etc/httpd/conf/httpd.conf';
+    'apache user':
       ensure => present,
-      match  => "^User .*",
+      match  => '^User .*',
       line   => "User ${user}",
-      path   => "/etc/httpd/conf/httpd.conf";
-    "apache group":
+      path   => '/etc/httpd/conf/httpd.conf';
+    'apache group':
       ensure => present,
-      match  => "^Group .*",
+      match  => '^Group .*',
       line   => "Group ${group}",
-      path   => "/etc/httpd/conf/httpd.conf";
+      path   => '/etc/httpd/conf/httpd.conf';
   }
   if $coredump_dir {
-    file_line {"apache coredump":
+    file_line {'apache coredump':
       ensure => present,
       line   => "CoreDumpDirectory ${coredump_dir}",
-      path   => "/etc/httpd/conf/httpd.conf"
+      path   => '/etc/httpd/conf/httpd.conf'
     }
   }
 
   if $enable_keep_alive {
-   file_line {"apache keepalive":
+  file_line { 'apache keepalive':
       ensure => present,
-      line   => "KeepAlive On",
-      path   => "/etc/httpd/conf/httpd.conf",
-      match  => "^KeepAlive .*" 
-    }	 
+      line   => 'KeepAlive On',
+      path   => '/etc/httpd/conf/httpd.conf',
+      match  => '^KeepAlive .*'
+    }
   }
 
-  file_line{"mpm model":
+  file_line{'mpm model':
     ensure => present,
-    path   => "/etc/sysconfig/httpd",
+    path   => '/etc/sysconfig/httpd',
     line   => "HTTPD=${mpm_model}",
-    match  => "^#?HTTPD=/.*"
+    match  => '^#?HTTPD=/.*'
   }
 
   if $ulimit {
-    file_line {"apache ulimit":
+    file_line {'apache ulimit':
       ensure => present,
       line   => "ulimit ${ulimit}",
-      path   => "/etc/sysconfig/httpd"
+      path   => '/etc/sysconfig/httpd'
     }
   }
 

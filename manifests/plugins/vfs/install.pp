@@ -3,7 +3,7 @@ class dmlite::plugins::vfs::install (
 
   include dmlite
 
-  package {"dmlite-plugins-vfs":
+  package {'dmlite-plugins-vfs':
     ensure => present;
   }
 

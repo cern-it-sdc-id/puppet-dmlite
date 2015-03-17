@@ -3,7 +3,7 @@ class dmlite::python (
 
   Class[Dmlite::Python::Install] -> Class[Dmlite::Python::Config]
 
-  class{"dmlite::python::install":}
-  class{"dmlite::python::config":}
+  class{'dmlite::python::install':}
+  class{'dmlite::python::config':}
 
 }

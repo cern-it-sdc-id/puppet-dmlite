@@ -2,7 +2,7 @@ class dmlite::python::install (
 ) inherits dmlite::dav::params {
 
     package {
-      "python-dmlite":
+      'python-dmlite':
         ensure => present;
     }
 

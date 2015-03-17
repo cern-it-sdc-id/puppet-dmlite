@@ -4,22 +4,22 @@ class dmlite::srm::install (
 ) inherits dmlite::srm::params {
 
     package {
-      "dpm-srm-server-${dbflavor}":
+      "dpm-srm-server-${dmlite::srm::params::dbflavor}":
         ensure => present
     }
 
     file {
-      "/var/log/srmv2.2":
+      '/var/log/srmv2.2':
+        ensure => directory,
         owner  => "${user}",
         group  => "${group}",
-        mode   => 600,
-        ensure => directory;
-      "/var/log/srmv2.2/log":
-        owner  => "${user}",
-        group  => "${group}",
-        mode   => 600,
+        mode   => '0600';
+      '/var/log/srmv2.2/log':
         ensure => present,
-        require=> File["/var/log/srmv2.2"];
+        owner  => "${user}",
+        group  => "${group}",
+        mode   => '0600',
+        require=> File['/var/log/srmv2.2'];
     }
 
 }

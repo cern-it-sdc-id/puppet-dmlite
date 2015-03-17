@@ -15,7 +15,7 @@ class dmlite::plugins::memcache(
 
   Class[Dmlite::Plugins::Memcache::Install] -> Class[Dmlite::Plugins::Memcache::Config]
 
-  class{"dmlite::plugins::memcache::config":
+  class{'dmlite::plugins::memcache::config':
     servers              => $servers,
     enable_memcache      => $enable_memcache,
     enable_memcache_cat  => $enable_memcache_cat,
@@ -29,6 +29,6 @@ class dmlite::plugins::memcache(
     func_counter         => "${func_counter}",
     local_cache_size     => $local_cache_size,
   }
-  class{"dmlite::plugins::memcache::install":}
+  class{'dmlite::plugins::memcache::install':}
 
 }

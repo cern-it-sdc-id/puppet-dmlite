@@ -19,11 +19,11 @@ class dmlite::plugins::hdfs::config (
 ) inherits dmlite::plugins::hdfs::params {
 
   file {
-    "/etc/dmlite.conf.d/hdfs.conf":
+    '/etc/dmlite.conf.d/hdfs.conf':
       owner   => $user,
       group   => $group,
-      mode    => 0600,
-      content => template("dmlite/plugins/hdfs.conf.erb"),
-      require => Package["dmlite-plugins-hdfs"]
+      mode    => '0600',
+      content => template('dmlite/plugins/hdfs.conf.erb'),
+      require => Package['dmlite-plugins-hdfs']
   }
 }

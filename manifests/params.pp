@@ -1,7 +1,7 @@
 class dmlite::params {
-  $libdir = $architecture ? {
-    "x86_64" => "lib64",
-    default  => "lib",
+  $libdir = $::architecture ? {
+    'x86_64' => 'lib64',
+    default  => 'lib',
   }
 
   $enable_config  = hiera('dmlite::params::enable_config', true)
