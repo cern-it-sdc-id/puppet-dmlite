@@ -12,13 +12,13 @@ class dmlite::plugins::vfs::config (
 ) inherits dmlite::plugins::vfs::params {
 
   if defined ('xrootd::service'){
-    Class[Dmlite::Plugins::vfs::Config] ~> Class[Xrootd::Service]
+    Class[Dmlite::Plugins::Vfs::Config] ~> Class[Xrootd::Service]
   }
   if defined ('dmlite::dav::service'){
-    Class[Dmlite::Plugins::vfs::Config] ~> Class[Dmlite::Dav::Service]
+    Class[Dmlite::Plugins::Vfs::Config] ~> Class[Dmlite::Dav::Service]
   }
   if defined ('gridftp::service'){
-    Class[Dmlite::Plugins::vfs::Config] ~> Class[Gridftp::Service]
+    Class[Dmlite::Plugins::Vfs::Config] ~> Class[Gridftp::Service]
   }
 
   file {

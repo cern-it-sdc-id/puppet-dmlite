@@ -1,5 +1,7 @@
-2015-03-xx  Andrea Manzi  <andrea.manzi@cern.ch>
+2015-03-23  Andrea Manzi  <andrea.manzi@cern.ch>
     * updated conf for hdfs plugin
+    * added cron for http session folder cleaning
+    * added frontend reload for all dmlite/dmlite plugins conf changes
 2015-03-11  Andrea Manzi  <andrea.manzi@cern.ch>
     * remove SSLv3 support from DAV
     * added conf for HostCertificate in Mysql plugin
