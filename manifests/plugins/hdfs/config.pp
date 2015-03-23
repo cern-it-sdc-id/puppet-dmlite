@@ -20,6 +20,16 @@ class dmlite::plugins::hdfs::config (
 
 ) inherits dmlite::plugins::hdfs::params {
 
+  if defined ('xrootd::service'){
+    Class[Dmlite::Plugins::Hdfs::Config] ~> Class[Xrootd::Service]
+  }
+  if defined ('dmlite::dav::service'){
+    Class[Dmlite::Plugins::Hdfs::Config] ~> Class[Dmlite::Dav::Service]
+  }
+  if defined ('gridftp::service'){
+    Class[Dmlite::Plugins::Hdfs::Config] ~> Class[Gridftp::Service]
+  }
+  
   file {
     '/etc/dmlite.conf.d/hdfs.conf':
       owner   => $user,

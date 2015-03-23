@@ -27,7 +27,7 @@ class dmlite::head_hdfs (
     debuginfo => $debuginfo
   }
  
-  Class[Dmlite::Plugins::Hdfs::Install] -> Class[Dmlite::Plugins::Hdfs::Config] 
+  Class[Dmlite::Plugins::Hdfs::Install] -> Class[Dmlite::Plugins::Hdfs::Config]
 
   class{'dmlite::plugins::hdfs::config':
     token_password => "${token_password}",
@@ -39,7 +39,7 @@ class dmlite::head_hdfs (
     hdfs_mode      => "${hdfs_mode}",
     hdfs_gateway   => "${hdfs_gateway}",
     enable_io      => "${enable_io}",
-    enable_ns      => "${enable_ns}",
+    enable_ns      => false,
   }
   class{'dmlite::plugins::hdfs::install':}
 
