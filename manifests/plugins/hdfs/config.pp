@@ -8,6 +8,7 @@ class dmlite::plugins::hdfs::config (
   $hdfs_user          = $dmlite::plugins::hdfs::params::hdfs_user,
   $hdfs_mode          = $dmlite::plugins::hdfs::params::hdfs_mode,
   $hdfs_gateway       = $dmlite::plugins::hdfs::params::hdfs_gateway,
+  $hdfs_tmp_folder    = $dmlite::plugins::hdfs::params::hdfs_tmp_folder,
   $hadoop_home_lib    = $dmlite::plugins::hdfs::params::hadoop_home_lib,
   $hdfs_home_lib      = $dmlite::plugins::hdfs::params::hdfs_home_lib,
   $java_home          = $dmlite::plugins::hdfs::params::java_home,

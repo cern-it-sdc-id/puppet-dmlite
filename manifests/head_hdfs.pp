@@ -14,7 +14,8 @@ class dmlite::head_hdfs (
   $hdfs_namenode  = undef,
   $hdfs_port      = undef,
   $hdfs_user      = undef,
-  $hdfs_mode      = "rw",
+  $hdfs_mode      = 'rw',
+  $hdfs_tmp_folder = '/tmp'
   $hdfs_gateway   = "${::fqdn}",
   $enable_io      = false,
   $enable_ns      = false,
@@ -38,6 +39,7 @@ class dmlite::head_hdfs (
     hdfs_user      => "${hdfs_user}",
     hdfs_mode      => "${hdfs_mode}",
     hdfs_gateway   => "${hdfs_gateway}",
+    hdfs_tmp_folder => "${hdfs_tmp_folder}",
     enable_io      => "${enable_io}",
     enable_ns      => false,
   }

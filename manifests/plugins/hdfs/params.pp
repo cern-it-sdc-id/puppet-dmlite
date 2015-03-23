@@ -9,6 +9,7 @@ class dmlite::plugins::hdfs::params (
     $hdfs_user = undef
     $hdfs_mode = rw
     $hdfs_gateway = "${::fqdn}"
+    $hdfs_tmp_folder = '/tmp'
     $hadoop_home_lib = '/usr/lib/hadoop'
     $hdfs_home_lib = '/usr/lib/hadoop-hdfs'
     $java_home = '/usr/java/latest'

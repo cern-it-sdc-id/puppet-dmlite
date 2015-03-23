@@ -19,6 +19,10 @@ HdfsPort  <%= @hdfs_port %>
 HdfsUser  <%= @hdfs_user %>
 HdfsGateway  <%= @hdfs_gateway %>
 
+<%if @enable_io -%>
+HdfsTmpFolder <%= @hdfs_tmp_folder %>
+<% end -%>
+
 <%if @enable_ns -%>
 HdfsMode  <%= @hdfs_mode %>
 MapFile   <%= @map_file %>
