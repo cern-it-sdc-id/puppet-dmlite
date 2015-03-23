@@ -33,6 +33,16 @@ class dmlite::plugins::memcache::config (
     fail("The parameter '${local_cache_size}' provided is not a number. Please provide a positive integer.")
   }
 
+  if defined ('xrootd::service'){
+    Class[Dmlite::Plugins::Memcache::Config] ~> Class[Xrootd::Service]
+  }
+  if defined ('dmlite::dav::service'){
+    Class[Dmlite::Plugins::Memcache::Config] ~> Class[Dmlite::Dav::Service]
+  }
+  if defined ('gridftp::service'){
+    Class[Dmlite::Plugins::Memcache::Config] ~> Class[Gridftp::Service]
+  }
+
   file {
     '/etc/dmlite.conf.d/memcache.conf':
       ensure  => absent;

@@ -16,6 +16,16 @@ class dmlite::plugins::mysql::config (
   $adminuser        = undef,
 ) inherits dmlite::plugins::mysql::params {
 
+  if defined ('xrootd::service'){
+    Class[Dmlite::Plugins::Mysql::Config] ~> Class[Xrootd::Service]
+  }
+  if defined ('dmlite::dav::service'){
+    Class[Dmlite::Plugins::Mysql::Config] ~> Class[Dmlite::Dav::Service]
+  }
+  if defined ('gridftp::service'){
+    Class[Dmlite::Plugins::Mysql::Config] ~> Class[Gridftp::Service]
+  }
+
     file {
       '/etc/dmlite.conf.d/mysql.conf':
         owner   => $user,
