@@ -23,6 +23,7 @@ class dmlite::xrootd (
   $dpm_xrootd_fedredirs = {},
   $log_style_param = '-k fifo', #'-k fifo' for xrootd4
   $vomsxrd_package = 'vomsxrd',
+  $enable_hdfs = false,
 ) {
 
   validate_bool($xrootd_use_voms)
@@ -34,6 +35,7 @@ class dmlite::xrootd (
   Xrootd::Create_Sysconfig <| |> ~> Class[Xrootd::Service]
   Exec['delete .xrootd.log files'] ~> Class[Xrootd::Service]
   Exec['delete .xrootd.log files'] -> Xrootd::Create_sysconfig <| |>
+  Class[Dmlite::Xrootd] ~> Class['Xrootd::Service']
 
   package {'dpm-xrootd':
     ensure => present
@@ -47,6 +49,10 @@ class dmlite::xrootd (
 
   include xrootd::config
   include xrootd::service
+
+  if $enable_hdfs {
+    $java_home= $dmlite::plugins::hdfs::params::java_home
+  }
 
   $sec_protocol_local = "/usr/${xrootd::config::xrdlibdir} unix"
 
@@ -96,7 +102,8 @@ class dmlite::xrootd (
       xrd_debug      => $dpm_xrootd_debug,
       ofs_tpc        => $ofs_tpc,
       sec_protocol   => [ $sec_protocol_disk, $sec_protocol_local ],
-      dpm_listvoms   => $dpm_listvoms
+      dpm_listvoms   => $dpm_listvoms,
+      use_dmlite_io  => $enable_hdfs,
     }
   } else {
     $xrootd_instances_options_disk = {}

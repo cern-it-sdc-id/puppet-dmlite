@@ -12,7 +12,7 @@ class dmlite::plugins::hdfs::params (
     $hdfs_tmp_folder = '/tmp'
     $hadoop_home_lib = '/usr/lib/hadoop'
     $hdfs_home_lib = '/usr/lib/hadoop-hdfs'
-    $java_home = '/usr/java/latest'
+    $java_home = '/usr/lib/jvm/java/'
     $token_password = 'change-this'
     $map_file = '/etc/lcgdm-mapfile'
     $token_id = ip

@@ -28,4 +28,5 @@ class dmlite::dav::params (
     $enable_http        = true
     $enable_keep_alive  = true
     $mpm_model          = '/usr/sbin/httpd.event'
+    $enable_hdfs        = false
 }
