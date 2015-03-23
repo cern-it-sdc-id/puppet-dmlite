@@ -17,9 +17,15 @@ LoadPlugin plugin_hdfs_pooldriver /usr/<%= @libdir %>/dmlite/plugin_hdfs.so
 HdfsNameNode  <%= @hdfs_namenode %>
 HdfsPort  <%= @hdfs_port %>
 HdfsUser  <%= @hdfs_user %>
+HdfsGateway  <%= @hdfs_gateway %>
+
+<%if @enable_io -%>
+HdfsTmpFolder <%= @hdfs_tmp_folder %>
+<% end -%>
 
 <%if @enable_ns -%>
 HdfsMode  <%= @hdfs_mode %>
+MapFile   <%= @map_file %>
 <% end %>
 
 #environment parameters

@@ -8,6 +8,16 @@ class dmlite::config::disk (
 
   Class[Dmlite::Install] -> Class[Dmlite::Config::Disk]
 
+  if defined ('xrootd::service'){
+    Class[Dmlite::Config::Disk] ~> Class[Xrootd::Service]
+  }
+  if defined ('dmlite::dav::service'){
+    Class[Dmlite::Config::Disk] ~> Class[Dmlite::Dav::Service]
+  }
+  if defined ('gridftp::service'){
+    Class[Dmlite::Config::Disk] ~> Class[Gridftp::Service]
+  }
+
   # the head config is needed for xrootd and gridftp
   dmlite::create_config{'head_config':
     config_file_name => 'dmlite',

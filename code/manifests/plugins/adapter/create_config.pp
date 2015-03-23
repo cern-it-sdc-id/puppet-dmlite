@@ -22,6 +22,16 @@ define dmlite::plugins::adapter::create_config (
 
   $libdir = $dmlite::params::libdir
 
+  if defined ('xrootd::service'){
+    Dmlite::Plugins::Adapter::Create_config <| |> ~> Class[Xrootd::Service]
+  }
+  if defined ('dmlite::dav::service'){
+    Dmlite::Plugins::Adapter::Create_config <| |> ~> Class[Dmlite::Dav::Service]
+  }
+  if defined ('gridftp::service'){
+    Dmlite::Plugins::Adapter::Create_config <| |> ~> Class[Gridftp::Service]
+  }
+
   file {
     "/etc/${config_dir_name}.conf.d/adapter.conf":
       owner   => $user,

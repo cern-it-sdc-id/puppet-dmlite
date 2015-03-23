@@ -14,4 +14,12 @@ class dmlite::dav::install (
     unless  => 'grep -q \'# chkconfig fetch-crl-cron on\' \'/etc/cron.d/fetch-crl\'',
     require => Class[fetchcrl],
   }
+
+ # cron definition for session cache
+  cron { 'session cache cleaner':
+    ensure  => 'present',
+    command => "/usr/bin/find /var/www/sessions -type f -cmin +1440 -print0 -exec /bin/rm {} \;",
+    user    => 'root',
+    minute  => '00',
+  }
 }

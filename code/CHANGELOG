@@ -1,4 +1,5 @@
+2015-03-xx  Andrea Manzi  <andrea.manzi@cern.ch>
+    * updated conf for hdfs plugin
 2015-03-11  Andrea Manzi  <andrea.manzi@cern.ch>
     * remove SSLv3 support from DAV
     * added conf for HostCertificate in Mysql plugin
-

@@ -11,6 +11,16 @@ class dmlite::plugins::vfs::config (
   $data_path          = $dmlite::plugins::vfs::params::data_path,
 ) inherits dmlite::plugins::vfs::params {
 
+  if defined ('xrootd::service'){
+    Class[Dmlite::Plugins::vfs::Config] ~> Class[Xrootd::Service]
+  }
+  if defined ('dmlite::dav::service'){
+    Class[Dmlite::Plugins::vfs::Config] ~> Class[Dmlite::Dav::Service]
+  }
+  if defined ('gridftp::service'){
+    Class[Dmlite::Plugins::vfs::Config] ~> Class[Gridftp::Service]
+  }
+
   file {
     '${catalog_path}':
         ensure => directory,

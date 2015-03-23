@@ -8,8 +8,8 @@ class dmlite::head (
   $nshost     = "${::fqdn}",
   $adminuser  = undef,
   $debuginfo  = false,
-  $log_level      = $dmlite::params::log_level,
-  $logcomponents  = $dmlite::params::logcomponents
+  $log_level      = 1,
+  $logcomponents  = undef,
 ) {
   class{'dmlite::config::head':
     log_level     => $log_level,
@@ -18,6 +18,7 @@ class dmlite::head (
   class{'dmlite::install':
     debuginfo => $debuginfo
   }
+
   class{'dmlite::plugins::adapter::config::head':
     token_password => "${token_password}",
     token_id       => "${token_id}",
@@ -34,5 +35,6 @@ class dmlite::head (
     mysql_password => "${mysql_password}",
     adminuser      => "${adminuser}",
   }
+
   class{'dmlite::plugins::mysql::install':}
 }

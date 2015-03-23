@@ -8,6 +8,16 @@ class dmlite::plugins::profiler::config (
 
   validate_array($collectors)
 
+  if defined ('xrootd::service'){
+    Class[Dmlite::Plugins::Profiler::Config] ~> Class[Xrootd::Service]
+  }
+  if defined ('dmlite::dav::service'){
+    Class[Dmlite::Plugins::Profiler::Config] ~> Class[Dmlite::Dav::Service]
+  }
+  if defined ('gridftp::service'){
+    Class[Dmlite::Plugins::Profiler::Config] ~> Class[Gridftp::Service]
+  }
+ 
   file {
     '/etc/dmlite.conf.d/profiler.conf':
       owner   => $user,

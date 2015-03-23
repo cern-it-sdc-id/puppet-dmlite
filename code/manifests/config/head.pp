@@ -8,6 +8,16 @@ class dmlite::config::head (
 
   Class[Dmlite::Install] -> Class[Dmlite::Config::Head]
 
+  if defined ('xrootd::service'){
+    Class[Dmlite::Config::Head] ~> Class[Xrootd::Service]
+  }
+  if defined ('dmlite::dav::service'){
+    Class[Dmlite::Config::Head] ~> Class[Dmlite::Dav::Service]
+  }
+  if defined ('gridftp::service'){
+    Class[Dmlite::Config::Head] ~> Class[Gridftp::Service]
+  }
+
   dmlite::create_config{'head_config':
     config_file_name => 'dmlite',   # create /etc/dmlite.conf
     user             => $user,
