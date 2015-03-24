@@ -39,4 +39,15 @@ class dmlite::plugins::hdfs::config (
       content => template('dmlite/plugins/hdfs.conf.erb'),
       require => Package['dmlite-plugins-hdfs']
   }
+
+  if $enable_io {
+    file {
+      '/etc/dmlite-disk.conf.d/hdfs.conf':
+        owner   => $user,
+        group   => $group,
+        mode    => '0600',
+        content => template('dmlite/plugins/hdfs.conf.erb'),
+        require => Package['dmlite-plugins-hdfs']
+    }
+  }
 }
