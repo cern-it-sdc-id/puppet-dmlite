@@ -59,7 +59,8 @@ define dmlite::xrootd::create_config (
   $alice_token_libname = undef,
   $alice_fqans = undef,
 
-  $dpm_xrootd_fedredirs = undef
+  $dpm_xrootd_fedredirs = undef,
+  $use_dmlite_io = false
 
 ) {
   include xrootd::config

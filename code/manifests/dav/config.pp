@@ -26,6 +26,7 @@ class dmlite::dav::config (
   $enable_http        = $dmlite::dav::params::enable_http,
   $enable_keep_alive  = $dmlite::dav::params::enable_keep_alive,
   $mpm_model          = $dmlite::dav::params::mpm_model,
+  $enable_hdfs        = $dmlite::dav::params::enable_hdfs,
   #dav ports
   $dav_http_port      = 80,
   $dav_https_port     = 443,
@@ -36,12 +37,31 @@ class dmlite::dav::config (
   validate_bool($enable_https)
   validate_bool($enable_http)
 
+  case $enable_hdfs {
+    true:{
+      $dav_template = 'dmlite/dav/zlcgdm-dav_hdfs.conf'
+    }
+    default: {
+      $dav_template = 'dmlite/dav/zlcgdm-dav.conf'
+    }
+  }
 
   Class[Dmlite::Dav::Install] -> Class[Dmlite::Dav::Config]
 
   if($::selinux != false) {
     selboolean{'httpd_can_network_connect': value => on, persistent => true }
     selboolean{'httpd_execmem': value => on, persistent => true }
+  }
+
+  if $enable_hdfs {
+    $java_home= $dmlite::plugins::hdfs::params::java_home
+    file {
+      '/etc/sysconfig/httpd':
+        ensure  => present,
+        owner   => $user,
+        group   => $group,
+        content => template('dmlite/dav/sysconfig.erb')
+    }
   }
 
   file {
@@ -53,7 +73,7 @@ class dmlite::dav::config (
       content => ''; # empty content, so an upgrade doesn't overwrite it
     '/etc/httpd/conf.d/zlcgdm-dav.conf':
       ensure  => present,
-      content => template('dmlite/dav/zlcgdm-dav.conf');
+      content => template("${dav_template}");
   }
 
   # We need some additional tweaks to the httpd.conf.

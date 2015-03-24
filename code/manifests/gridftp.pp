@@ -9,12 +9,20 @@ class dmlite::gridftp (
   $dpmhost             = '',
   $nshost              = $dpmhost,
   $user                = $dmlite::params::user,
-  $group               = $dmlite::params::group
+  $group               = $dmlite::params::group,
+  $enable_hdfs         = false,
+  $data_note           = 0,
+  $remote_nodes        = undef,
 ) {
   File['/var/log/dpm-gsiftp'] -> Class[Gridftp::Config]
   Package['dpm-dsi'] -> Class[Gridftp::Config]
   Package['dpm-dsi'] -> File['/etc/sysconfig/dpm-gsiftp']
   Class['Gridftp::Config'] -> Exec['remove_globus-gridftp-server_init_management']
+  Class[Dmlite::Gridftp] ~> Class['Gridftp::Service']
+
+  if $enable_hdfs {
+    $java_home = $dmlite::plugins::hdfs::params::java_home
+  }
 
   package{'dpm-dsi': ensure => present}
 
@@ -48,7 +56,9 @@ class dmlite::gridftp (
     port                => $port,
     service             => 'dpm-gsiftp',
     sysconfigfile       => '/etc/sysconfig/globus',
-    thread_model        => 'pthread'
+    thread_model        => 'pthread',
+    data_node           => $data_note,
+    remote_nodes        => "${remote_nodes}",
   }
   exec{'remove_globus-gridftp-server_init_management':
     command => '/sbin/chkconfig globus-gridftp-server off',
