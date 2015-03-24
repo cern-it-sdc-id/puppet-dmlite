@@ -22,13 +22,13 @@ define dmlite::plugins::adapter::create_config (
 
   $libdir = $dmlite::params::libdir
 
-  if defined ('xrootd::service'){
+  if defined (Class[Xrootd::Service]){
     Dmlite::Plugins::Adapter::Create_config <| |> ~> Class[Xrootd::Service]
   }
-  if defined ('dmlite::dav::service'){
+  if defined (Class[Dmlite::Dav::Service]){
     Dmlite::Plugins::Adapter::Create_config <| |> ~> Class[Dmlite::Dav::Service]
   }
-  if defined ('gridftp::service'){
+  if defined (Class[Gridftp::Service]){
     Dmlite::Plugins::Adapter::Create_config <| |> ~> Class[Gridftp::Service]
   }
 
