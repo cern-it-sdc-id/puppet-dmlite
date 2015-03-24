@@ -17,7 +17,6 @@ class dmlite::plugins::profiler::config (
   if defined ('gridftp::service'){
     Class[Dmlite::Plugins::Profiler::Config] ~> Class[Gridftp::Service]
   }
- 
   file {
     '/etc/dmlite.conf.d/profiler.conf':
       owner   => $user,
@@ -26,7 +25,6 @@ class dmlite::plugins::profiler::config (
       content => template('dmlite/plugins/profiler.conf.erb'),
       require => Package['dmlite-plugins-profiler']
   }
-
   file {
     '/etc/dmlite-disk.conf.d/profiler.conf':
       owner   => $user,

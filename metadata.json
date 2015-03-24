@@ -3,7 +3,7 @@
   "dependencies": [
     {
       "name": "CERNOps/fetchcrl",
-      "version_requirement": "\u003e\u003d 0.1.0"
+      "version_requirement": "\u003e\u003d 0.2.2"
     },
     {
       "name": "puppetlabs/stdlib",

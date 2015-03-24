@@ -15,7 +15,6 @@ class dmlite::dav::install (
     require => Class[fetchcrl],
   }
 
- # cron definition for session cache
   cron { 'session cache cleaner':
     ensure  => 'present',
     command => '/usr/bin/find /var/www/sessions -type f -cmin +1440 -print0 -exec /bin/rm {} \;',

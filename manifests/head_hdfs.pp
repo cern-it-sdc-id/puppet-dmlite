@@ -31,17 +31,17 @@ class dmlite::head_hdfs (
   Class[Dmlite::Plugins::Hdfs::Install] -> Class[Dmlite::Plugins::Hdfs::Config]
 
   class{'dmlite::plugins::hdfs::config':
-    token_password => "${token_password}",
-    token_id       => "${token_id}",
-    token_life     => "${token_life}",
-    hdfs_namenode  => "${hdfs_namenode}",
-    hdfs_port      => "${hdfs_port}",
-    hdfs_user      => "${hdfs_user}",
-    hdfs_mode      => "${hdfs_mode}",
-    hdfs_gateway   => "${hdfs_gateway}",
-    hdfs_tmp_folder => "${hdfs_tmp_folder}",
-    enable_io      => "${enable_io}",
-    enable_ns      => false,
+    token_password	=> "${token_password}",
+    token_id		=> "${token_id}",
+    token_life	 	=> "${token_life}",
+    hdfs_namenode	=> "${hdfs_namenode}",
+    hdfs_port		=> "${hdfs_port}",
+    hdfs_user		=> "${hdfs_user}",
+    hdfs_mode		=> "${hdfs_mode}",
+    hdfs_gateway	=> "${hdfs_gateway}",
+    hdfs_tmp_folder	=> "${hdfs_tmp_folder}",
+    enable_io		=> "${enable_io}",
+    enable_ns		=> false,
   }
   class{'dmlite::plugins::hdfs::install':}
 
