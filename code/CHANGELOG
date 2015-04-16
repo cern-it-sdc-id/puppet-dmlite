@@ -1,3 +1,7 @@
+2015-04-14 Andrea Manzi  <andrea.manzi@cern.ch>
+    * added conf for hdfs gateway
+2015-04-10 Andrea Manzi  <andrea.manzi@cern.ch>
+    * added str2bool for ::selinux fact
 2015-03-23  Andrea Manzi  <andrea.manzi@cern.ch>
     * updated conf for hdfs plugin
     * added cron for http session folder cleaning

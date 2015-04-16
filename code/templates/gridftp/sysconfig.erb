@@ -24,7 +24,9 @@ export DPNS_HOST=<%= @nshost %>
 #GLOBUS_TCP_PORT_RANGE="20000,25000"
 
 # - GRIDFTP startup options
-#OPTIONS="-S -d all -p 2811 -auth-level 0 -dsi dpm -disable-usage-stats"
+<% if @enable_hdfs -%>
+OPTIONS="-S -d all -p 2811 -auth-level 0 -dsi dmlite:rfn_nocheck -disable-usage-stats"
+<% end -%>
 
 <% if @enable_hdfs -%>
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:<%= @java_home %>/jre/lib/amd64/server/
