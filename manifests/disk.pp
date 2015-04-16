@@ -34,7 +34,7 @@ class dmlite::disk (
     enable_dpm     => false,
     enable_ns      => false,
     enable_io      => true,       
-    mysql_dir_space_report_depth = 6,
+    mysql_dir_space_report_depth => 6,
   }
 
   class{'dmlite::plugins::mysql::install':}
