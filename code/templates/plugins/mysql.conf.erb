@@ -8,6 +8,14 @@ LoadPlugin plugin_mysql_ns /usr/<%= @libdir %>/dmlite/plugin_mysql.so
 LoadPlugin plugin_mysql_dpm /usr/<%= @libdir %>/dmlite/plugin_mysql.so
 <% end -%>
 
+<%if @enable_io -%>
+# Load namespace and pool manager (DPM)
+LoadPlugin plugin_mysql_iopassthrough /usr/<%= @libdir %>/dmlite/plugin_mysql.so
+
+MySqlDirectorySpaceReportDepth <%= @mysql_dir_space_report_depth %>
+<% end -%>
+
+
 # MySQL connection parameters
 MySqlHost 	<%= @mysql_host %>
 MySqlUsername 	<%= @mysql_username %>
