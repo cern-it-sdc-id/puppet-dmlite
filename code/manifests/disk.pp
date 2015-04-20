@@ -10,6 +10,7 @@ class dmlite::disk (
   $debuginfo  = false,
   $log_level      = 1,
   $logcomponents  = undef,
+  $enable_mysql_io = true,
 ) {
   class { 'dmlite::config::head':
     log_level     => $log_level,
@@ -26,16 +27,19 @@ class dmlite::disk (
   }
   class{'dmlite::plugins::adapter::install':}
 
-  class{'dmlite::plugins::mysql::config':
-    mysql_host     => "${mysql_host}",
-    mysql_username => "${mysql_username}",
-    mysql_password => "${mysql_password}",
-    dbpool_size    => 2,
-    enable_dpm     => false,
-    enable_ns      => false,
-    enable_io      => true,       
-    mysql_dir_space_report_depth => 6,
-  }
+  if $enable_mysql_io {
 
-  class{'dmlite::plugins::mysql::install':}
+  	class{'dmlite::plugins::mysql::config':
+    		mysql_host     => "${mysql_host}",
+    		mysql_username => "${mysql_username}",
+    		mysql_password => "${mysql_password}",
+    		dbpool_size    => 2,
+    		enable_dpm     => false,
+    		enable_ns      => false,
+    		enable_io      => true,       
+    		mysql_dir_space_report_depth => 6,
+  	}
+
+  	class{'dmlite::plugins::mysql::install':}
+  }
 }
