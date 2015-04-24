@@ -66,17 +66,6 @@ class dmlite::dav::config (
     }
   }
 
-  #enable cors
-  $domain_string = regsubst("${::domain}", '\.', '\\.', 'G')
-  file {
-      '/etc/httpd/conf.d/cross-domain.conf':
-        ensure  => present,
-        owner   => 'root',
-        group   => 'root',
-        content => template('dmlite/dav/cross-domain.conf.erb')
-  }
-
-
   file {
     '/etc/httpd/conf.d/ssl.conf':
       ensure  => present,
