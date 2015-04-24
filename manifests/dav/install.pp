@@ -21,13 +21,4 @@ class dmlite::dav::install (
     user    => 'root',
     minute  => '00',
   }
-
-  file {
-      '/etc/httpd/conf.d/cross-domain.conf':
-        ensure  => present,
-        owner   => 'root',
-        group   => 'root',
-        content => template('dmlite/dav/cross-domain.conf.erb')
-    }
-
 }
