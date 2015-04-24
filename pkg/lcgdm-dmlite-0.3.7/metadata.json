@@ -1,0 +1,24 @@
+{
+  "name": "lcgdm-dmlite",
+  "version": "0.3.7",
+  "author": "DPM",
+  "summary": "Package for managing dmlite plugins",
+  "license": "Apache License, Version 2.0",
+  "source": "https://github.com/cern-it-sdc-id/puppet-dmlite",
+  "tags": [
+  
+  ],
+  "description": "This package provides modules for managing dmlite",
+  "project_page": "https://svnweb.cern.ch/trac/lcgdm",
+  "issues_url": "https://github.com/cern-it-sdc-id/puppet-dmlite/issues",
+  "requirements": [
+  
+  ],
+  "operatingsystem_support": [
+  
+  ],
+  "dependencies": [
+    {"version_requirement":">= 2.0.0","name":"puppetlabs/stdlib"},
+    {"version_requirement":">= 0.2.2","name":"CERNOps/fetchcrl"}
+  ]
+}
