@@ -10,6 +10,7 @@ class dmlite::plugins::hdfs::params (
     $hdfs_mode = rw
     $hdfs_gateway = "${::fqdn}"
     $hdfs_tmp_folder = '/tmp'
+    $hdfs_replication = 3
     $hadoop_home_lib = '/usr/lib/hadoop'
     $hdfs_home_lib = '/usr/lib/hadoop-hdfs'
     $java_home = '/usr/lib/jvm/java/'

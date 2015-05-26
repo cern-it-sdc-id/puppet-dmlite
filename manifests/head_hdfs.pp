@@ -17,6 +17,7 @@ class dmlite::head_hdfs (
   $hdfs_mode      = 'rw',
   $hdfs_tmp_folder = '/tmp',
   $hdfs_gateway   = "${::fqdn}",
+  $hdfs_replication = 3,
   $enable_io      = false,
   $enable_ns      = false,
 ) {
@@ -40,6 +41,7 @@ class dmlite::head_hdfs (
     hdfs_mode       => "${hdfs_mode}",
     hdfs_gateway    => "${hdfs_gateway}",
     hdfs_tmp_folder => "${hdfs_tmp_folder}",
+    hdfs_replication => "${hdfs_replication}",
     enable_io       => "${enable_io}",
     enable_ns       => false,
   }

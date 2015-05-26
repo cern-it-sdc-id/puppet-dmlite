@@ -1,3 +1,5 @@
+2015-05-26 Andrea Manzi  <andrea.manzi@cern.ch>
+    * added conf for HDFSReplication parameter
 2015-04-14 Andrea Manzi  <andrea.manzi@cern.ch>
     * added conf for hdfs gateway
 2015-04-10 Andrea Manzi  <andrea.manzi@cern.ch>
