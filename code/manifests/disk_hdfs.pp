@@ -17,6 +17,7 @@ class dmlite::disk_hdfs (
   $hdfs_mode      = 'rw',
   $hdfs_tmp_folder = '/tmp',
   $enable_io      = true,
+  $hdfs_replication = 3,
 ) {
   class{'dmlite::config::head':
     log_level     => $log_level,
@@ -38,6 +39,7 @@ class dmlite::disk_hdfs (
     hdfs_mode       => "${hdfs_mode}",
     hdfs_tmp_folder => "${hdfs_tmp_folder}",
     enable_io       => "${enable_io}",
+    hdfs_replication => "${hdfs_replication}",
   }
   class{'dmlite::plugins::hdfs::install':}
 
