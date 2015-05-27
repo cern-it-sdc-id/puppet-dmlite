@@ -16,5 +16,11 @@ class dmlite::config (
     log_level        => $log_level,
     logcomponents    => $logcomponents
   }
-}
 
+  #ensure syslog is properly configured
+  file_line{'rsyslogd':
+    ensure => present,
+    path   => '/etc/rsyslog.conf',
+    line   => '$IncludeConfig /etc/rsyslog.d/*.conf',
+  }
+}
