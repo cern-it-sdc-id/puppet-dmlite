@@ -16,7 +16,7 @@ define dmlite::create_config (
     ensure  => present,
     owner   => $user,
     group   => $group,
-    mode    => '0600',
+    mode    => '0750',
     content => template('dmlite/dmlite.conf.erb')
   }
 
@@ -24,6 +24,6 @@ define dmlite::create_config (
     ensure => directory,
     owner  => $user,
     group  => $group,
-    mode   => '0700'
+    mode   => '0750'
   }
 }

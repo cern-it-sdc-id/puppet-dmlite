@@ -52,7 +52,7 @@ class dmlite::plugins::memcache::config (
     file { '/etc/dmlite.conf.d/zmemcache.conf':
       owner   => $user,
       group   => $group,
-      mode    => '0600',
+      mode    => '0750',
       content => template('dmlite/plugins/memcache.conf.erb'),
       require => Package['dmlite-plugins-memcache']
     }

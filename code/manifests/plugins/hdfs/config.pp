@@ -36,7 +36,7 @@ class dmlite::plugins::hdfs::config (
     '/etc/dmlite.conf.d/hdfs.conf':
       owner   => $user,
       group   => $group,
-      mode    => '0600',
+      mode    => '0750',
       content => template('dmlite/plugins/hdfs.conf.erb'),
       require => Package['dmlite-plugins-hdfs']
   }
@@ -46,7 +46,7 @@ class dmlite::plugins::hdfs::config (
       '/etc/dmlite-disk.conf.d/hdfs.conf':
         owner   => $user,
         group   => $group,
-        mode    => '0600',
+        mode    => '0750',
         content => template('dmlite/plugins/hdfs.conf.erb'),
         require => Package['dmlite-plugins-hdfs']
     }
