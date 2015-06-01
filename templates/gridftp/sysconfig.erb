@@ -25,7 +25,7 @@ export DPNS_HOST=<%= @nshost %>
 
 # - GRIDFTP startup options
 <% if @enable_hdfs -%>
-OPTIONS="-S -d all -p 2811 -auth-level 0 -dsi dmlite:rfn_nocheck -disable-usage-stats"
+OPTIONS="-S -p 2811 -auth-level 0 -dsi dmlite:rfn_nocheck -disable-usage-stats"
 <% end -%>
 
 <% if @enable_hdfs -%>
