@@ -35,7 +35,7 @@ class dmlite::disk (
     		mysql_password => "${mysql_password}",
     		dbpool_size    => 2,
     		enable_dpm     => false,
-    		enable_ns      => false,
+    		enable_ns      => true,
     		enable_io      => true,       
     		mysql_dir_space_report_depth => 6,
   	}
