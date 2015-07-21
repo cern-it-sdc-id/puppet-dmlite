@@ -36,4 +36,16 @@ class dmlite::plugins::mysql::config (
         content => template('dmlite/plugins/mysql.conf.erb'),
         require => Package['dmlite-plugins-mysql']
     }
+
+    if $enable_io {
+	    file {
+      		'/etc/dmlite-disk.conf.d/mysql.conf':
+	          owner   => $user,
+        	  group   => $group,
+        	  mode    => '0600',
+	          content => template('dmlite/plugins/mysql.conf.erb'),
+	          require => Package['dmlite-plugins-mysql']
+    	    }
+    }
+
 }
