@@ -56,7 +56,14 @@ class dmlite::plugins::memcache::config (
       content => template('dmlite/plugins/memcache.conf.erb'),
       require => Package['dmlite-plugins-memcache']
     }
-
+  }
+  else {
+    file {
+      '/etc/dmlite.conf.d/zmemcache.conf':
+        ensure  => absent;
+    }
+  }
+  if $enable_memcache_cat {
     file { '/etc/dmlite-disk.conf.d/zmemcache.conf':
       owner   => $user,
       group   => $group,
@@ -65,11 +72,4 @@ class dmlite::plugins::memcache::config (
       require => Package['dmlite-plugins-memcache']
     }
   }
-  else {
-    file {
-      '/etc/dmlite.conf.d/zmemcache.conf':
-        ensure  => absent;
-    }
-  }
-
 }
