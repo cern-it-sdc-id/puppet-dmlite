@@ -10,6 +10,7 @@ class dmlite::head (
   $debuginfo  = false,
   $log_level      = 1,
   $logcomponents  = undef,
+  $enable_space_reporting = false,
 ) {
   class{'dmlite::config::head':
     log_level     => $log_level,
@@ -34,6 +35,7 @@ class dmlite::head (
     mysql_username => "${mysql_username}",
     mysql_password => "${mysql_password}",
     adminuser      => "${adminuser}",
+    enable_io      => "${enable_space_reporting}",
   }
 
   class{'dmlite::plugins::mysql::install':}
