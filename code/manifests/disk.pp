@@ -48,7 +48,7 @@ class dmlite::disk (
         if size($memcached_servers) == 0 {
                 fail("please specify at least one memcached server address via memcached_servers variable")
         }
-	-> 
+
         class{"dmlite::plugins::memcache":
                 servers          => $memcached_servers,
 	        expiration_limit => 600,
