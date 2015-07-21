@@ -46,5 +46,6 @@ class dmlite::plugins::mysql::config (
 	          content => template('dmlite/plugins/mysql.conf.erb'),
 	          require => Package['dmlite-plugins-mysql']
     	    }
+    }
 
 }
