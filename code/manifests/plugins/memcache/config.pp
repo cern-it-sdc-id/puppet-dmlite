@@ -56,6 +56,14 @@ class dmlite::plugins::memcache::config (
       content => template('dmlite/plugins/memcache.conf.erb'),
       require => Package['dmlite-plugins-memcache']
     }
+
+    file { '/etc/dmlite-disk.conf.d/zmemcache.conf':
+      owner   => $user,
+      group   => $group,
+      mode    => '0600',
+      content => template('dmlite/plugins/memcache.conf.erb'),
+      require => Package['dmlite-plugins-memcache']
+    }
   }
   else {
     file {
