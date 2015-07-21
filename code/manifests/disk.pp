@@ -50,6 +50,7 @@ class dmlite::disk (
         }
 
         class{"dmlite::plugins::memcache":
+		enable_memcache_cat => true,
                 servers          => $memcached_servers,
 	        expiration_limit => 600,
         	posix            => 'on',
