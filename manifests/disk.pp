@@ -11,7 +11,6 @@ class dmlite::disk (
   $log_level      = 1,
   $logcomponents  = undef,
   $enable_space_reporting = true,
-  $memcached_servers = [],
 ) {
   class { 'dmlite::config::head':
     log_level     => $log_level,
@@ -42,20 +41,6 @@ class dmlite::disk (
   	}
 
   	class{'dmlite::plugins::mysql::install':}
-
-	validate_array($memcached_servers)
-
-        if size($memcached_servers) == 0 {
-                fail("please specify at least one memcached server address via memcached_servers variable")
-        }
-
-        class{"dmlite::plugins::memcache":
-		enable_memcache_cat => true,
-                servers          => $memcached_servers,
-	        expiration_limit => 600,
-        	posix            => 'on',
-		pool_size        => 10,
-        }
 
   }
 }
