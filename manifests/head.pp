@@ -10,7 +10,7 @@ class dmlite::head (
   $debuginfo  = false,
   $log_level      = 1,
   $logcomponents  = undef,
-  $enable_space_reporting = false,
+  $enable_space_reporting = true,
 ) {
   class{'dmlite::config::head':
     log_level     => $log_level,
