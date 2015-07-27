@@ -157,10 +157,9 @@ class dmlite::dav::config (
     }
 
    file_line { 'mpm prefork':
-      ensure => present,
-      line   => '#LoadModule mpm_prefork_module modules/mod_mpm_prefork.so',
+      ensure => absent,
+      line   => 'LoadModule mpm_prefork_module modules/mod_mpm_prefork.so',
       path   => '/etc/httpd/conf.modules.d/00-mpm.conf',
-      match  => '^LoadModule mpm_event_module modules/mod_mpm_prefork.so'
     }
   }
 }
