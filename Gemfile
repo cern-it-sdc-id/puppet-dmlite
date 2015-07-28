@@ -1,4 +1,4 @@
-urce ENV['GEM_SOURCE'] || "https://rubygems.org"
+source ENV['GEM_SOURCE'] || "https://rubygems.org"
 
 # https://github.com/rspec/rspec-core/issues/1864
 gem 'rspec', '~> 3.1.0'
