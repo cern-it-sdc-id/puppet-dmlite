@@ -1,3 +1,8 @@
+2015-07-28 Andrea Manzi  <andrea.manzi@cern.ch>
+    * added conf for directory space reporting ( installation and cof of Mysql IO on disknodes)
+    * added conf for WebDav con Redhat7
+    * ensure rsyslog is properly configured 
+    * added cross domain configuration
 2015-05-26 Andrea Manzi  <andrea.manzi@cern.ch>
     * added conf for HDFSReplication parameter
 2015-04-14 Andrea Manzi  <andrea.manzi@cern.ch>
