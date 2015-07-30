@@ -1,9 +1,9 @@
 class dmlite::disk (
   $token_password,
   $token_id   = 'ip',
-  $mysql_username,
-  $mysql_password,
-  $mysql_host = 'localhost',
+  $mysql_username = undef,
+  $mysql_password = undef,
+  $mysql_host = undef,
   $mysql_dir_space_report_depth = 6,
   $dpmhost    = "${::fqdn}",
   $nshost     = "${::fqdn}",
@@ -28,6 +28,16 @@ class dmlite::disk (
   class{'dmlite::plugins::adapter::install':}
 
   if $enable_space_reporting {
+
+         if $mysql_username == undef { 
+		fail("'mysql_username' not defined") 
+	 }
+	 if $mysql_password == undef {
+                fail("'mysql_password' not defined")
+         }
+	 if $mysql_host == undef {
+                fail("'mysql_host' not defined")
+         }
 
   	class{'dmlite::plugins::mysql::config':
     		mysql_host     => "${mysql_host}",
