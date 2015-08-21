@@ -12,6 +12,7 @@ class dmlite::plugins::hdfs::config (
   $hadoop_home_lib    = $dmlite::plugins::hdfs::params::hadoop_home_lib,
   $hdfs_home_lib      = $dmlite::plugins::hdfs::params::hdfs_home_lib,
   $hdfs_replication   = $dmlite::plugins::hdfs::params::hdfs_replication,
+  $hadoop_conf_folder = $dmlite::plugins::hdfs::params::hadoop_conf_folder,
   $java_home          = $dmlite::plugins::hdfs::params::java_home,
   $token_password     = $dmlite::plugins::hdfs::params::token_password,
   $token_id           = $dmlite::plugins::hdfs::params::token_id,

@@ -142,5 +142,24 @@ class dmlite::dav::config (
       path   => '/etc/sysconfig/httpd'
     }
   }
+ #centOS7 changes
+ if $::operatingsystemmajrelease and $::operatingsystemmajrelease >= 7 { 
+     file {
+      '/etc/httpd/conf.modules.d/00-dav.conf':
+        ensure  => absent,
+     }
 
+   file_line { 'mpm event':
+      ensure => present,
+      line   => 'LoadModule mpm_event_module modules/mod_mpm_event.so',
+      path   => '/etc/httpd/conf.modules.d/00-mpm.conf',
+      match  => '^#LoadModule mpm_event_module modules/mod_mpm_event.so'
+    }
+
+   file_line { 'mpm prefork':
+      ensure => absent,
+      line   => 'LoadModule mpm_prefork_module modules/mod_mpm_prefork.so',
+      path   => '/etc/httpd/conf.modules.d/00-mpm.conf',
+    }
+  }
 }

@@ -63,5 +63,4 @@ class dmlite::plugins::memcache::config (
         ensure  => absent;
     }
   }
-
 }
