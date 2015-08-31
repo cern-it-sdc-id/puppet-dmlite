@@ -1,3 +1,6 @@
+2015-08-30 Andrea Manzi  <andrea.manzi@cern.ch>
+    * added new parameter for hdfs plugin to load the hadoop conf to the classpath
+    * fix for Ruby 2.0
 2015-07-28 Andrea Manzi  <andrea.manzi@cern.ch>
     * added conf for directory space reporting ( installation and cof of Mysql IO on disknodes)
     * added conf for WebDav con Redhat7
