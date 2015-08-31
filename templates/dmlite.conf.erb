@@ -28,7 +28,7 @@ LogLevel <%= @log_level %>
 # Log Oracle
 # Log Profiler
 # Log ProfilerTimings
-<% if @logcomponents -%>
+<% if @logcomponents.lenght > 0 -%>
 <% @logcomponents.sort.each do |component| -%>
 Log <%= component %>
 <% end -%>
