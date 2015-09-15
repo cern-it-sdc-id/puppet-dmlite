@@ -10,7 +10,7 @@ class dmlite::disk (
   $debuginfo  = false,
   $log_level      = 1,
   $logcomponents  = undef,
-  $enable_space_reporting = true,
+  $enable_space_reporting = false,
 ) {
   class { 'dmlite::config::head':
     log_level     => $log_level,
