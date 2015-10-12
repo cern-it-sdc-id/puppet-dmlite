@@ -1,3 +1,5 @@
+2015-09-15 Andrea Manzi  <andrea.manzi@cern.ch>
+    * disable space reporting configuration by default
 2015-08-30 Andrea Manzi  <andrea.manzi@cern.ch>
     * added new parameter for hdfs plugin to load the hadoop conf to the classpath
     * fix for Ruby 2.0
