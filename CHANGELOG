@@ -1,3 +1,6 @@
+2015-10-20 Andrea Manzi  <andrea.manzi@cern.ch>
+    * enable SRM in CentOS7
+    * small fixes for puppet  3.8.3
 2015-09-15 Andrea Manzi  <andrea.manzi@cern.ch>
     * disable space reporting configuration by default
 2015-08-30 Andrea Manzi  <andrea.manzi@cern.ch>
