@@ -27,17 +27,40 @@ class dmlite::plugins::mysql::config (
   if defined ('gridftp::service'){
     Class[Dmlite::Plugins::Mysql::Config] ~> Class[Gridftp::Service]
   }
+     if $::domain == "cern.ch" {
+        teigi::secret::sub_file{"/etc/dmlite.conf.d/mysql.conf":
+          teigi_keys => ['mysql_password'],
+          owner   => $user,
+          group   => $group,
+          mode    => '0600',
+          template => 'dmlite/plugins/mysql.conf.CERN.erb',
+          require => Package['dmlite-plugins-mysql']
+        }
 
-    file {
-      '/etc/dmlite.conf.d/mysql.conf':
-        owner   => $user,
-        group   => $group,
-        mode    => '0600',
-        content => template('dmlite/plugins/mysql.conf.erb'),
-        require => Package['dmlite-plugins-mysql']
-    }
+         if $enable_io {
+            teigi::secret::sub_file{"/etc/dmlite-disk.conf.d/mysql.conf": 
+		  teigi_keys => ['mysql_password'],
+                  owner   => $user,
+                  group   => $group,
+                  mode    => '0600',
+                  template => 'dmlite/plugins/mysql.conf.CERN.erb',
+                  require => Package['dmlite-plugins-mysql']
+            }
+    	}
 
-    if $enable_io {
+      }
+      else {
+
+         file {
+           '/etc/dmlite.conf.d/mysql.conf':
+           owner   => $user,
+           group   => $group,
+           mode    => '0600',
+           content => template('dmlite/plugins/mysql.conf.erb'),
+           require => Package['dmlite-plugins-mysql']
+         }
+
+         if $enable_io {
 	    file {
       		'/etc/dmlite-disk.conf.d/mysql.conf':
 	          owner   => $user,
@@ -45,7 +68,8 @@ class dmlite::plugins::mysql::config (
         	  mode    => '0600',
 	          content => template('dmlite/plugins/mysql.conf.erb'),
 	          require => Package['dmlite-plugins-mysql']
-    	    }
-    }
+    	  }
+      }
+   }
 
 }
