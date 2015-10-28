@@ -29,7 +29,7 @@ class dmlite::plugins::mysql::config (
   }
      if $::domain == "cern.ch" {
         teigi::secret::sub_file{"/etc/dmlite.conf.d/mysql.conf":
-          teigi_keys => ['mysql_password'],
+          teigi_keys => ['dpmdbuser_pass'],
           owner   => $user,
           group   => $group,
           mode    => '0600',
@@ -39,7 +39,7 @@ class dmlite::plugins::mysql::config (
 
          if $enable_io {
             teigi::secret::sub_file{"/etc/dmlite-disk.conf.d/mysql.conf": 
-		  teigi_keys => ['mysql_password'],
+		  teigi_keys => ['dpmdbuser_pass'],
                   owner   => $user,
                   group   => $group,
                   mode    => '0600',
