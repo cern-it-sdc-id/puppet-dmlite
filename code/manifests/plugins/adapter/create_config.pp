@@ -31,13 +31,24 @@ define dmlite::plugins::adapter::create_config (
   if defined (Class[Gridftp::Service]){
     Dmlite::Plugins::Adapter::Create_config <| |> ~> Class[Gridftp::Service]
   }
-
-  file {
-    "/etc/${config_dir_name}.conf.d/adapter.conf":
+  if $::domain == "cern.ch" {
+        teigi::secret::sub_file{"/etc/${config_dir_name}.conf.d/adapter.conf":
+          teigi_keys => ['token_password'],
+	  owner   => $user,
+          group   => $group,
+          mode    => '0600',
+          template => "dmlite/plugins/adapter.conf.CERN.erb",
+          require => [Package['dmlite-plugins-adapter'], File["/etc/${config_dir_name}.conf.d"]]
+        }
+  }
+  else {
+    file {
+      "/etc/${config_dir_name}.conf.d/adapter.conf":
       owner   => $user,
       group   => $group,
       mode    => '0600',
       content => template('dmlite/plugins/adapter.conf.erb'),
       require => [Package['dmlite-plugins-adapter'], File["/etc/${config_dir_name}.conf.d"]]
+    }
   }
 }

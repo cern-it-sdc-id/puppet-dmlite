@@ -1,0 +1,51 @@
+<%if @enable_ns -%>
+# Uncomment to enable the namespace adapter plugin
+# (adapter to the DPM or LFC nameserver)
+LoadPlugin plugin_adapter_ns /usr/<%= @libdir %>/dmlite/plugin_adapter.so
+<% end -%>
+
+<%if @enable_dpm -%>
+# Uncomment to enable the adapter plugin to the DPM server
+LoadPlugin plugin_adapter_dpm /usr/<%= @libdir %>/dmlite/plugin_adapter.so
+<% end -%>
+
+<%if @enable_io -%>
+# Uncomment to enable the adapter filesystem plugin
+# (read from local filesystem)
+LoadPlugin plugin_fs_io /usr/<%= @libdir %>/dmlite/plugin_adapter.so
+<% end -%>
+
+<%if @enable_rfio -%>
+# Uncomment to enable the adapter rfio plugin
+# (read using rfio - local if local, remote rfio read if not)
+LoadPlugin plugin_fs_rfio /usr/<%= @libdir %>/dmlite/plugin_adapter.so
+<% end -%>
+
+<%if @enable_pooldriver -%>
+# Uncommemt to enable the pool adapter plugin
+# (wrapper for a native pool type)
+LoadPlugin plugin_fs_pooldriver /usr/<%= @libdir %>/dmlite/plugin_adapter.so
+<% end -%>
+
+# Remote DPM/LFC host to connect to
+<%if @dpmhost -%>DpmHost <%= @dpmhost %><% end %>
+<%if @nshost -%>NsHost <%= @nshost %><% end %>
+
+# Timeout when connection to the NsHost (in seconds)
+ConnectionTimeout <%= @connection_timeout %>
+# Number of retries when connecting to NsHost (in seconds)
+RetryLimit <%= @retry_limit %>
+# Interval between retries when connecting to NsHost (in seconds)
+RetryInterval <%= @retry_interval %>
+
+<%if @token_password -%>
+# Token generation
+TokenPassword %TEIGI__token_password__%
+TokenId <%= @token_id %>
+TokenLife <%= @token_life %>
+<% end -%>
+
+<% if @adminuser != "" -%>
+# Adminuser for replication and filesystem selection
+AdminUsername <%= @adminuser %>
+<% end -%>
