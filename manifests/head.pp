@@ -35,7 +35,7 @@ class dmlite::head (
     mysql_username => "${mysql_username}",
     mysql_password => "${mysql_password}",
     adminuser      => "${adminuser}",
-    enable_io      => "${enable_space_reporting}",
+    enable_io      => ${enable_space_reporting},
   }
 
   class{'dmlite::plugins::mysql::install':}
