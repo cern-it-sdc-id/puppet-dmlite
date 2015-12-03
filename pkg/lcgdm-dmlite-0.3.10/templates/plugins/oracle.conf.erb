@@ -1,0 +1,19 @@
+<%if @enable_ns -%>
+# Load namespace only (LFC)
+LoadPlugin plugin_oracle_ns /usr/<%= @libdir %>/dmlite/plugin_oracle.so
+<% end -%>
+
+# Oracle connection parameters
+OracleUsername <%= @oracle_username %>
+OraclePassword <%= @oracle_password %>
+OracleDatabase <%= @oracle_db %>
+
+# Connection pool
+OraclePoolMin <%= @dbpool_min %>
+OraclePoolMax <%= @dbpool_max %>
+
+# Grid mapfile
+MapFile <%= @mapfile %>
+
+# Give too access to the host DN
+HostDNIsRoot <%= @host_dn_is_root %>

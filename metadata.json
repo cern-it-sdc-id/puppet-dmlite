@@ -19,5 +19,5 @@
   "source": "https://github.com/cern-it-sdc-id/puppet-dmlite",
   "summary": "Package for managing dmlite plugins",
   "tags": [],
-  "version": "0.3.10"
+  "version": "0.3.11"
 }
