@@ -1,3 +1,7 @@
+2015-12-03 Andrea Manzi  <andrea.manzi@cern.ch>
+    * removed weak ciphers in Lcgdm-Dav
+    * disabled NSAnon by default in Lcgdm-Dav
+    * fixed a problem with enable_space_reporting
 2015-10-20 Andrea Manzi  <andrea.manzi@cern.ch>
     * enable SRM in CentOS7
     * small fixes for puppet  3.8.3

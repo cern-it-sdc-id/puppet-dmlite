@@ -163,6 +163,7 @@ class dmlite::xrootd (
       all_adminpath         => '/var/spool/xrootd',
       all_pidpath           => '/var/run/xrootd',
       all_sitename          => $site_name,
+      cms_cidtag            => $site_name,
       xrd_allrole           => 'manager',
       cmsd_allrole          => 'server',
       xrootd_seclib         => 'libXrdSec.so',
