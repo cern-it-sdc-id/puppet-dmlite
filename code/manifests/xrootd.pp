@@ -157,7 +157,12 @@ class dmlite::xrootd (
       dpm_xrootd_fedredirs  => $dpm_xrootd_fedredirs
 
     }
-
+    $l = size("${::fqdn}")
+    if $l > 16 {
+	    $cms_cidtag = regsubst("${::fqdn}", '^(.{16})(.*)', '\1') 
+    } else {
+	    $cms_cidtag = "${::fqdn}"
+    }
 
     $federation_defaults = {
       dmlite_conf           => $dmlite_conf,
@@ -165,7 +170,7 @@ class dmlite::xrootd (
       all_adminpath         => '/var/spool/xrootd',
       all_pidpath           => '/var/run/xrootd',
       all_sitename          => $site_name,
-      cms_cidtag            => $site_name,
+      cms_cidtag            => $cms_cidtag,
       xrd_allrole           => 'manager',
       cmsd_allrole          => 'server',
       xrootd_seclib         => 'libXrdSec.so',
