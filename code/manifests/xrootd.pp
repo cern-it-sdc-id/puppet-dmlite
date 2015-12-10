@@ -24,6 +24,7 @@ class dmlite::xrootd (
   $log_style_param = '-k fifo', #'-k fifo' for xrootd4
   $vomsxrd_package = 'vomsxrd',
   $enable_hdfs = false,
+  $oss_statlib = undef,
 ) {
 
   validate_bool($xrootd_use_voms)
@@ -157,6 +158,7 @@ class dmlite::xrootd (
 
     }
 
+
     $federation_defaults = {
       dmlite_conf           => $dmlite_conf,
       dpm_host              => $dpmhost,
@@ -186,6 +188,7 @@ class dmlite::xrootd (
       dpm_mmreqhost         => "${dpm_mmreqhost}",
       dpm_xrootd_serverport => $dpm_xrootd_serverport,
       dpm_enablecmsclient   => true,
+      oss_statlib           => $oss_statlib,
     }
 
     create_resources('dmlite::xrootd::create_redir_config', $dpm_xrootd_fedredirs, $federation_defaults)
