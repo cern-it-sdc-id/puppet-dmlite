@@ -164,10 +164,8 @@ class dmlite::xrootd (
 	    $cms_cidtag = "${::fqdn}"
     }
     #retrieving xrootd version and apply conf
-    $major = regsubst("${::dpm_xrootd_version}", '^(\d+\.)?(\d+\.)?(\*|\d+)$', '\1')
-    $minor = regsubst("${::dpm_xrootd_version}", '^(\d+\.)?(\d+\.)?(\*|\d+)$', '\2')
-
-    if ($major == 3 and $minor >= 6) or ($major > 3) {
+    
+    if  versioncmp("${::package_dpm_xrootd}", '3.6.0') > 0 {
 	    $oss_statlib = '-2 libXrdDPMStatInfo.so.3'
     }
     $federation_defaults = {
