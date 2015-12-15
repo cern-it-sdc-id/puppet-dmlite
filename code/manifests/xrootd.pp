@@ -163,7 +163,13 @@ class dmlite::xrootd (
     } else {
 	    $cms_cidtag = "${::fqdn}"
     }
+    #retrieving xrootd version and apply conf
+    $major = regsubst("${::dpm_xrootd_version}", '^(\d+\.)?(\d+\.)?(\*|\d+)$', '\1')
+    $minor = regsubst("${::dpm_xrootd_version}", '^(\d+\.)?(\d+\.)?(\*|\d+)$', '\2')
 
+    if ($major == 3 and $minor >= 6) or ($major > 3) {
+	    $oss_statlib = '-2 libXrdDPMStatInfo.so.3'
+    }
     $federation_defaults = {
       dmlite_conf           => $dmlite_conf,
       dpm_host              => $dpmhost,
