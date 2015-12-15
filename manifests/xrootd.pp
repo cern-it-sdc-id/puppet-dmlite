@@ -24,7 +24,6 @@ class dmlite::xrootd (
   $log_style_param = '-k fifo', #'-k fifo' for xrootd4
   $vomsxrd_package = 'vomsxrd',
   $enable_hdfs = false,
-  $oss_statlib = undef,
 ) {
 
   validate_bool($xrootd_use_voms)
@@ -167,6 +166,8 @@ class dmlite::xrootd (
     
     if  versioncmp("${::package_dpm_xrootd}", '3.6.0') > 0 {
 	    $oss_statlib = '-2 libXrdDPMStatInfo.so.3'
+    } else {
+	    $oss_statlib = undef
     }
     $federation_defaults = {
       dmlite_conf           => $dmlite_conf,
