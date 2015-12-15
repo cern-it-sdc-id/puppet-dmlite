@@ -164,7 +164,7 @@ class dmlite::xrootd (
     }
     #retrieving xrootd version and apply conf
     
-    if  versioncmp("${::package_dpm_xrootd}", '3.7.0') > 0 {
+    if  versioncmp("${::package_dpm_xrootd}", '3.6.0') >= 0 {
 	    $oss_statlib = '-2 libXrdDPMStatInfo.so.3'
     } else {
 	    $oss_statlib = undef
