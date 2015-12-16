@@ -24,6 +24,7 @@ class dmlite::xrootd (
   $log_style_param = '-k fifo', #'-k fifo' for xrootd4
   $vomsxrd_package = 'vomsxrd',
   $enable_hdfs = false,
+  $lcgdm_user = 'dpmmgr',
 ) {
 
   validate_bool($xrootd_use_voms)
@@ -64,9 +65,9 @@ class dmlite::xrootd (
   if member($nodetype, 'disk') {
 
     if $xrootd_use_voms {
-      $sec_protocol_disk = "/usr/${xrootd::config::xrdlibdir} gsi -crl:3 -key:/etc/grid-security/${lcgdm::base::config::user}/dpmkey.pem -cert:/etc/grid-security/${lcgdm::base::config::user}/dpmcert.pem -md:sha256:sha1 -ca:2 -gmapopt:10 -vomsfun:/usr/${xrootd::config::xrdlibdir}/libXrdSecgsiVOMS.so"
+      $sec_protocol_disk = "/usr/${xrootd::config::xrdlibdir} gsi -crl:3 -key:/etc/grid-security/${lcgdm_user}/dpmkey.pem -cert:/etc/grid-security/${lcgdm_user}/dpmcert.pem -md:sha256:sha1 -ca:2 -gmapopt:10 -vomsfun:/usr/${xrootd::config::xrdlibdir}/libXrdSecgsiVOMS.so"
     } else {
-      $sec_protocol_disk = "/usr/${xrootd::config::xrdlibdir} gsi -crl:3 -key:/etc/grid-security/${lcgdm::base::config::user}/dpmkey.pem -cert:/etc/grid-security/${lcgdm::base::config::user}/dpmcert.pem -md:sha256:sha1 -ca:2 -gmapopt:10 -vomsat:0"
+      $sec_protocol_disk = "/usr/${xrootd::config::xrdlibdir} gsi -crl:3 -key:/etc/grid-security/${lcgdm_user}/dpmkey.pem -cert:/etc/grid-security/${lcgdm_user}/dpmcert.pem -md:sha256:sha1 -ca:2 -gmapopt:10 -vomsat:0"
     }
 
     if $xrd_dpmclassic == false {
@@ -109,9 +110,9 @@ class dmlite::xrootd (
 
     if $xrootd_use_voms {
 
-      $sec_protocol_redir = "/usr/${xrootd::config::xrdlibdir} gsi -crl:3 -key:/etc/grid-security/${lcgdm::base::config::user}/dpmkey.pem -cert:/etc/grid-security/${lcgdm::base::config::user}/dpmcert.pem -md:sha256:sha1 -ca:2 -gmapopt:10 -vomsfun:/usr/${xrootd::config::xrdlibdir}/libXrdSecgsiVOMS.so"
+      $sec_protocol_redir = "/usr/${xrootd::config::xrdlibdir} gsi -crl:3 -key:/etc/grid-security/${lcgdm_user}/dpmkey.pem -cert:/etc/grid-security/${lcgdm_user}/dpmcert.pem -md:sha256:sha1 -ca:2 -gmapopt:10 -vomsfun:/usr/${xrootd::config::xrdlibdir}/libXrdSecgsiVOMS.so"
     } else {
-      $sec_protocol_redir = "/usr/${xrootd::config::xrdlibdir} gsi -crl:3 -key:/etc/grid-security/${lcgdm::base::config::user}/dpmkey.pem -cert:/etc/grid-security/${lcgdm::base::config::user}/dpmcert.pem -md:sha256:sha1 -ca:2 -gmapopt:10 -vomsat:0"
+      $sec_protocol_redir = "/usr/${xrootd::config::xrdlibdir} gsi -crl:3 -key:/etc/grid-security/${lcgdm_user}/dpmkey.pem -cert:/etc/grid-security/${lcgdm_user}/dpmcert.pem -md:sha256:sha1 -ca:2 -gmapopt:10 -vomsat:0"
     }
 
     $xrootd_instances_options_redir = {
@@ -241,8 +242,8 @@ class dmlite::xrootd (
     }
   }
   xrootd::create_sysconfig{$xrootd::config::sysconfigfile:
-    xrootd_user              => $lcgdm::base::config::user,
-    xrootd_group             => $lcgdm::base::config::user,
+    xrootd_user              => $lcgdm_user,
+    xrootd_group             => $lcgdm_user,
     xrootd_instances_options => $xrootd_instances_options_all,
     cmsd_instances_options   => $cmsd_instances_options_fed,
     exports                  => $exports,
@@ -252,8 +253,8 @@ class dmlite::xrootd (
   # TODO: make the basedir point to $xrootd::config::configdir
   file{'/etc/xrootd/dpmxrd-sharedkey.dat':
     ensure  => file,
-    owner   => $lcgdm::base::config::user,
-    group   => $lcgdm::base::config::user,
+    owner   => $lcgdm_user,
+    group   => $lcgdm_user,
     mode    => '0640',
     content => $dpm_xrootd_sharedkey
   }
@@ -263,16 +264,16 @@ class dmlite::xrootd (
 
   file { '/var/log/xrootd/redir':
     ensure    => directory,
-    owner     => $lcgdm::base::config::user,
-    group     => $lcgdm::base::config::user,
+    owner     => $lcgdm_user,
+    group     => $lcgdm_user,
     subscribe => [File['/var/log/xrootd']],
     require   => Class['xrootd::config'],
   }
 
   file { '/var/log/xrootd/disk':
     ensure    => directory,
-    owner     => $lcgdm::base::config::user,
-    group     => $lcgdm::base::config::user,
+    owner     => $lcgdm_user,
+    group     => $lcgdm_user,
     subscribe => [File['/var/log/xrootd']],
     require   => Class['xrootd::config'],
   }
