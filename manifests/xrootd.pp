@@ -5,7 +5,7 @@ class dmlite::xrootd (
   $dmlite_conf = '/etc/dmlite.conf',
   $dpmhost = $::fqdn,
   $nshost = $::fqdn,
-  $ns_basepath = $dmlite::dpm::config::basepath,
+  $ns_basepath = 'dpm',
   $xrootd_use_voms = true,
   $xrootd_monitor = undef,
   $xrd_report = undef,
@@ -41,11 +41,7 @@ class dmlite::xrootd (
     ensure => present
   }
 
-  if $ns_basepath == undef {
-    $domainpath = "/${lcgdm::ns::config::basepath}/${domain}"
-  } else {
-    $domainpath = "/${ns_basepath}/${domain}"
-  }
+  $domainpath = "/${ns_basepath}/${domain}"
 
   include xrootd::config
   include xrootd::service
