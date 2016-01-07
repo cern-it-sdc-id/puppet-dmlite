@@ -18,6 +18,7 @@ class dmlite::disk_hdfs (
   $hdfs_tmp_folder = '/tmp',
   $enable_io      = true,
   $hdfs_replication = 3,
+  $enable_space_reporting = false,
 ) {
   class{'dmlite::config::head':
     log_level     => $log_level,
@@ -50,7 +51,7 @@ class dmlite::disk_hdfs (
     adminuser      => "${adminuser}",
     enable_dpm     => false,
     enable_ns      => true,
-    enable_io      => true,
+    enable_io      => $enable_space_reporting,
     mysql_dir_space_report_depth => 6,
   }
 
