@@ -32,7 +32,7 @@ class dmlite::plugins::mysql::config (
           teigi_keys => ['dpmdbuser_pass'],
           owner   => $user,
           group   => $group,
-          mode    => '0600',
+          mode    => '0750',
           template => 'dmlite/plugins/mysql.conf.CERN.erb',
           require => Package['dmlite-plugins-mysql']
         }
@@ -42,7 +42,7 @@ class dmlite::plugins::mysql::config (
 		  teigi_keys => ['dpmdbuser_pass'],
                   owner   => $user,
                   group   => $group,
-                  mode    => '0600',
+                  mode    => '0750',
                   template => 'dmlite/plugins/mysql.conf.CERN.erb',
                   require => Package['dmlite-plugins-mysql']
             }
@@ -55,7 +55,7 @@ class dmlite::plugins::mysql::config (
            '/etc/dmlite.conf.d/mysql.conf':
            owner   => $user,
            group   => $group,
-           mode    => '0600',
+           mode    => '0750',
            content => template('dmlite/plugins/mysql.conf.erb'),
            require => Package['dmlite-plugins-mysql']
          }
@@ -65,7 +65,7 @@ class dmlite::plugins::mysql::config (
       		'/etc/dmlite-disk.conf.d/mysql.conf':
 	          owner   => $user,
         	  group   => $group,
-        	  mode    => '0600',
+        	  mode    => '0750',
 	          content => template('dmlite/plugins/mysql.conf.erb'),
 	          require => Package['dmlite-plugins-mysql']
     	  }
