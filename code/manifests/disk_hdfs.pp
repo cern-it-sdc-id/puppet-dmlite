@@ -48,6 +48,10 @@ class dmlite::disk_hdfs (
     mysql_username => "${mysql_username}",
     mysql_password => "${mysql_password}",
     adminuser      => "${adminuser}",
+    enable_dpm     => false,
+    enable_ns      => true,
+    enable_io      => true,
+    mysql_dir_space_report_depth => 6,
   }
 
   class{'dmlite::plugins::mysql::install':}
