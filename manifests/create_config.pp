@@ -8,7 +8,7 @@ define dmlite::create_config (
 ) {
   include dmlite::params
 
-  Class[Dmlite::Params] -> Dmlite::Create_config <| |>
+  Class[dmlite::params] -> Dmlite::Create_config <| |>
 
   $libdir = $dmlite::params::libdir
 

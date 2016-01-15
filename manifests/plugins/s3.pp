@@ -1,6 +1,6 @@
 class dmlite::plugins::s3 {
 
-  Class[Dmlite::Plugins::S3::Install] -> Class[Dmlite::Plugins::S3::Config] -> Class[Dmlite::Plugins::S3::Service]
+  Class[dmlite::plugins::s3::install] -> Class[dmlite::plugins::s3::config] -> Class[dmlite::plugins::s3::service]
 
   class{'dmlite::plugins::s3::config':}
   class{'dmlite::plugins::s3::install':}

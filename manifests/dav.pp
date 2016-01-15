@@ -1,7 +1,7 @@
 class dmlite::dav (
 ) inherits dmlite::dav::params {
 
-  Class[Dmlite::Dav::Install] -> Class[Dmlite::Dav::Config] ~> Class[Dmlite::Dav::Service]
+  Class[dmlite::dav::install] -> Class[dmlite::dav::config] ~> Class[dmlite::dav::service]
 
   include('dmlite::dav::install')
   include('dmlite::dav::config')

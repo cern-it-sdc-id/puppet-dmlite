@@ -6,16 +6,16 @@ class dmlite::config::disk (
   $logcomponents  = $dmlite::params::logcomponents
 ) inherits dmlite::params {
 
-  Class[Dmlite::Install] -> Class[Dmlite::Config::Disk]
+  Class[dmlite::install] -> Class[dmlite::config::disk]
 
   if defined ('xrootd::service'){
-    Class[Dmlite::Config::Disk] ~> Class[Xrootd::Service]
+    Class[dmlite::config::disk] ~> Class[xrootd::service]
   }
   if defined ('dmlite::dav::service'){
-    Class[Dmlite::Config::Disk] ~> Class[Dmlite::Dav::Service]
+    Class[dmlite::config::disk] ~> Class[dmlite::dav::service]
   }
   if defined ('gridftp::service'){
-    Class[Dmlite::Config::Disk] ~> Class[Gridftp::Service]
+    Class[dmlite::config::disk] ~> Class[gridftp::service]
   }
 
   # the head config is needed for xrootd and gridftp

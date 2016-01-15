@@ -1,7 +1,7 @@
 class dmlite::dav::service (
 ) inherits dmlite::dav::params {
 
-  Class[Dmlite::Dav::Config] ~> Class[Dmlite::Dav::Service]
+  Class[dmlite::dav::config] ~> Class[dmlite::dav::service]
 
   service { 'httpd':
     ensure     => running,

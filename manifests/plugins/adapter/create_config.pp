@@ -18,18 +18,18 @@ define dmlite::plugins::adapter::create_config (
   $group              = $dmlite::params::group,
   $adminuser          = undef
 ) {
-  Class[Dmlite::Params] -> Dmlite::Plugins::Adapter::Create_config <| |>
+  Class[dmlite::params] -> Dmlite::Plugins::Adapter::Create_config <| |>
 
   $libdir = $dmlite::params::libdir
 
-  if defined (Class[Xrootd::Service]){
-    Dmlite::Plugins::Adapter::Create_config <| |> ~> Class[Xrootd::Service]
+  if defined (Class[xrootd::service]){
+    Dmlite::Plugins::Adapter::Create_config <| |> ~> Class[xrootd::service]
   }
-  if defined (Class[Dmlite::Dav::Service]){
-    Dmlite::Plugins::Adapter::Create_config <| |> ~> Class[Dmlite::Dav::Service]
+  if defined (Class[dmlite::dav::service]){
+    Dmlite::Plugins::Adapter::Create_config <| |> ~> Class[dmlite::dav::service]
   }
-  if defined (Class[Gridftp::Service]){
-    Dmlite::Plugins::Adapter::Create_config <| |> ~> Class[Gridftp::Service]
+  if defined (Class[gridftp::service]){
+    Dmlite::Plugins::Adapter::Create_config <| |> ~> Class[gridftp::service]
   }
 
   file {
