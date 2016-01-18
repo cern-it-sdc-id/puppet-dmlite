@@ -14,11 +14,11 @@ class dmlite::gridftp (
   $data_node           = 0,
   $remote_nodes        = undef,
 ) {
-  File['/var/log/dpm-gsiftp'] -> Class[Gridftp::Config]
-  Package['dpm-dsi'] -> Class[Gridftp::Config]
+  File['/var/log/dpm-gsiftp'] -> Class[gridftp::config]
+  Package['dpm-dsi'] -> Class[gridftp::config]
   Package['dpm-dsi'] -> File['/etc/sysconfig/dpm-gsiftp']
-  Class['Gridftp::Config'] -> Exec['remove_globus-gridftp-server_init_management']
-  Class[Dmlite::Gridftp] ~> Class['Gridftp::Service']
+  Class['gridftp::config'] -> Exec['remove_globus-gridftp-server_init_management']
+  Class[dmlite::gridftp] ~> Class['gridftp::service']
 
   if $enable_hdfs {
     $java_home = $dmlite::plugins::hdfs::params::java_home

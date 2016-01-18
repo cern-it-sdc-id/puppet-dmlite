@@ -1,6 +1,6 @@
 class dmlite::plugins::oracle {
 
-  Class[Dmlite::Plugins::Oracle::Install] -> Class[Dmlite::Plugins::Oracle::Config] -> Class[Dmlite::Plugins::Oracle::Service]
+  Class[dmlite::plugins::oracle::install] -> Class[dmlite::plugins::oracle::config] -> Class[dmlite::plugins::oracle::service]
 
   class{'dmlite::plugins::oracle::config':}
   class{'dmlite::plugins::oracle::install':}

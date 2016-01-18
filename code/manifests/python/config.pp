@@ -1,5 +1,5 @@
 class dmlite::python::config (
 ) {
-    Class[Dmlite::Python::Install] -> Class[Dmlite::Python::Config]
+    Class[dmlite::python::install] -> Class[dmlite::python::config]
 
 }

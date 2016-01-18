@@ -1,5 +1,5 @@
 class dmlite::shell::config (
 ) {
-    Class[Dmlite::Shell::Install] -> Class[Dmlite::Shell::Config]
+    Class[dmlite::shell::install] -> Class[dmlite::shell::config]
 
 }
