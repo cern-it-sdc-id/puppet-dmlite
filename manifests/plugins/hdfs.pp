@@ -1,6 +1,6 @@
 class dmlite::plugins::hdfs {
 
-  Class[Dmlite::Plugins::Hdfs::Install] -> Class[Dmlite::Plugins::Hdfs::Config]
+  Class[dmlite::plugins::hdfs::install] -> Class[dmlite::plugins::hdfs::config]
 
   class{'dmlite::plugins::hdfs::config':}
   class{'dmlite::plugins::hdfs::install':}

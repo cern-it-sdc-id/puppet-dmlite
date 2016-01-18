@@ -17,7 +17,7 @@ class dmlite::plugins::adapter::config (
   $adminuser          = undef,
 ) inherits dmlite::plugins::adapter::params {
 
-  Class[Dmlite::Plugins::Adapter::Install] -> Class[Dmlite::Plugins::Adapter::Config]
+  Class[dmlite::plugins::adapter::install] -> Class[dmlite::plugins::adapter::config]
 
   dmlite::plugins::adapter::create_config{'default_config':
     config_dir_name    => $config_dir_name,   # put file in /etc/dmlite.conf.d/adapter.conf

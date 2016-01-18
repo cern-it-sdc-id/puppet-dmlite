@@ -6,7 +6,7 @@ class dmlite::config (
   $logcomponents  = $dmlite::params::logcomponents
 ) inherits dmlite::params {
 
-  Class[Dmlite::Install] -> Class[Dmlite::Config]
+  Class[dmlite::install] -> Class[dmlite::config]
 
   dmlite::create_config{'default_config':
     config_file_name => 'dmlite',   # create /etc/dmlite.conf

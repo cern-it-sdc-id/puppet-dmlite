@@ -6,13 +6,13 @@ class dmlite::plugins::s3::config (
 ) inherits dmlite::plugins::s3::params {
 
   if defined ('xrootd::service'){
-    Class[Dmlite::Plugins::S3::Config] ~> Class[Xrootd::Service]
+    Class[dmlite::plugins::s3::config] ~> Class[xrootd::service]
   }
   if defined ('dmlite::dav::service'){
-    Class[Dmlite::Plugins::S3::Config] ~> Class[Dmlite::Dav::Service]
+    Class[dmlite::plugins::s3::config] ~> Class[dmlite::dav::service]
   }
   if defined ('gridftp::service'){
-    Class[Dmlite::Plugins::S3::Config] ~> Class[Gridftp::Service]
+    Class[dmlite::plugins::s3::config] ~> Class[gridftp::service]
   }
 
   file {

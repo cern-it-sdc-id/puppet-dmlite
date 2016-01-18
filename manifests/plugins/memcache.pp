@@ -13,7 +13,7 @@ class dmlite::plugins::memcache(
   $local_cache_size      = $dmlite::plugins::memcache::params::local_cache_size,
 ) inherits dmlite::plugins::memcache::params {
 
-  Class[Dmlite::Plugins::Memcache::Install] -> Class[Dmlite::Plugins::Memcache::Config]
+  Class[dmlite::plugins::memcache::install] -> Class[dmlite::plugins::memcache::config]
 
   class{'dmlite::plugins::memcache::config':
     servers              => $servers,

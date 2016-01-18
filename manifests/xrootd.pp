@@ -32,11 +32,11 @@ class dmlite::xrootd (
   validate_bool($dpm_xrootd_debug)
   validate_bool($alice_token)
 
-  Dmlite::Xrootd::Create_Config <| |> ~> Class[Xrootd::Service]
-  Xrootd::Create_Sysconfig <| |> ~> Class[Xrootd::Service]
-  Exec['delete .xrootd.log files'] ~> Class[Xrootd::Service]
+  Dmlite::Xrootd::Create_config <| |> ~> Class[xrootd::service]
+  Xrootd::Create_sysconfig <| |> ~> Class[xrootd::service]
+  Exec['delete .xrootd.log files'] ~> Class[xrootd::service]
   Exec['delete .xrootd.log files'] -> Xrootd::Create_sysconfig <| |>
-  Class[Dmlite::Xrootd] ~> Class['Xrootd::Service']
+  Class[dmlite::xrootd] ~> Class['xrootd::service']
 
   package {'dpm-xrootd':
     ensure => present

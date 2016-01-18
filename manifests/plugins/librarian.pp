@@ -1,6 +1,6 @@
 class dmlite::plugins::librarian {
 
-  Class[Dmlite::Plugins::Librarian::Install] -> Class[Dmlite::Plugins::Librarian::Config]
+  Class[dmlite::plugins::librarian::install] -> Class[dmlite::plugins::librarian::config]
 
   class{'dmlite::plugins::librarian::config':}
   class{'dmlite::plugins::librarian::install':}

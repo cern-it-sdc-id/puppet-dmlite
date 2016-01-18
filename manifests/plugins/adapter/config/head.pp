@@ -12,7 +12,7 @@ class dmlite::plugins::adapter::config::head (
   $adminuser          = undef,
 ) inherits dmlite::plugins::adapter::params {
 
-  Class[Dmlite::Plugins::Adapter::Install] -> Class[Dmlite::Plugins::Adapter::Config::Head]
+  Class[dmlite::plugins::adapter::install] -> Class[dmlite::plugins::adapter::config::head]
 
   if $with_db_plugin {
     $enable_ns = false

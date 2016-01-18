@@ -6,7 +6,7 @@ define dmlite::dpm::filesystem(
   $fs = '',
 ) {
 
-    Class[Dmlite::Shell::Install] -> Dmlite::Dpm::Filesystem <| |>
+    Class[dmlite::shell::install] -> Dmlite::Dpm::Filesystem <| |>
 
     ensure_packages(['dpm-python'])
 
