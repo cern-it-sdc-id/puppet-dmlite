@@ -1,3 +1,10 @@
+2016-02-04 Frederic Schaer  <frederic.schaer@cea.fr>
+    * fix for dpm-xrootd facter, prevents puppet breaks on non-RHE systems
+2016-01-18 Frederic Schaer  <frederic.schaer@cea.fr>
+    * Puppet 4 support
+2016-01-07 Andrea Manzi  <andrea.manzi@cern.ch>
+    * added facter to detect dpm-xrootd version
+    * added conf changes for dpm-xortod 3.6
 2015-12-03 Andrea Manzi  <andrea.manzi@cern.ch>
     * removed weak ciphers in Lcgdm-Dav
     * disabled NSAnon by default in Lcgdm-Dav
