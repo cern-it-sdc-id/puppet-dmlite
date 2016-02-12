@@ -1,6 +1,6 @@
 AddHandler fastcgi-script .fcgi
 
-FastCgiServer <%= @fcgi_dome_path -%> -port <%= @fcgi_dome_port -%> -listen-queue-depth <%= @fgci_listen_queue_depth -%> -processes <%= @fcgi_processes -%> -idle-timeout <%= @fcgi_idle_timeout -%> -initial-env LD_LIBRARY_PATH=/usr/lib64 -initial-env  <%= @fcgi_dome_initial_env -%> 
+FastCgiServer <%= @fcgi_dome_path -%> -port <%= @fcgi_dome_port -%> -listen-queue-depth <%= @fcgi_listen_queue_depth -%> -processes <%= @fcgi_processes -%> -idle-timeout <%= @fcgi_idle_timeout -%> -initial-env LD_LIBRARY_PATH=/usr/lib64 -initial-env  <%= @fcgi_dome_initial_env -%> 
 
 <%if @dome_head -%>
 Alias /domehead/ /var/www/fcgi-bin/dome/
