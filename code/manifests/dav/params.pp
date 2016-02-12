@@ -4,6 +4,7 @@ class dmlite::dav::params (
     $dmlite_disk_conf   = '/etc/dmlite-disk.conf'
     $ns_type            = 'Head'
     $ns_prefix          = 'dpm'
+    $disk_prefix        = 'dpm'
     $ns_flags           = 'Write RemoteCopy'
     $ns_anon            = false
     $ns_max_replicas    = 3

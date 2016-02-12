@@ -3,6 +3,7 @@ class dmlite::dav::config (
   $dmlite_disk_conf   = $dmlite::dav::params::dmlite_disk_conf,
   $ns_type            = $dmlite::dav::params::ns_type,
   $ns_prefix          = $dmlite::dav::params::ns_prefix,
+  $disk_prefix        = $dmlite::dav::params::disk_prefix,
   $ns_flags           = $dmlite::dav::params::ns_flags,
   $ns_anon            = $dmlite::dav::params::ns_anon,
   $ns_max_replicas    = $dmlite::dav::params::ns_max_replicas,
