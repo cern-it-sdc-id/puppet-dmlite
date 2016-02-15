@@ -16,6 +16,7 @@ class dmlite::dav::params (
     $ssl_key            = '/etc/grid-security/hostkey.pem'
     $ssl_capath         = '/etc/grid-security/certificates'
     $ssl_ciphersuite    = 'NULL-MD5:NULL:RC4-MD5:RC4:+LOW:+MEDIUM:+HIGH:+EXP'
+    $ssl_options        = '+StdEnvVars'
     $log_error          = 'logs/ssl_error_log'
     $log_transfer       = 'logs/ssl_access_log'
     $log_level          = 'warn'

@@ -14,6 +14,7 @@ class dmlite::dav::config (
   $ssl_cert           = $dmlite::dav::params::ssl_cert,
   $ssl_key            = $dmlite::dav::params::ssl_key,
   $ssl_capath         = $dmlite::dav::params::ssl_capath,
+  $ssl_options        = $dmlite::dav::params::ssl_options,
   $log_error          = $dmlite::dav::params::log_error,
   $log_transfer       = $dmlite::dav::params::log_transfer,
   $log_level          = $dmlite::dav::params::log_level,
