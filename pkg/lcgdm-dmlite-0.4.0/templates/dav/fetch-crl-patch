@@ -1,0 +1,8 @@
+# remove fetch-crl patch
+if [ -f "/etc/cron.d/fetch-crl" ]; then
+   if [ -f "/etc/fetch-crl.cron.backup" ]; then
+      rm -f "/etc/cron.d/fetch-crl"
+      cp -rf "/etc/fetch-crl.cron.backup" "/etc/cron.d/fetch-crl"
+      rm -f "/etc/fetch-crl.cron.backup"	
+   fi
+fi

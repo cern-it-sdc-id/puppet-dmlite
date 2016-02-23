@@ -1,0 +1,34 @@
+#
+# Please change the following values according to your setup :
+#
+
+#
+# should globus-gridftp-server run?
+# any string but "yes" will equivalent to "NO"
+#
+RUN_DPMFTP="yes"
+#
+# DPM Name Server host : !!!!! please change !!!!!
+#
+export DPM_HOST=<%= @dpmhost %>
+
+#
+# DPM Server host : !!!!! please change !!!!!
+#
+export DPNS_HOST=<%= @nshost %>
+
+# - GRIDFTP log file :
+#FTPLOGFILE=/var/log/dpm-gsiftp/dpm-gsiftp.log
+
+# - GRIDFTP data port range :
+#GLOBUS_TCP_PORT_RANGE="20000,25000"
+
+# - GRIDFTP startup options
+<% if @enable_hdfs -%>
+OPTIONS="-S -p 2811 -auth-level 0 -dsi dmlite:rfn_nocheck -disable-usage-stats"
+<% end -%>
+
+<% if @enable_hdfs -%>
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:<%= @java_home %>/jre/lib/amd64/server/
+<% end -%>
+

@@ -3,6 +3,7 @@ class dmlite::plugins::adapter::config (
   $dpm_host            = $dmlite::plugins::adapter::params::dpmhost,
   $ns_host             = $dmlite::plugins::adapter::params::nshost,
   $connection_timeout = $dmlite::plugins::adapter::params::connection_timeout,
+  $connection_poolsize = $dmlite::plugins::adapter::params::connection_poolsize,
   $retry_limit        = $dmlite::plugins::adapter::params::retry_limit,
   $retry_interval     = $dmlite::plugins::adapter::params::retry_interval,
   $enable_dpm         = $dmlite::plugins::adapter::params::enable_dpm,
@@ -10,7 +11,7 @@ class dmlite::plugins::adapter::config (
   $enable_rfio        = $dmlite::plugins::adapter::params::enable_rfio,
   $enable_ns          = $dmlite::plugins::adapter::params::enable_ns,
   $enable_pooldriver  = $dmlite::plugins::adapter::params::enable_pooldriver,
-
+  
   $token_password,
   $token_id           = $dmlite::plugins::adapter::params::token_id,
   $token_life         = $dmlite::plugins::adapter::params::token_life,
@@ -24,6 +25,7 @@ class dmlite::plugins::adapter::config (
     dpmhost            => $dpm_host,
     nshost             => $ns_host,
     connection_timeout => $connection_timeout,
+    connection_poolsize => $connection_poolsize,
     retry_limit        => $retry_limit,
     retry_interval     => $retry_interval,
     enable_dpm         => $enable_dpm,

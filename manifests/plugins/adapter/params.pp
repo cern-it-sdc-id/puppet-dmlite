@@ -3,6 +3,7 @@ class dmlite::plugins::adapter::params (
     $dpmhost            = undef
     $nshost             = undef
     $connection_timeout = 15
+    $connection_poolsize = 10
     $retry_limit        = 3
     $retry_interval     = 2
     $enable_dpm         = false
