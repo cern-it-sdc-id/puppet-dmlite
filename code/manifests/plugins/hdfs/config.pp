@@ -24,20 +24,20 @@ class dmlite::plugins::hdfs::config (
 ) inherits dmlite::plugins::hdfs::params {
 
   if defined ('xrootd::service'){
-    Class[Dmlite::Plugins::Hdfs::Config] ~> Class[Xrootd::Service]
+    Class[dmlite::plugins::hdfs::config] ~> Class[xrootd::service]
   }
   if defined ('dmlite::dav::service'){
-    Class[Dmlite::Plugins::Hdfs::Config] ~> Class[Dmlite::Dav::Service]
+    Class[dmlite::plugins::hdfs::config] ~> Class[dmlite::dav::service]
   }
   if defined ('gridftp::service'){
-    Class[Dmlite::Plugins::Hdfs::Config] ~> Class[Gridftp::Service]
+    Class[dmlite::plugins::hdfs::config] ~> Class[gridftp::service]
   }
   
   file {
     '/etc/dmlite.conf.d/hdfs.conf':
       owner   => $user,
       group   => $group,
-      mode    => '0600',
+      mode    => '0750',
       content => template('dmlite/plugins/hdfs.conf.erb'),
       require => Package['dmlite-plugins-hdfs']
   }
@@ -47,7 +47,7 @@ class dmlite::plugins::hdfs::config (
       '/etc/dmlite-disk.conf.d/hdfs.conf':
         owner   => $user,
         group   => $group,
-        mode    => '0600',
+        mode    => '0750',
         content => template('dmlite/plugins/hdfs.conf.erb'),
         require => Package['dmlite-plugins-hdfs']
     }

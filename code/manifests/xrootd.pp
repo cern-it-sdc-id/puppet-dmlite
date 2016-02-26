@@ -5,7 +5,7 @@ class dmlite::xrootd (
   $dmlite_conf = '/etc/dmlite.conf',
   $dpmhost = $::fqdn,
   $nshost = $::fqdn,
-  $ns_basepath = $dmlite::dpm::config::basepath,
+  $ns_basepath = 'dpm',
   $xrootd_use_voms = true,
   $xrootd_monitor = undef,
   $xrd_report = undef,
@@ -24,6 +24,7 @@ class dmlite::xrootd (
   $log_style_param = '-k fifo', #'-k fifo' for xrootd4
   $vomsxrd_package = 'vomsxrd',
   $enable_hdfs = false,
+  $lcgdm_user = 'dpmmgr',
 ) {
 
   validate_bool($xrootd_use_voms)
@@ -31,21 +32,17 @@ class dmlite::xrootd (
   validate_bool($dpm_xrootd_debug)
   validate_bool($alice_token)
 
-  Dmlite::Xrootd::Create_Config <| |> ~> Class[Xrootd::Service]
-  Xrootd::Create_Sysconfig <| |> ~> Class[Xrootd::Service]
-  Exec['delete .xrootd.log files'] ~> Class[Xrootd::Service]
+  Dmlite::Xrootd::Create_config <| |> ~> Class[xrootd::service]
+  Xrootd::Create_sysconfig <| |> ~> Class[xrootd::service]
+  Exec['delete .xrootd.log files'] ~> Class[xrootd::service]
   Exec['delete .xrootd.log files'] -> Xrootd::Create_sysconfig <| |>
-  Class[Dmlite::Xrootd] ~> Class['Xrootd::Service']
+  Class[dmlite::xrootd] ~> Class['xrootd::service']
 
   package {'dpm-xrootd':
     ensure => present
   }
 
-  if $ns_basepath == undef {
-    $domainpath = "/${lcgdm::ns::config::basepath}/${domain}"
-  } else {
-    $domainpath = "/${ns_basepath}/${domain}"
-  }
+  $domainpath = "/${ns_basepath}/${domain}"
 
   include xrootd::config
   include xrootd::service
@@ -68,9 +65,9 @@ class dmlite::xrootd (
   if member($nodetype, 'disk') {
 
     if $xrootd_use_voms {
-      $sec_protocol_disk = "/usr/${xrootd::config::xrdlibdir} gsi -crl:3 -key:/etc/grid-security/${lcgdm::base::config::user}/dpmkey.pem -cert:/etc/grid-security/${lcgdm::base::config::user}/dpmcert.pem -md:sha256:sha1 -ca:2 -gmapopt:10 -vomsfun:/usr/${xrootd::config::xrdlibdir}/libXrdSecgsiVOMS.so"
+      $sec_protocol_disk = "/usr/${xrootd::config::xrdlibdir} gsi -crl:3 -key:/etc/grid-security/${lcgdm_user}/dpmkey.pem -cert:/etc/grid-security/${lcgdm_user}/dpmcert.pem -md:sha256:sha1 -ca:2 -gmapopt:10 -vomsfun:/usr/${xrootd::config::xrdlibdir}/libXrdSecgsiVOMS.so"
     } else {
-      $sec_protocol_disk = "/usr/${xrootd::config::xrdlibdir} gsi -crl:3 -key:/etc/grid-security/${lcgdm::base::config::user}/dpmkey.pem -cert:/etc/grid-security/${lcgdm::base::config::user}/dpmcert.pem -md:sha256:sha1 -ca:2 -gmapopt:10 -vomsat:0"
+      $sec_protocol_disk = "/usr/${xrootd::config::xrdlibdir} gsi -crl:3 -key:/etc/grid-security/${lcgdm_user}/dpmkey.pem -cert:/etc/grid-security/${lcgdm_user}/dpmcert.pem -md:sha256:sha1 -ca:2 -gmapopt:10 -vomsat:0"
     }
 
     if $xrd_dpmclassic == false {
@@ -113,9 +110,9 @@ class dmlite::xrootd (
 
     if $xrootd_use_voms {
 
-      $sec_protocol_redir = "/usr/${xrootd::config::xrdlibdir} gsi -crl:3 -key:/etc/grid-security/${lcgdm::base::config::user}/dpmkey.pem -cert:/etc/grid-security/${lcgdm::base::config::user}/dpmcert.pem -md:sha256:sha1 -ca:2 -gmapopt:10 -vomsfun:/usr/${xrootd::config::xrdlibdir}/libXrdSecgsiVOMS.so"
+      $sec_protocol_redir = "/usr/${xrootd::config::xrdlibdir} gsi -crl:3 -key:/etc/grid-security/${lcgdm_user}/dpmkey.pem -cert:/etc/grid-security/${lcgdm_user}/dpmcert.pem -md:sha256:sha1 -ca:2 -gmapopt:10 -vomsfun:/usr/${xrootd::config::xrdlibdir}/libXrdSecgsiVOMS.so"
     } else {
-      $sec_protocol_redir = "/usr/${xrootd::config::xrdlibdir} gsi -crl:3 -key:/etc/grid-security/${lcgdm::base::config::user}/dpmkey.pem -cert:/etc/grid-security/${lcgdm::base::config::user}/dpmcert.pem -md:sha256:sha1 -ca:2 -gmapopt:10 -vomsat:0"
+      $sec_protocol_redir = "/usr/${xrootd::config::xrdlibdir} gsi -crl:3 -key:/etc/grid-security/${lcgdm_user}/dpmkey.pem -cert:/etc/grid-security/${lcgdm_user}/dpmcert.pem -md:sha256:sha1 -ca:2 -gmapopt:10 -vomsat:0"
     }
 
     $xrootd_instances_options_redir = {
@@ -156,13 +153,26 @@ class dmlite::xrootd (
       dpm_xrootd_fedredirs  => $dpm_xrootd_fedredirs
 
     }
-
+    $l = size("${::fqdn}")
+    if $l > 16 {
+	    $cms_cidtag = regsubst("${::fqdn}", '^(.{16})(.*)', '\1') 
+    } else {
+	    $cms_cidtag = "${::fqdn}"
+    }
+    #retrieving xrootd version and apply conf
+    
+    if  versioncmp("${::package_dpm_xrootd}", '3.6.0') >= 0 {
+	    $oss_statlib = '-2 libXrdDPMStatInfo.so.3'
+    } else {
+	    $oss_statlib = undef
+    }
     $federation_defaults = {
       dmlite_conf           => $dmlite_conf,
       dpm_host              => $dpmhost,
       all_adminpath         => '/var/spool/xrootd',
       all_pidpath           => '/var/run/xrootd',
       all_sitename          => $site_name,
+      cms_cidtag            => $cms_cidtag,
       xrd_allrole           => 'manager',
       cmsd_allrole          => 'server',
       xrootd_seclib         => 'libXrdSec.so',
@@ -185,6 +195,7 @@ class dmlite::xrootd (
       dpm_mmreqhost         => "${dpm_mmreqhost}",
       dpm_xrootd_serverport => $dpm_xrootd_serverport,
       dpm_enablecmsclient   => true,
+      oss_statlib           => $oss_statlib,
     }
 
     create_resources('dmlite::xrootd::create_redir_config', $dpm_xrootd_fedredirs, $federation_defaults)
@@ -231,8 +242,8 @@ class dmlite::xrootd (
     }
   }
   xrootd::create_sysconfig{$xrootd::config::sysconfigfile:
-    xrootd_user              => $lcgdm::base::config::user,
-    xrootd_group             => $lcgdm::base::config::user,
+    xrootd_user              => $lcgdm_user,
+    xrootd_group             => $lcgdm_user,
     xrootd_instances_options => $xrootd_instances_options_all,
     cmsd_instances_options   => $cmsd_instances_options_fed,
     exports                  => $exports,
@@ -242,8 +253,8 @@ class dmlite::xrootd (
   # TODO: make the basedir point to $xrootd::config::configdir
   file{'/etc/xrootd/dpmxrd-sharedkey.dat':
     ensure  => file,
-    owner   => $lcgdm::base::config::user,
-    group   => $lcgdm::base::config::user,
+    owner   => $lcgdm_user,
+    group   => $lcgdm_user,
     mode    => '0640',
     content => $dpm_xrootd_sharedkey
   }
@@ -253,16 +264,16 @@ class dmlite::xrootd (
 
   file { '/var/log/xrootd/redir':
     ensure    => directory,
-    owner     => $lcgdm::base::config::user,
-    group     => $lcgdm::base::config::user,
+    owner     => $lcgdm_user,
+    group     => $lcgdm_user,
     subscribe => [File['/var/log/xrootd']],
     require   => Class['xrootd::config'],
   }
 
   file { '/var/log/xrootd/disk':
     ensure    => directory,
-    owner     => $lcgdm::base::config::user,
-    group     => $lcgdm::base::config::user,
+    owner     => $lcgdm_user,
+    group     => $lcgdm_user,
     subscribe => [File['/var/log/xrootd']],
     require   => Class['xrootd::config'],
   }

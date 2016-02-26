@@ -18,6 +18,7 @@ class dmlite::disk_hdfs (
   $hdfs_tmp_folder = '/tmp',
   $enable_io      = true,
   $hdfs_replication = 3,
+  $enable_space_reporting = false,
 ) {
   class{'dmlite::config::head':
     log_level     => $log_level,
@@ -27,7 +28,7 @@ class dmlite::disk_hdfs (
     debuginfo => $debuginfo
   }
 
-  Class[Dmlite::Plugins::Hdfs::Install] -> Class[Dmlite::Plugins::Hdfs::Config]
+  Class[dmlite::plugins::hdfs::install] -> Class[dmlite::plugins::hdfs::config]
 
   class { 'dmlite::plugins::hdfs::config':
     token_password  => "${token_password}",
@@ -48,6 +49,10 @@ class dmlite::disk_hdfs (
     mysql_username => "${mysql_username}",
     mysql_password => "${mysql_password}",
     adminuser      => "${adminuser}",
+    enable_dpm     => false,
+    enable_ns      => true,
+    enable_io      => $enable_space_reporting,
+    mysql_dir_space_report_depth => 6,
   }
 
   class{'dmlite::plugins::mysql::install':}

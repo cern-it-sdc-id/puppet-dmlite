@@ -3,6 +3,7 @@ define dmlite::plugins::adapter::create_config (
   $dpmhost            = $dmlite::plugins::adapter::params::dpmhost,
   $nshost             = $dmlite::plugins::adapter::params::nshost,
   $connection_timeout = $dmlite::plugins::adapter::params::connection_timeout,
+  $connection_poolsize = $dmlite::plugins::adapter::params::connection_poolsize,
   $retry_limit        = $dmlite::plugins::adapter::params::retry_limit,
   $retry_interval     = $dmlite::plugins::adapter::params::retry_interval,
   $enable_dpm         = $dmlite::plugins::adapter::params::enable_dpm,
@@ -18,18 +19,18 @@ define dmlite::plugins::adapter::create_config (
   $group              = $dmlite::params::group,
   $adminuser          = undef
 ) {
-  Class[Dmlite::Params] -> Dmlite::Plugins::Adapter::Create_config <| |>
+  Class[dmlite::params] -> Dmlite::Plugins::Adapter::Create_config <| |>
 
   $libdir = $dmlite::params::libdir
 
-  if defined (Class[Xrootd::Service]){
-    Dmlite::Plugins::Adapter::Create_config <| |> ~> Class[Xrootd::Service]
+  if defined (Class[xrootd::service]){
+    Dmlite::Plugins::Adapter::Create_config <| |> ~> Class[xrootd::service]
   }
-  if defined (Class[Dmlite::Dav::Service]){
-    Dmlite::Plugins::Adapter::Create_config <| |> ~> Class[Dmlite::Dav::Service]
+  if defined (Class[dmlite::dav::service]){
+    Dmlite::Plugins::Adapter::Create_config <| |> ~> Class[dmlite::dav::service]
   }
-  if defined (Class[Gridftp::Service]){
-    Dmlite::Plugins::Adapter::Create_config <| |> ~> Class[Gridftp::Service]
+  if defined (Class[gridftp::service]){
+    Dmlite::Plugins::Adapter::Create_config <| |> ~> Class[gridftp::service]
   }
   if $::domain == "cern.ch" {
         teigi::secret::sub_file{"/etc/${config_dir_name}.conf.d/adapter.conf":

@@ -6,7 +6,7 @@ class dmlite::srm (
   $nshost   = $dmlite::srm::params::nshost,
 ) inherits dmlite::srm::params {
 
-  Class[Dmlite::Srm::Install] -> Class[Dmlite::Srm::Config] -> Class[Dmlite::Srm::Service]
+  Class[dmlite::srm::install] -> Class[dmlite::srm::config] -> Class[dmlite::srm::service]
 
   class{'dmlite::srm::install':
     user  => "${user}",

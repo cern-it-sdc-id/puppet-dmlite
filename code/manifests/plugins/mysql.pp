@@ -1,6 +1,6 @@
 class dmlite::plugins::mysql {
 
-  Class[Dmlite::Plugins::Mysql::Install] -> Class[Dmlite::Plugins::Mysql::Config] -> Class[Dmlite::Plugins::Mysql::Service]
+  Class[dmlite::plugins::mysql::install] -> Class[dmlite::plugins::mysql::config] -> Class[dmlite::plugins::mysql::service]
 
   class{'dmlite::plugins::mysql::config':}
   class{'dmlite::plugins::mysql::install':}

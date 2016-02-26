@@ -45,6 +45,8 @@ define dmlite::xrootd::create_redir_config (
   $sec_protocol = $xrootd::config::sec_protocol,
 
   $pss_setopt = $xrootd::config::pss_setopt,
+  $cms_cidtag =  $xrootd::config::cms_cidtag,
+  $oss_statlib = $xrootd::config::oss_statlib,
 
   $dpm_listvoms = undef,
   $dpm_mmreqhost = undef,

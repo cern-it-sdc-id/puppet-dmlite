@@ -1,6 +1,6 @@
 class dmlite::nfs {
 
-  Class[Dmlite::Nfs::Install] -> Class[Dmlite::Nfs::Config] -> Class[Dmlite::Nfs::Service]
+  Class[dmlite::nfs::install] -> Class[dmlite::nfs::config] -> Class[dmlite::nfs::service]
 
   class{'dmlite::nfs::install':}
   class{'dmlite::nfs::config':}

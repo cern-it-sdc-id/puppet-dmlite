@@ -34,13 +34,13 @@ class dmlite::plugins::memcache::config (
   }
 
   if defined ('xrootd::service'){
-    Class[Dmlite::Plugins::Memcache::Config] ~> Class[Xrootd::Service]
+    Class[dmlite::plugins::memcache::config] ~> Class[xrootd::service]
   }
   if defined ('dmlite::dav::service'){
-    Class[Dmlite::Plugins::Memcache::Config] ~> Class[Dmlite::Dav::Service]
+    Class[dmlite::plugins::memcache::config] ~> Class[dmlite::dav::service]
   }
   if defined ('gridftp::service'){
-    Class[Dmlite::Plugins::Memcache::Config] ~> Class[Gridftp::Service]
+    Class[dmlite::plugins::memcache::config] ~> Class[gridftp::service]
   }
 
   file {
@@ -52,7 +52,7 @@ class dmlite::plugins::memcache::config (
     file { '/etc/dmlite.conf.d/zmemcache.conf':
       owner   => $user,
       group   => $group,
-      mode    => '0600',
+      mode    => '0750',
       content => template('dmlite/plugins/memcache.conf.erb'),
       require => Package['dmlite-plugins-memcache']
     }

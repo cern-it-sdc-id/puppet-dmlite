@@ -11,7 +11,7 @@ class dmlite::plugins::vfs(
   $data_path          = $dmlite::plugins::vfs::params::data_path,
 ) inherits dmlite::plugins::vfs::params {
 
-  Class[Dmlite::Plugins::Vfs::Install] -> Class[Dmlite::Plugins::Vfs::Config]
+  Class[dmlite::plugins::vfs::install] -> Class[dmlite::plugins::vfs::config]
 
   class{'dmlite::plugins::vfs::config':
     enable_vfs     => $enable_vfs,

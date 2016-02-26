@@ -46,7 +46,7 @@ class dmlite::dav::config (
     }
   }
 
-  Class[Dmlite::Dav::Install] -> Class[Dmlite::Dav::Config]
+  Class[dmlite::dav::install] -> Class[dmlite::dav::config]
 
   # some installations don't have complete data types enabled by default, use
   # str2bool to catch both cases

@@ -19,20 +19,20 @@ class dmlite::plugins::mysql::config (
 ) inherits dmlite::plugins::mysql::params {
 
   if defined ('xrootd::service'){
-    Class[Dmlite::Plugins::Mysql::Config] ~> Class[Xrootd::Service]
+    Class[dmlite::plugins::mysql::config] ~> Class[xrootd::service]
   }
   if defined ('dmlite::dav::service'){
-    Class[Dmlite::Plugins::Mysql::Config] ~> Class[Dmlite::Dav::Service]
+    Class[dmlite::plugins::mysql::config] ~> Class[dmlite::dav::service]
   }
   if defined ('gridftp::service'){
-    Class[Dmlite::Plugins::Mysql::Config] ~> Class[Gridftp::Service]
+    Class[dmlite::plugins::mysql::config] ~> Class[gridftp::service]
   }
      if $::domain == "cern.ch" {
         teigi::secret::sub_file{"/etc/dmlite.conf.d/mysql.conf":
           teigi_keys => ['dpmdbuser_pass'],
           owner   => $user,
           group   => $group,
-          mode    => '0600',
+          mode    => '0750',
           template => 'dmlite/plugins/mysql.conf.CERN.erb',
           require => Package['dmlite-plugins-mysql']
         }
@@ -42,7 +42,7 @@ class dmlite::plugins::mysql::config (
 		  teigi_keys => ['dpmdbuser_pass'],
                   owner   => $user,
                   group   => $group,
-                  mode    => '0600',
+                  mode    => '0750',
                   template => 'dmlite/plugins/mysql.conf.CERN.erb',
                   require => Package['dmlite-plugins-mysql']
             }
@@ -55,7 +55,7 @@ class dmlite::plugins::mysql::config (
            '/etc/dmlite.conf.d/mysql.conf':
            owner   => $user,
            group   => $group,
-           mode    => '0600',
+           mode    => '0750',
            content => template('dmlite/plugins/mysql.conf.erb'),
            require => Package['dmlite-plugins-mysql']
          }
@@ -65,7 +65,7 @@ class dmlite::plugins::mysql::config (
       		'/etc/dmlite-disk.conf.d/mysql.conf':
 	          owner   => $user,
         	  group   => $group,
-        	  mode    => '0600',
+        	  mode    => '0750',
 	          content => template('dmlite/plugins/mysql.conf.erb'),
 	          require => Package['dmlite-plugins-mysql']
     	  }

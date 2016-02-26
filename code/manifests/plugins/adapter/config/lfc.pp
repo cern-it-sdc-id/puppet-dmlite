@@ -2,6 +2,7 @@ class dmlite::plugins::adapter::config::lfc (
   $dpmhost            = $dmlite::plugins::adapter::params::dpmhost,
   $nshost             = $dmlite::plugins::adapter::params::nshost,
   $connection_timeout = $dmlite::plugins::adapter::params::connection_timeout,
+  $connection_poolsize = $dmlite::plugins::adapter::params::connection_poolsize,
   $retry_limit        = $dmlite::plugins::adapter::params::retry_limit,
   $retry_interval     = $dmlite::plugins::adapter::params::retry_interval,
 
@@ -10,13 +11,14 @@ class dmlite::plugins::adapter::config::lfc (
   $token_life         = $dmlite::plugins::adapter::params::token_life,
 ) inherits dmlite::plugins::adapter::params {
 
-  Class[Dmlite::Plugins::Adapter::Install] -> Class[Dmlite::Plugins::Adapter::Config::Lfc]
+  Class[dmlite::plugins::adapter::install] -> Class[dmlite::plugins::adapter::config::lfc]
 
   dmlite::plugins::adapter::create_config{'head_config':
     config_dir_name    => 'dmlite',   # put file in /etc/dmlite.conf.d/adapter.conf
     dpmhost            => $dpmhost,
     nshost             => $nshost,
     connection_timeout => $connection_timeout,
+    connection_poolsize => $connection_poolsize,
     retry_limit        => $retry_limit,
     retry_interval     => $retry_interval,
     enable_dpm         => false,

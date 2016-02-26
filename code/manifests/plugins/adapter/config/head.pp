@@ -2,6 +2,7 @@ class dmlite::plugins::adapter::config::head (
   $dpmhost            = $dmlite::plugins::adapter::params::dpmhost,
   $nshost             = $dmlite::plugins::adapter::params::nshost,
   $connection_timeout = $dmlite::plugins::adapter::params::connection_timeout,
+  $connection_poolsize  = $dmlite::plugins::adapter::params::connection_poolsize,
   $retry_limit        = $dmlite::plugins::adapter::params::retry_limit,
   $retry_interval     = $dmlite::plugins::adapter::params::retry_interval,
   $with_db_plugin     = $dmlite::plugins::adapter::params::with_db_plugin,
@@ -12,7 +13,7 @@ class dmlite::plugins::adapter::config::head (
   $adminuser          = undef,
 ) inherits dmlite::plugins::adapter::params {
 
-  Class[Dmlite::Plugins::Adapter::Install] -> Class[Dmlite::Plugins::Adapter::Config::Head]
+  Class[dmlite::plugins::adapter::install] -> Class[dmlite::plugins::adapter::config::head]
 
   if $with_db_plugin {
     $enable_ns = false
@@ -27,6 +28,7 @@ class dmlite::plugins::adapter::config::head (
     dpmhost            => $dpmhost,
     nshost             => $nshost,
     connection_timeout => $connection_timeout,
+    connection_poolsize => $connection_poolsize,
     retry_limit        => $retry_limit,
     retry_interval     => $retry_interval,
     enable_dpm         => $enable_dpm,
@@ -45,6 +47,7 @@ class dmlite::plugins::adapter::config::head (
     dpmhost            => $dpmhost,
     nshost             => $nshost,
     connection_timeout => $connection_timeout,
+    connection_poolsize => $connection_poolsize,
     retry_limit        => $retry_limit,
     retry_interval     => $retry_interval,
     enable_dpm         => false,

@@ -6,16 +6,16 @@ class dmlite::config::head (
   $logcomponents  = $dmlite::params::logcomponents
 ) inherits dmlite::params {
 
-  Class[Dmlite::Install] -> Class[Dmlite::Config::Head]
+  Class[dmlite::install] -> Class[dmlite::config::head]
 
   if defined ('xrootd::service'){
-    Class[Dmlite::Config::Head] ~> Class[Xrootd::Service]
+    Class[dmlite::config::head] ~> Class[xrootd::service]
   }
   if defined ('dmlite::dav::service'){
-    Class[Dmlite::Config::Head] ~> Class[Dmlite::Dav::Service]
+    Class[dmlite::config::head] ~> Class[dmlite::dav::service]
   }
   if defined ('gridftp::service'){
-    Class[Dmlite::Config::Head] ~> Class[Gridftp::Service]
+    Class[dmlite::config::head] ~> Class[gridftp::service]
   }
 
   dmlite::create_config{'head_config':
