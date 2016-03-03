@@ -9,7 +9,7 @@ class dmlite::srm::service (
     hasrestart => true,
     enable     => true,
     require    => [Class['dmlite::srm::config'], Class['dmlite::srm::install']],
-    subscribe  => File["${lcgdm::ns::config::configfile}"]
+    subscribe  => File[$lcgdm::ns::config::configfile]
   }
  #centOS7 changes
  if $::operatingsystemmajrelease and ($::operatingsystemmajrelease + 0) >= 7 {
