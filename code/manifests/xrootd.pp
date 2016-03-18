@@ -268,7 +268,8 @@ class dmlite::xrootd (
 
 		 }
 		 $hash_ = {
-                        $xrootd_instances => $redir_conf,
+                        'dpmredir'=> $redir_conf,
+			
 		 }
 
 		
