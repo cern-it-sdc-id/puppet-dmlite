@@ -269,8 +269,12 @@ class dmlite::xrootd (
                     daemon_corefile_limit    => $daemon_corefile_limit
 
 		 }
+
+		$hash_ = inline_template("<%= Hash[xrootd_instances.map {|v| [v,redir_conf]}] %>")
 		
-   	 	 create_resources('xrootd::create_systemd', $hash_, $redir_conf)
+		notify($hash_)
+
+   	 	create_resources('xrootd::create_systemd', $hash_, $redir_conf)
 
 	}
 
