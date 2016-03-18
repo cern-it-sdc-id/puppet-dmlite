@@ -260,19 +260,16 @@ class dmlite::xrootd (
         	 $array_fed_final =  prefix($array_fed,'dpmfedredir_')
 		 $xrootd_instances = flatten (concat (['dpmredir'],$array_fed_final))
 		
-		 xrootd::create_systemd{"xrootd@${xrootd_instances}":
-                    xrootd_user              => $lcgdm_user,
-                    xrootd_group             => $lcgdm_user,
+		 $redir_conf = {
+		    xrootd_user              => $lcgdm_user,
+	            xrootd_group             => $lcgdm_user,
                     exports                  => $exports,
                     daemon_corefile_limit    => $daemon_corefile_limit
-                  }
 
-		 xrootd::create_systemd{"cmsd@${array_fed_final}":
-                    xrootd_user              => $lcgdm_user,
-                    xrootd_group             => $lcgdm_user,
-                    exports                  => $exports,
-                    daemon_corefile_limit    => $daemon_corefile_limit
-                  }
+		 }
+		
+   	 	 create_resources('xrootd::create_systemd', $dpm_xrootd_fedredirs, $redir_conf)
+
 	}
 
   } else {
