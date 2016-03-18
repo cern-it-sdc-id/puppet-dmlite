@@ -302,19 +302,19 @@ class dmlite::xrootd (
 	 
 	 if member($nodetype, 'head') and  member($nodetype, 'disk') {
 		class{'xrootd::service':
-		    xrootd_instances  =>  flatten(concat( ['dpmredir', 'dpmdisk'],$array_fed_final)),
+		    xrootd_instances  =>  flatten(concat( ['xrootd@dpmredir.service', 'xrootd@dpmdisk.service'],$array_fed_final)),
 		    cmsd_instances => $array_fed_final,
 	     	  }  
 
 	 } elsif member($nodetype, 'head') {
 		class{'xrootd::service':
-                    xrootd_instances  =>  flatten(concat( ['dpmredir'],$array_fed_final)),
+                    xrootd_instances  =>  flatten(concat( ['xrootd@dpmredir.service'],$array_fed_final)),
                     cmsd_instances => $array_fed_final,
                   }  
 
 	 } else {
 		class{'xrootd::service':
-                    xrootd_instances  =>  ['dpmdisk'],
+                    xrootd_instances  =>  ['xrootd@dpmdisk.service'],
                   }  
 	}
   }
