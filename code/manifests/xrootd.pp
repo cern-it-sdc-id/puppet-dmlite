@@ -260,6 +260,7 @@ class dmlite::xrootd (
         	 $array_fed_final =  prefix($array_fed,'dpmfedredir_')
 		 $xrootd_instances = flatten (concat (['dpmredir'],$array_fed_final))
 		
+		 #TODO federation
 		 $redir_conf = {
 		    xrootd_user              => $lcgdm_user,
 	            xrootd_group             => $lcgdm_user,
@@ -301,15 +302,16 @@ class dmlite::xrootd (
   if $::operatingsystemmajrelease and $::operatingsystemmajrelease >= 7 {
 	 
 	 if member($nodetype, 'head') and  member($nodetype, 'disk') {
+		#TODO federation
 		class{'xrootd::service':
-		    xrootd_instances  =>  flatten(concat( ['xrootd@dpmredir.service', 'xrootd@dpmdisk.service'],$array_fed_final)),
-		    cmsd_instances => $array_fed_final,
+		    xrootd_instances  =>  ['xrootd@dpmredir.service', 'xrootd@dpmdisk.service'],
+		    #cmsd_instances => $array_fed_final,
 	     	  }  
 
 	 } elsif member($nodetype, 'head') {
 		class{'xrootd::service':
-                    xrootd_instances  =>  flatten(concat( ['xrootd@dpmredir.service'],$array_fed_final)),
-                    cmsd_instances => $array_fed_final,
+                    xrootd_instances  =>  ['xrootd@dpmredir.service'],
+                    #cmsd_instances => $array_fed_final,
                   }  
 
 	 } else {
