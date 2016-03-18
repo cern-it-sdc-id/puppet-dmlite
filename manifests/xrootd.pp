@@ -260,14 +260,14 @@ class dmlite::xrootd (
         	 $array_fed_final =  prefix($array_fed,'dpmfedredir_')
 		 $xrootd_instances = flatten (concat (['dpmredir'],$array_fed_final))
 		
-		 xrootd::create_systemd{"xrootd@$xrootd_instances.service.d":
+		 xrootd::create_systemd{"xrootd@${xrootd_instances}.service.d":
                     xrootd_user              => $lcgdm_user,
                     xrootd_group             => $lcgdm_user,
                     exports                  => $exports,
                     daemon_corefile_limit    => $daemon_corefile_limit
                   }
 
-		 xrootd::create_systemd{"cmsd@$array_fed_final.service.d":
+		 xrootd::create_systemd{"cmsd@${array_fed_final}.service.d":
                     xrootd_user              => $lcgdm_user,
                     xrootd_group             => $lcgdm_user,
                     exports                  => $exports,
