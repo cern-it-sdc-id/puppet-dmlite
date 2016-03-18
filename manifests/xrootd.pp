@@ -259,7 +259,7 @@ class dmlite::xrootd (
 	         $array_fed =  keys($dpm_xrootd_fedredirs)
         	 $array_fed_final =  prefix($array_fed,'dpmfedredir_')
 		 $xrootd_instances = flatten (concat (['dpmredir'],$array_fed_final))
-
+		
 		 $redir_conf = {
 		    xrootd_user              => $lcgdm_user,
 	            xrootd_group             => $lcgdm_user,
@@ -267,10 +267,12 @@ class dmlite::xrootd (
                     daemon_corefile_limit    => $daemon_corefile_limit
 
 		 }
+		 $hash_ = {
+                        $xrootd_instances => $redir_conf,
+		 }
 
-		$hash_ = inline_template("<%= Hash[xrootd_instances.map {|v| [v,redir_conf]}] %>")
 		
-   	 	create_resources('xrootd::create_systemd', $hash_, $redir_conf)
+   	 	 create_resources('xrootd::create_systemd', $hash_, $redir_conf)
 
 	}
 
