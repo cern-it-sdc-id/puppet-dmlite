@@ -298,9 +298,6 @@ class dmlite::xrootd (
 
   if $::operatingsystemmajrelease and $::operatingsystemmajrelease >= 7 {
 	 
-	 #get federation hashes
-	 $array_fed =  keys($dpm_xrootd_fedredirs)
-	 $array_fed_final =  prefix($array_fed,'dpmfedredir_')
 	 if member($nodetype, 'head') and  member($nodetype, 'disk') {
 		class{'xrootd::service':
 		    xrootd_instances  =>  flatten(concat( ['dpmredir', 'dpmdisk'],$array_fed_final)),
