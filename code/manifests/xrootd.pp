@@ -260,7 +260,7 @@ class dmlite::xrootd (
         	 $array_fed_final =  prefix($array_fed,'dpmfedredir_')
 		 $xrootd_instances = flatten (concat (['dpmredir'],$array_fed_final))
 
-		 $hash_ = inline_template("<%= Hash[xrootd_instances.map {|v| [v,undef]}] %>")
+		 $hash_ = inline_template("<%= Hash[xrootd_instances.map {|v| [v,v]}] %>")
 		
 		 $redir_conf = {
 		    xrootd_user              => $lcgdm_user,
