@@ -31,5 +31,6 @@ HTTPD=/usr/sbin/httpd.event
 #PIDFILE=/var/run/httpd/httpd.pid
 
 <% if @enable_hdfs -%>
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:<%= @java_home %>/jre/lib/amd64/server/
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:<%= @java_home %>/jre/lib/amd64/server/
+export LD_LIBRARY_PATH
 <% end -%>
