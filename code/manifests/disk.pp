@@ -43,7 +43,7 @@ class dmlite::disk (
     		mysql_host     => "${mysql_host}",
     		mysql_username => "${mysql_username}",
     		mysql_password => "${mysql_password}",
-    		dbpool_size    => 2,
+    		dbpool_size    => 10,
     		enable_dpm     => false,
     		enable_ns      => true,
     		enable_io      => true,       
