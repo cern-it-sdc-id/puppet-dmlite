@@ -257,10 +257,16 @@ class dmlite::xrootd (
 	if member($nodetype, 'head') {     
 		 #get federation hashes
 	         $array_fed =  keys($dpm_xrootd_fedredirs)
-        	 $array_fed_final =  prefix($array_fed,'dpmfedredir_')
-		 $xrootd_instances = flatten (concat (['dpmredir'],$array_fed_final))
-		 $xrootd_instances_final = prefix($xrootd_istances,'xrootd@')
-		 $cmsd_instances_final = prefix($array_fedfinal,'cmsd@')
+		
+		 if size($array_fed) > 0 {
+	        	 $array_fed_final =  prefix($array_fed,'dpmfedredir_')
+			 $xrootd_instances = flatten (concat (['dpmredir'],$array_fed_final))
+  			 $cmsd_instances_final = prefix($array_fedfinal,'cmsd@')
+		 }
+		 else {
+			$xrootd_instances_final = ['dpmredir']	
+		 }
+		 $xrootd_instances_final = prefix($xrootd_instances,'xrootd@')
 		
                  dmlite::xrootd::create_systemd_config{ $xrootd_instances_final:
 		 	xrootd_user              => $lcgdm_user,
@@ -268,13 +274,14 @@ class dmlite::xrootd (
 		        exports                  => $exports,
 		        daemon_corefile_limit    => $daemon_corefile_limit
 		 }
-		
-		 dmlite::xrootd::create_systemd_config{ $cmsd_instances_final:
-                        xrootd_user              => $lcgdm_user,
-                        xrootd_group             => $lcgdm_user,
-                        exports                  => $exports,
-                        daemon_corefile_limit    => $daemon_corefile_limit
-                 }
+		 if size($array_fed) > 0 {
+		 	dmlite::xrootd::create_systemd_config{ $cmsd_instances_final:
+                        	xrootd_user              => $lcgdm_user,
+	                        xrootd_group             => $lcgdm_user,
+        	                exports                  => $exports,
+                	        daemon_corefile_limit    => $daemon_corefile_limit
+	                 }
+		}
 
 
 	}
@@ -303,7 +310,6 @@ class dmlite::xrootd (
   if $::operatingsystemmajrelease and $::operatingsystemmajrelease >= 7 {
 	 
 	 if member($nodetype, 'head') and  member($nodetype, 'disk') {
-		#TODO federation
 		class{'xrootd::service':
 		    xrootd_instances  =>  concat (['xrootd@dpmdisk'],$xrootd_instances_final),
 		    cmsd_instances => $cmsd_instances_final,
