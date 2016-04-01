@@ -259,8 +259,8 @@ class dmlite::xrootd (
 	         $array_fed =  keys($dpm_xrootd_fedredirs)
         	 $array_fed_final =  prefix($array_fed,'dpmfedredir_')
 		 $xrootd_instances = flatten (concat (['dpmredir'],$array_fed_final))
-		 $xrootd_instances_final = prefix($array_fed,'xrootd@')
-		 $cmsd_instances_final = prefix($array_fed,'cmsd@')
+		 $xrootd_instances_final = prefix($xrootd_istances,'xrootd@')
+		 $cmsd_instances_final = prefix($array_fedfinal,'cmsd@')
 		
                  dmlite::xrootd::create_systemd_config{ $xrootd_instances_final:
 		 	xrootd_user              => $lcgdm_user,
@@ -305,7 +305,7 @@ class dmlite::xrootd (
 	 if member($nodetype, 'head') and  member($nodetype, 'disk') {
 		#TODO federation
 		class{'xrootd::service':
-		    xrootd_instances  =>  concat (['xrootd@dpmredir'],$xrootd_instances_final),
+		    xrootd_instances  =>  concat (['xrootd@dpmdisk'],$xrootd_instances_final),
 		    cmsd_instances => $cmsd_instances_final,
 	     	  }  
 
@@ -317,7 +317,7 @@ class dmlite::xrootd (
 
 	 } else {
 		class{'xrootd::service':
-                    xrootd_instances  =>  ['xrootd@dpmdisk.service'],
+                    xrootd_instances  =>  ['xrootd@dpmdisk'],
                   }  
 	}
   }
