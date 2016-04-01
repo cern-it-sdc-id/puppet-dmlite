@@ -264,7 +264,7 @@ class dmlite::xrootd (
   			 $cmsd_instances_final = prefix($array_fedfinal,'cmsd@')
 		 }
 		 else {
-			$xrootd_instances_final = ['dpmredir']	
+			$xrootd_instances = ['dpmredir']	
 		 }
 		 $xrootd_instances_final = prefix($xrootd_instances,'xrootd@')
 		
@@ -281,7 +281,7 @@ class dmlite::xrootd (
         	                exports                  => $exports,
                 	        daemon_corefile_limit    => $daemon_corefile_limit
 	                 }
-		}
+		 }
 
 
 	}
