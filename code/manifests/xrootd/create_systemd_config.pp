@@ -1,5 +1,4 @@
 define dmlite::xrootd::create_systemd_config (
-	$name= $title,
 	$xrootd_user = undef,
         $xrootd_group = undef,
         $exports = undef,
