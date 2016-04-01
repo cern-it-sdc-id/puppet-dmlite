@@ -261,7 +261,7 @@ class dmlite::xrootd (
 		 if size($array_fed) > 0 {
 	        	 $array_fed_final =  prefix($array_fed,'dpmfedredir_')
 			 $xrootd_instances = flatten (concat (['dpmredir'],$array_fed_final))
-  			 $cmsd_instances_final = prefix($array_fedfinal,'cmsd@')
+  			 $cmsd_instances_final = prefix($array_fed_final,'cmsd@')
 		 }
 		 else {
 			$xrootd_instances = ['dpmredir']	
