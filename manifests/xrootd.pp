@@ -259,22 +259,23 @@ class dmlite::xrootd (
 	         $array_fed =  keys($dpm_xrootd_fedredirs)
         	 $array_fed_final =  prefix($array_fed,'dpmfedredir_')
 		 $xrootd_instances = flatten (concat (['dpmredir'],$array_fed_final))
+		 $xrootd_instances_final = prefix($array_fed,'xrootd@')
+		 $cmsd_instances_final = prefix($array_fed,'cmsd@')
 		
-		 #TODO federation
-		 $redir_conf = {
-		    xrootd_user              => $lcgdm_user,
-	            xrootd_group             => $lcgdm_user,
-                    exports                  => $exports,
-                    daemon_corefile_limit    => $daemon_corefile_limit
-
+                 dmlite::xrootd::create_systemd_config{ $xrootd_instances_final:
+		 	xrootd_user              => $lcgdm_user,
+		        xrootd_group             => $lcgdm_user,
+		        exports                  => $exports,
+		        daemon_corefile_limit    => $daemon_corefile_limit
 		 }
-		 $hash_ = {
-                        'xrootd@dpmredir'=> $redir_conf,
-			
-		 }
-
 		
-   	 	 create_resources('xrootd::create_systemd', $hash_, $redir_conf)
+		 dmlite::xrootd::create_systemd_config{ $cmsd_instances_final:
+                        xrootd_user              => $lcgdm_user,
+                        xrootd_group             => $lcgdm_user,
+                        exports                  => $exports,
+                        daemon_corefile_limit    => $daemon_corefile_limit
+                 }
+
 
 	}
 
@@ -304,14 +305,14 @@ class dmlite::xrootd (
 	 if member($nodetype, 'head') and  member($nodetype, 'disk') {
 		#TODO federation
 		class{'xrootd::service':
-		    xrootd_instances  =>  ['xrootd@dpmredir.service', 'xrootd@dpmdisk.service'],
-		    #cmsd_instances => $array_fed_final,
+		    xrootd_instances  =>  concat (['xrootd@dpmredir'],$xrootd_instances_final),
+		    cmsd_instances => $cmsd_instances_final,
 	     	  }  
 
 	 } elsif member($nodetype, 'head') {
 		class{'xrootd::service':
-                    xrootd_instances  =>  ['xrootd@dpmredir.service'],
-                    #cmsd_instances => $array_fed_final,
+                    xrootd_instances  =>  $xrootd_instances_final,
+                    cmsd_instances => $cmsd_instances_final,
                   }  
 
 	 } else {
