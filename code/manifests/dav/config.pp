@@ -63,7 +63,7 @@ class dmlite::dav::config (
         owner   => $user,
         group   => $group,
         content => template('dmlite/dav/sysconfig.erb'),
-	notify => Service['httpd']
+	notify => Class[dmlite::dav::service]
     }
   }
 
@@ -75,7 +75,7 @@ class dmlite::dav::config (
         owner   => 'root',
         group   => 'root',
         content => template('dmlite/dav/cross-domain.conf.erb'),
-	notify => Service['httpd']
+	notify => Class[dmlite::dav::service]
   }
   #enable mpm_conf
   file {
@@ -84,7 +84,7 @@ class dmlite::dav::config (
         owner   => 'root',
         group   => 'root',
         content => template('dmlite/dav/mpm_event.conf'),
-	notify => Service['httpd']
+	notify => Class[dmlite::dav::service]
   }
 
   file {
