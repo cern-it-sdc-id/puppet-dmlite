@@ -21,4 +21,11 @@ class dmlite::dav::install (
     user    => 'root',
     minute  => '00',
   }
+  
+  cron { 'graceful http restart':
+    ensure  => 'present',
+    command => '/usr/sbin/apachectl graceful >& /dev/null',
+    minute  => fqdn_rand(60,'apache'),
+    hour    => '*/6',
+  }
 }
