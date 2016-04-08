@@ -1,3 +1,8 @@
+2016-04-08 Andrea Manzi  <andrea.manzi@cern.ch>
+    * Xrootd support on CentOS7
+    * added missing conf steps for LCGDM-dav
+    * fix support for DPM-HDFS on CentOS7
+    *  Add ConnPoolSize parameter to adapter conf
 2016-02-04 Frederic Schaer  <frederic.schaer@cea.fr>
     * fix for dpm-xrootd facter, prevents puppet breaks on non-RHE systems
 2016-01-18 Frederic Schaer  <frederic.schaer@cea.fr>
