@@ -250,7 +250,7 @@ class dmlite::xrootd (
 	}
 	file_line{'digauth_filename':
    	 	ensure => present,
-		path   => '/etc/xroot/xrootd-dpmfedredir_atlas.cfg',
+		path   => '/etc/xrootd/xrootd-dpmfedredir_atlas.cfg',
 		line   => "xrootd.diglib * ${digauth_filename}",
         }
 
