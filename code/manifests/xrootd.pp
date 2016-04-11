@@ -199,6 +199,18 @@ class dmlite::xrootd (
 
     create_resources('dmlite::xrootd::create_redir_config', $dpm_xrootd_fedredirs, $federation_defaults)
 
+    #added atlas digauth file
+    $array_feds =  keys($dpm_xrootd_fedredirs)
+    if member($array_feds, 'atlas') {
+        $digauth_filename = '/etc/xrootd/digauth_atlas.cf'
+        xrootd::create_digauthfile{$digauth_filename:
+                host    => 'atlint04.slac.stanford.edu',
+                group   => '/atlas',
+        }
+
+    }
+
+
     $xrootd_instances_options_fed = map_hash($dpm_xrootd_fedredirs, "-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-dpmfedredir_%s.cfg ${log_style_param}")
     $cmsd_instances_options_fed = map_hash($dpm_xrootd_fedredirs, "-l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-dpmfedredir_%s.cfg ${log_style_param}")
 
@@ -239,21 +251,6 @@ class dmlite::xrootd (
       path    => '/bin/:/usr/bin/',
       unless  => '[ "`/bin/find /var/log/xrootd -type f -name .xrootd.log -type p`" = "" ]'
     }
-  }
-  #added atlas digauth file
-  $array_feds =  keys($dpm_xrootd_fedredirs)
-  if member($array_feds, 'atlas') {
-	$digauth_filename = '/etc/xrootd/digauth_atlas.cf'
-	xrootd::create_digauthfile{$digauth_filename:
-		host	=> 'atlint04.slac.stanford.edu',
-		group	=> '/atlas',
-	}
-	file_line{'digauth_filename':
-   	 	ensure => present,
-		path   => '/etc/xrootd/xrootd-dpmfedredir_atlas.cfg',
-		line   => "xrootd.diglib * ${digauth_filename}",
-        }
-
   }
   
   #use syconfig in SL6, systemd otherwise
