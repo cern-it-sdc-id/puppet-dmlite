@@ -243,10 +243,16 @@ class dmlite::xrootd (
   #added atlas digauth file
   $array_feds =  keys($dpm_xrootd_fedredirs)
   if member($array_feds, 'atlas') {
-	xrootd::create_digauthfile{'/etc/xrootd/digauth_atlas.cf':
+	$digauth_filename = '/etc/xrootd/digauth_atlas.cf'
+	xrootd::create_digauthfile{$digauth_filename:
 		host	=> 'atlint04.slac.stanford.edu',
 		group	=> '/atlas',
 	}
+	file_line{'digauth_filename':
+   	 	ensure => present,
+		path   => '/etc/xroot/xrootd-dpmfedredir_atlas.cfg',
+		line   => "xrootd.diglib * ${digauth_filename}",
+        }
 
   }
   
