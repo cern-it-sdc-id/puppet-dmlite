@@ -240,6 +240,16 @@ class dmlite::xrootd (
       unless  => '[ "`/bin/find /var/log/xrootd -type f -name .xrootd.log -type p`" = "" ]'
     }
   }
+  #added atlas digauth file
+  $array_feds =  keys($dpm_xrootd_fedredirs)
+  if member($array_feds, 'atlas') {
+	xrootd::create_digauthfile{'/etc/xrootd/digauth_atlas.cf':
+		host	=> 'atlint04.slac.stanford.edu',
+		group	=> '/atlas',
+	}
+
+  }
+  
   #use syconfig in SL6, systemd otherwise
 
   if $::operatingsystemmajrelease and $::operatingsystemmajrelease >= 7 {
