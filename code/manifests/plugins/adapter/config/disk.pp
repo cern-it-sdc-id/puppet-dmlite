@@ -2,6 +2,7 @@ class dmlite::plugins::adapter::config::disk (
   $dpmhost            = $dmlite::plugins::adapter::params::dpmhost,
   $nshost             = $dmlite::plugins::adapter::params::nshost,
   $connection_timeout = $dmlite::plugins::adapter::params::connection_timeout,
+  $connection_poolsize = $dmlite::plugins::adapter::params::connection_poolsize,
   $retry_limit        = $dmlite::plugins::adapter::params::retry_limit,
   $retry_interval     = $dmlite::plugins::adapter::params::retry_interval,
 
@@ -17,6 +18,7 @@ class dmlite::plugins::adapter::config::disk (
     dpmhost            => $dpmhost,
     nshost             => $nshost,
     connection_timeout => $connection_timeout,
+    connection_poolsize => $connection_poolsize,
     retry_limit        => $retry_limit,
     retry_interval     => $retry_interval,
     enable_dpm         => true,
@@ -34,6 +36,7 @@ class dmlite::plugins::adapter::config::disk (
     dpmhost            => $dpmhost,
     nshost             => $nshost,
     connection_timeout => $connection_timeout,
+    connection_poolsize => $connection_poolsize,
     retry_limit        => $retry_limit,
     retry_interval     => $retry_interval,
     enable_dpm         => false,

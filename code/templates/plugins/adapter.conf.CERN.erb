@@ -31,6 +31,8 @@ LoadPlugin plugin_fs_pooldriver /usr/<%= @libdir %>/dmlite/plugin_adapter.so
 <%if @dpmhost -%>DpmHost <%= @dpmhost %><% end %>
 <%if @nshost -%>NsHost <%= @nshost %><% end %>
 
+# Pool size
+ConnPoolSize <%= @connection_poolsize %>
 # Timeout when connection to the NsHost (in seconds)
 ConnectionTimeout <%= @connection_timeout %>
 # Number of retries when connecting to NsHost (in seconds)

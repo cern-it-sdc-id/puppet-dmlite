@@ -3,6 +3,7 @@ define dmlite::plugins::adapter::create_config (
   $dpmhost            = $dmlite::plugins::adapter::params::dpmhost,
   $nshost             = $dmlite::plugins::adapter::params::nshost,
   $connection_timeout = $dmlite::plugins::adapter::params::connection_timeout,
+  $connection_poolsize = $dmlite::plugins::adapter::params::connection_poolsize,
   $retry_limit        = $dmlite::plugins::adapter::params::retry_limit,
   $retry_interval     = $dmlite::plugins::adapter::params::retry_interval,
   $enable_dpm         = $dmlite::plugins::adapter::params::enable_dpm,

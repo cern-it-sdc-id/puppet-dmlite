@@ -45,7 +45,6 @@ class dmlite::xrootd (
   $domainpath = "/${ns_basepath}/${domain}"
 
   include xrootd::config
-  include xrootd::service
 
   if $enable_hdfs {
     $java_home= $dmlite::plugins::hdfs::params::java_home
@@ -200,6 +199,18 @@ class dmlite::xrootd (
 
     create_resources('dmlite::xrootd::create_redir_config', $dpm_xrootd_fedredirs, $federation_defaults)
 
+    #added atlas digauth file
+    $array_feds =  keys($dpm_xrootd_fedredirs)
+    if member($array_feds, 'atlas') {
+        $digauth_filename = '/etc/xrootd/digauth_atlas.cf'
+        xrootd::create_digauthfile{$digauth_filename:
+                host    => 'atlint04.slac.stanford.edu',
+                group   => '/atlas',
+        }
+
+    }
+
+
     $xrootd_instances_options_fed = map_hash($dpm_xrootd_fedredirs, "-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-dpmfedredir_%s.cfg ${log_style_param}")
     $cmsd_instances_options_fed = map_hash($dpm_xrootd_fedredirs, "-l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-dpmfedredir_%s.cfg ${log_style_param}")
 
@@ -241,13 +252,63 @@ class dmlite::xrootd (
       unless  => '[ "`/bin/find /var/log/xrootd -type f -name .xrootd.log -type p`" = "" ]'
     }
   }
-  xrootd::create_sysconfig{$xrootd::config::sysconfigfile:
-    xrootd_user              => $lcgdm_user,
-    xrootd_group             => $lcgdm_user,
-    xrootd_instances_options => $xrootd_instances_options_all,
-    cmsd_instances_options   => $cmsd_instances_options_fed,
-    exports                  => $exports,
-    daemon_corefile_limit    => $daemon_corefile_limit
+  
+  #use syconfig in SL6, systemd otherwise
+
+  if $::operatingsystemmajrelease and $::operatingsystemmajrelease >= 7 {
+
+        if member($nodetype, 'disk') {
+                
+                xrootd::create_systemd{"xrootd@dpmdisk":
+                    xrootd_user              => $lcgdm_user,
+                    xrootd_group             => $lcgdm_user,
+                    exports                  => $exports,
+                    daemon_corefile_limit    => $daemon_corefile_limit
+                }
+        } 
+
+	if member($nodetype, 'head') {     
+		 #get federation hashes
+	         $array_fed =  keys($dpm_xrootd_fedredirs)
+		
+		 if size($array_fed) > 0 {
+	        	 $array_fed_final =  prefix($array_fed,'dpmfedredir_')
+			 $xrootd_instances = flatten (concat (['dpmredir'],$array_fed_final))
+  			 $cmsd_instances_final = prefix($array_fed_final,'cmsd@')
+		 }
+		 else {
+			$xrootd_instances = ['dpmredir']	
+		 }
+		 $xrootd_instances_final = prefix($xrootd_instances,'xrootd@')
+		
+                 dmlite::xrootd::create_systemd_config{ $xrootd_instances_final:
+		 	xrootd_user              => $lcgdm_user,
+		        xrootd_group             => $lcgdm_user,
+		        exports                  => $exports,
+		        daemon_corefile_limit    => $daemon_corefile_limit
+		 }
+		 if size($array_fed) > 0 {
+		 	dmlite::xrootd::create_systemd_config{ $cmsd_instances_final:
+                        	xrootd_user              => $lcgdm_user,
+	                        xrootd_group             => $lcgdm_user,
+        	                exports                  => $exports,
+                	        daemon_corefile_limit    => $daemon_corefile_limit
+	                 }
+		 }
+
+
+	}
+
+  } else {
+
+        xrootd::create_sysconfig{$xrootd::config::sysconfigfile:
+            xrootd_user              => $lcgdm_user,
+            xrootd_group             => $lcgdm_user,
+            xrootd_instances_options => $xrootd_instances_options_all,
+            cmsd_instances_options   => $cmsd_instances_options_fed,
+            exports                  => $exports,
+            daemon_corefile_limit    => $daemon_corefile_limit
+          }
   }
 
   # TODO: make the basedir point to $xrootd::config::configdir
@@ -259,8 +320,29 @@ class dmlite::xrootd (
     content => $dpm_xrootd_sharedkey
   }
 
+  if $::operatingsystemmajrelease and $::operatingsystemmajrelease >= 7 {
+	 
+	 if member($nodetype, 'head') and  member($nodetype, 'disk') {
+		class{'xrootd::service':
+		    xrootd_instances  =>  concat (['xrootd@dpmdisk'],$xrootd_instances_final),
+		    cmsd_instances => $cmsd_instances_final,
+	     	  }  
 
-  include xrootd::service
+	 } elsif member($nodetype, 'head') {
+		class{'xrootd::service':
+                    xrootd_instances  =>  $xrootd_instances_final,
+                    cmsd_instances => $cmsd_instances_final,
+                  }  
+
+	 } else {
+		class{'xrootd::service':
+                    xrootd_instances  =>  ['xrootd@dpmdisk'],
+                  }  
+	}
+  }
+  else {
+	include xrootd::service
+  }
 
   file { '/var/log/xrootd/redir':
     ensure    => directory,
