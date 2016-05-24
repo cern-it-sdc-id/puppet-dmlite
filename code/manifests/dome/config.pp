@@ -1,32 +1,65 @@
 class dmlite::dome::config (
-  $fcgi_dome_path             = $dmlite::dome::params::fcgi_dome_path
-  $fcgi_dome_port             = $dmlite::dome::params::fcgi_dome_port
-  $fcgi_listen_queue_depth    = $dmlite::dome::params::fcgi_listen_queue_depth
-  $fcgi_processes             = $dmlite::dome::params::fcgi_processes
-  $fcgi_idle_timeout          = $dmlite::dome::params::fcgi_idle_timeout
-  $fcgi_dome_initial_env      = $dmlite::dome::params::fcgi_dome_initial_env
-  $dome_head                  = $dmlite::dome::params::dome_head
-  $dome_disk                  = $dmlite::dome::params::dome_disk
+  $dome_head	      = $dmlite::dome::params::head
+  $dome_disk          = $dmlite::dome::params::disk
+  $head_port          = $dmlite::dome::params::head_port
+  $disk_port          = $dmlite::dome::params::disk_port
+  $head_debug         = $dmlite::dome::params::head_debug
+  $disk_debug         = $dmlite::dome::params::disk_debug
+  $head_maxcallouts   = $dmlite::dome::params::head_maxcallouts
+  $head_maxcalloutspernode = $dmlite::dome::params::head_maxcalloutspernode
+  $head_maxchecksums  = $dmlite::dome::params::head_maxchecksums
+  $head_maxchecksumspernode  = $dmlite::dome::params::head_maxchecksumspernode
+  $db_host            = 'localhost'
+  $db_user	      = undef
+  $db_password	      = undef
+  $db_port            = $dmlite::dome::params::db_port
+  $db_poolsz          = $dmlite::dome::params::db_poolsz
+  $head_task_maxrunningtime = $dmlite::dome::params::head_task_maxrunningtime
+  $head_task_purgetime = $dmlite::dome::params::head_task_purgetime
+  $disk_task_maxrunningtime = $dmlite::dome::params::disk_task_maxrunningtime
+  $disk_task_purgetime = $dmlite::dome::params::disk_task_purgetime
+  $put_minfreespace_mb = $dmlite::dome::params::put_minfreespace_mb
+  $head_auth_authorizeDN = $dmlite::dome::params::head_auth_authorizeDN
+  $disk_auth_authorizeDN = $dmlite::dome::params::disk_auth_authorizeDN
+  $dirspacereportdepth = $dmlite::dome::params::dirspacereportdepth
+  $restclient_cli_certificate = $dmlite::dome::params::restclient_cli_certificate
+  $restclient_cli_private_key = $dmlite::dome::params::restclient_cli_private_key
+  $head_filepuller_stathook = undef
+  $disk_filepuller_pullhook = undef
+  $filepuller = undef
+  $headnode_domeurl = undef
 ) inherits dmlite::dome::params {
 
   validate_bool($dome_head)
   validate_bool($dome_disk)
 
-  $dome_template = 'dmlite/dome/zdome.conf'
+  $zdome_template = 'dmlite/dome/zdome.conf.erb'
+  $domehead_template = 'dmlite/dome/domehead.conf.erb'
+  $domedisk_template = 'dmlite/dome/domedisk.conf.erb'
+
   file {
     '/etc/httpd/conf.d/zdome.conf':
       ensure  => present,
-      content => template("${dome_template}");
+      content => template("${zdome_template}");
   }
 
 
   Class[dmlite::dome::install] -> Class[dmlite::dome::config]
 
-  # some installations don't have complete data types enabled by default, use
-  # str2bool to catch both cases
-  if(str2bool("${::selinux}") != false) {
-    selboolean{'httpd_can_network_connect': value => on, persistent => true }
-    selboolean{'httpd_execmem': value => on, persistent => true }
+  if $dome_head {
+  	file {
+	    '/etc/domehead.conf':
+	      ensure  => present,
+	      content => template("${domehead_template}");
+	  }
+  }
+
+  if $dome_disk {
+        file {
+            '/etc/domedisk.conf':
+              ensure  => present,
+              content => template("${domedisk_template}");
+          }
   }
 
 }

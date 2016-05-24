@@ -1,29 +1,8 @@
-AddHandler fastcgi-script .fcgi
-
-FastCgiServer <%= @fcgi_dome_path -%> -port <%= @fcgi_dome_port -%> -listen-queue-depth <%= @fcgi_listen_queue_depth -%> -processes <%= @fcgi_processes -%> -idle-timeout <%= @fcgi_idle_timeout -%> -initial-env LD_LIBRARY_PATH=/usr/lib64 -initial-env  <%= @fcgi_dome_initial_env -%> 
-
-<%if @dome_head -%>
-Alias /domehead/ /var/www/fcgi-bin/dome/
+LoadModule proxy_module modules/mod_proxy.so
+LoadModule proxy_fcgi_module modules/mod_proxy_fcgi.so
+<%if @head -%>
+ProxyPassMatch ^/domehead/(.*)$ fcgi://127.0.0.1:<%= @head_port -%>/$1
 <% end -%>
-<%if @dome_disk -%>
-Alias /domedisk/ /var/www/fcgi-bin/dome/
-<% end -%>
-
-<Directory /var/www/fcgi-bin>
-  SetHandler fastcgi-script
-  Options +ExecCGI
-  Order allow,deny
-  Allow from all
-</Directory>
-
-<%if @dome_head -%>
-<LocationMatch "^/domehead/.*">
-  setenv FCGI_MODE head
-</LocationMatch>
-<% end -%>
-
-<%if @dome_disk -%>
-<LocationMatch "^/domedisk/.*">
-  setenv FCGI_MODE disk
-</LocationMatch>
+<%if @disk -%>
+ProxyPassMatch ^/domedisk/(.*)$ fcgi://127.0.0.1:<%= @disk_port -%>/$1
 <% end -%>

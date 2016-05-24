@@ -1,0 +1,28 @@
+glb.debug: <%= @head_debug -%>
+glb.role: head
+glb.fcgi.listenport: <%= @head_port -%>
+glb.task.maxrunningtime = <%= @head_task_maxrunningtime -%>
+glb.task.purgetime = <%= @head_task_purgetime -%>
+
+glb.dirspacereportdepth = <%= @dirspacereportdepth -%>
+
+glb.put.minfreespace_mb: <%= @put_minfreespace_mb -%>
+
+glb.auth.authorizeDN[]: <%= @head_auth_authorizeDN -%>
+
+glb.restclient.cli_certificate: <%= @head_restclient_cli_cert -%>
+glb.restclient.cli_private_key: <%= @head_restclient_cli_privatekey -%>
+
+head.maxcallouts: <%= @head_maxcallouts -%>
+head.maxcalloutspernode: <%= @head_maxcalloutspernode -%>
+
+head.maxchecksums: <%= @head_maxchecksums -%>
+head.maxchecksumspernode:  <%= @head_maxchecksumspernode -%>
+head.filepuller.stathook: <%= @head_filepuller_stathook -%>
+
+head.db.host: <%= @db_host -%>
+head.db.user: <%= @db_user -%>
+head.db.password: <%= @db_password -%>
+head.db.port: <%= @db_port -%>
+head.db.poolsz: <%= @db_pool_size -%>
+

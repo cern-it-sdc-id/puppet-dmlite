@@ -1,0 +1,12 @@
+glb.debug: <%= @disk_debug -%>
+glb.role: disk
+glb.fcgi.listenport: <%= @disk_port -%>
+glb.task.maxrunningtime = <%= @disk_task_maxrunningtime -%>
+glb.task.purgetime = <%= @disk_task_purgetime -%>
+
+glb.auth.authorizeDN[]: <%= @disk_auth_authorizeDN -%>
+
+glb.restclient.cli_certificate: <%= @disk_restclient_cli_cert -%>
+glb.restclient.cli_private_key: <%= @disk_restclient_cli_privatekey -%>
+
+
