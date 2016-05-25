@@ -14,7 +14,7 @@ class dmlite::dome::params (
     $db_user  		= undef
     $db_password	= undef
     $db_port		= 0
-    $db_poolsz		= 10
+    $db_pool_size	= 10
     $head_task_maxrunningtime = 3600
     $head_task_purgetime = 3600
     $disk_task_maxrunningtime = 3600
