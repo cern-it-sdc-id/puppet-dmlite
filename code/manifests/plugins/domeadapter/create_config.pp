@@ -7,8 +7,7 @@ define dmlite::plugins::domeadapter::create_config (
   $davix_cert_path    = $dmlite::plugins::domeadapter::params::davix_cert_path,
   $davix_private_key_path = $dmlite::plugins::domeadapter::params::davix_private_key_path,
   $dome_head_url      = $dmlite::plugins::domeadapter::params::dome_head_url,
-  $dome_disk_url      = $dmlite::plugins::domeadapter::params::dome_disk_url
-
+  $dome_disk_url      = $dmlite::plugins::domeadapter::params::dome_disk_url,
   $token_password     = '',
   $token_id           = $dmlite::plugins::domeadapter::params::token_id,
   $token_life         = $dmlite::plugins::domeadapter::params::token_life,
