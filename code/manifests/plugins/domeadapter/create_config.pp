@@ -36,5 +36,4 @@ define dmlite::plugins::domeadapter::create_config (
       content => template('dmlite/plugins/domeadapter.conf.erb'),
       require => [Package['dmlite-plugins-domeadapter'], File["/etc/${config_dir_name}.conf.d"]]
     }
-  }
 }
