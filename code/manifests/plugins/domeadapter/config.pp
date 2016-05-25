@@ -21,13 +21,11 @@ class dmlite::plugins::domeadapter::config (
 
   dmlite::plugins::domeadapter::create_config{'default_config':
     config_dir_name    => $config_dir_name,   # put file in /etc/dmlite.conf.d/domeadapter.conf
-    $dome_disk_url     => $dome_disk_url,    
-    $dome_head_url     => $dome_head_url,
-    $davix_ca_path     => $davix_ca_path,
-    $davix_cert_path   => $davix_ca_cert_path,
-    $davix_private_key_path => $davix_private_key_path,
-    $dome_head_url     => $dome_head_url,
-    $dome_disk_url     => $dome_disk_url,
+    dome_disk_url      => $dome_disk_url,    
+    dome_head_url      => $dome_head_url,
+    davix_ca_path      => $davix_ca_path,
+    davix_cert_path    => $davix_ca_cert_path,
+    davix_private_key_path => $davix_private_key_path,
     enable_io          => $enable_io,
     enable_ns          => $enable_ns,
     enable_pooldriver  => $enable_pooldriver,

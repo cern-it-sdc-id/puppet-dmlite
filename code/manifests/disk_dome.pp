@@ -16,13 +16,16 @@ class dmlite::disk_dome (
   class{'dmlite::plugins::domeadapter::config::disk':
     token_password => "${token_password}",
     token_id       => "${token_id}",
+    dome_disk_url => "https://${::fqdn}/domedisk",
+    dome_head_url => "${headnode_domeurl}",
+
   }
   class{'dmlite::plugins::domeadapter::install':}
 
   class{'dmlite::dome::config':
     dome_head    => false,
     dome_disk    => true,
-    headnode_domeurl => "${headnode_domeurl}"
+    headnode_domeurl => "${headnode_domeurl}",
   }
 
   class{'dmlite::dome::install':}

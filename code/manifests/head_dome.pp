@@ -47,6 +47,8 @@ class dmlite::head_dome (
     db_host      => "${mysql_host}",
     db_user 	 => "${mysql_username}",
     db_password	 => "${mysql_password}",
+    dome_head_url => "https://${::fqdn}/domehead",
+    dome_disk_url => "https://${::fqdn}/domedisk",
   }
   
   class{'dmlite::dome::install':}
