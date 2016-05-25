@@ -13,7 +13,7 @@ class dmlite::dome::config (
   $db_user	      = undef,
   $db_password	      = undef,
   $db_port            = $dmlite::dome::params::db_port,
-  $db_poolsz          = $dmlite::dome::params::db_poolsz,
+  $db_poolsz          = $dmlite::dome::params::db_pool_size,
   $head_task_maxrunningtime = $dmlite::dome::params::head_task_maxrunningtime,
   $head_task_purgetime = $dmlite::dome::params::head_task_purgetime,
   $disk_task_maxrunningtime = $dmlite::dome::params::disk_task_maxrunningtime,
