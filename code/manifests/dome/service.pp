@@ -3,7 +3,7 @@ class dmlite::dome::service (
 
   Class[dmlite::dome::config] ~> Class[dmlite::dome::service]
 
-  if dmlite::dome::config::dome_head {
+  if $dmlite::dome::config::dome_head {
   	service { 'domehead':
 	    ensure     => running,
 	    hasstatus  => true,
@@ -13,7 +13,7 @@ class dmlite::dome::service (
 	}
   }
 
-  if dmlite::dome::config::dome_disk {
+  if $dmlite::dome::config::dome_disk {
 
 	service { 'domedisk':
             ensure     => running,
