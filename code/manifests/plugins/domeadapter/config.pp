@@ -10,7 +10,7 @@ class dmlite::plugins::domeadapter::config (
   $enable_io          = $dmlite::plugins::domeadapter::params::enable_io,
   $enable_ns          = $dmlite::plugins::domeadapter::params::enable_ns,
   $enable_pooldriver  = $dmlite::plugins::domeadapter::params::enable_pooldriver,
-  
+  $enable_catalog     = $dmlite::plugins::domeadapter::params::enable_catalog, 
   $token_password,
   $token_id           = $dmlite::plugins::domeadapter::params::token_id,
   $token_life         = $dmlite::plugins::domeadapter::params::token_life,
@@ -28,6 +28,7 @@ class dmlite::plugins::domeadapter::config (
     davix_private_key_path => $davix_private_key_path,
     enable_io          => $enable_io,
     enable_ns          => $enable_ns,
+    enable_catalog     => $enable_catalog,
     enable_pooldriver  => $enable_pooldriver,
     token_password     => $token_password,
     token_id           => $token_id,

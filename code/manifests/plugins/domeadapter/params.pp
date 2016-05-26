@@ -8,6 +8,7 @@ class dmlite::plugins::domeadapter::params (
     $enable_ns          = false
     $enable_io          = false
     $enable_pooldriver  = true
+    $enable_catalog     = false
     $token_id           = 'id'
     $token_life         = 1000
     $token_password     = undef

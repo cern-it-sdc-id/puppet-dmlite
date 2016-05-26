@@ -3,6 +3,7 @@ define dmlite::plugins::domeadapter::create_config (
   $enable_io          = $dmlite::plugins::domeadapter::params::enable_io,
   $enable_ns          = $dmlite::plugins::domeadapter::params::enable_ns,
   $enable_pooldriver  = $dmlite::plugins::domeadapter::params::enable_pooldriver,
+  $enable_catalog     = $dmlite::plugins::domeadapter::params::enable_catalog,
   $davix_ca_path      = $dmlite::plugins::domeadapter::params::davix_ca_path,
   $davix_cert_path    = $dmlite::plugins::domeadapter::params::davix_cert_path,
   $davix_private_key_path = $dmlite::plugins::domeadapter::params::davix_private_key_path,

@@ -10,6 +10,10 @@ LoadPlugin plugin_domeadapter_io /usr/<%= @libdir %>/dmlite/plugin_domeadapter.s
 LoadPlugin plugin_domeadapter_pools /usr/<%= @libdir %>/dmlite/plugin_domeadapter.so
 <% end -%>
 
+<%if @enable_catalog -%>
+LoadPlugin plugin_domeadapter_headcatalog /usr/<%= @libdir %>/dmlite/plugin_domeadapter.so
+<% end -%>
+
 
 DavixCAPath  <%= @davix_ca_path %>
 DavixCertPath <%= @davix_cert_path %>

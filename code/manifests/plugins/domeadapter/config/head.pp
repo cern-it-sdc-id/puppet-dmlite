@@ -25,6 +25,7 @@ class dmlite::plugins::domeadapter::config::head (
     enable_io          => true,
     enable_ns          => false,
     enable_pooldriver  => true,
+    enable_catalog     => true,
     token_password     => $token_password,
     token_id           => $token_id,
     token_life         => $token_life,
