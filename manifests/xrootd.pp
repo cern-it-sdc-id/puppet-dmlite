@@ -86,7 +86,7 @@ class dmlite::xrootd (
       xrd_allrole    => 'server',
       xrootd_seclib  => 'libXrdSec.so',
       xrootd_export  => [ '/' ],
-      xrootd_async   => 'off',
+      xrootd_async   => 'on',
       xrootd_monitor => $xrootd_monitor,
       ofs_authlib    => 'libXrdDPMDiskAcc.so.3',
       ofs_authorize  => true,
