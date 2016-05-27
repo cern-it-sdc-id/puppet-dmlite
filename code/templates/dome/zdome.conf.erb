@@ -1,8 +1,8 @@
 LoadModule proxy_module modules/mod_proxy.so
 LoadModule proxy_fcgi_module modules/mod_proxy_fcgi.so
-<%if @head -%>
+<%if @dome_head -%>
 ProxyPassMatch ^/domehead/(.*)$ fcgi://127.0.0.1:<%= @head_port -%>/$1
 <% end -%>
-<%if @disk -%>
+<%if @dome_disk -%>
 ProxyPassMatch ^/domedisk/(.*)$ fcgi://127.0.0.1:<%= @disk_port -%>/$1
 <% end -%>
