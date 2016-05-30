@@ -39,6 +39,8 @@ class dmlite::head_dome (
     dpm_db         => "${dpm_db}",
     adminuser      => "${adminuser}",
     enable_io      => $enable_space_reporting,
+    enable_dpm     => false,
+    enable_ns	   => true,
   }
 
   class{'dmlite::plugins::mysql::install':}
