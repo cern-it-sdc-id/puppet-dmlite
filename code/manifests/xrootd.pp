@@ -86,7 +86,7 @@ class dmlite::xrootd (
       xrd_allrole    => 'server',
       xrootd_seclib  => 'libXrdSec.so',
       xrootd_export  => [ '/' ],
-      xrootd_async   => 'off',
+      xrootd_async   => 'on',
       xrootd_monitor => $xrootd_monitor,
       ofs_authlib    => 'libXrdDPMDiskAcc.so.3',
       ofs_authorize  => true,
@@ -199,6 +199,18 @@ class dmlite::xrootd (
 
     create_resources('dmlite::xrootd::create_redir_config', $dpm_xrootd_fedredirs, $federation_defaults)
 
+    #added atlas digauth file
+    $array_feds =  keys($dpm_xrootd_fedredirs)
+    if member($array_feds, 'atlas') {
+        $digauth_filename = '/etc/xrootd/digauth_atlas.cf'
+        xrootd::create_digauthfile{$digauth_filename:
+                host    => 'atlint04.slac.stanford.edu',
+                group   => '/atlas',
+        }
+
+    }
+
+
     $xrootd_instances_options_fed = map_hash($dpm_xrootd_fedredirs, "-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-dpmfedredir_%s.cfg ${log_style_param}")
     $cmsd_instances_options_fed = map_hash($dpm_xrootd_fedredirs, "-l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-dpmfedredir_%s.cfg ${log_style_param}")
 
@@ -240,9 +252,10 @@ class dmlite::xrootd (
       unless  => '[ "`/bin/find /var/log/xrootd -type f -name .xrootd.log -type p`" = "" ]'
     }
   }
+  
   #use syconfig in SL6, systemd otherwise
 
-  if $::operatingsystemmajrelease and $::operatingsystemmajrelease >= 7 {
+  if $::operatingsystemmajrelease and ($::operatingsystemmajrelease + 0) >= 7 {
 
         if member($nodetype, 'disk') {
                 
@@ -307,7 +320,7 @@ class dmlite::xrootd (
     content => $dpm_xrootd_sharedkey
   }
 
-  if $::operatingsystemmajrelease and $::operatingsystemmajrelease >= 7 {
+  if $::operatingsystemmajrelease and ($::operatingsystemmajrelease + 0) >= 7 {
 	 
 	 if member($nodetype, 'head') and  member($nodetype, 'disk') {
 		class{'xrootd::service':

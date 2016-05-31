@@ -4,6 +4,8 @@ class dmlite::head (
   $mysql_username,
   $mysql_password,
   $mysql_host = 'localhost',
+  $dpm_db     = "dpm_db",
+  $ns_db      = "cns_db",
   $dpmhost    = "${::fqdn}",
   $nshost     = "${::fqdn}",
   $adminuser  = undef,
@@ -34,6 +36,8 @@ class dmlite::head (
     mysql_host     => "${mysql_host}",
     mysql_username => "${mysql_username}",
     mysql_password => "${mysql_password}",
+    ns_db          => "${ns_db}",
+    dpm_db         => "${dpm_db}",
     adminuser      => "${adminuser}",
     enable_io      => $enable_space_reporting,
   }

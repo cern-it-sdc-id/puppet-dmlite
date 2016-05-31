@@ -72,4 +72,7 @@ xrootd.redirect <%= @fed_host -%>:<%= @xrootd_port -%> ? <%= File.join(path,"") 
 dpm.dmio
 <% end -%>
 
-
+<%# configure atlas dig auth %>
+<% if @digauth_filename  -%>
+xrootd.diglib * <%= @digauth_filename -%>
+<% end -%>
