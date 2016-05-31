@@ -8,6 +8,10 @@
     {
       "name": "puppetlabs/stdlib",
       "version_requirement": "\u003e\u003d 2.0.0"
+    },
+    {
+      "name": "lcgdm/xrootd",
+      "version_requirement": "\u003e\u003d 0.2.1"
     }
   ],
   "description": "This package provides modules for managing dmlite",
@@ -19,5 +23,5 @@
   "source": "https://github.com/cern-it-sdc-id/puppet-dmlite",
   "summary": "Package for managing dmlite plugins",
   "tags": [],
-  "version": "0.4.1"
+  "version": "0.4.2"
 }
