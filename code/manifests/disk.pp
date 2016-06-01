@@ -11,6 +11,8 @@ class dmlite::disk (
   $log_level      = 1,
   $logcomponents  = undef,
   $enable_space_reporting = false,
+  $enable_dome = false,
+  $headnode_domeurl = undef,
 ) {
   class { 'dmlite::config::head':
     log_level     => $log_level,
@@ -26,6 +28,23 @@ class dmlite::disk (
     nshost         => "${nshost}"
   }
   class{'dmlite::plugins::adapter::install':}
+
+
+  if $enable_dome {
+	if $headnode_domeurl == undef {
+                fail("'headnode_domeurl' is not defined")
+        }
+
+	class{'dmlite::dome::config':
+	    dome_head    => false,
+	    dome_disk    => true,
+	    headnode_domeurl => "${headnode_domeurl}",
+	}
+
+	class{'dmlite::dome::install':}
+	
+	class{'dmlite::dome::service':}
+  }
 
   if $enable_space_reporting {
 

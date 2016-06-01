@@ -13,6 +13,7 @@ class dmlite::head (
   $log_level      = 1,
   $logcomponents  = undef,
   $enable_space_reporting = false,
+  $enable_dome   = false,
 ) {
   class{'dmlite::config::head':
     log_level     => $log_level,
@@ -43,4 +44,18 @@ class dmlite::head (
   }
 
   class{'dmlite::plugins::mysql::install':}
+
+  if $enable_dome {
+	  class{'dmlite::dome::config':
+	    dome_head    => true,
+	    dome_disk    => false,
+	    db_host      => "${mysql_host}",
+	    db_user      => "${mysql_username}",
+	    db_password  => "${mysql_password}",
+	  } 
+	  class{'dmlite::dome::install':}
+
+	  class{'dmlite::dome::service':}
+
+  }
 }
