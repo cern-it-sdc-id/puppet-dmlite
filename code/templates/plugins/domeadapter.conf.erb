@@ -1,0 +1,35 @@
+<%if @enable_ns -%>
+LoadPlugin plugin_domeadapter_ns /usr/<%= @libdir %>/dmlite/plugin_domeadapter.so
+<% end -%>
+
+<%if @enable_io -%>
+LoadPlugin plugin_domeadapter_io /usr/<%= @libdir %>/dmlite/plugin_domeadapter.so
+<% end -%>
+
+<%if @enable_pooldriver -%>
+LoadPlugin plugin_domeadapter_pools /usr/<%= @libdir %>/dmlite/plugin_domeadapter.so
+<% end -%>
+
+<%if @enable_catalog -%>
+LoadPlugin plugin_domeadapter_headcatalog /usr/<%= @libdir %>/dmlite/plugin_domeadapter.so
+<% end -%>
+
+
+DavixCAPath  <%= @davix_ca_path %>
+DavixCertPath <%= @davix_cert_path %>
+DavixPrivateKeyPath <%=@davix_private_key_path %>
+
+DomeDisk <%= @dome_disk_url %>
+DomeHead <%= @dome_head_url %>
+
+<%if @token_password -%>
+# Token generation
+TokenPassword <%= @token_password %>
+TokenId <%= @token_id %>
+TokenLife <%= @token_life %>
+<% end -%>
+
+<% if @adminuser != "" -%>
+# Adminuser for replication and filesystem selection
+AdminUsername <%= @adminuser %>
+<% end -%>

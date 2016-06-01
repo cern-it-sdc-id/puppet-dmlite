@@ -4,6 +4,7 @@ class dmlite::dav::params (
     $dmlite_disk_conf   = '/etc/dmlite-disk.conf'
     $ns_type            = 'Head'
     $ns_prefix          = 'dpm'
+    $disk_prefix        = 'dpm'
     $ns_flags           = 'Write RemoteCopy'
     $ns_anon            = false
     $ns_max_replicas    = 3
@@ -15,6 +16,7 @@ class dmlite::dav::params (
     $ssl_key            = '/etc/grid-security/hostkey.pem'
     $ssl_capath         = '/etc/grid-security/certificates'
     $ssl_ciphersuite    = 'NULL-MD5:NULL:RC4-MD5:RC4:+LOW:+MEDIUM:+HIGH:+EXP'
+    $ssl_options        = '+StdEnvVars'
     $log_error          = 'logs/ssl_error_log'
     $log_transfer       = 'logs/ssl_access_log'
     $log_level          = 'warn'
