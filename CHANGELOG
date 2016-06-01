@@ -1,3 +1,7 @@
+2016-05-31 Andrea Manzi  <andrea.manzi@cern.ch>
+    * Enable remote debugging for ATLAS FAX sites
+    * httpd is now restarted when the certificates are renewed
+    * removed xrootd.async off from dpm-xrootd conf
 2016-04-08 Andrea Manzi  <andrea.manzi@cern.ch>
     * Xrootd support on CentOS7
     * added missing conf steps for LCGDM-dav
