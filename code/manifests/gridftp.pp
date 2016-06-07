@@ -13,6 +13,7 @@ class dmlite::gridftp (
   $enable_hdfs         = false,
   $data_node           = 0,
   $remote_nodes        = undef,
+  $data_interface      = undef,
 ) {
   File['/var/log/dpm-gsiftp'] -> Class[gridftp::config]
   Package['dpm-dsi'] -> Class[gridftp::config]
@@ -59,6 +60,7 @@ class dmlite::gridftp (
     thread_model        => 'pthread',
     data_node           => $data_node,
     remote_nodes        => "${remote_nodes}",
+    data_interface      => "${data_interface}",
   }
   exec{'remove_globus-gridftp-server_init_management':
     command => '/sbin/chkconfig globus-gridftp-server off',
