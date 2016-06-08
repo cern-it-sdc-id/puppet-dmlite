@@ -154,12 +154,12 @@ class dmlite::xrootd (
     }
     $l = size("${::fqdn}")
     if $l > 16 {
-	    $cms_cidtag = regsubst("${::fqdn}", '^(.{16})(.*)', '\1') 
+	    $cms_cidtag = regsubst("${::fqdn}", '^(.{16})(.*)', '\1')
     } else {
 	    $cms_cidtag = "${::fqdn}"
     }
     #retrieving xrootd version and apply conf
-    
+
     if  versioncmp("${::package_dpm_xrootd}", '3.6.0') >= 0 {
 	    $oss_statlib = '-2 libXrdDPMStatInfo.so.3'
     } else {
@@ -252,35 +252,35 @@ class dmlite::xrootd (
       unless  => '[ "`/bin/find /var/log/xrootd -type f -name .xrootd.log -type p`" = "" ]'
     }
   }
-  
+
   #use syconfig in SL6, systemd otherwise
 
   if $::operatingsystemmajrelease and ($::operatingsystemmajrelease + 0) >= 7 {
 
         if member($nodetype, 'disk') {
-                
+
                 xrootd::create_systemd{"xrootd@dpmdisk":
                     xrootd_user              => $lcgdm_user,
                     xrootd_group             => $lcgdm_user,
                     exports                  => $exports,
                     daemon_corefile_limit    => $daemon_corefile_limit
                 }
-        } 
+        }
 
-	if member($nodetype, 'head') {     
+	if member($nodetype, 'head') {
 		 #get federation hashes
 	         $array_fed =  keys($dpm_xrootd_fedredirs)
-		
+
 		 if size($array_fed) > 0 {
 	        	 $array_fed_final =  prefix($array_fed,'dpmfedredir_')
 			 $xrootd_instances = flatten (concat (['dpmredir'],$array_fed_final))
   			 $cmsd_instances_final = prefix($array_fed_final,'cmsd@')
 		 }
 		 else {
-			$xrootd_instances = ['dpmredir']	
+			$xrootd_instances = ['dpmredir']
 		 }
 		 $xrootd_instances_final = prefix($xrootd_instances,'xrootd@')
-		
+
                  dmlite::xrootd::create_systemd_config{ $xrootd_instances_final:
 		 	xrootd_user              => $lcgdm_user,
 		        xrootd_group             => $lcgdm_user,
@@ -307,7 +307,9 @@ class dmlite::xrootd (
             xrootd_instances_options => $xrootd_instances_options_all,
             cmsd_instances_options   => $cmsd_instances_options_fed,
             exports                  => $exports,
-            daemon_corefile_limit    => $daemon_corefile_limit
+            daemon_corefile_limit    => $daemon_corefile_limit,
+            enable_hdfs              => $enable_hdfs,
+            java_home                => $java_home,
           }
   }
 
@@ -321,23 +323,23 @@ class dmlite::xrootd (
   }
 
   if $::operatingsystemmajrelease and ($::operatingsystemmajrelease + 0) >= 7 {
-	 
+
 	 if member($nodetype, 'head') and  member($nodetype, 'disk') {
 		class{'xrootd::service':
 		    xrootd_instances  =>  concat (['xrootd@dpmdisk'],$xrootd_instances_final),
 		    cmsd_instances => $cmsd_instances_final,
-	     	  }  
+	     	  }
 
 	 } elsif member($nodetype, 'head') {
 		class{'xrootd::service':
                     xrootd_instances  =>  $xrootd_instances_final,
                     cmsd_instances => $cmsd_instances_final,
-                  }  
+                  }
 
 	 } else {
 		class{'xrootd::service':
                     xrootd_instances  =>  ['xrootd@dpmdisk'],
-                  }  
+                  }
 	}
   }
   else {
