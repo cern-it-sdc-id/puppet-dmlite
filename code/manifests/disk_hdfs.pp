@@ -49,7 +49,7 @@ class dmlite::disk_hdfs (
     mysql_username => "${mysql_username}",
     mysql_password => "${mysql_password}",
     adminuser      => "${adminuser}",
-    enable_dpm     => false,
+    enable_dpm     => true,
     enable_ns      => true,
     enable_io      => $enable_space_reporting,
     mysql_dir_space_report_depth => 6,
