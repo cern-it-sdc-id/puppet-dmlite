@@ -41,7 +41,7 @@ class dmlite::plugins::domeadapter::config::head (
     davix_private_key_path => $davix_private_key_path,
     enable_io          => true,
     enable_ns          => true,
-    enable_pooldriver  => false,
+    enable_pooldriver  => true,
     token_password     => $token_password,
     token_id           => $token_id,
     token_life         => $token_life,
