@@ -8,7 +8,9 @@ glb.task.maxrunningtime = <%= @disk_task_maxrunningtime -%>
 
 glb.task.purgetime = <%= @disk_task_purgetime -%>
 
-glb.auth.authorizeDN[]: <%= @disk_auth_authorizeDN -%>
+<% @disk_auth_authorizeDN.sort.each do |entry| -%>
+glb.auth.authorizeDN[]: <%= entry %>
+<% end -%>
 
 glb.restclient.cli_certificate: <%= @restclient_cli_certificate -%>
 

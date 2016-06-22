@@ -12,7 +12,9 @@ glb.dirspacereportdepth = <%= @dirspacereportdepth -%>
 
 glb.put.minfreespace_mb: <%= @put_minfreespace_mb -%>
 
-glb.auth.authorizeDN[]: <%= @head_auth_authorizeDN -%>
+<% @head_auth_authorizeDN.sort.each do |entry| -%>
+glb.auth.authorizeDN[]: <%= entry %>
+<% end -%>
 
 glb.restclient.cli_certificate: <%= @restclient_cli_certificate -%>
 
