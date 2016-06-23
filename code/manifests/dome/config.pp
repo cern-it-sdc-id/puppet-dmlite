@@ -24,8 +24,9 @@ class dmlite::dome::config (
   $dirspacereportdepth = $dmlite::dome::params::dirspacereportdepth,
   $restclient_cli_certificate = $dmlite::dome::params::restclient_cli_certificate,
   $restclient_cli_private_key = $dmlite::dome::params::restclient_cli_private_key,
-  $head_filepuller_stathook = undef,
-  $disk_filepuller_pullhook = undef,
+  $head_filepuller_stathook = $dmlite::dome::params::head_filepuller_stathook,
+  $head_filepuller_stathooktimeout = $dmlite::dome::params::head_filepuller_stathooktimeout,
+  $disk_filepuller_pullhook = $dmlite::dome::params::disk_filepuller_pullhook,
   $filepuller = undef,
   $headnode_domeurl = undef,
 ) inherits dmlite::dome::params {

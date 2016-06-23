@@ -25,8 +25,9 @@ class dmlite::dome::params (
     $dirspacereportdepth = 6
     $restclient_cli_certificate = '/etc/grid-security/dpmmgr/dpmcert.pem'
     $restclient_cli_private_key = '/etc/grid-security/dpmmgr/dpmkey.pem'
-    $head_filepuller_stathook = undef
-    $disk_filepuller_pullhook = undef
+    $head_filepuller_stathook = '/usr/bin/externalstat.sh'
+    $head_filepuller_stathooktimeout = 10
+    $disk_filepuller_pullhook = '/usr/bin/externalpull.sh' 
     $filepuller = undef
     $headnode_domeurl = undef
     
