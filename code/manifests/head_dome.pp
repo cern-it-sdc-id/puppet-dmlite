@@ -28,7 +28,7 @@ class dmlite::head_dome (
     adminuser      => "${adminuser}",
     dome_head_url  => "https://${::fqdn}/domehead",
     dome_disk_url  => "https://${::fqdn}/domedisk",
-    disknode	   => "${disknode}",
+    disknode	   => $disknode,
   }
   class{'dmlite::plugins::domeadapter::install':}
 
