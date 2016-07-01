@@ -12,7 +12,7 @@ class dmlite::head_dome (
   $debuginfo  = false,
   $log_level      = 1,
   $logcomponents  = undef,
-  $enable_space_reporting = false,
+  $disknode   = false,
 ) {
   class{'dmlite::config::head':
     log_level     => $log_level,
@@ -28,6 +28,7 @@ class dmlite::head_dome (
     adminuser      => "${adminuser}",
     dome_head_url  => "https://${::fqdn}/domehead",
     dome_disk_url  => "https://${::fqdn}/domedisk",
+    disknode	   => "${disknode}",
   }
   class{'dmlite::plugins::domeadapter::install':}
 
@@ -38,7 +39,6 @@ class dmlite::head_dome (
     ns_db          => "${ns_db}",
     dpm_db         => "${dpm_db}",
     adminuser      => "${adminuser}",
-    enable_io      => $enable_space_reporting,
     enable_dpm     => false,
     enable_ns	   => true,
   }

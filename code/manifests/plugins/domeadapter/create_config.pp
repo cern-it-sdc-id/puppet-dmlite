@@ -14,7 +14,8 @@ define dmlite::plugins::domeadapter::create_config (
   $token_life         = $dmlite::plugins::domeadapter::params::token_life,
   $user               = $dmlite::params::user,
   $group              = $dmlite::params::group,
-  $adminuser          = undef
+  $adminuser          = undef,
+  $disknode	      = $dmlite::plugins::domeadapter::params::disknode,
 ) {
   Class[dmlite::params] -> Dmlite::Plugins::Domeadapter::Create_config <| |>
 

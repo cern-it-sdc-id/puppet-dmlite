@@ -15,6 +15,7 @@ class dmlite::plugins::domeadapter::config (
   $token_id           = $dmlite::plugins::domeadapter::params::token_id,
   $token_life         = $dmlite::plugins::domeadapter::params::token_life,
   $adminuser          = undef,
+  $disknode           = $dmlite::plugins::domeadapter::params::disknode,
 ) inherits dmlite::plugins::domeadapter::params {
 
   Class[dmlite::plugins::domeadapter::install] -> Class[dmlite::plugins::domeadapter::config]
@@ -33,5 +34,6 @@ class dmlite::plugins::domeadapter::config (
     token_password     => $token_password,
     token_id           => $token_id,
     token_life         => $token_life,
+    disknode	       => $disknode
   }
 }
