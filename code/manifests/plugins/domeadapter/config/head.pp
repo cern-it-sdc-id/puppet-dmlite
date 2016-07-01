@@ -31,7 +31,7 @@ class dmlite::plugins::domeadapter::config::head (
     token_id           => $token_id,
     token_life         => $token_life,
     adminuser          => $adminuser,
-    $disknode          => $disknode,
+    disknode          => $disknode,
   }
 
   dmlite::plugins::domeadapter::create_config{'disk_config_http':
@@ -48,7 +48,7 @@ class dmlite::plugins::domeadapter::config::head (
     token_id           => $token_id,
     token_life         => $token_life,
     adminuser          => $adminuser,
-    $disknode          => $disknode,
+    disknode          => $disknode,
   }
 }
 
