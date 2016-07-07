@@ -3,7 +3,8 @@ class dmlite::dav::service (
 
   Class[dmlite::dav::config] ~> Class[dmlite::dav::service]
 
-  $certificates_files = File[$lcgdm::base::config::cert,$lcgdm::base::config::certkey]
+  $certificates_files = File["/etc/grid-security/$lcgdm::base::config/$lcgdm::base::config::cert",
+                             "/etc/grid-security/$lcgdm::base::config/$lcgdm::base::config::certkey"]
 
   service { 'httpd':
     ensure     => running,
