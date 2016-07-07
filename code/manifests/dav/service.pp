@@ -3,19 +3,7 @@ class dmlite::dav::service (
 
   Class[dmlite::dav::config] ~> Class[dmlite::dav::service]
 
-  if ! defined(File[$dmlite::dav::params::ssl_cert]) {
-	file{$dmlite::dav::params::ssl_cert:
-		ensure => present
-	}
-  }
-  if ! defined(File[$dmlite::dav::params::ssl_key]) {
-	file{$dmlite::dav::params::ssl_key:
-                ensure => present
-        }
-  
-  }
-
-  $certificates_files = File[$dmlite::dav::params::ssl_cert,$dmlite::dav::params::ssl_key ]
+  $certificates_files = File[$lcgdm::base::config::cert,$lcgdm::base::config::certkey]
 
   service { 'httpd':
     ensure     => running,
