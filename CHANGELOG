@@ -1,5 +1,5 @@
 2016-07-08 Andrea Manzi  <andrea.manzi@cern.ch>
-    * change the way Dav subscrive to certificates for service restart
+    * change the way Dav and xrootd  subscribe to certificates for service restart
     * added service restart on certificate change to SRM
 2016-05-31 Andrea Manzi  <andrea.manzi@cern.ch>
     * Enable remote debugging for ATLAS FAX sites
