@@ -37,6 +37,7 @@ class dmlite::xrootd (
   Exec['delete .xrootd.log files'] ~> Class[xrootd::service]
   Exec['delete .xrootd.log files'] -> Xrootd::Create_sysconfig <| |>
   Class[dmlite::xrootd] ~> Class['xrootd::service']
+  Class[lcgdm::base::config] -> Class[dmlite::xrootd]
 
   package {'dpm-xrootd':
     ensure => present
@@ -328,22 +329,31 @@ class dmlite::xrootd (
 		class{'xrootd::service':
 		    xrootd_instances  =>  concat (['xrootd@dpmdisk'],$xrootd_instances_final),
 		    cmsd_instances => $cmsd_instances_final,
-	     	  }
+                    certificate => "/etc/grid-security/${lcgdm_user}/dpmcert.pem",
+                    key  => "/etc/grid-security/${lcgdm_user}/dpmkey.pem",
+	        }
 
 	 } elsif member($nodetype, 'head') {
 		class{'xrootd::service':
                     xrootd_instances  =>  $xrootd_instances_final,
                     cmsd_instances => $cmsd_instances_final,
-                  }
+		    certificate => "/etc/grid-security/${lcgdm_user}/dpmcert.pem",
+                    key  => "/etc/grid-security/${lcgdm_user}/dpmkey.pem",
+                 }
 
 	 } else {
 		class{'xrootd::service':
                     xrootd_instances  =>  ['xrootd@dpmdisk'],
-                  }
+		    certificate => "/etc/grid-security/${lcgdm_user}/dpmcert.pem",
+                    key  => "/etc/grid-security/${lcgdm_user}/dpmkey.pem",
+                }
 	}
   }
   else {
-	include xrootd::service
+	class{'xrootd::service':
+	      certificate => "/etc/grid-security/${lcgdm_user}/dpmcert.pem",
+              key  => "/etc/grid-security/${lcgdm_user}/dpmkey.pem",
+	}
   }
 
   file { '/var/log/xrootd/redir':
