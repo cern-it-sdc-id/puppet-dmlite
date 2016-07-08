@@ -1,7 +1,9 @@
 class dmlite::srm::service (
 ) inherits dmlite::srm::params {
 
-    Class[lcgdm::ns::install] -> Class[dmlite::srm::service]
+  Class[lcgdm::ns::install] -> Class[dmlite::srm::service]
+
+  Class[lcgdm::base::config] ~> Class[dmlite::srm::service]
 
   service { 'srmv2.2':
     ensure     => running,
@@ -9,7 +11,9 @@ class dmlite::srm::service (
     hasrestart => true,
     enable     => true,
     require    => [Class['dmlite::srm::config'], Class['dmlite::srm::install']],
-    subscribe  => File[$lcgdm::ns::config::configfile]
+    subscribe  => File[$lcgdm::ns::config::configfile,
+                "/etc/grid-security/$lcgdm::base::config::user/$lcgdm::base::config::cert",
+                "/etc/grid-security/$lcgdm::base::config::user/$lcgdm::base::config::certkey"],
   }
  #centOS7 changes
  if $::operatingsystemmajrelease and ($::operatingsystemmajrelease + 0) >= 7 {
