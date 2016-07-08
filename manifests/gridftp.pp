@@ -19,6 +19,7 @@ class dmlite::gridftp (
   Package['dpm-dsi'] -> File['/etc/sysconfig/dpm-gsiftp']
   Class['gridftp::config'] -> Exec['remove_globus-gridftp-server_init_management']
   Class[dmlite::gridftp] ~> Class['gridftp::service']
+  Class[lcgdm::base::config] -> Class[dmlite::gridftp]
 
   if $enable_hdfs {
     $java_home = $dmlite::plugins::hdfs::params::java_home
@@ -68,7 +69,9 @@ class dmlite::gridftp (
   include dmlite::gaiconfig
 
   class{'gridftp::service':
-    service => 'dpm-gsiftp'
+    service => 'dpm-gsiftp',
+    certificate => "/etc/grid-security/$lcgdm::base::config::user/$lcgdm::base::config::cert",
+    key => "/etc/grid-security/$lcgdm::base::config::user/$lcgdm::base::config::certkey",
   }
 }
 
