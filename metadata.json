@@ -20,7 +20,7 @@
     {
       "name": "lcgdm/gridftp",
       "version_requirement": "\u003e\u003d 0.2.1"
-    },
+    }
   ],
   "description": "This package provides modules for managing dmlite",
   "license": "Apache License, Version 2.0",
