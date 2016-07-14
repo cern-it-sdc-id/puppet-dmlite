@@ -14,6 +14,7 @@ class dmlite::head (
   $logcomponents  = undef,
   $enable_space_reporting = false,
   $enable_dome   = false,
+  $upgrade_db    = false,
 ) {
   class{'dmlite::config::head':
     log_level     => $log_level,
@@ -46,6 +47,18 @@ class dmlite::head (
   class{'dmlite::plugins::mysql::install':}
 
   if $enable_dome {
+          #install the metapackage for head
+          package{'dmlite-dpm_head':
+		 ensure => present
+	  }
+
+   	  if $upgrade_db {
+		exec{'upgradedb350':
+   		 command => "/usr/share/dmlite/dbscripts/upgrade/DPM_upgrade_mysql ${mysql_host} ${mysql_username} ${mysql_password} ${dpm_db} ${ns_db}",
+		 require => Package['dmlite-dpm_head'],
+		}
+          }
+
 	  class{'dmlite::dome::config':
 	    dome_head    => true,
 	    dome_disk    => false,
