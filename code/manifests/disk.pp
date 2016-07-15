@@ -44,7 +44,7 @@ class dmlite::disk (
 	class{'dmlite::dome::config':
 	    dome_head    => false,
 	    dome_disk    => true,
-	    headnode_domeurl => "${headnode_domeurl}",
+	    headnode_domeurl => "${_headnode_domeurl}",
 	}
 	class{'dmlite::dome::install':}
 	->
