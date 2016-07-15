@@ -36,14 +36,16 @@ class dmlite::disk (
             ensure => present,
         }
         if $headnode_domeurl == undef {
-	    $headnode_domeurl = "https://${dpmhost}/domehead"
+	    $_headnode_domeurl = "https://${dpmhost}/domehead"
+	}
+	else {
+	    $_headnode_domeurl = $headnode_domeurl
 	}
 	class{'dmlite::dome::config':
 	    dome_head    => false,
 	    dome_disk    => true,
 	    headnode_domeurl => "${headnode_domeurl}",
 	}
-	->
 	class{'dmlite::dome::install':}
 	->
 	class{'dmlite::dome::service':}
