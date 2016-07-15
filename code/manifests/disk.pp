@@ -33,10 +33,10 @@ class dmlite::disk (
   if $enable_dome {
 	#install the metapackage for disk
         package{'dmlite-dpm_disk':
-                 ensure => present
+            ensure => present,
         }
         if $headnode_domeurl == undef {
-		$headnode_domeurl = "https://${dpmhost}/domehead",
+	    $headnode_domeurl = "https://${dpmhost}/domehead",
 	}
 	class{'dmlite::dome::config':
 	    dome_head    => false,
