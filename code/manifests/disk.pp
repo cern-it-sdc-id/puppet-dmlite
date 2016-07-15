@@ -31,18 +31,21 @@ class dmlite::disk (
 
 
   if $enable_dome {
-	if $headnode_domeurl == undef {
-                fail("'headnode_domeurl' is not defined")
+	#install the metapackage for disk
+        package{'dmlite-dpm_disk':
+                 ensure => present
         }
-
+        if $headnode_domeurl == undef {
+		$headnode_domeurl = "https://${dpmhost}/domehead",
+	}
 	class{'dmlite::dome::config':
 	    dome_head    => false,
 	    dome_disk    => true,
 	    headnode_domeurl => "${headnode_domeurl}",
 	}
-
+	->
 	class{'dmlite::dome::install':}
-	
+	->
 	class{'dmlite::dome::service':}
   }
 
