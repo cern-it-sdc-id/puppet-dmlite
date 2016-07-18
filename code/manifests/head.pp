@@ -15,6 +15,7 @@ class dmlite::head (
   $enable_space_reporting = false,
   $enable_dome   = false,
   $upgrade_db    = false,
+  $enable_disknode = false,
 ) {
   class{'dmlite::config::head':
     log_level     => $log_level,
@@ -51,20 +52,26 @@ class dmlite::head (
           package{'dmlite-dpm_head':
 		 ensure => present
 	  }
-
+          if $enable_disknode {
+          #install the metapackage for disk
+            package{'dmlite-dpm_disk':
+              ensure => present,
+            }
+          }
    	  if $upgrade_db {
 		exec{'upgradedb350':
    		 command => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/DPM_upgrade_mysql ${mysql_host} ${mysql_username} ${mysql_password} ${dpm_db} ${ns_db}",
 		 require => Package['dmlite-dpm_head'],
 		}
           }
-
+	  
 	  class{'dmlite::dome::config':
 	    dome_head    => true,
-	    dome_disk    => false,
+	    dome_disk    => $enable_disknode,
 	    db_host      => "${mysql_host}",
 	    db_user      => "${mysql_username}",
 	    db_password  => "${mysql_password}",
+            $headnode_domeurl = "https://${dpmhost}/domehead",
 	  } 
 	  class{'dmlite::dome::install':}
 	  ->
