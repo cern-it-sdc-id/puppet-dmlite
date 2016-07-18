@@ -71,7 +71,7 @@ class dmlite::head (
 	    db_host      => "${mysql_host}",
 	    db_user      => "${mysql_username}",
 	    db_password  => "${mysql_password}",
-            $headnode_domeurl = "https://${dpmhost}/domehead",
+            headnode_domeurl =>"https://${dpmhost}/domehead",
 	  } 
 	  class{'dmlite::dome::install':}
 	  ->
