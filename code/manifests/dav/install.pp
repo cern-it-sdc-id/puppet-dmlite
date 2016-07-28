@@ -17,7 +17,7 @@ class dmlite::dav::install (
 
   cron { 'session cache cleaner':
     ensure  => 'present',
-    command => '/usr/bin/find /var/www/sessions -type f -cmin +1440 -delete',
+    command => '/usr/bin/find /var/www/sessions -type f -cmin +120 -delete',
     user    => 'root',
     minute  => '00',
   }
