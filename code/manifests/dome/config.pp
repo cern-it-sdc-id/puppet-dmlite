@@ -9,8 +9,8 @@ class dmlite::dome::config (
   $head_maxcalloutspernode = $dmlite::dome::params::head_maxcalloutspernode,
   $head_maxchecksums  = $dmlite::dome::params::head_maxchecksums,
   $head_maxchecksumspernode  = $dmlite::dome::params::head_maxchecksumspernode,
-  $db_host            = 'localhost',
-  $db_user	      = undef,
+  $db_host            = $dmlite::dome::params::db_host,
+  $db_user	      = $dmlite::dome::params::db_user,
   $db_password	      = undef,
   $db_port            = $dmlite::dome::params::db_port,
   $db_pool_size        = $dmlite::dome::params::db_pool_size,
@@ -28,7 +28,8 @@ class dmlite::dome::config (
   $head_filepuller_stathooktimeout = $dmlite::dome::params::head_filepuller_stathooktimeout,
   $disk_filepuller_pullhook = $dmlite::dome::params::disk_filepuller_pullhook,
   $filepuller = undef,
-  $headnode_domeurl = undef,
+  $headnode_domeurl = $dmlite::dome::params::headnode_domeurl,
+  $proxy_timeout = $dmlite::dome::params::proxy_timeout,
 ) inherits dmlite::dome::params {
 
   validate_bool($dome_head)

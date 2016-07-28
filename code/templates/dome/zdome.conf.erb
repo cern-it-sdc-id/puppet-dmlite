@@ -6,3 +6,4 @@ ProxyPassMatch ^/domehead/(.*)$ fcgi://127.0.0.1:<%= @head_port -%>/$1
 <%if @dome_disk -%>
 ProxyPassMatch ^/domedisk/(.*)$ fcgi://127.0.0.1:<%= @disk_port -%>/$1
 <% end -%>
+ProxyTimeout <%= @proxy_timeout-%> 
