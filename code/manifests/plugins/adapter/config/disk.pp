@@ -39,7 +39,7 @@ class dmlite::plugins::adapter::config::disk (
     connection_poolsize => $connection_poolsize,
     retry_limit        => $retry_limit,
     retry_interval     => $retry_interval,
-    enable_dpm         => false,
+    enable_dpm         => true,
     enable_io          => false,
     enable_rfio        => true,
     enable_ns          => false,
