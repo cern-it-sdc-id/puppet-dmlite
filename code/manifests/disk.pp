@@ -32,7 +32,7 @@ class dmlite::disk (
 
   if $enable_dome {
 	#install the metapackage for disk
-        package{'dmlite-dpm_disk':
+        package{'dmlite-dpmdisk':
             ensure => present,
         }
         if $headnode_domeurl == undef {

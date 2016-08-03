@@ -48,19 +48,19 @@ class dmlite::head (
 
   if $enable_dome {
           #install the metapackage for head
-          package{'dmlite-dpm_head':
+          package{'dmlite-dpmhead':
 		 ensure => present
 	  }
           if $enable_disknode {
           #install the metapackage for disk
-            package{'dmlite-dpm_disk':
+            package{'dmlite-dpmdisk':
               ensure => present,
             }
           }
   	  exec{'upgradedb350':
    	    command => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/DPM_upgrade_mysql ${mysql_host} ${mysql_username} ${mysql_password} ${dpm_db} ${ns_db}",
             unless => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/check_schema_version ${mysql_host} ${mysql_username} ${mysql_password} ${dpm_db} ${ns_db} 350 320",
-	    require => Package['dmlite-dpm_head'],
+	    require => Package['dmlite-dpmhead'],
 	  }
 	  
 	  class{'dmlite::dome::config':
