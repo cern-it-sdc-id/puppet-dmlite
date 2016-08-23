@@ -58,6 +58,7 @@ class dmlite::dav::config (
   }
 
   if $enable_hdfs {
+    include dmlite::plugins::hdfs::params
     $java_home= $dmlite::plugins::hdfs::params::java_home
     file {
       '/etc/sysconfig/httpd':

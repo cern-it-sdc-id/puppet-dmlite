@@ -48,6 +48,7 @@ class dmlite::xrootd (
   include xrootd::config
 
   if $enable_hdfs {
+    include dmlite::plugins::hdfs::params
     $java_home= $dmlite::plugins::hdfs::params::java_home
   }
 
