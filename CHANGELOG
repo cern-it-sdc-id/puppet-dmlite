@@ -1,3 +1,8 @@
+2016-09-23 Andrea Manzi  <andrea.manzi@cern.ch>
+    * switch to use the new puppet-fetchrl module
+    * use the new option on gridftp to restart the service
+    * added hiera lookup for hdfs plugin params
+    * fixes for puppet 4.6
 2016-07-08 Andrea Manzi  <andrea.manzi@cern.ch>
     * change the way Dav and xrootd  subscribe to certificates for service restart
     * added service restart on certificate change to SRM

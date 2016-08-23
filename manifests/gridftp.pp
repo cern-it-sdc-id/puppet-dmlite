@@ -22,6 +22,7 @@ class dmlite::gridftp (
   Class[lcgdm::base::config] -> Class[dmlite::gridftp]
 
   if $enable_hdfs {
+    include dmlite::plugins::hdfs::params
     $java_home = $dmlite::plugins::hdfs::params::java_home
   }
 
@@ -72,6 +73,7 @@ class dmlite::gridftp (
     service => 'dpm-gsiftp',
     certificate => "/etc/grid-security/$lcgdm::base::config::user/$lcgdm::base::config::cert",
     key => "/etc/grid-security/$lcgdm::base::config::user/$lcgdm::base::config::certkey",
+    restart_on_cert_renewal => true
   }
 }
 
