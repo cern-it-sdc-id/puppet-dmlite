@@ -58,8 +58,8 @@ class dmlite::head (
             }
           }
   	  exec{'upgradedb350':
-   	    command => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/DPM_upgrade_mysql ${mysql_host} ${mysql_username} ${mysql_password} ${dpm_db} ${ns_db} 340 320",
-            unless => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/check_schema_version ${mysql_host} ${mysql_username} ${mysql_password} ${dpm_db} ${ns_db} 350 320",
+   	    command => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/DPM_upgrade_mysql ${mysql_host} ${mysql_username} ${mysql_password}",
+            unless => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/check_schema_version ${mysql_host} ${mysql_username} ${mysql_password}",
 	    require => Package['dmlite-dpmhead'],
 	  }
 	  
