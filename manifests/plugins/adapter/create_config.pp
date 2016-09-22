@@ -32,17 +32,6 @@ define dmlite::plugins::adapter::create_config (
   if defined (Class[gridftp::service]){
     Dmlite::Plugins::Adapter::Create_config <| |> ~> Class[gridftp::service]
   }
-  if $::domain == "cern.ch" {
-        teigi::secret::sub_file{"/etc/${config_dir_name}.conf.d/adapter.conf":
-          teigi_keys => ['token_password'],
-	  owner   => $user,
-          group   => $group,
-          mode    => '0600',
-          template => "dmlite/plugins/adapter.conf.CERN.erb",
-          require => [Package['dmlite-plugins-adapter'], File["/etc/${config_dir_name}.conf.d"]]
-        }
-  }
-  else {
     file {
       "/etc/${config_dir_name}.conf.d/adapter.conf":
       owner   => $user,
@@ -51,5 +40,4 @@ define dmlite::plugins::adapter::create_config (
       content => template('dmlite/plugins/adapter.conf.erb'),
       require => [Package['dmlite-plugins-adapter'], File["/etc/${config_dir_name}.conf.d"]]
     }
-  }
 }
