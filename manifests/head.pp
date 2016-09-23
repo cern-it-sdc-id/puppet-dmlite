@@ -47,22 +47,23 @@ class dmlite::head (
   class{'dmlite::plugins::mysql::install':}
 
   if $enable_dome {
+          
           #install the metapackage for head
           package{'dmlite-dpmhead':
 		 ensure => present
 	  }
-          if $enable_disknode {
+          ->
+  	  exec{'upgradedb350':
+   	    command => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/DPM_upgrade_mysql ${mysql_host} ${mysql_username} ${mysql_password}",
+            unless => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/check_schema_version ${mysql_host} ${mysql_username} ${mysql_password}",
+	    require => Class['lcgdm']
+	  }
+	  if $enable_disknode {
           #install the metapackage for disk
             package{'dmlite-dpmdisk':
               ensure => present,
             }
           }
-  	  exec{'upgradedb350':
-   	    command => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/DPM_upgrade_mysql ${mysql_host} ${mysql_username} ${mysql_password}",
-            unless => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/check_schema_version ${mysql_host} ${mysql_username} ${mysql_password}",
-	    require => Package['dmlite-dpmhead'],
-	  }
-	  
 	  class{'dmlite::dome::config':
 	    dome_head    => true,
 	    dome_disk    => $enable_disknode,
