@@ -5,10 +5,10 @@ class dmlite::plugins::adapter::config::disk (
   $connection_poolsize = $dmlite::plugins::adapter::params::connection_poolsize,
   $retry_limit        = $dmlite::plugins::adapter::params::retry_limit,
   $retry_interval     = $dmlite::plugins::adapter::params::retry_interval,
-
   $token_password,
   $token_id           = $dmlite::plugins::adapter::params::token_id,
   $token_life         = $dmlite::plugins::adapter::params::token_life,
+  $empty_conf	      = false,
 ) inherits dmlite::plugins::adapter::params {
 
   Class[dmlite::plugins::adapter::install] -> Class[dmlite::plugins::adapter::config::disk]
@@ -29,6 +29,7 @@ class dmlite::plugins::adapter::config::disk (
     token_password     => $token_password,
     token_id           => $token_id,
     token_life         => $token_life,
+    empty_conf 	       => $empty_conf
   }
 
   dmlite::plugins::adapter::create_config{'disk_config_http':
@@ -47,6 +48,7 @@ class dmlite::plugins::adapter::config::disk (
     token_password     => $token_password,
     token_id           => $token_id,
     token_life         => $token_life,
+    empty_conf         => $empty_conf
   }
 }
 

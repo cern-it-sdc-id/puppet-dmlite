@@ -11,6 +11,7 @@ class dmlite::plugins::adapter::config::head (
   $token_id           = $dmlite::plugins::adapter::params::token_id,
   $token_life         = $dmlite::plugins::adapter::params::token_life,
   $adminuser          = undef,
+  $empty_conf         = false,
 ) inherits dmlite::plugins::adapter::params {
 
   Class[dmlite::plugins::adapter::install] -> Class[dmlite::plugins::adapter::config::head]
@@ -40,6 +41,7 @@ class dmlite::plugins::adapter::config::head (
     token_id           => $token_id,
     token_life         => $token_life,
     adminuser          => $adminuser,
+    empty_conf         => $empty_conf,
   }
 
   dmlite::plugins::adapter::create_config{'disk_config_http':
@@ -59,6 +61,7 @@ class dmlite::plugins::adapter::config::head (
     token_id           => $token_id,
     token_life         => $token_life,
     adminuser          => $adminuser,
+    empty_conf         => $empty_conf
   }
 }
 

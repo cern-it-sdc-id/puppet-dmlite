@@ -17,7 +17,8 @@ define dmlite::plugins::adapter::create_config (
   $token_life         = $dmlite::plugins::adapter::params::token_life,
   $user               = $dmlite::params::user,
   $group              = $dmlite::params::group,
-  $adminuser          = undef
+  $adminuser          = undef,
+  $empty_conf         = false,
 ) {
   Class[dmlite::params] -> Dmlite::Plugins::Adapter::Create_config <| |>
 
@@ -32,12 +33,22 @@ define dmlite::plugins::adapter::create_config (
   if defined (Class[gridftp::service]){
     Dmlite::Plugins::Adapter::Create_config <| |> ~> Class[gridftp::service]
   }
-    file {
-      "/etc/${config_dir_name}.conf.d/adapter.conf":
-      owner   => $user,
-      group   => $group,
-      mode    => '0600',
-      content => template('dmlite/plugins/adapter.conf.erb'),
-      require => [Package['dmlite-plugins-adapter'], File["/etc/${config_dir_name}.conf.d"]]
+    if $empty_conf {
+      file {
+        "/etc/${config_dir_name}.conf.d/adapter.conf":
+          content => "",
+          owner   => $user,
+          group   => $group,
+        }
+    } else {
+      
+      file {
+        "/etc/${config_dir_name}.conf.d/adapter.conf":
+        owner   => $user,
+        group   => $group,
+        mode    => '0600',
+        content => template('dmlite/plugins/adapter.conf.erb'),
+        require => [Package['dmlite-plugins-adapter'], File["/etc/${config_dir_name}.conf.d"]]
+      }
     }
 }
