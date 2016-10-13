@@ -1,7 +1,5 @@
 class dmlite::plugins::domeadapter::config (
   $config_dir_name    = 'dmlite',
-  $dome_disk_url,
-  $dome_head_url,
   $davix_ca_path      = $dmlite::plugins::domeadapter::params::davix_ca_path,
   $davix_cert_path    = $dmlite::plugins::domeadapter::params::davix_ca_cert_path,
   $davix_private_key_path = $dmlite::plugins::domeadapter::params::davix_private_key_path,

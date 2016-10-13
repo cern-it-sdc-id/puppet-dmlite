@@ -53,6 +53,15 @@ class dmlite::head (
       with_db_plugin => true,
     }
     class{'dmlite::plugins::adapter::install':}
+
+    class{'dmlite::plugins::domeadapter::config::head':
+     token_password => "${token_password}",
+      empty_conf     => true,
+    }
+
+    class{'dmlite::plugins::domeadapter::install':
+      uninstall      => true,
+    }
   }
 
   class{'dmlite::plugins::mysql::config':

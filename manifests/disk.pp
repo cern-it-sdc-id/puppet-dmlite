@@ -54,6 +54,15 @@ class dmlite::disk (
       nshost         => "${nshost}"
     }
     class{'dmlite::plugins::adapter::install':}
+
+    class{'dmlite::plugins::domeadapter::install':
+      uninstall      => true,
+    }
+    class{'dmlite::plugins::domeadapter::config::disk':
+      token_password => "${token_password}",
+      empty_conf     => true,
+    }
+
   }
 
   if $enable_dome {

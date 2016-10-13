@@ -1,17 +1,20 @@
 class dmlite::plugins::domeadapter::install (
-  $debuginfo = false
+  $debuginfo = false,
+  $uninstall = false,
 ) inherits dmlite::plugins::domeadapter::params {
 
   include dmlite
+  
+  if !$uninstall {
+    package {
+      'dmlite-plugins-domeadapter':
+        ensure => present;
+    }
 
-  package {
-    'dmlite-plugins-domeadapter':
-      ensure => present;
-  }
-
-  if $debuginfo {
-    package {'dmlite-plugins-domeadapter-debuginfo':
-      ensure => present;
+    if $debuginfo {
+      package {'dmlite-plugins-domeadapter-debuginfo':
+        ensure => present;
+      }
     }
   }
 

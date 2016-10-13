@@ -16,6 +16,7 @@ define dmlite::plugins::domeadapter::create_config (
   $group              = $dmlite::params::group,
   $adminuser          = undef,
   $disknode	      = $dmlite::plugins::domeadapter::params::disknode,
+  $empty_conf         = false,
 ) {
   Class[dmlite::params] -> Dmlite::Plugins::Domeadapter::Create_config <| |>
 
@@ -30,12 +31,21 @@ define dmlite::plugins::domeadapter::create_config (
   if defined (Class[gridftp::service]){
     Dmlite::Plugins::Domeadapter::Create_config <| |> ~> Class[gridftp::service]
   }
-  file {
+  if $empty_conf {
+    file {
       "/etc/${config_dir_name}.conf.d/domeadapter.conf":
-      owner   => $user,
-      group   => $group,
-      mode    => '0750',
-      content => template('dmlite/plugins/domeadapter.conf.erb'),
-      require => [Package['dmlite-plugins-domeadapter'], File["/etc/${config_dir_name}.conf.d"]]
+        content => "",
+        owner   => $user,
+        group   => $group,
+      }
+  } else {
+    file {
+        "/etc/${config_dir_name}.conf.d/domeadapter.conf":
+        owner   => $user,
+        group   => $group,
+        mode    => '0750',
+        content => template('dmlite/plugins/domeadapter.conf.erb'),
+        require => [Package['dmlite-plugins-domeadapter'], File["/etc/${config_dir_name}.conf.d"]]
     }
+  }
 }
