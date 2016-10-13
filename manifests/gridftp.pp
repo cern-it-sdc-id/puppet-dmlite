@@ -13,6 +13,7 @@ class dmlite::gridftp (
   $enable_hdfs         = false,
   $data_node           = 0,
   $remote_nodes        = undef,
+  $enable_dome_checksum = false,
 ) {
   File['/var/log/dpm-gsiftp'] -> Class[gridftp::config]
   Package['dpm-dsi'] -> Class[gridftp::config]
