@@ -4,7 +4,7 @@ class dmlite::accounting (
   $broker_network = hiera('dmlite::accounting::broker_network','PROD'),
   $broker_host = hiera('dmlite::accounting::broker_host',''),
   $broker_port = hiera('dmlite::accounting::broker_port',''),
-  $use_ssl = hiera('dmlite::accounting::use_ssl',true),
+  $use_ssl = hiera('dmlite::accounting::use_ssl',false),
   $certificate = hiera('dmlite::accounting::certificate','/etc/grid-security/dpmmgr/dpmcert.pem'),
   $key = hiera('dmlite::accounting::key','/etc/grid-security/dpmmgr/dpmkey.pem'),
   $capath = hiera('dmlite::accounting::capath','/etc/grid-security/certificates'),
