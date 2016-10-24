@@ -1,0 +1,49 @@
+#############################################################################
+# Required: broker configuration options
+#
+
+[broker]
+
+# The SSM will query a BDII to find brokers available.  These details are for the 
+# EGI production broker network
+bdii: <%= @bdii_url %>
+network:  <%= @broker_network %>
+# OR (these details will only be used if the broker network settings aren't used)
+host:  <%= @broker_host %>
+port: <%= @broker_port %>
+
+# broker authentication.  If use_ssl is set, the certificates configured
+# in the mandatory [certificates] section will be used. 
+use_ssl: <%= @use_ssl %>
+
+
+################################################################################
+# Required: Certificate configuration
+
+[certificates]
+certificate: <%= @certificate %>
+key: <%= @key %>
+capath: <%= @capath %>
+# If this is supplied, outgoing messages will be encrypted
+# using this certificate
+<%if @server_cert != ''-%>
+server_cert: <%= @server_cert %>
+<% end -%>
+
+###############################################################################
+# Messaging configuration.
+#
+[messaging]
+
+# Queue to which SSM will send messages
+destination: <%= @messaging_destination %>
+
+# Outgoing messages will be read and removed from this directory.
+path:  <%= @messaging_path %>
+
+[logging]
+logfile:  <%= @log_file %>
+# Available logging levels:
+# DEBUG, INFO, WARN, ERROR, CRITICAL
+level: <%= @log_level %>
+console:  <%= @console %>
