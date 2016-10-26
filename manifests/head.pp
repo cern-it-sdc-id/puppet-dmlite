@@ -24,7 +24,10 @@ class dmlite::head (
   class{'dmlite::install':
     debuginfo => $debuginfo
   }
-
+  if $enable_domeadapter and $enable_space_reporting{
+    fail("'enable_domeadapter' and 'enable_space_reporting' options are mutual exclusive")
+  }
+  
   if $enable_domeadapter and $enable_dome {
     class{'dmlite::plugins::domeadapter::config::head':
       token_password => "${token_password}",

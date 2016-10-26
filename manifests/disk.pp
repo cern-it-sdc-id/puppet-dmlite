@@ -22,7 +22,7 @@ class dmlite::disk (
   class{'dmlite::install':
     debuginfo => $debuginfo
   }
-
+  
   if $headnode_domeurl == undef {
     $_headnode_domeurl = "https://${dpmhost}/domehead"
   }
@@ -30,6 +30,10 @@ class dmlite::disk (
     $_headnode_domeurl = $headnode_domeurl
   }
    
+  if $enable_domeadapter and $enable_space_reporting{
+    fail("'enable_domeadapter' and 'enable_space_reporting' options are mutual exclusive")
+  }
+
   if $enable_dome  and $enable_domeadapter {
     class{'dmlite::plugins::domeadapter::config::disk':
       token_password => "${token_password}",
