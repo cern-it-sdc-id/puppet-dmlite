@@ -101,6 +101,16 @@ class dmlite::dav::config (
       ensure  => present,
       content => template("${dav_template}");
   }
+  
+  #added proxycache folder
+
+  file {
+    '/var/www/proxycache':
+      ensure  => directory,
+      owner   => $user,
+      group   => $group,
+      notify => Class[dmlite::dav::service]
+  }
 
   # We need some additional tweaks to the httpd.conf.
   # Probably goes away if we start using a puppet module for apache.
