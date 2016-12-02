@@ -89,7 +89,7 @@ class dmlite::head (
      exec{'upgradedb350':
        command => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/DPM_upgrade_mysql ${mysql_host} ${mysql_username} ${mysql_password}",
        unless => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/check_schema_version ${mysql_host} ${mysql_username} ${mysql_password}",
-       require => Class['lcgdm']
+       require => Class['dmlite::db']
      }
      if $enable_disknode {
        #install the metapackage for disk

@@ -2,11 +2,9 @@ class dmlite::dav::service (
 ) inherits dmlite::dav::params {
 
   Class[dmlite::dav::config] ~> Class[dmlite::dav::service]
-  
-  Class[lcgdm::base::config] ~> Class[dmlite::dav::service]
 
-  $certificates_files = File["/etc/grid-security/$lcgdm::base::config::user/$lcgdm::base::config::cert",
-                             "/etc/grid-security/$lcgdm::base::config::user/$lcgdm::base::config::certkey"]
+  $certificates_files = File["/etc/grid-security/$dmlite::base::config::user/$dmlite::base::config::cert",
+                             "/etc/grid-security/$dmlite::base::config::user/$dmlite::base::config::certkey"]
 
   service { 'httpd':
     ensure     => running,

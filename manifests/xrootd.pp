@@ -37,7 +37,7 @@ class dmlite::xrootd (
   Exec['delete .xrootd.log files'] ~> Class[xrootd::service]
   Exec['delete .xrootd.log files'] -> Xrootd::Create_sysconfig <| |>
   Class[dmlite::xrootd] ~> Class['xrootd::service']
-  Class[lcgdm::base::config] -> Class[dmlite::xrootd]
+  Class[dmlite::base::config] -> Class[dmlite::xrootd]
 
   package {'dpm-xrootd':
     ensure => present
