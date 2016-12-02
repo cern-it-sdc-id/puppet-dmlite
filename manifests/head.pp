@@ -70,11 +70,14 @@ class dmlite::head (
         }
   }
   #db conf
+  package{'dmlite-dpmhead':
+    ensure => present
+  } ->
   class{'dmlite::db:::dpm':
     dbuser => "${mysql_username}",
     dbpass => "${mysql_password}",
     dbhost => "${mysql_host}",
-  }
+  } ->
   class{'dmlite::db:::ns': 
     flavor => 'mysql'
     dbuser => "${mysql_username}", 
@@ -136,10 +139,6 @@ class dmlite::head (
 
   if $enable_dome {
           
-    #install the metapackage for head
-     package{'dmlite-dpmhead':
-        ensure => present
-     } ->
      exec{'upgradedb350':
        command => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/DPM_upgrade_mysql ${mysql_host} ${mysql_username} ${mysql_password}",
        unless => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/check_schema_version ${mysql_host} ${mysql_username} ${mysql_password}",
