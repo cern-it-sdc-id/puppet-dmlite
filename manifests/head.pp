@@ -83,7 +83,7 @@ class dmlite::head (
       dbhost => "${mysql_host}",
     } ->
     class{'dmlite::db:::ns': 
-      flavor => 'mysql'
+      flavor => 'mysql',
       dbuser => "${mysql_username}", 
       dbpass => "${mysql_password}",
       dbhost => "${mysql_host}",
