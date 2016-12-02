@@ -1,5 +1,4 @@
 class dmlite::dpm::mysql ($dbuser, $dbpass, $dbhost) {
-  include 'mysql::server'
 
   # the packaged db script explicitly creates the db, we don't want that
   file_line { 'dpm mysql commentcreate':

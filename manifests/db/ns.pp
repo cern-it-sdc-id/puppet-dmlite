@@ -1,4 +1,4 @@
-class dmlite::db::ns ($flavor, $dbuser, $dbpass, $dbhost) {
+class dmlite::db::ns ($flavor , $dbuser, $dbpass, $dbhost) {
 
   # the packaged db script explicitly creates the db, we don't want that
   file_line { "${flavor} mysql commentcreate":

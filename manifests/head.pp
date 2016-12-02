@@ -1,19 +1,25 @@
 class dmlite::head (
   $token_password,
-  $token_id   = 'ip',
+  $token_id        = 'ip',
   $mysql_username,
   $mysql_password,
-  $mysql_host = 'localhost',
-  $dpm_db     = "dpm_db",
-  $ns_db      = "cns_db",
-  $dpmhost    = "${::fqdn}",
-  $nshost     = "${::fqdn}",
-  $adminuser  = undef,
-  $debuginfo  = false,
-  $log_level      = 1,
-  $logcomponents  = undef,
+  $mysql_host      = 'localhost',
+  $dpm_db          = "dpm_db",
+  $ns_db           = "cns_db",
+  $dpmhost         = "${::fqdn}",
+  $nshost          = "${::fqdn}",
+  $dbhost          = "${::fqdn}",
+  $domain          = undef,
+  $mysqlrootpass   = "",
+  $dbmanage        = true,
+  $uid             = '151',
+  $gid             = '151',
+  $adminuser       = undef,
+  $debuginfo       = false,
+  $log_level       = 1,
+  $logcomponents   = undef,
   $enable_space_reporting = false,
-  $enable_dome   = false,
+  $enable_dome     = false,
   $enable_disknode = false,
   $enable_domeadapter = false,
 ) {
@@ -27,7 +33,55 @@ class dmlite::head (
   if $enable_domeadapter and $enable_space_reporting{
     fail("'enable_domeadapter' and 'enable_space_reporting' options are mutual exclusive")
   }
+
+  validate_bool($dbmanage)
+
+  #
+  # Base configuration
+  #
+  if !defined(Class['dmlite::base']) {
+    if gid != undef {
+      class { 'dmlite::base':
+        uid => $uid,
+        gid => $gid,
+      }
+    } else {
+      class { 'dmlite::base':
+        uid => $uid,
+        gid => $uid,
+      }
+    }
+  }
   
+  #
+  # In case the DB is not local we should configure the file /root/.my.cnf
+
+  if $dbhost != 'localhost' and $dbhost != "${::fqdn}" and $dbmanage {
+        #check if root pass is empty
+        if empty($mysqlrootpass ) {
+                fail("mysqlrootpass parameter  should  not be empty")
+        }
+        #create the /root/.my.cnf
+        file { '/root/.my.cnf':
+          ensure => present,
+          mode   => '0655',
+          content => template('dmlite/mysql/my.cnf.erb'),
+          before => Class[dmlite::db]
+        }
+  }
+  #db conf
+  class{'dmlite::db:::dpm':
+    dbuser => "${mysql_username}",
+    dbpass => "${mysql_password}",
+    dbhost => "${mysql_host}",
+  }
+  class{'dmlite::db:::ns': 
+    flavor => 'mysql'
+    dbuser => "${mysql_username}", 
+    dbpass => "${mysql_password}",
+    dbhost => "${mysql_host}",
+  }
+
   if $enable_domeadapter and $enable_dome {
     class{'dmlite::plugins::domeadapter::config::head':
       token_password => "${token_password}",
@@ -89,7 +143,7 @@ class dmlite::head (
      exec{'upgradedb350':
        command => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/DPM_upgrade_mysql ${mysql_host} ${mysql_username} ${mysql_password}",
        unless => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/check_schema_version ${mysql_host} ${mysql_username} ${mysql_password}",
-       require => Class['dmlite::db']
+       require => Class['dmlite::db::head']
      }
      if $enable_disknode {
        #install the metapackage for disk
@@ -108,5 +162,17 @@ class dmlite::head (
       class{'dmlite::dome::install':}
       ->
       class{'dmlite::dome::service':}
+  }
+
+
+  #
+  # Create path for domain and VOs to be enabled.
+  #
+  validate_array($volist)
+      
+  dmlite::dpm::domain { "${domain}": }
+
+  dmlite::dpm::vo { $volist: 
+    domain => "${domain}",
   }
 }
