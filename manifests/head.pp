@@ -10,6 +10,8 @@ class dmlite::head (
   $nshost          = "${::fqdn}",
   $dbhost          = "${::fqdn}",
   $domain          = undef,
+  $volist          = undef,
+  $legacy          = true,
   $mysqlrootpass   = "",
   $dbmanage        = true,
   $uid             = '151',
@@ -33,30 +35,32 @@ class dmlite::head (
   if $enable_domeadapter and $enable_space_reporting{
     fail("'enable_domeadapter' and 'enable_space_reporting' options are mutual exclusive")
   }
+  
+  if !$legacy {
 
-  validate_bool($dbmanage)
+    validate_bool($dbmanage)
 
-  #
-  # Base configuration
-  #
-  if !defined(Class['dmlite::base']) {
-    if gid != undef {
-      class { 'dmlite::base':
-        uid => $uid,
-        gid => $gid,
-      }
-    } else {
-      class { 'dmlite::base':
-        uid => $uid,
-        gid => $uid,
+    #
+    # Base configuration
+    #
+    if !defined(Class['dmlite::base']) {
+      if gid != undef {
+        class { 'dmlite::base':
+          uid => $uid,
+          gid => $gid,
+        }
+      } else {
+        class { 'dmlite::base':
+          uid => $uid,
+          gid => $uid,
+        }
       }
     }
-  }
   
-  #
-  # In case the DB is not local we should configure the file /root/.my.cnf
+    #
+    # In case the DB is not local we should configure the file /root/.my.cnf
 
-  if $dbhost != 'localhost' and $dbhost != "${::fqdn}" and $dbmanage {
+    if $dbhost != 'localhost' and $dbhost != "${::fqdn}" and $dbmanage {
         #check if root pass is empty
         if empty($mysqlrootpass ) {
                 fail("mysqlrootpass parameter  should  not be empty")
@@ -66,23 +70,25 @@ class dmlite::head (
           ensure => present,
           mode   => '0655',
           content => template('dmlite/mysql/my.cnf.erb'),
-          before => Class[dmlite::db]
+          before => Class[dmlite::db::head]
         }
-  }
-  #db conf
-  package{'dmlite-dpmhead':
-    ensure => present
-  } ->
-  class{'dmlite::db:::dpm':
-    dbuser => "${mysql_username}",
-    dbpass => "${mysql_password}",
-    dbhost => "${mysql_host}",
-  } ->
-  class{'dmlite::db:::ns': 
-    flavor => 'mysql'
-    dbuser => "${mysql_username}", 
-    dbpass => "${mysql_password}",
-    dbhost => "${mysql_host}",
+    }
+    #db conf
+    package{'dmlite-dpmhead':
+      ensure => present
+    } ->
+    class{'dmlite::db:::dpm':
+      dbuser => "${mysql_username}",
+      dbpass => "${mysql_password}",
+      dbhost => "${mysql_host}",
+    } ->
+    class{'dmlite::db:::ns': 
+      flavor => 'mysql'
+      dbuser => "${mysql_username}", 
+      dbpass => "${mysql_password}",
+      dbhost => "${mysql_host}",
+    }
+
   }
 
   if $enable_domeadapter and $enable_dome {
@@ -163,15 +169,16 @@ class dmlite::head (
       class{'dmlite::dome::service':}
   }
 
-
-  #
-  # Create path for domain and VOs to be enabled.
-  #
-  validate_array($volist)
+  if !$legacy {
+    #
+    # Create path for domain and VOs to be enabled.
+    #
+    validate_array($volist)
       
-  dmlite::dpm::domain { "${domain}": }
+    dmlite::dpm::domain { "${domain}": }
 
-  dmlite::dpm::vo { $volist: 
-    domain => "${domain}",
+    dmlite::dpm::vo { $volist: 
+      domain => "${domain}",
+    }
   }
 }
