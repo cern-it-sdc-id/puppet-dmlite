@@ -4,7 +4,7 @@ define dmlite::dpm::pool(
   $def_filesize = '100M'
 ) {
 
-  Class[dmlite::shell::install] -> Dmlite::Dpm::Pool <| |>
+  Class[dmlite::shell] -> Dmlite::Dpm::Pool <| |>
 
   exec{"lcgdm_dpm_pool-${name}":
     path    => '/bin:/sbin:/usr/bin:/usr/sbin',

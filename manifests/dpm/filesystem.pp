@@ -5,7 +5,7 @@ define dmlite::dpm::filesystem(
   $fs = '',
 ) {
 
-    Class[dmlite::shell::install] -> Dmlite::Dpm::Filesystem <| |>
+    Class[dmlite::shell] -> Dmlite::Dpm::Filesystem <| |>
 
     if $ensure == 'present' {
       $cmd = 'fsadd'

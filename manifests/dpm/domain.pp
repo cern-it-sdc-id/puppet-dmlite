@@ -1,7 +1,7 @@
 define dmlite::dpm::domain(
 ) {
 
-  Class[dmlite::shell::install] -> Dmlite::Dpm::Domain <| |>
+  Class[dmlite::shell] -> Dmlite::Dpm::Domain <| |>
   Class[dmlite::dpm::config] -> Dmlite::Dpm::Domain<| |>
 
   $domainpath = "/${dmlite::dpm::config::basepath}/${name}"
