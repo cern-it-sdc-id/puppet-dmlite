@@ -17,6 +17,9 @@ class dmlite::config::disk (
   if defined ('gridftp::service'){
     Class[dmlite::config::disk] ~> Class[gridftp::service]
   }
+  if defined (Class[dmlite::dome::service]){
+    Class[dmlite::config::disk] ~> Class[dmlite::dome::service]
+  }
 
   # the head config is needed for xrootd and gridftp
   dmlite::create_config{'head_config':

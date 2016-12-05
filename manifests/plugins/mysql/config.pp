@@ -27,6 +27,9 @@ class dmlite::plugins::mysql::config (
   if defined ('gridftp::service'){
     Class[dmlite::plugins::mysql::config] ~> Class[gridftp::service]
   }
+  if defined (Class[dmlite::dome::service]){
+    Class[dmlite::plugins::mysql::config]  ~> Class[dmlite::dome::service]
+  }
   file {'/etc/dmlite.conf.d/mysql.conf':
        owner   => $user,
        group   => $group,

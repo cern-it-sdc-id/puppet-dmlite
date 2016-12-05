@@ -17,6 +17,9 @@ class dmlite::config::head (
   if defined ('gridftp::service'){
     Class[dmlite::config::head] ~> Class[gridftp::service]
   }
+  if defined (Class[dmlite::dome::service]){
+    Class[dmlite::config::head] ~> Class[dmlite::dome::service]
+  }
 
   dmlite::create_config{'head_config':
     config_file_name => 'dmlite',   # create /etc/dmlite.conf
