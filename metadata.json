@@ -23,10 +23,10 @@
     }
   ],
   "description": "This package provides modules for managing dmlite",
-  "license": "Apache License, Version 2.0",
+  "license": "Apache-2.0",
   "name": "lcgdm-dmlite",
   "operatingsystem_support": [],
-  "project_page": "https://svnweb.cern.ch/trac/lcgdm",
+  "project_page": "http://lcgdm.web.cern.ch/dmlite",
   "requirements": [],
   "source": "https://github.com/cern-it-sdc-id/puppet-dmlite",
   "summary": "Package for managing dmlite plugins",
