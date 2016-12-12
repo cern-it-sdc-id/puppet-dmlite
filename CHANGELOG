@@ -1,3 +1,5 @@
+2016-12-12 Andrea Manzi  <andrea.manzi@cern.ch>
+    * changes for DPM 1.9.0 configuration
 2016-09-23 Andrea Manzi  <andrea.manzi@cern.ch>
     * switch to use the new puppet-fetchrl module
     * use the new option on gridftp to restart the service
