@@ -3,7 +3,9 @@ class dmlite::base (
   $gid     = $dmlite::base::params::gid,
   $cert    = $dmlite::base::params::cert,
   $certkey = $dmlite::base::params::certkey,
-  $user    = $dmlite::base::params::user,) inherits dmlite::dpm::params {
+  $user    = $dmlite::base::params::user,) 
+inherits dmlite::base::params {
+
   class { 'dmlite::base::config':
     uid     => $uid,
     gid     => $gid,

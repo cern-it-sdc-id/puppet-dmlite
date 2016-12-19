@@ -70,19 +70,19 @@ class dmlite::head (
           ensure => present,
           mode   => '0655',
           content => template('dmlite/mysql/my.cnf.erb'),
-          before => Class[dmlite::db::head]
+          before => [Class[dmlite::db::dpm], Class[dmlite::db::ns]]
         }
     }
     #db conf
     package{'dmlite-dpmhead':
       ensure => present
-    } ->
-    class{'dmlite::db:::dpm':
+    } 
+    class{'dmlite::db::dpm':
       dbuser => "${mysql_username}",
       dbpass => "${mysql_password}",
       dbhost => "${mysql_host}",
-    } ->
-    class{'dmlite::db:::ns': 
+    } 
+    class{'dmlite::db::ns': 
       flavor => 'mysql',
       dbuser => "${mysql_username}", 
       dbpass => "${mysql_password}",
@@ -148,7 +148,7 @@ class dmlite::head (
      exec{'upgradedb350':
        command => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/DPM_upgrade_mysql ${mysql_host} ${mysql_username} ${mysql_password}",
        unless => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/check_schema_version ${mysql_host} ${mysql_username} ${mysql_password}",
-       require => Class['dmlite::db::head']
+       require => Class['dmlite::db::dpm']
      }
      if $enable_disknode {
        #install the metapackage for disk

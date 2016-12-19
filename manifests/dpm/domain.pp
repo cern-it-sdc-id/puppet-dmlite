@@ -1,5 +1,6 @@
 define dmlite::dpm::domain(
 ) {
+  include dmlite::dpm::config 
 
   Class[dmlite::shell] -> Dmlite::Dpm::Domain <| |>
   Class[dmlite::dpm::config] -> Dmlite::Dpm::Domain<| |>

@@ -1,4 +1,4 @@
-class dmlite::db::params  {
+class dmlite::db::params ()  inherits dmlite::db {
   $host     = "${::fqdn}"
   $nshost   = "${::fqdn}"
   $dbflavor = 'mysql'

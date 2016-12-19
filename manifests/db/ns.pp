@@ -1,18 +1,18 @@
-class dmlite::db::ns ($flavor , $dbuser, $dbpass, $dbhost) {
+class dmlite::db::ns ($flavor , $dbuser, $dbpass, $dbhost) inherits dmlite::db::params {
 
   # the packaged db script explicitly creates the db, we don't want that
   file_line { "${flavor} mysql commentcreate":
     ensure => present,
     match  => 'CREATE DATABASE.*',
     line   => '-- CREATE DATABASE.*',
-    path   => "/usr/share/dmlite/dbscripts/create_${flavor}_tables_mysql.sql"
+    path   => "/usr/share/dmlite/dbscripts/cns_mysql_db.sql"
   }
 
   mysql::db { $dmlite::db::params::ns_db:
     user     => "${dbuser}",
     password => "${dbpass}",
     host     => "${dbhost}",
-    sql      => "/usr/share/dmlite/dbscripts/create_${flavor}_tables_mysql.sql",
+    sql      => "/usr/share/dmlite/dbscripts/cns_mysql_db.sql",
     require  => File_line["${flavor} mysql commentcreate"],
   }
 
