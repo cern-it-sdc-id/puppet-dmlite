@@ -35,6 +35,9 @@ class dmlite::head (
   if $enable_domeadapter and $enable_space_reporting{
     fail("'enable_domeadapter' and 'enable_space_reporting' options are mutual exclusive")
   }
+  if !$enable_domeadapter and !$legacy{
+    fail("'enable_domeadapter' and 'legacy' options both false are not supported")
+  }
   
   if !$legacy {
 
@@ -73,15 +76,16 @@ class dmlite::head (
           before => [Class[dmlite::db::dpm], Class[dmlite::db::ns]]
         }
     }
-    #db conf
-    package{'dmlite-dpmhead':
-      ensure => present
-    } 
+    Package['dmlite-dpmhead']
+    ->
     class{'dmlite::db::dpm':
       dbuser => "${mysql_username}",
       dbpass => "${mysql_password}",
       dbhost => "${mysql_host}",
     } 
+
+    Package['dmlite-dpmhead']
+    ->
     class{'dmlite::db::ns': 
       flavor => 'mysql',
       dbuser => "${mysql_username}", 
@@ -89,6 +93,16 @@ class dmlite::head (
       dbhost => "${mysql_host}",
     }
 
+    #
+    # Create path for domain and VOs to be enabled.
+    #
+    validate_array($volist)
+
+    dmlite::dpm::domain { "${domain}": }
+    ->
+    dmlite::dpm::vo { $volist:
+      domain => "${domain}",
+    }
   }
 
   if $enable_domeadapter and $enable_dome {
@@ -109,7 +123,9 @@ class dmlite::head (
       token_password => "${token_password}",
       empty_conf     => true,
     }
-  } else {
+  } 
+  else 
+  {
     class{'dmlite::plugins::adapter::config::head':
       token_password => "${token_password}",
       token_id       => "${token_id}",
@@ -144,11 +160,22 @@ class dmlite::head (
   class{'dmlite::plugins::mysql::install':}
 
   if $enable_dome {
-          
-     exec{'upgradedb350':
-       command => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/DPM_upgrade_mysql ${mysql_host} ${mysql_username} ${mysql_password}",
-       unless => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/check_schema_version ${mysql_host} ${mysql_username} ${mysql_password}",
-       require => Class['dmlite::db::dpm']
+     package{'dmlite-dpmhead':
+       ensure => present
+     }
+
+     if !$legacy {     
+       exec{'upgradedb350':
+         command => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/DPM_upgrade_mysql ${mysql_host} ${mysql_username} ${mysql_password}",
+         unless => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/check_schema_version ${mysql_host} ${mysql_username} ${mysql_password}",
+         require => [ Class['dmlite::db::dpm'], Class['dmlite::db::ns']]
+       }
+     } else {
+       exec{'upgradedb350':
+         command => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/DPM_upgrade_mysql ${mysql_host} ${mysql_username} ${mysql_password}",
+         unless => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/check_schema_version ${mysql_host} ${mysql_username} ${mysql_password}",
+         require =>  Class['lcgdm']
+       }
      }
      if $enable_disknode {
        #install the metapackage for disk
@@ -156,29 +183,17 @@ class dmlite::head (
          ensure => present,
         }
       }
-      class{'dmlite::dome::config':
-        dome_head    => true,
-        dome_disk    => $enable_disknode,
-        db_host      => "${mysql_host}",
-        db_user      => "${mysql_username}",
-        db_password  => "${mysql_password}",
-        headnode_domeurl =>"https://${dpmhost}/domehead",
-      } 
-      class{'dmlite::dome::install':}
-      ->
-      class{'dmlite::dome::service':}
+     class{'dmlite::dome::config':
+       dome_head    => true,
+       dome_disk    => $enable_disknode,
+       db_host      => "${mysql_host}",
+       db_user      => "${mysql_username}",
+       db_password  => "${mysql_password}",
+       headnode_domeurl =>"https://${dpmhost}/domehead",
+     } 
+     class{'dmlite::dome::install':}
+     ->
+     class{'dmlite::dome::service':}
   }
 
-  if !$legacy {
-    #
-    # Create path for domain and VOs to be enabled.
-    #
-    validate_array($volist)
-      
-    dmlite::dpm::domain { "${domain}": }
-
-    dmlite::dpm::vo { $volist: 
-      domain => "${domain}",
-    }
-  }
 }

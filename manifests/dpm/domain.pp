@@ -10,8 +10,9 @@ define dmlite::dpm::domain(
   exec { "ns_domain_${name}":
     path    => '/usr/bin:/usr/sbin',
     command => "dmlite-shell -e \"mkdir ${domainpath} p\"",
-    unless  => "dmlite-shell -e \"ls ${domainpath}\""
-  }
+    unless  => "dmlite-shell -e \"ls ${domainpath}\"",
+    require => Class['dmlite::db::ns']
+  }  
 
 }
 
