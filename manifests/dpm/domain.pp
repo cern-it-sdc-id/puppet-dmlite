@@ -21,8 +21,8 @@ define dmlite::dpm::domain(
   } ->
    exec { "ns_basepath_setacl-domain-${name}":
     path    => '/bin:/usr/bin:/usr/sbin',
-    command => "dmlite-shell -e \"acl /${domainpath} d:u::rwx,d:g::rwx,d:o::r-x,u::rwx,g::r-x,o::r-x set\"",
-    unless  => "dmlite-shell -e \"acl /${domainpath} \" | grep default:user:",
+    command => "dmlite-shell -e \"acl ${domainpath} d:u::rwx,d:g::rwx,d:o::r-x,u::rwx,g::r-x,o::r-x set\"",
+    unless  => "dmlite-shell -e \"acl ${domainpath} \" | grep default:user:",
     require => Class['dmlite::db::ns']
   } 
 
