@@ -19,7 +19,7 @@ define dmlite::dpm::filesystem(
 
     exec{"${pool}/${server}:${fs}":
       path    => '/bin:/sbin:/usr/bin:/usr/sbin',
-      command => "dmlite-shell -e \"${cmd} ${fs} ${pool_option} ${server}\"",
+      command => "dmlite-shell -e \"${cmd} ${fs} ${options} ${server}\"",
       unless  => "dmlite-shell -e \"qryconf\" | ( ${grep} \"${server} ${fs}\" )", # subshell required to invert return status with !
     }
 

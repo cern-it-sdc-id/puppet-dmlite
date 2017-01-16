@@ -7,10 +7,10 @@ define dmlite::dpm::pool(
   
   Class[dmlite::shell] -> Dmlite::Dpm::Pool <| |>
 
-  exec{"lcgdm_dpm_pool-${name}":
+  exec{"dmlite_dpm_pool-${name}":
     path    => '/bin:/sbin:/usr/bin:/usr/sbin',
     command => "dmlite-shell -e \"pooladd ${name} ${pool_type} ${stype}\"",
-    unless  => "dmlite-shell -e \"qryconf | grep 'POOL ${name}'\"",
+    unless  => "dmlite-shell -e \"qryconf \"| grep 'POOL ${name}'",
   }
 
 }
