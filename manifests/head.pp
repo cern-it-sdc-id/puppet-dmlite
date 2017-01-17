@@ -76,7 +76,7 @@ class dmlite::head (
           before => [Class[dmlite::db::dpm], Class[dmlite::db::ns]]
         }
     }
-    Package['dmlite-dpmhead']
+    Package['dmlite-dpmhead-dome']
     ->
     class{'dmlite::db::dpm':
       dbuser => "${mysql_username}",
@@ -84,7 +84,7 @@ class dmlite::head (
       dbhost => "${mysql_host}",
     } 
 
-    Package['dmlite-dpmhead']
+    Package['dmlite-dpmhead-dome']
     ->
     class{'dmlite::db::ns': 
       flavor => 'mysql',
@@ -160,17 +160,25 @@ class dmlite::head (
   class{'dmlite::plugins::mysql::install':}
 
   if $enable_dome {
-     package{'dmlite-dpmhead':
-       ensure => present
-     }
-
-     if !$legacy {     
+     if !$legacy {
+       package{'dmlite-dpmhead':
+         ensure => absent
+       }
+       package{'dmlite-dpmhead-dome':
+         ensure => present
+       }     
        exec{'upgradedb350':
          command => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/DPM_upgrade_mysql ${mysql_host} ${mysql_username} ${mysql_password}",
          unless => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/check_schema_version ${mysql_host} ${mysql_username} ${mysql_password}",
          require => [ Class['dmlite::db::dpm'], Class['dmlite::db::ns']]
        }
      } else {
+       package{'dmlite-dpmhead-dome':
+         ensure => absent
+       }
+       package{'dmlite-dpmhead':
+         ensure => present
+       }      
        exec{'upgradedb350':
          command => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/DPM_upgrade_mysql ${mysql_host} ${mysql_username} ${mysql_password}",
          unless => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/check_schema_version ${mysql_host} ${mysql_username} ${mysql_password}",
@@ -179,9 +187,23 @@ class dmlite::head (
      }
      if $enable_disknode {
        #install the metapackage for disk
-       package{'dmlite-dpmdisk':
-         ensure => present,
-        }
+       if !$legacy {
+         package{'dmlite-dpmdisk':
+           ensure => absent,
+         }
+         package{'dmlite-dpmdisk-dome':
+           ensure => present,
+         }
+       }
+       else {
+	 package{'dmlite-dpmdisk-dome':
+           ensure => absent,
+         }
+         package{'dmlite-dpmdisk':
+           ensure => present,
+         }
+       }
+         
       }
      class{'dmlite::dome::config':
        dome_head    => true,

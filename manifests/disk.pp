@@ -14,6 +14,7 @@ class dmlite::disk (
   $enable_dome = false,
   $enable_domeadapter = false,
   $headnode_domeurl = undef,
+  $legacy           = true,
 ) {
   class {'dmlite::config::head':
     log_level     => $log_level,
@@ -71,10 +72,24 @@ class dmlite::disk (
 
   if $enable_dome {
     #install the metapackage for disk
-    package{'dmlite-dpmdisk':
-      ensure => present,
+    if !$legacy {
+      package{'dmlite-dpmdisk':
+        ensure => absent,
+      }
+      package{'dmlite-dpmdisk-dome':
+        ensure => present,
+      }
     }
-    class{'dmlite::dome::config':
+    else {
+      package{'dmlite-dpmdisk-dome':
+        ensure => absent,
+      }
+      package{'dmlite-dpmdisk':
+        ensure => present,
+      }
+    }
+ 
+   class{'dmlite::dome::config':
      dome_head    => false,
      dome_disk    => true,
      headnode_domeurl => "${_headnode_domeurl}",
