@@ -3,8 +3,8 @@ class dmlite::dav::service (
 
   Class[dmlite::dav::config] ~> Class[dmlite::dav::service]
 
-  $certificates_files = File["/etc/grid-security/$dmlite::base::config::user/$dmlite::base::config::cert",
-                             "/etc/grid-security/$dmlite::base::config::user/$dmlite::base::config::certkey"]
+  $certificates_files = File["/etc/grid-security/$dmlite::dav::params::user/dpmkey.pem",
+                             "/etc/grid-security/$dmlite:dav::params::user/dpmcert.pem"]
 
   service { 'httpd':
     ensure     => running,

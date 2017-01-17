@@ -20,8 +20,12 @@ class dmlite::gridftp (
   Package['dpm-dsi'] -> File['/etc/sysconfig/dpm-gsiftp']
   Class['gridftp::config'] -> Exec['remove_globus-gridftp-server_init_management']
   Class[dmlite::gridftp] ~> Class['gridftp::service']
-  Class[dmlite::base::config] -> Class[dmlite::gridftp]
-
+  if $enable_dome_checksum {
+    Class[dmlite::base::config] -> Class[dmlite::gridftp]
+  }
+  else {
+    Class[lcgdm::base::config] -> Class[dmlite::gridftp]
+  }
   if $enable_hdfs {
     include dmlite::plugins::hdfs::params
     $java_home = $dmlite::plugins::hdfs::params::java_home
