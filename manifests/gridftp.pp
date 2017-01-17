@@ -14,6 +14,7 @@ class dmlite::gridftp (
   $data_node           = 0,
   $remote_nodes        = undef,
   $enable_dome_checksum = false,
+  $legacy              = true,
 ) {
   File['/var/log/dpm-gsiftp'] -> Class[gridftp::config]
   Package['dpm-dsi'] -> Class[gridftp::config]
@@ -21,7 +22,7 @@ class dmlite::gridftp (
   Class['gridftp::config'] -> Exec['remove_globus-gridftp-server_init_management']
   Class[dmlite::gridftp] ~> Class['gridftp::service']
 
-  if $enable_dome_checksum {
+  if !$legacy {
     Class[dmlite::base::config] -> Class[dmlite::gridftp]
   }
   else {
@@ -77,8 +78,8 @@ class dmlite::gridftp (
 
   class{'gridftp::service':
     service => 'dpm-gsiftp',
-    certificate => "/etc/grid-security/$dmlite::params::user/dpmcert.pem",
-    key => "/etc/grid-security/$dmlite::params::user/dpmkey.pem",
+    certificate => "/etc/grid-security/$dmlite::gridftp::user/dpmcert.pem",
+    key => "/etc/grid-security/$dmlite::gridftp::user/dpmkey.pem",
     restart_on_cert_renewal => true
   }
 }

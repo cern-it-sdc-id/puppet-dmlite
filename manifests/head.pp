@@ -163,26 +163,26 @@ class dmlite::head (
      if !$legacy {
        package{'dmlite-dpmhead':
          ensure => absent
-       }
+       } ->
        package{'dmlite-dpmhead-dome':
          ensure => present
        }     
        exec{'upgradedb350':
          command => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/DPM_upgrade_mysql ${mysql_host} ${mysql_username} ${mysql_password}",
          unless => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/check_schema_version ${mysql_host} ${mysql_username} ${mysql_password}",
-         require => [ Class['dmlite::db::dpm'], Class['dmlite::db::ns']]
+         require => [ Class['dmlite::db::dpm'], Class['dmlite::db::ns'], Package['dmlite-dpmhead-dome']]
        }
      } else {
        package{'dmlite-dpmhead-dome':
          ensure => absent
-       }
+       }->
        package{'dmlite-dpmhead':
          ensure => present
        }      
        exec{'upgradedb350':
          command => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/DPM_upgrade_mysql ${mysql_host} ${mysql_username} ${mysql_password}",
          unless => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/check_schema_version ${mysql_host} ${mysql_username} ${mysql_password}",
-         require =>  Class['lcgdm']
+         require =>  [ Class['lcgdm'],  Package['dmlite-dpmhead']]
        }
      }
      if $enable_disknode {
@@ -190,7 +190,7 @@ class dmlite::head (
        if !$legacy {
          package{'dmlite-dpmdisk':
            ensure => absent,
-         }
+         }->
          package{'dmlite-dpmdisk-dome':
            ensure => present,
          }
@@ -198,7 +198,7 @@ class dmlite::head (
        else {
 	 package{'dmlite-dpmdisk-dome':
            ensure => absent,
-         }
+         }->
          package{'dmlite-dpmdisk':
            ensure => present,
          }

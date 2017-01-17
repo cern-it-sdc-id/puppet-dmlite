@@ -25,6 +25,7 @@ class dmlite::xrootd (
   $vomsxrd_package = 'vomsxrd',
   $enable_hdfs = false,
   $lcgdm_user = 'dpmmgr',
+  $legacy = true,
 ) {
 
   validate_bool($xrootd_use_voms)
@@ -37,8 +38,11 @@ class dmlite::xrootd (
   Exec['delete .xrootd.log files'] ~> Class[xrootd::service]
   Exec['delete .xrootd.log files'] -> Xrootd::Create_sysconfig <| |>
   Class[dmlite::xrootd] ~> Class['xrootd::service']
-  Class[dmlite::base::config] -> Class[dmlite::xrootd]
-
+  if $legacy {
+    Class[lcgdm::base::config] -> Class[dmlite::xrootd] 
+  } else {
+     Class[dmlite::base::config] -> Class[dmlite::xrootd]
+  }
   package {'dpm-xrootd':
     ensure => present
   }
