@@ -33,6 +33,9 @@ define dmlite::plugins::adapter::create_config (
   if defined (Class[gridftp::service]){
     Dmlite::Plugins::Adapter::Create_config <| |> ~> Class[gridftp::service]
   }
+   if defined (Class[dmlite::dome::service]){
+    Dmlite::Plugins::Adapter::Create_config <| |>  ~> Class[dmlite::dome::service]
+  }
     if $empty_conf {
       file {
         "/etc/${config_dir_name}.conf.d/adapter.conf":

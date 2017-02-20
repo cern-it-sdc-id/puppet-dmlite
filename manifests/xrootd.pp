@@ -54,12 +54,17 @@ class dmlite::xrootd (
   if $enable_hdfs {
     include dmlite::plugins::hdfs::params
     $java_home= $dmlite::plugins::hdfs::params::java_home
+  } else {
+    $java_home= undef
   }
 
   $sec_protocol_local = "/usr/${xrootd::config::xrdlibdir} unix"
 
   if $xrootd_use_voms == false and $xrd_dpmclassic == false {
     $dpm_listvoms = true
+  }
+  else {
+    $dpm_listvoms = false
   }
   if $xrootd_use_voms == true and $xrd_dpmclassic == false {
     package{"${vomsxrd_package}":
@@ -243,7 +248,10 @@ class dmlite::xrootd (
 
   if $dpm_xrootd_debug {
     $daemon_corefile_limit = 'unlimited'
+  } else {
+    $daemon_corefile_limit = undef
   }
+
 
   if ($log_style_param == '-k fifo') {  # delete all non-fifo files
     exec{'delete .xrootd.log files':

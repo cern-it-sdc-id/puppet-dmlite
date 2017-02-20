@@ -21,11 +21,12 @@ class dmlite::srm::service (
    file{'/etc/systemd/system/multi-user.target.wants/srmv2.2.service':
      ensure => 'link',
      target => '/usr/share/dpm-mysql/srmv2.2.service',
-   }
+   } ->
    file{'/etc/systemd/system/srmv2.2.service':
      ensure => link,
      target => '/usr/share/dpm-mysql/srmv2.2.service',
    }
+    -> Service['srmv2.2']
  }
 
 }
