@@ -123,9 +123,30 @@ class dmlite::head (
       token_password => "${token_password}",
       empty_conf     => true,
     }
+
+   class{'dmlite::plugins::mysql::config':
+    empty_conf     => true,
+   }
+
+   class{'dmlite::plugins::mysql::install':
+    uninstall      => true,
+   } 
   } 
   else 
   {
+    class{'dmlite::plugins::mysql::config':
+      mysql_host     => "${mysql_host}",
+      mysql_username => "${mysql_username}",
+      mysql_password => "${mysql_password}",
+      ns_db          => "${ns_db}",
+      dpm_db         => "${dpm_db}",
+      adminuser      => "${adminuser}",
+      enable_io      => $enable_space_reporting,
+      enable_dpm     => !$enable_domeadapter,
+    }
+
+    class{'dmlite::plugins::mysql::install':}
+
     class{'dmlite::plugins::adapter::config::head':
       token_password => "${token_password}",
       token_id       => "${token_id}",
@@ -146,18 +167,6 @@ class dmlite::head (
     }
   }
 
-  class{'dmlite::plugins::mysql::config':
-    mysql_host     => "${mysql_host}",
-    mysql_username => "${mysql_username}",
-    mysql_password => "${mysql_password}",
-    ns_db          => "${ns_db}",
-    dpm_db         => "${dpm_db}",
-    adminuser      => "${adminuser}",
-    enable_io      => $enable_space_reporting,
-    enable_dpm     => !$enable_domeadapter,
-  }
-
-  class{'dmlite::plugins::mysql::install':}
 
   if $enable_dome {
      if !$legacy {

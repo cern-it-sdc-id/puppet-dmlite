@@ -1,10 +1,14 @@
 class dmlite::plugins::mysql::install (
+  $uninstall = false,
 ) inherits dmlite::plugins::mysql::params {
 
   include dmlite
 
-  package {'dmlite-plugins-mysql':
-    ensure => present;
+  if !$uninstall {
+    package {
+      'dmlite-plugins-mysql':
+        ensure => present;
+    }
   }
 
 }
