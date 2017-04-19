@@ -125,12 +125,12 @@ class dmlite::head (
     }
 
    class{'dmlite::plugins::mysql::config':
-    empty_conf     => true,
+     empty_conf     => true,
+     mysql_password => "",
    }
 
    class{'dmlite::plugins::mysql::install':
-    uninstall      => true,
-    mysql_password => "",
+     uninstall      => true,
    } 
   } 
   else 
