@@ -130,6 +130,7 @@ class dmlite::head (
 
    class{'dmlite::plugins::mysql::install':
     uninstall      => true,
+    mysql_password => "",
    } 
   } 
   else 
