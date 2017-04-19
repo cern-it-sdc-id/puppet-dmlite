@@ -6,7 +6,7 @@ class dmlite::dav::params (
     $ns_prefix          = 'dpm'
     $disk_prefix        = 'dpm'
     $ns_flags           = 'Write RemoteCopy'
-    $ns_anon            = true
+    $ns_anon            = false
     $ns_max_replicas    = 3
     $ns_secure_redirect = 'Off'
     $ns_trusted_dns     = undef
