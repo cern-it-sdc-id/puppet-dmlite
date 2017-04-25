@@ -76,7 +76,7 @@ class dmlite::head (
           before => [Class[dmlite::db::dpm], Class[dmlite::db::ns]]
         }
     }
-    Package['dmlite-dpmhead-dome']
+    Package['dmlite-dpmhead-domeonly']
     ->
     class{'dmlite::db::dpm':
       dbuser => "${mysql_username}",
@@ -84,7 +84,7 @@ class dmlite::head (
       dbhost => "${mysql_host}",
     } 
 
-    Package['dmlite-dpmhead-dome']
+    Package['dmlite-dpmhead-domeonly']
     ->
     class{'dmlite::db::ns': 
       flavor => 'mysql',
@@ -174,16 +174,16 @@ class dmlite::head (
        package{'dmlite-dpmhead':
          ensure => absent
        } ->
-       package{'dmlite-dpmhead-dome':
+       package{'dmlite-dpmhead-domeonly':
          ensure => present
        }     
        exec{'upgradedb350':
          command => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/DPM_upgrade_mysql ${mysql_host} ${mysql_username} ${mysql_password}",
          unless => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/check_schema_version ${mysql_host} ${mysql_username} ${mysql_password}",
-         require => [ Class['dmlite::db::dpm'], Class['dmlite::db::ns'], Package['dmlite-dpmhead-dome']]
+         require => [ Class['dmlite::db::dpm'], Class['dmlite::db::ns'], Package['dmlite-dpmhead-domeonly']]
        }
      } else {
-       package{'dmlite-dpmhead-dome':
+       package{'dmlite-dpmhead-domeonly':
          ensure => absent
        }->
        package{'dmlite-dpmhead':
@@ -201,12 +201,12 @@ class dmlite::head (
          package{'dmlite-dpmdisk':
            ensure => absent,
          }->
-         package{'dmlite-dpmdisk-dome':
+         package{'dmlite-dpmdisk-domeonly':
            ensure => present,
          }
        }
        else {
-	 package{'dmlite-dpmdisk-dome':
+	 package{'dmlite-dpmdisk-domeonly':
            ensure => absent,
          }->
          package{'dmlite-dpmdisk':

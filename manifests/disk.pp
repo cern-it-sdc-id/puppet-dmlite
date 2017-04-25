@@ -76,12 +76,12 @@ class dmlite::disk (
       package{'dmlite-dpmdisk':
         ensure => absent,
       }
-      package{'dmlite-dpmdisk-dome':
+      package{'dmlite-dpmdisk-domeonly':
         ensure => present,
       }
     }
     else {
-      package{'dmlite-dpmdisk-dome':
+      package{'dmlite-dpmdisk-domeonly':
         ensure => absent,
       }
       package{'dmlite-dpmdisk':
