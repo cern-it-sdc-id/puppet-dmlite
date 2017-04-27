@@ -27,14 +27,13 @@ class dmlite::gridftp (
     $java_home = $dmlite::plugins::hdfs::params::java_home
   }
   
-  
   #if gridftp redirection is enabled ( so remote_nodes is set to 1) configure epsv_ip
   case $remote_nodes {
     undef: {
-      $epsv_ip = 0
+      $epsv_ip = false
     }
     default: {
-      $epsv_ip = 1
+      $epsv_ip = true
     }
   }
   package{'dpm-dsi': ensure => present}
