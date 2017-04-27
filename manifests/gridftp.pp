@@ -29,9 +29,13 @@ class dmlite::gridftp (
   
   
   #if gridftp redirection is enabled ( so remote_nodes is set to 1) configure epsv_ip
-  $epsv_ip = 0
-  if $remote_nodes {
-    $epsv_ip = 1
+  case $remote_nodes {
+    undef: {
+      $epsv_ip = 0
+    }
+    default: {
+      $epsv_ip = 1
+    }
   }
   package{'dpm-dsi': ensure => present}
 
