@@ -26,7 +26,13 @@ class dmlite::gridftp (
     include dmlite::plugins::hdfs::params
     $java_home = $dmlite::plugins::hdfs::params::java_home
   }
-
+  
+  
+  #if gridftp redirection is enabled ( so remote_nodes is set to 1) configure epsv_ip
+  $epsv_ip = 0
+  if $remote_nodes {
+    $epsv_ip = 1
+  }
   package{'dpm-dsi': ensure => present}
 
   file {
@@ -62,6 +68,7 @@ class dmlite::gridftp (
     thread_model        => 'pthread',
     data_node           => $data_node,
     remote_nodes        => "${remote_nodes}",
+    epsv_ip             => $epsv_ip,
   }
   exec{'remove_globus-gridftp-server_init_management':
     command => '/sbin/chkconfig globus-gridftp-server off',

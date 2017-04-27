@@ -19,7 +19,7 @@
     },
     {
       "name": "lcgdm/gridftp",
-      "version_requirement": "\u003e\u003d 0.2.2"
+      "version_requirement": "\u003e\u003d 0.2.4"
     }
   ],
   "description": "This package provides modules for managing dmlite",
@@ -31,5 +31,5 @@
   "source": "https://github.com/cern-it-sdc-id/puppet-dmlite",
   "summary": "Package for managing dmlite plugins",
   "tags": [],
-  "version": "0.5.1"
+  "version": "0.5.2"
 }
