@@ -4,9 +4,9 @@ glb.role: disk
 
 glb.fcgi.listenport: <%= @disk_port -%>
 
-glb.task.maxrunningtime = <%= @disk_task_maxrunningtime -%>
+glb.task.maxrunningtime: <%= @disk_task_maxrunningtime -%>
 
-glb.task.purgetime = <%= @disk_task_purgetime -%>
+glb.task.purgetime: <%= @disk_task_purgetime -%>
 
 <% @disk_auth_authorizeDN.sort.each do |entry| -%>
 glb.auth.authorizeDN[]: <%= entry %>
