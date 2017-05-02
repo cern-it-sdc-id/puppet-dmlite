@@ -22,7 +22,7 @@ class dmlite::dome::params (
     $put_minfreespace_mb = hiera('dmlite::dome::params::put_minfreespace_mb', 1)
     $head_auth_authorizeDN = hiera('dmlite::dome::params::head_auth_authorizeDN', [])
     $disk_auth_authorizeDN = hiera('dmlite::dome::params::disk_auth_authorizeDN', [])
-    $dirspacereportdepth = hiera('dmlite::dome::params::dirspacereportdepth', 3)
+    $dirspacereportdepth = hiera('dmlite::dome::params::dirspacereportdepth', 6)
     $restclient_cli_certificate = hiera('dmlite::dome::params::restclient_cli_certificate','/etc/grid-security/dpmmgr/dpmcert.pem')
     $restclient_cli_private_key = hiera('dmlite::dome::params::restclient_cli_private_key','/etc/grid-security/dpmmgr/dpmkey.pem')
     $head_filepuller_stathook = hiera('dmlite::dome::params::head_filepuller_stathook','/usr/share/dmlite/filepull/externalstat_example.sh')
