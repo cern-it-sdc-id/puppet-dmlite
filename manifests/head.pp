@@ -222,10 +222,9 @@ class dmlite::head (
        db_user      => "${mysql_username}",
        db_password  => "${mysql_password}",
        headnode_domeurl =>"https://${dpmhost}/domehead",
+       restclient_cli_xrdhttpkey => ${token_password},
      } 
      class{'dmlite::dome::install':}
-     ->
-     class{'dmlite::dome::service':}
   }
 
 }

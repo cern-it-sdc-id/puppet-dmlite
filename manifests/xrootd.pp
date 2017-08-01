@@ -26,6 +26,8 @@ class dmlite::xrootd (
   $enable_hdfs = false,
   $lcgdm_user = 'dpmmgr',
   $legacy = true,
+  $dpm_enable_dome = false,
+  $dpm_xrdhttp_secret_key = ''
 ) {
 
   validate_bool($xrootd_use_voms)
@@ -111,6 +113,8 @@ class dmlite::xrootd (
       sec_protocol   => [ $sec_protocol_disk, $sec_protocol_local ],
       dpm_listvoms   => $dpm_listvoms,
       use_dmlite_io  => $enable_hdfs,
+      dpm_enable_dome => $dpm_enable_dome,
+      dpm_xrdhttp_secret_key => $dpm_xrdhttp_secret_key   
     }
   } else {
     $xrootd_instances_options_disk = {}
@@ -160,8 +164,9 @@ class dmlite::xrootd (
       alice_token_principal => $alice_token_principal,
       alice_token_libname   => $alice_token_libname,
       alice_fqans           => $alice_fqans,
-      dpm_xrootd_fedredirs  => $dpm_xrootd_fedredirs
-
+      dpm_xrootd_fedredirs  => $dpm_xrootd_fedredirs,
+      dpm_enable_dome       => $dpm_enable_dome,
+      dpm_xrdhttp_secret_key => $dpm_xrdhttp_secret_key
     }
     $l = size("${::fqdn}")
     if $l > 16 {

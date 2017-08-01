@@ -2,7 +2,7 @@ glb.debug: <%= @disk_debug -%>
 
 glb.role: disk
 
-glb.fcgi.listenport: <%= @disk_port -%>
+glb.auth.urlprefix: /domedisk/
 
 glb.task.maxrunningtime = <%= @disk_task_maxrunningtime -%>
 
@@ -15,6 +15,8 @@ glb.auth.authorizeDN[]: <%= entry %>
 glb.restclient.cli_certificate: <%= @restclient_cli_certificate -%>
 
 glb.restclient.cli_private_key: <%= @restclient_cli_private_key -%>
+
+glb.restclient.xrdhttpkey: <%= @restclient_cli_xrdhttpkey -%>
 
 disk.headnode.domeurl: <%= @headnode_domeurl -%>
 

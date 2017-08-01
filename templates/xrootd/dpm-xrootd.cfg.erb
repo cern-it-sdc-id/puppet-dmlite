@@ -19,6 +19,12 @@ dpm.enablecmsclient
 # useful if voms attribute processing is enabled
 dpm.allowvo <%= @dpm_allowvo %>
 <% end -%>
+<% if @dpm_enable_dome -%>
+xrd.protocol XrdHttp /usr/lib64/libXrdHttp-4.so
+http.exthandler /usr/lib64/libdome.so /etc/domehead.conf
+http.selfhttps2http yes
+http.secretkey  <%= @dpm_xrdhttp_secret_key %>
+<% end -%>
 fi
 <% if @dpm_namelib -%>
 dpm.namelib <%= @dpm_namelib %>

@@ -93,10 +93,9 @@ class dmlite::disk (
      dome_head    => false,
      dome_disk    => true,
      headnode_domeurl => "${_headnode_domeurl}",
+     restclient_cli_xrdhttpkey => ${token_password},
     }
     class{'dmlite::dome::install':}
-    ->
-    class{'dmlite::dome::service':}
   }
 
   if $enable_space_reporting {
