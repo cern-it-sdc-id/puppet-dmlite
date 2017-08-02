@@ -21,7 +21,7 @@ dpm.allowvo <%= @dpm_allowvo %>
 <% end -%>
 <% if @dpm_enable_dome -%>
 xrd.protocol XrdHttp /usr/lib64/libXrdHttp-4.so
-http.exthandler /usr/lib64/libdome.so /etc/domehead.conf
+http.exthandler /usr/lib64/libdome.so <%= @dpm_dome_conf_file %>
 http.selfhttps2http yes
 http.secretkey  <%= @dpm_xrdhttp_secret_key %>
 <% end -%>

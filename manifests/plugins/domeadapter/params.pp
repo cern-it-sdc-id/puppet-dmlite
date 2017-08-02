@@ -13,4 +13,5 @@ class dmlite::plugins::domeadapter::params (
     $token_life         = 1000
     $token_password     = undef
     $disknode           = false
+    $host_dn            = undef
 }

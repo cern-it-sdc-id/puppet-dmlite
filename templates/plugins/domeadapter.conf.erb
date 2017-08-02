@@ -31,6 +31,10 @@ TokenId <%= @token_id %>
 TokenLife <%= @token_life %>
 <% end -%>
 
+<%if @host_dn -%>
+ThisDomeAdapterDN <%= @host_dn %>
+<% end -%>
+
 <% if @adminuser != "" -%>
 # Adminuser for replication and filesystem selection
 AdminUsername <%= @adminuser %>

@@ -17,6 +17,7 @@ define dmlite::plugins::domeadapter::create_config (
   $adminuser          = undef,
   $disknode	      = $dmlite::plugins::domeadapter::params::disknode,
   $empty_conf         = false,
+  $host_dn            = $dmlite::plugins::domeadapter::params::host_dn
 ) {
   Class[dmlite::params] -> Dmlite::Plugins::Domeadapter::Create_config <| |>
 

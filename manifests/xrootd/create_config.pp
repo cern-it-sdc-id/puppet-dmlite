@@ -62,7 +62,8 @@ define dmlite::xrootd::create_config (
   $dpm_xrootd_fedredirs = undef,
   $use_dmlite_io = false,
   $dpm_enable_dome = false,
-  $dpm_xrdhttp_secret_key = undef
+  $dpm_xrdhttp_secret_key = undef,
+  $dpm_dome_conf_file = undef
 ) {
   include xrootd::config
 
