@@ -26,7 +26,7 @@ class dmlite::disk (
   }
   
   if $headnode_domeurl == undef {
-    $_headnode_domeurl = "https://${dpmhost}/domehead"
+    $_headnode_domeurl = "http://${dpmhost}:1094/domehead"
   }
   else {
     $_headnode_domeurl = $headnode_domeurl

@@ -111,8 +111,8 @@ class dmlite::head (
       token_password => "${token_password}",
       token_id       => "${token_id}",
       adminuser      => "${adminuser}",
-      dome_head_url  => "https://${::fqdn}/domehead",
-      dome_disk_url  => "https://${::fqdn}/domedisk",
+      dome_head_url  => "http://${::fqdn}:1095/domehead",
+      dome_disk_url  => "http://${::fqdn}:1094/domedisk",
       disknode       => $enable_disknode,
       host_dn        => "${host_dn}"
     }
@@ -223,7 +223,7 @@ class dmlite::head (
        db_host      => "${mysql_host}",
        db_user      => "${mysql_username}",
        db_password  => "${mysql_password}",
-       headnode_domeurl =>"https://${dpmhost}/domehead",
+       headnode_domeurl => "http://${dpmhost}:1094/domehead",
        restclient_cli_xrdhttpkey => "${token_password}"
      } 
      class{'dmlite::dome::install':}
