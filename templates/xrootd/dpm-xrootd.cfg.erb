@@ -23,6 +23,9 @@ dpm.allowvo <%= @dpm_allowvo %>
 xrd.protocol XrdHttp /usr/lib64/libXrdHttp-4.so
 http.exthandler /usr/lib64/libdome.so <%= @dpm_dome_conf_file %>
 http.selfhttps2http yes
+http.cert /etc/grid-security/dpmmgr/dpmcert.pem
+http.key /etc/grid-security/dpmmgr/dpmkey.pem
+http.cadir /etc/grid-security/certificates
 http.secretkey  <%= @dpm_xrdhttp_secret_key %>
 <% end -%>
 fi
