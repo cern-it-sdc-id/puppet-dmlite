@@ -40,7 +40,7 @@ class dmlite::disk (
     class{'dmlite::plugins::domeadapter::config::disk':
       token_password => "${token_password}",
       token_id       => "${token_id}",
-      dome_disk_url  => "https://${::fqdn}/domedisk",
+      dome_disk_url  => "http://${::fqdn}:1095/domedisk",
       dome_head_url  => "${_headnode_domeurl}",
       host_dn        => "${host_dn}"
     }
