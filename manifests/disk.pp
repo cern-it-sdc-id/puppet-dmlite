@@ -15,6 +15,7 @@ class dmlite::disk (
   $enable_domeadapter = false,
   $headnode_domeurl = undef,
   $legacy           = true,
+  $host_dn          = ''
 ) {
   class {'dmlite::config::head':
     log_level     => $log_level,
@@ -39,8 +40,9 @@ class dmlite::disk (
     class{'dmlite::plugins::domeadapter::config::disk':
       token_password => "${token_password}",
       token_id       => "${token_id}",
-      dome_disk_url => "https://${::fqdn}/domedisk",
-      dome_head_url => "${_headnode_domeurl}",
+      dome_disk_url  => "https://${::fqdn}/domedisk",
+      dome_head_url  => "${_headnode_domeurl}",
+      host_dn        => "${host_dn}"
     }
     class{'dmlite::plugins::domeadapter::install':}
 
@@ -66,6 +68,7 @@ class dmlite::disk (
     class{'dmlite::plugins::domeadapter::config::disk':
       token_password => "${token_password}",
       empty_conf     => true,
+      host_dn        => "${host_dn}"
     }
 
   }
