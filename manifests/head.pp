@@ -111,8 +111,8 @@ class dmlite::head (
       token_password => "${token_password}",
       token_id       => "${token_id}",
       adminuser      => "${adminuser}",
-      dome_head_url  => "http://${::fqdn}:1095/domehead",
-      dome_disk_url  => "http://${::fqdn}:1094/domedisk",
+      dome_head_url  => "http://${::fqdn}:1094/domehead",
+      dome_disk_url  => "http://${::fqdn}:1095/domedisk",
       disknode       => $enable_disknode,
       host_dn        => "${host_dn}"
     }
