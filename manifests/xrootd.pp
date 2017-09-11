@@ -25,6 +25,9 @@ class dmlite::xrootd (
   $vomsxrd_package = 'vomsxrd',
   $enable_hdfs = false,
   $lcgdm_user = 'dpmmgr',
+  $legacy = true,
+  $dpm_enable_dome = false,
+  $dpm_xrdhttp_secret_key = ''
 ) {
 
   validate_bool($xrootd_use_voms)
@@ -37,8 +40,11 @@ class dmlite::xrootd (
   Exec['delete .xrootd.log files'] ~> Class[xrootd::service]
   Exec['delete .xrootd.log files'] -> Xrootd::Create_sysconfig <| |>
   Class[dmlite::xrootd] ~> Class['xrootd::service']
-  Class[lcgdm::base::config] -> Class[dmlite::xrootd]
-
+  if $legacy {
+    Class[lcgdm::base::config] -> Class[dmlite::xrootd] 
+  } else {
+     Class[dmlite::base::config] -> Class[dmlite::xrootd]
+  }
   package {'dpm-xrootd':
     ensure => present
   }
@@ -85,28 +91,31 @@ class dmlite::xrootd (
     }
 
     dmlite::xrootd::create_config{'/etc/xrootd/xrootd-dpmdisk.cfg':
-      dmlite_conf    => $dmlite_conf,
-      dpm_host       => $dpmhost,
-      all_adminpath  => '/var/spool/xrootd',
-      all_pidpath    => '/var/run/xrootd',
-      all_sitename   => $site_name,
-      xrd_allrole    => 'server',
-      xrootd_seclib  => 'libXrdSec.so',
-      xrootd_export  => [ '/' ],
-      xrootd_async   => 'on',
-      xrootd_monitor => $xrootd_monitor,
-      ofs_authlib    => 'libXrdDPMDiskAcc.so.3',
-      ofs_authorize  => true,
-      xrd_ofsosslib  => 'libXrdDPMOss.so.3',
-      ofs_persist    => 'auto hold 0',
-      xrd_port       => $dpm_xrootd_serverport,
-      xrd_network    => 'nodnr',
-      xrd_report     => $xrd_report,
-      xrd_debug      => $dpm_xrootd_debug,
-      ofs_tpc        => $ofs_tpc,
-      sec_protocol   => [ $sec_protocol_disk, $sec_protocol_local ],
-      dpm_listvoms   => $dpm_listvoms,
-      use_dmlite_io  => $enable_hdfs,
+      dmlite_conf            => $dmlite_conf,
+      dpm_host               => $dpmhost,
+      all_adminpath          => '/var/spool/xrootd',
+      all_pidpath            => '/var/run/xrootd',
+      all_sitename           => $site_name,
+      xrd_allrole            => 'server',
+      xrootd_seclib          => 'libXrdSec.so',
+      xrootd_export          => [ '/' ],
+      xrootd_async           => 'on',
+      xrootd_monitor         => $xrootd_monitor,
+      ofs_authlib            => 'libXrdDPMDiskAcc.so.3',
+      ofs_authorize          => true,
+      xrd_ofsosslib          => 'libXrdDPMOss.so.3',
+      ofs_persist            => 'auto hold 0',
+      xrd_port               => $dpm_xrootd_serverport,
+      xrd_network            => 'nodnr',
+      xrd_report             => $xrd_report,
+      xrd_debug              => $dpm_xrootd_debug,
+      ofs_tpc                => $ofs_tpc,
+      sec_protocol           => [ $sec_protocol_disk, $sec_protocol_local ],
+      dpm_listvoms           => $dpm_listvoms,
+      use_dmlite_io          => $enable_hdfs,
+      dpm_enable_dome        => $dpm_enable_dome,
+      dpm_xrdhttp_secret_key => $dpm_xrdhttp_secret_key,
+      dpm_dome_conf_file     => '/etc/domedisk.conf'   
     }
   } else {
     $xrootd_instances_options_disk = {}
@@ -156,9 +165,11 @@ class dmlite::xrootd (
       alice_token_principal => $alice_token_principal,
       alice_token_libname   => $alice_token_libname,
       alice_fqans           => $alice_fqans,
-      dpm_xrootd_fedredirs  => $dpm_xrootd_fedredirs
-
-    }
+      dpm_xrootd_fedredirs  => $dpm_xrootd_fedredirs,
+      dpm_enable_dome       => $dpm_enable_dome,
+      dpm_xrdhttp_secret_key => $dpm_xrdhttp_secret_key,
+      dpm_dome_conf_file    => '/etc/domehead.conf'
+   }
     $l = size("${::fqdn}")
     if $l > 16 {
 	    $cms_cidtag = regsubst("${::fqdn}", '^(.{16})(.*)', '\1')

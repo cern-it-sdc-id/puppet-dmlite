@@ -13,8 +13,6 @@ class dmlite::plugins::memcache(
   $local_cache_size      = $dmlite::plugins::memcache::params::local_cache_size,
 ) inherits dmlite::plugins::memcache::params {
 
-  Class[dmlite::plugins::memcache::install] -> Class[dmlite::plugins::memcache::config]
-
   class{'dmlite::plugins::memcache::config':
     servers              => $servers,
     enable_memcache      => $enable_memcache,
@@ -29,6 +27,9 @@ class dmlite::plugins::memcache(
     func_counter         => "${func_counter}",
     local_cache_size     => $local_cache_size,
   }
-  class{'dmlite::plugins::memcache::install':}
-
+  if $enable_memcache {
+    Class[dmlite::plugins::memcache::install] -> Class[dmlite::plugins::memcache::config]
+    
+    class{'dmlite::plugins::memcache::install':}
+  }
 }

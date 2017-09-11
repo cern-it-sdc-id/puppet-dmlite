@@ -17,6 +17,7 @@ define dmlite::plugins::domeadapter::create_config (
   $adminuser          = undef,
   $disknode	      = $dmlite::plugins::domeadapter::params::disknode,
   $empty_conf         = false,
+  $host_dn            = $dmlite::plugins::domeadapter::params::host_dn
 ) {
   Class[dmlite::params] -> Dmlite::Plugins::Domeadapter::Create_config <| |>
 
@@ -30,9 +31,6 @@ define dmlite::plugins::domeadapter::create_config (
   }
   if defined (Class[gridftp::service]){
     Dmlite::Plugins::Domeadapter::Create_config <| |> ~> Class[gridftp::service]
-  }
-  if defined (Class[dmlite::dome::service]){
-    Dmlite::Plugins::Domeadapter::Create_config <| |>  ~> Class[dmlite::dome::service]
   }
   if $empty_conf {
     file {

@@ -1,7 +1,5 @@
 class dmlite::dome::params (
 ) inherits dmlite::params {
-    $head_port     	= hiera('dmlite::dome::params::head_port', 9001)
-    $disk_port		= hiera('dmlite::dome::params::disk_port',9002)
     $head       	= false
     $disk   	        = true
     $head_debug		= hiera('dmlite::dome::params::head_debug', 1)
@@ -31,4 +29,5 @@ class dmlite::dome::params (
     $filepuller = undef
     $headnode_domeurl = hiera('dmlite::dome::params::disk_filepuller_pullhook',undef)
     $proxy_timeout = hiera('dmlite::dome::params::proxy_timeout',600)
+    $restclient_cli_xrdhttpkey = hiera('mlite::dome::params::restclient_cli_xrdhttpkey',undef)
 }

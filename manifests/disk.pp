@@ -14,6 +14,8 @@ class dmlite::disk (
   $enable_dome = false,
   $enable_domeadapter = false,
   $headnode_domeurl = undef,
+  $legacy           = true,
+  $host_dn          = ''
 ) {
   class {'dmlite::config::head':
     log_level     => $log_level,
@@ -24,7 +26,7 @@ class dmlite::disk (
   }
   
   if $headnode_domeurl == undef {
-    $_headnode_domeurl = "https://${dpmhost}/domehead"
+    $_headnode_domeurl = "http://${dpmhost}:1094/domehead"
   }
   else {
     $_headnode_domeurl = $headnode_domeurl
@@ -38,8 +40,9 @@ class dmlite::disk (
     class{'dmlite::plugins::domeadapter::config::disk':
       token_password => "${token_password}",
       token_id       => "${token_id}",
-      dome_disk_url => "https://${::fqdn}/domedisk",
-      dome_head_url => "${_headnode_domeurl}",
+      dome_disk_url  => "http://${::fqdn}:1095/domedisk",
+      dome_head_url  => "${_headnode_domeurl}",
+      host_dn        => "${host_dn}"
     }
     class{'dmlite::plugins::domeadapter::install':}
 
@@ -65,23 +68,37 @@ class dmlite::disk (
     class{'dmlite::plugins::domeadapter::config::disk':
       token_password => "${token_password}",
       empty_conf     => true,
+      host_dn        => "${host_dn}"
     }
 
   }
 
   if $enable_dome {
     #install the metapackage for disk
-    package{'dmlite-dpmdisk':
-      ensure => present,
+    if !$legacy {
+      package{'dmlite-dpmdisk':
+        ensure => absent,
+      }
+      package{'dmlite-dpmdisk-domeonly':
+        ensure => present,
+      }
     }
-    class{'dmlite::dome::config':
+    else {
+      package{'dmlite-dpmdisk-domeonly':
+        ensure => absent,
+      }
+      package{'dmlite-dpmdisk':
+        ensure => present,
+      }
+    }
+ 
+   class{'dmlite::dome::config':
      dome_head    => false,
      dome_disk    => true,
      headnode_domeurl => "${_headnode_domeurl}",
+     restclient_cli_xrdhttpkey => "${token_password}"
     }
     class{'dmlite::dome::install':}
-    ->
-    class{'dmlite::dome::service':}
   }
 
   if $enable_space_reporting {

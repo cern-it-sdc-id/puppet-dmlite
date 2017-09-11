@@ -10,6 +10,7 @@ class dmlite::plugins::domeadapter::config::head (
   $adminuser          = undef,
   $disknode 	      = $dmlite::plugins::domeadapter::params::disknode,
   $empty_conf         = false,
+  $host_dn            = $dmlite::plugins::domeadapter::params::host_dn,
 ) inherits dmlite::plugins::domeadapter::params {
 
   Class[dmlite::plugins::domeadapter::install] -> Class[dmlite::plugins::domeadapter::config::head]
@@ -32,10 +33,11 @@ class dmlite::plugins::domeadapter::config::head (
     adminuser          => $adminuser,
     disknode           => $disknode,
     empty_conf         => $empty_conf,
+    host_dn            => $host_dn
   }
 
   dmlite::plugins::domeadapter::create_config{'disk_config_http':
-    config_dir_name    => 'dmlite-disk',   # put file in /etc/dmlite-disk.conf.d/domedaapter.conf
+    config_dir_name    => 'dmlite-disk',   # put file in /etc/dmlite-disk.conf.d/domeadapter.conf
     dome_head_url      => $dome_head_url,
     dome_disk_url      => $dome_disk_url,
     davix_ca_path      => $davix_ca_path,
@@ -50,6 +52,7 @@ class dmlite::plugins::domeadapter::config::head (
     adminuser          => $adminuser,
     disknode           => $disknode,
     empty_conf         => $empty_conf,
+    host_dn            => $host_dn
   }
 }
 

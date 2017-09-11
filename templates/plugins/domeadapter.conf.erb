@@ -19,6 +19,8 @@ DavixCAPath  <%= @davix_ca_path %>
 DavixCertPath <%= @davix_cert_path %>
 DavixPrivateKeyPath <%=@davix_private_key_path %>
 
+DavixPoolSize 32
+
 <%if @disknode -%>
 DomeDisk <%= @dome_disk_url %>
 <% end -%>
@@ -29,6 +31,10 @@ DomeHead <%= @dome_head_url %>
 TokenPassword <%= @token_password %>
 TokenId <%= @token_id %>
 TokenLife <%= @token_life %>
+<% end -%>
+
+<%if @host_dn -%>
+ThisDomeAdapterDN <%= @host_dn %>
 <% end -%>
 
 <% if @adminuser != "" -%>
