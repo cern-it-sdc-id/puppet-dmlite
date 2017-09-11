@@ -3,8 +3,13 @@ class dmlite::dav::service (
 
   Class[dmlite::dav::config] ~> Class[dmlite::dav::service]
 
-  $certificates_files = File["/etc/grid-security/$dmlite::dav::params::user/dpmkey.pem",
-                             "/etc/grid-security/$dmlite::dav::params::user/dpmcert.pem"]
+  case $dmlite::dav::params::nstype  {
+    'LFC': { $certfilename='lfccert.pem'; $keyfilename='lfckey.pem'}
+    default: { $certfilename='dpmcert.pem'; $keyfilename='dpmkey.pem'}
+  }
+
+  $certificates_files = File["/etc/grid-security/$dmlite::dav::params::user/$certfilename",
+                             "/etc/grid-security/$dmlite::dav::params::user/$keyfilename"]
 
   service { 'httpd':
     ensure     => running,
