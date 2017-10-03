@@ -16,14 +16,14 @@ class dmlite::dav::install (
   }
 
   cron { 'session cache cleaner':
-    ensure  => 'present',
+    ensure  => 'absent',
     command => '/usr/bin/find /var/www/sessions -type f -cmin +120 -delete',
     user    => 'root',
     minute  => '00',
   }
   
   cron { 'graceful http restart':
-    ensure  => 'present',
+    ensure  => 'absent',
     command => '/usr/sbin/apachectl graceful >& /dev/null',
     minute  => fqdn_rand(60,'apache'),
     hour    => '*/6',
