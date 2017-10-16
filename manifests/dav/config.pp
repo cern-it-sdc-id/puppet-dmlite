@@ -176,7 +176,7 @@ class dmlite::dav::config (
       ensure => present,
       line   => 'LoadModule mpm_event_module modules/mod_mpm_event.so',
       path   => '/etc/httpd/conf.modules.d/00-mpm.conf',
-      match  => '^#LoadModule mpm_event_module modules/mod_mpm_event.so'
+      match  => '^#?LoadModule mpm_event_module modules/mod_mpm_event.so'
     }
    file_line { 'mpm prefork':
       ensure => absent,
