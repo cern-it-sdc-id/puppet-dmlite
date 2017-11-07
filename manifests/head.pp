@@ -94,18 +94,7 @@ class dmlite::head (
       dbhost => "${mysql_host}",
     }
 
-    #
-    # Create path for domain and VOs to be enabled.
-    #
     validate_array($volist)
-    #need to configure xrootd first
-    Class[dmlite::xrootd] 
-    -> 
-    dmlite::dpm::domain { "${domain}": }
-    ->
-    dmlite::dpm::vo { $volist:
-      domain => "${domain}",
-    }
   }
 
   if $enable_domeadapter and $enable_dome {
@@ -229,6 +218,18 @@ class dmlite::head (
        restclient_cli_xrdhttpkey => "${token_password}"
      } 
      class{'dmlite::dome::install':}
+     if !$legacy { 
+       validate_array($volist)
+       #need to configure xrootd first
+       Class[dmlite::xrootd]
+       ->
+       dmlite::dpm::domain { "${domain}": }
+       ->
+       dmlite::dpm::vo { $volist:
+         domain => "${domain}",
+      }
+    }
+
   }
 
 }
