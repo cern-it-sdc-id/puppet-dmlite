@@ -98,7 +98,9 @@ class dmlite::head (
     # Create path for domain and VOs to be enabled.
     #
     validate_array($volist)
-
+    #need to configure xrootd first
+    Class[dmlite::xrootd] 
+    -> 
     dmlite::dpm::domain { "${domain}": }
     ->
     dmlite::dpm::vo { $volist:
