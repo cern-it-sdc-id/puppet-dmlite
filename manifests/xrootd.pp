@@ -27,7 +27,10 @@ class dmlite::xrootd (
   $lcgdm_user = 'dpmmgr',
   $legacy = true,
   $dpm_enable_dome = false,
-  $dpm_xrdhttp_secret_key = ''
+  $dpm_xrdhttp_secret_key = '',
+  $after_conf_head = 'network-online.target mariadb.service',
+  $after_conf_disk = 'network-online.target',
+  $runtime_dir = 'dpmxrootd'
 ) {
 
   validate_bool($xrootd_use_voms)
@@ -284,7 +287,9 @@ class dmlite::xrootd (
                     xrootd_user              => $lcgdm_user,
                     xrootd_group             => $lcgdm_user,
                     exports                  => $exports,
-                    daemon_corefile_limit    => $daemon_corefile_limit
+                    daemon_corefile_limit    => $daemon_corefile_limit,
+                    after_conf               => $after_conf_disk,
+                    runtime_dir              => $runtime_dir
                 }
         }
 
@@ -306,14 +311,18 @@ class dmlite::xrootd (
 		 	xrootd_user              => $lcgdm_user,
 		        xrootd_group             => $lcgdm_user,
 		        exports                  => $exports,
-		        daemon_corefile_limit    => $daemon_corefile_limit
+		        daemon_corefile_limit    => $daemon_corefile_limit,
+			after_conf               => $after_conf_head,
+			runtime_dir              => $runtime_dir
 		 }
 		 if size($array_fed) > 0 {
 		 	dmlite::xrootd::create_systemd_config{ $cmsd_instances_final:
                         	xrootd_user              => $lcgdm_user,
 	                        xrootd_group             => $lcgdm_user,
         	                exports                  => $exports,
-                	        daemon_corefile_limit    => $daemon_corefile_limit
+                	        daemon_corefile_limit    => $daemon_corefile_limit,
+				after_conf               => $after_conf_head,
+				runtime_dir              => $runtime_dir
 	                 }
 		 }
 
