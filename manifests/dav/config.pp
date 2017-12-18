@@ -9,6 +9,7 @@ class dmlite::dav::config (
   $ns_max_replicas    = $dmlite::dav::params::ns_max_replicas,
   $ns_secure_redirect = $dmlite::dav::params::ns_secure_redirect,
   $ns_trusted_dns     = $dmlite::dav::params::ns_trusted_dns,
+  $ns_macaroon_secret = $dmlite::dav::params::ns_macaroon_secret,
   $disk_flags         = $dmlite::dav::params::disk_flags,
   $disk_anon          = $dmlite::dav::params::disk_anon,
   $ssl_cert           = $dmlite::dav::params::ssl_cert,

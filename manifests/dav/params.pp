@@ -10,6 +10,7 @@ class dmlite::dav::params (
     $ns_max_replicas    = 3
     $ns_secure_redirect = 'Off'
     $ns_trusted_dns     = undef
+    $ns_macaroon_secret = undef
     $disk_flags         = 'Write RemoteCopy'
     $disk_anon          = 'nobody:nogroup'
     $ssl_cert           = '/etc/grid-security/hostcert.pem'
