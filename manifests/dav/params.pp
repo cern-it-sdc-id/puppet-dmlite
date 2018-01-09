@@ -10,7 +10,7 @@ class dmlite::dav::params (
     $ns_max_replicas    = hiera('dmlite::dav::params::ns_max_replicas', 3)
     $ns_secure_redirect = hiera('dmlite::dav::params::ns_secure_redirect', 'Off')
     $ns_trusted_dns     = hiera('dmlite::dav::params::ns_trusted_dns', undef)
-    $ns_macaroon_secret = hiera('dmlite::dav::params::ns_macaroon_secret', undef)
+    $ns_macaroon_secret = hiera('dmlite::dav::params::ns_macaroon_secret', false)
     $disk_flags         = hiera('dmlite::dav::params::disk_flags', 'Write RemoteCopy')
     $disk_anon          = hiera('dmlite::dav::params::disk_anon', 'nobody:nogroup')
     $ssl_cert           = hiera('dmlite::dav::params::ssl_cert', '/etc/grid-security/hostcert.pem')

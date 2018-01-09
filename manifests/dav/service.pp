@@ -4,8 +4,14 @@ class dmlite::dav::service (
   Class[dmlite::dav::config] ~> Class[dmlite::dav::service]
 
   case $dmlite::dav::config::ns_type  {
-    'LFC': { $certfilename='lfccert.pem'; $keyfilename='lfckey.pem'}
-    default: { $certfilename='dpmcert.pem'; $keyfilename='dpmkey.pem'}
+    'LFC': { 
+             $certfilename='lfccert.pem';
+             $keyfilename='lfckey.pem'
+           }
+    default: { 
+             $certfilename='dpmcert.pem';
+             $keyfilename='dpmkey.pem'
+           }
   }
 
   $certificates_files = File["/etc/grid-security/$dmlite::dav::config::user/$certfilename",
