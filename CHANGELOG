@@ -1,3 +1,6 @@
+2018-01-15 Andrea Manzi  <andrea.manzi@cern.ch>
+    * add gai.conf to c7
+    * fix for Multiple LoadModule lines in 00-mpm.conf on CentOS7
 2017-08-17 Andrea Manzi  <andrea.manzi@cern.ch>
     * correct configuration for dav 3rd party copy on C7
 2017-04-27 Andrea Manzi  <andrea.manzi@cern.ch>
