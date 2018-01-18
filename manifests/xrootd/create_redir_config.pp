@@ -6,6 +6,7 @@ define dmlite::xrootd::create_redir_config (
   $cmsd_port = undef,
   $local_port = undef,
   $paths = undef,
+  $direct = false,
 
   $namelib_prefix = undef,
   $namelib = undef,
@@ -63,7 +64,9 @@ define dmlite::xrootd::create_redir_config (
   # constructing variables from the parameters
   $pss_origin = "localhost:${local_port}"
   $xrd_port = $local_port
-  $all_manager = "${fed_host}+:${cmsd_port}"
+  if($cmsd_port){
+    $all_manager = "${fed_host}+:${cmsd_port}"
+  }
   $all_export = $paths
 
   $dpm_namelib = $namelib
