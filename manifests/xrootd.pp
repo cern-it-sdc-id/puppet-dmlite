@@ -107,7 +107,6 @@ class dmlite::xrootd (
       ofs_authlib            => 'libXrdDPMDiskAcc.so.3',
       ofs_authorize          => true,
       xrd_ofsosslib          => 'libXrdDPMOss.so.3',
-      ofs_persist            => 'auto hold 0',
       xrd_port               => $dpm_xrootd_serverport,
       xrd_network            => 'nodnr',
       xrd_report             => $xrd_report,
