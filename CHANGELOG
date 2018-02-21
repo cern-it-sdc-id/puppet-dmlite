@@ -1,3 +1,5 @@
+2018-02-21 Andrea Sartirana  <sartiran@llr.in2p3.fr>
+    * Modification needed for new cms federation config
 2018-01-15 Andrea Manzi  <andrea.manzi@cern.ch>
     * add gai.conf to c7
     * fix for Multiple LoadModule lines in 00-mpm.conf on CentOS7
