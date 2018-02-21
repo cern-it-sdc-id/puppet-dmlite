@@ -64,13 +64,15 @@ dpm.mmreqhost <%= @dpm_mmreqhost %>
 <%# federation redirects for the main config file %>
 <% if @dpm_xrootd_fedredirs and not @paths -%>
 <% @dpm_xrootd_fedredirs.sort.each do |fedname, redir| -%>
+<% if not redir['direct'] -%>
 <% redir['paths'].sort.each do |path| -%>
 xrootd.redirect <%= @dpm_host -%>:<%= redir['local_port'] -%> <%= File.join(path,"") %>
 <% end -%>
 <% end -%>
 <% end -%>
+<% end -%>
 <%# federation redirects for each federation config file %>
-<% if @paths -%>
+<% if @paths and @xrootd_port -%>
 <% @paths.sort.each do |path| -%>
 xrootd.redirect <%= @fed_host -%>:<%= @xrootd_port -%> ? <%= File.join(path,"") %>
 <% end -%>

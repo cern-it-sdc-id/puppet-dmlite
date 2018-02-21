@@ -171,7 +171,7 @@ class dmlite::xrootd (
       dpm_enable_dome       => $dpm_enable_dome,
       dpm_xrdhttp_secret_key => $dpm_xrdhttp_secret_key,
       dpm_dome_conf_file    => '/etc/domehead.conf'
-   }
+    }
     $l = size("${::fqdn}")
     if $l > 16 {
 	    $cms_cidtag = regsubst("${::fqdn}", '^(.{16})(.*)', '\1')
@@ -230,9 +230,10 @@ class dmlite::xrootd (
 
     }
 
+    $dpm_cmsd_fedredirs = $dpm_xrootd_fedredirs.filter | $fed,$value | { $value['cmsd_port']!=undef }
 
     $xrootd_instances_options_fed = map_hash($dpm_xrootd_fedredirs, "-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-dpmfedredir_%s.cfg ${log_style_param}")
-    $cmsd_instances_options_fed = map_hash($dpm_xrootd_fedredirs, "-l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-dpmfedredir_%s.cfg ${log_style_param}")
+    $cmsd_instances_options_fed = map_hash($dpm_cmsd_fedredirs, "-l /var/log/xrootd/cmsd.log -c /etc/xrootd/xrootd-dpmfedredir_%s.cfg ${log_style_param}")
 
   } else {
     $xrootd_instances_options_redir = {}
@@ -298,8 +299,9 @@ class dmlite::xrootd (
 
 		 if size($array_fed) > 0 {
 	        	 $array_fed_final =  prefix($array_fed,'dpmfedredir_')
+			 $array_cmsd = $array_fed.filter | $fed | {$dpm_xrootd_fedredirs[$fed]['cmsd_port']!=undef}
 			 $xrootd_instances = flatten (concat (['dpmredir'],$array_fed_final))
-  			 $cmsd_instances_final = prefix($array_fed_final,'cmsd@')
+  			 $cmsd_instances_final = prefix(prefix($array_cmsd,'dpmfedredir_'),'cmsd@')
 		 }
 		 else {
 			$xrootd_instances = ['dpmredir']
