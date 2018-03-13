@@ -59,7 +59,8 @@ class dmlite::plugins::memcache::config (
   else {
     file {
       '/etc/dmlite.conf.d/zmemcache.conf':
-        ensure  => absent;
+        ensure  => present,
+        content => ''; # empty content, so an upgrade doesn't overwrite it
     }
   }
 }
