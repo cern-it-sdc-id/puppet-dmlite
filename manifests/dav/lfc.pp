@@ -9,6 +9,7 @@ class dmlite::dav::lfc (
   $ns_max_replicas    = $dmlite::dav::ns_max_replicas,
   $ns_secure_redirect = $dmlite::dav::ns_secure_redirect,
   $ns_trusted_dns     = $dmlite::dav::ns_trusted_dns,
+  $ns_macaroon_secret = $dmlite::dav::ns_macaroon_secret,
   $disk_flags         = $dmlite::dav::disk_flags,
   $disk_anon          = $dmlite::dav::disk_anon,
   $ssl_cert           = $dmlite::dav::ssl_cert,
