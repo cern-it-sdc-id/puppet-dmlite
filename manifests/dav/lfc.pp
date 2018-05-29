@@ -35,10 +35,9 @@ class dmlite::dav::lfc (
   $dav_https_port     = $dmlite::dav::dav_https_port,
 ) {
 
-  Class[dmlite::dav] -> Class[dmlite::dav::install] -> Class[dmlite::dav::config] -> Class[dmlite::dav::service]
+  Class[dmlite::dav::install] -> Class[dmlite::dav::config] -> Class[dmlite::dav::service]
 
-  class{'dmlite::dav::install':}
-  class{'dmlite::dav::config':
+  class{'dmlite::dav':
     ns_type      => 'LFC',
     ns_prefix    => 'grid',
     ns_flags     => 'NoAuthn',
@@ -48,6 +47,5 @@ class dmlite::dav::lfc (
     user         => 'lfcmgr',
     group        => 'lfcmgr',
   }
-  class{'dmlite::dav::service':}
 
 }
