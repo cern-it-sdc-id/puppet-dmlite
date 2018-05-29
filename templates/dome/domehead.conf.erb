@@ -32,8 +32,9 @@ head.maxchecksumspernode:  <%= @head_maxchecksumspernode -%>
 
 head.filepuller.stathook: <%= @head_filepuller_stathook -%>
 
+<% if @head_filepuller_stathooktimeout != 0  -%>
 head.filepuller.stathooktimeout:<%= @head_filepuller_stathooktimeout -%>
-
+<% end -%>
 head.db.host: <%= @db_host -%>
 
 head.db.user: <%= @db_user -%>
@@ -44,3 +45,6 @@ head.db.port: <%= @db_port -%>
 
 head.db.poolsz: <%= @db_pool_size -%>
 
+head.db.cnsdbname: <%= @cnsdb_name -%>
+
+head.db.dpmdbname: <%= @dpmdb_name -%>
