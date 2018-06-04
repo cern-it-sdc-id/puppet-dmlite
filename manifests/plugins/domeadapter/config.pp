@@ -1,7 +1,7 @@
 class dmlite::plugins::domeadapter::config (
   $config_dir_name    = 'dmlite',
   $davix_ca_path      = $dmlite::plugins::domeadapter::params::davix_ca_path,
-  $davix_cert_path    = $dmlite::plugins::domeadapter::params::davix_ca_cert_path,
+  $davix_cert_path    = $dmlite::plugins::domeadapter::params::davix_cert_path,
   $davix_private_key_path = $dmlite::plugins::domeadapter::params::davix_private_key_path,
   $dome_head_url      = $dmlite::plugins::domeadapter::params::dome_head_url,
   $dome_disk_url      = $dmlite::plugins::domeadapter::params::dome_disk_url,
@@ -14,6 +14,7 @@ class dmlite::plugins::domeadapter::config (
   $token_life         = $dmlite::plugins::domeadapter::params::token_life,
   $adminuser          = undef,
   $disknode           = $dmlite::plugins::domeadapter::params::disknode,
+  $host_dn            = $dmlite::plugins::domeadapter::params::host_dn,
 ) inherits dmlite::plugins::domeadapter::params {
 
   Class[dmlite::plugins::domeadapter::install] -> Class[dmlite::plugins::domeadapter::config]
@@ -32,6 +33,7 @@ class dmlite::plugins::domeadapter::config (
     token_password     => $token_password,
     token_id           => $token_id,
     token_life         => $token_life,
-    disknode	       => $disknode
+    disknode	       => $disknode,
+    host_dn            => $host_dn
   }
 }

@@ -2,7 +2,7 @@ glb.debug: <%= @head_debug -%>
 
 glb.role: head
 
-glb.fcgi.listenport: <%= @head_port -%>
+glb.auth.urlprefix: /domehead/
 
 glb.task.maxrunningtime: <%= @head_task_maxrunningtime -%>
 
@@ -20,9 +20,11 @@ glb.restclient.cli_certificate: <%= @restclient_cli_certificate -%>
 
 glb.restclient.cli_private_key: <%= @restclient_cli_private_key -%>
 
-head.maxcallouts: <%= @head_maxcallouts -%>
+glb.restclient.xrdhttpkey: <%= @restclient_cli_xrdhttpkey -%>
 
-head.maxcalloutspernode: <%= @head_maxcalloutspernode -%>
+head.filepulls.maxtotal: <%= @head_maxfilepulls -%>
+
+head.filepulls.maxpernode: <%= @head_maxfilepullspernode -%>
 
 head.maxchecksums: <%= @head_maxchecksums -%>
 
@@ -30,8 +32,9 @@ head.maxchecksumspernode:  <%= @head_maxchecksumspernode -%>
 
 head.filepuller.stathook: <%= @head_filepuller_stathook -%>
 
+<% if @head_filepuller_stathooktimeout != 0  -%>
 head.filepuller.stathooktimeout:<%= @head_filepuller_stathooktimeout -%>
-
+<% end -%>
 head.db.host: <%= @db_host -%>
 
 head.db.user: <%= @db_user -%>
@@ -42,3 +45,6 @@ head.db.port: <%= @db_port -%>
 
 head.db.poolsz: <%= @db_pool_size -%>
 
+head.db.cnsdbname: <%= @cnsdb_name -%>
+
+head.db.dpmdbname: <%= @dpmdb_name -%>

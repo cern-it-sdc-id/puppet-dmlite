@@ -9,6 +9,7 @@ class dmlite::dav::install (
   $ns_max_replicas    = $dmlite::dav::ns_max_replicas,
   $ns_secure_redirect = $dmlite::dav::ns_secure_redirect,
   $ns_trusted_dns     = $dmlite::dav::ns_trusted_dns,
+  $ns_macaroon_secret = $dmlite::dav::ns_macaroon_secret,
   $disk_flags         = $dmlite::dav::disk_flags,
   $disk_anon          = $dmlite::dav::disk_anon,
   $ssl_cert           = $dmlite::dav::ssl_cert,
@@ -48,14 +49,14 @@ class dmlite::dav::install (
   }
 
   cron { 'session cache cleaner':
-    ensure  => 'present',
+    ensure  => 'absent',
     command => '/usr/bin/find /var/www/sessions -type f -cmin +120 -delete',
     user    => 'root',
     minute  => '00',
   }
   
   cron { 'graceful http restart':
-    ensure  => 'present',
+    ensure  => 'absent',
     command => '/usr/sbin/apachectl graceful >& /dev/null',
     minute  => fqdn_rand(60,'apache'),
     hour    => '*/6',

@@ -42,9 +42,6 @@ class dmlite::plugins::memcache::config (
   if defined ('gridftp::service'){
     Class[dmlite::plugins::memcache::config] ~> Class[gridftp::service]
   }
-  if defined (Class[dmlite::dome::service]){
-    Class[dmlite::plugins::memcache::config]  ~> Class[dmlite::dome::service]
-  }
   file {
     '/etc/dmlite.conf.d/memcache.conf':
       ensure  => absent;
@@ -62,7 +59,8 @@ class dmlite::plugins::memcache::config (
   else {
     file {
       '/etc/dmlite.conf.d/zmemcache.conf':
-        ensure  => absent;
+        ensure  => present,
+        content => ''; # empty content, so an upgrade doesn't overwrite it
     }
   }
 }

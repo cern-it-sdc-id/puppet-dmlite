@@ -16,6 +16,7 @@ class dmlite::plugins::mysql::config (
   $user             = $dmlite::params::user,
   $group            = $dmlite::params::group,
   $adminuser        = undef,
+  $empty_conf       = false,
 ) inherits dmlite::plugins::mysql::params {
 
   if defined ('xrootd::service'){
@@ -27,15 +28,21 @@ class dmlite::plugins::mysql::config (
   if defined ('gridftp::service'){
     Class[dmlite::plugins::mysql::config] ~> Class[gridftp::service]
   }
-  if defined (Class[dmlite::dome::service]){
-    Class[dmlite::plugins::mysql::config]  ~> Class[dmlite::dome::service]
-  }
-  file {'/etc/dmlite.conf.d/mysql.conf':
+
+  if $empty_conf {
+    file {'/etc/dmlite.conf.d/mysql.conf':
+          content => "",
+          owner   => $user,
+          group   => $group,
+        }
+    } else {
+    file {'/etc/dmlite.conf.d/mysql.conf':
        owner   => $user,
        group   => $group,
        mode    => '0750',
        content => template('dmlite/plugins/mysql.conf.erb'),
        require => Package['dmlite-plugins-mysql']
+    }
   }
 
   if $enable_io {

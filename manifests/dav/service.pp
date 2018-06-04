@@ -9,6 +9,7 @@ class dmlite::dav::service (
   $ns_max_replicas    = $dmlite::dav::ns_max_replicas,
   $ns_secure_redirect = $dmlite::dav::ns_secure_redirect,
   $ns_trusted_dns     = $dmlite::dav::ns_trusted_dns,
+  $ns_macaroon_secret = $dmlite::dav::ns_macaroon_secret,
   $disk_flags         = $dmlite::dav::disk_flags,
   $disk_anon          = $dmlite::dav::disk_anon,
   $ssl_cert           = $dmlite::dav::ssl_cert,
@@ -35,11 +36,20 @@ class dmlite::dav::service (
 ) {
 
   Class[dmlite::dav::config] ~> Class[dmlite::dav::service]
-  
-  Class[lcgdm::base::config] ~> Class[dmlite::dav::service]
 
-  $certificates_files = File["/etc/grid-security/$lcgdm::base::config::user/$lcgdm::base::config::cert",
-                             "/etc/grid-security/$lcgdm::base::config::user/$lcgdm::base::config::certkey"]
+  case $dmlite::dav::config::ns_type  {
+    'LFC': { 
+             $certfilename='lfccert.pem';
+             $keyfilename='lfckey.pem'
+           }
+    default: { 
+             $certfilename='dpmcert.pem';
+             $keyfilename='dpmkey.pem'
+           }
+  }
+
+  $certificates_files = File["/etc/grid-security/$dmlite::dav::config::user/$certfilename",
+                             "/etc/grid-security/$dmlite::dav::config::user/$keyfilename"]
 
   service { 'httpd':
     ensure     => running,

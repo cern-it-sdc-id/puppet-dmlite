@@ -9,6 +9,7 @@ class dmlite::plugins::domeadapter::config::disk (
   $token_life         = $dmlite::plugins::domeadapter::params::token_life,
   $adminuser          = undef,
   $empty_conf         = false,
+  $host_dn            = $dmlite::plugins::domeadapter::params::host_dn
 ) inherits dmlite::plugins::domeadapter::params {
 
   Class[dmlite::plugins::domeadapter::install] -> Class[dmlite::plugins::domeadapter::config::disk]
@@ -29,7 +30,8 @@ class dmlite::plugins::domeadapter::config::disk (
     token_life         => $token_life,
     adminuser          => $adminuser,
     disknode	       => true,
-    empty_conf 	       => $empty_conf
+    empty_conf 	       => $empty_conf,
+    host_dn            => $host_dn
   }
 
   dmlite::plugins::domeadapter::create_config{'disk_config_http':
@@ -47,7 +49,8 @@ class dmlite::plugins::domeadapter::config::disk (
     token_life         => $token_life,
     adminuser          => $adminuser,
     disknode           => true,
-    empty_conf         => $empty_conf
+    empty_conf         => $empty_conf,
+    host_dn            => $host_dn,
   }
 }
 

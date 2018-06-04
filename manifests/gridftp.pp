@@ -14,14 +14,20 @@ class dmlite::gridftp (
   $data_node           = 0,
   $remote_nodes        = undef,
   $enable_dome_checksum = false,
+  $legacy              = true,
 ) {
   File['/var/log/dpm-gsiftp'] -> Class[gridftp::config]
   Package['dpm-dsi'] -> Class[gridftp::config]
   Package['dpm-dsi'] -> File['/etc/sysconfig/dpm-gsiftp']
   Class['gridftp::config'] -> Exec['remove_globus-gridftp-server_init_management']
   Class[dmlite::gridftp] ~> Class['gridftp::service']
-  Class[lcgdm::base::config] -> Class[dmlite::gridftp]
 
+  if !$legacy {
+    Class[dmlite::base::config] -> Class[dmlite::gridftp]
+  }
+  else {
+    Class[lcgdm::base::config] -> Class[dmlite::gridftp]
+  }
   if $enable_hdfs {
     include dmlite::plugins::hdfs::params
     $java_home = $dmlite::plugins::hdfs::params::java_home
@@ -82,8 +88,8 @@ class dmlite::gridftp (
 
   class{'gridftp::service':
     service => 'dpm-gsiftp',
-    certificate => "/etc/grid-security/$lcgdm::base::config::user/$lcgdm::base::config::cert",
-    key => "/etc/grid-security/$lcgdm::base::config::user/$lcgdm::base::config::certkey",
+    certificate => "/etc/grid-security/$dmlite::gridftp::user/dpmcert.pem",
+    key => "/etc/grid-security/$dmlite::gridftp::user/dpmkey.pem",
     restart_on_cert_renewal => true
   }
 }

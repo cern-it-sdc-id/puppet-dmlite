@@ -2,7 +2,7 @@ class dmlite::plugins::domeadapter::install (
   $debuginfo = false,
   $uninstall = false,
 ) inherits dmlite::plugins::domeadapter::params {
-
+  
   include dmlite
   
   if !$uninstall {
