@@ -87,3 +87,8 @@ dpm.dmio
 <% if @digauth_filename  -%>
 xrootd.diglib * <%= @digauth_filename -%>
 <% end -%>
+
+<%# configure ofs.ckslib %>
+<% if @xrd_ofsckslib  -%>
+ofs.ckslib <%= @xrd_ofsckslib -%>
+<% end -%>
