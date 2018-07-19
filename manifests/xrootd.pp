@@ -30,7 +30,8 @@ class dmlite::xrootd (
   $dpm_xrdhttp_secret_key = '',
   $after_conf_head = 'network-online.target mariadb.service',
   $after_conf_disk = 'network-online.target',
-  $runtime_dir = 'dpmxrootd'
+  $runtime_dir = 'dpmxrootd',
+  $xrd_checksum = 'max 100 adler32 md5 crc32'
 ) {
 
   validate_bool($xrootd_use_voms)
@@ -106,7 +107,9 @@ class dmlite::xrootd (
       xrootd_monitor         => $xrootd_monitor,
       ofs_authlib            => 'libXrdDPMDiskAcc.so.3',
       ofs_authorize          => true,
-      xrd_ofsosslib          => 'libXrdDPMOss.so.3',
+      xrd_ofsosslib          => '+cksio libXrdDPMOss.so.3',
+      xrd_ofsckslib          => 'libXrdDPMCks.so.3',
+      xrootd_chksum          => $xrd_checksum,
       xrd_port               => $dpm_xrootd_serverport,
       xrd_network            => 'nodnr',
       xrd_report             => $xrd_report,
@@ -150,8 +153,10 @@ class dmlite::xrootd (
       xrootd_monitor        => $xrootd_monitor,
       ofs_authlib           => $ofs_authlib,
       ofs_authorize         => true,
-      xrd_ofsosslib         => 'libXrdDPMOss.so.3',
+      xrd_ofsosslib         => '+cksio libXrdDPMOss.so.3',
+      xrd_ofsckslib         => 'libXrdDPMCks.so.3',
       ofs_cmslib            => 'libXrdDPMFinder.so.3',
+      xrootd_chksum         => $xrd_checksum,
       ofs_forward           => 'all',
       xrd_network           => 'nodnr',
       xrd_report            => $xrd_report,

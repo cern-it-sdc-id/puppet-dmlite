@@ -29,7 +29,7 @@ define dmlite::xrootd::create_config (
   $xrd_network = $xrootd::config::xrd_network,
   $xrd_report = $xrootd::config::xrd_report,
   $xrootd_monitor = $xrootd::config::xrootd_monitor,
-
+  $xrootd_chksum = $xrootd::config::xrootd_chksum,
   $ofs_authlib = $xrootd::config::ofs_authlib,
   $ofs_authorize = $xrootd::config::ofs_authorize,
   $ofs_persist = $xrootd::config::ofs_persist,
@@ -39,7 +39,7 @@ define dmlite::xrootd::create_config (
   $ofs_cmslib = $xrootd::config::ofs_cmslib,
   $ofs_forward = $xrootd::config::ofs_forward,
   $ofs_tpc = $xrootd::config::ofs_tpc,
-
+  $xrd_ofsckslib = undef,
   $sec_protocol = $xrootd::config::sec_protocol,
 
   $pss_origin = $xrootd::config::pss_origin,
