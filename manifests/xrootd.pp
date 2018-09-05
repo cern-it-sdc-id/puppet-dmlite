@@ -49,7 +49,7 @@ class dmlite::xrootd (
   } else {
      Class[dmlite::base::config] -> Class[dmlite::xrootd]
   }
-  package {'dpm-xrootd':
+  package {'dmlite-dpm-xrootd':
     ensure => present
   }
 
