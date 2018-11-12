@@ -4,8 +4,8 @@ glb.role: head
 head.maxcallouts: 3
 head.maxcalloutspernode: 2
 
-head.maxchecksums: 3
-head.maxchecksumspernode: 2
+head.checksum.maxtotal: 3
+head.checksum.maxpernode: 2
 
 glb.db.host: localhost
 glb.db.user: dpmdbuser
