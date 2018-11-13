@@ -31,7 +31,8 @@ class dmlite::xrootd (
   $after_conf_head = 'network-online.target mariadb.service',
   $after_conf_disk = 'network-online.target',
   $runtime_dir = 'dpmxrootd',
-  $xrd_checksum = 'max 100 adler32 md5 crc32'
+  $xrd_checksum = 'max 100 adler32 md5 crc32',
+  $dpm_xrd_packagename = 'dmlite-dpm-xrootd'
 ) {
 
   validate_bool($xrootd_use_voms)
@@ -49,7 +50,7 @@ class dmlite::xrootd (
   } else {
      Class[dmlite::base::config] -> Class[dmlite::xrootd]
   }
-  package {'dmlite-dpm-xrootd':
+  package {$dpm_xrd_packagename:
     ensure => present
   }
 
