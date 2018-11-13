@@ -6,8 +6,8 @@ class dmlite::dome::params (
     $disk_debug 	= hiera('dmlite::dome::params::disk_debug', 1)
     $head_maxfilepulls   = hiera('dmlite::dome::params::head_maxfilepulls', 4)
     $head_maxfilepullspernode =  hiera('dmlite::dome::params::head_maxfilepullspernode', 2)
-    $head_maxchecksums  = hiera('dmlite::dome::params::head_maxchecksums', 200)
-    $head_maxchecksumspernode  = hiera('dmlite::dome::params::head_maxchecksumspernode', 100)
+    $head_checksum_maxtotal = hiera('dmlite::dome::params::head_checksum_maxtotal', 200)
+    $head_checksum_maxpernode = hiera('dmlite::dome::params::head_checksum_maxpernode', 100)
     $db_host 		= hiera('dmlite::dome::params::db_host', 'localhost')
     $db_user  		= hiera('dmlite::dome::params::db_user', 'dpmmgr')
     $db_password	= undef
