@@ -7,6 +7,7 @@ class dmlite::xrootd (
   $nshost = $::fqdn,
   $ns_basepath = 'dpm',
   $xrootd_use_voms = true,
+  $xrootd_use_delegation = false,
   $xrootd_monitor = undef,
   $xrd_report = undef,
   $xrd_dpmclassic = false,
@@ -82,14 +83,22 @@ class dmlite::xrootd (
   if member($nodetype, 'disk') {
 
     if $xrootd_use_voms {
-      $sec_protocol_disk = "/usr/${xrootd::config::xrdlibdir} gsi -crl:3 -key:/etc/grid-security/${lcgdm_user}/dpmkey.pem -cert:/etc/grid-security/${lcgdm_user}/dpmcert.pem -md:sha256:sha1 -ca:2 -gmapopt:10 -vomsfun:/usr/${xrootd::config::xrdlibdir}/libXrdSecgsiVOMS.so"
+      if $xrootd_use_delegation {
+          $sec_protocol_disk = "/usr/${xrootd::config::xrdlibdir} gsi -dlgpxy:1 -exppxy:=cred -crl:3 -key:/etc/grid-security/${lcgdm_user}/dpmkey.pem -cert:/etc/grid-security/${lcgdm_user}/dpmcert.pem -md:sha256:sha1 -ca:2 -gmapopt:10 -vomsfun:/usr/${xrootd::config::xrdlibdir}/libXrdSecgsiVOMS.so"
+      } else {
+          $sec_protocol_disk = "/usr/${xrootd::config::xrdlibdir} gsi -crl:3 -key:/etc/grid-security/${lcgdm_user}/dpmkey.pem -cert:/etc/grid-security/${lcgdm_user}/dpmcert.pem -md:sha256:sha1 -ca:2 -gmapopt:10 -vomsfun:/usr/${xrootd::config::xrdlibdir}/libXrdSecgsiVOMS.so"
+      }
     } else {
       $sec_protocol_disk = "/usr/${xrootd::config::xrdlibdir} gsi -crl:3 -key:/etc/grid-security/${lcgdm_user}/dpmkey.pem -cert:/etc/grid-security/${lcgdm_user}/dpmcert.pem -md:sha256:sha1 -ca:2 -gmapopt:10 -vomsat:0"
     }
 
     if $xrd_dpmclassic == false {
-      $ofs_tpc = 'pgm /usr/bin/xrdcp --server'
-    }
+        if $xrootd_use_delegation == false {
+            $ofs_tpc = 'pgm /usr/bin/xrdcp --server'
+        } else {
+            $ofs_tpc = 'fcreds gsi =X509_USER_PROXY pgm /usr/bin/xrdcp --server'
+        }
+    } 
 
     $xrootd_instances_options_disk = {
       'disk' => "-l /var/log/xrootd/xrootd.log -c /etc/xrootd/xrootd-dpmdisk.cfg ${log_style_param}"
@@ -184,13 +193,9 @@ class dmlite::xrootd (
     } else {
 	    $cms_cidtag = "${::fqdn}"
     }
-    #retrieving xrootd version and apply conf
 
-    if  versioncmp("${::package_dpm_xrootd}", '3.6.0') >= 0 {
-	    $oss_statlib = '-2 libXrdDPMStatInfo.so.3'
-    } else {
-	    $oss_statlib = undef
-    }
+    $oss_statlib = '-2 libXrdDPMStatInfo.so.3'
+    
     $federation_defaults = {
       dmlite_conf           => $dmlite_conf,
       dpm_host              => $dpmhost,
