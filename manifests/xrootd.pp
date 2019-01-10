@@ -32,6 +32,7 @@ class dmlite::xrootd (
   $after_conf_head = 'network-online.target mariadb.service',
   $after_conf_disk = 'network-online.target',
   $runtime_dir = 'dpmxrootd',
+  $xrd_checksum_enabled = false,
   $xrd_checksum = 'max 100 adler32 md5 crc32',
   $dpm_xrd_packagename = 'dmlite-dpm-xrootd'
 ) {
@@ -80,6 +81,18 @@ class dmlite::xrootd (
     }
   }
 
+  
+  #add possibility to disable xrd checksum
+  if $xrd_checksum_enabled {
+     $_xrd_checksum = $xrd_checksum
+     $_xrd_ofsckslib = '= libXrdDPMCks.so.3'
+     $_xrd_ofsosslib = '+cksio libXrdDPMOss.so.3'
+  } else {
+     $_xrd_checksum = undef
+     $_xrd_ofsckslib = undef
+     $_xrd_ofsosslib = 'libXrdDPMOss.so.3'
+  }
+
   if member($nodetype, 'disk') {
 
     if $xrootd_use_voms {
@@ -117,9 +130,9 @@ class dmlite::xrootd (
       xrootd_monitor         => $xrootd_monitor,
       ofs_authlib            => 'libXrdDPMDiskAcc.so.3',
       ofs_authorize          => true,
-      xrd_ofsosslib          => '+cksio libXrdDPMOss.so.3',
-      xrd_ofsckslib          => '= libXrdDPMCks.so.3',
-      xrootd_chksum          => $xrd_checksum,
+      xrd_ofsosslib          => $_xrd_ofsosslib,
+      xrd_ofsckslib          => $_xrd_ofsckslib,
+      xrootd_chksum          => $_xrd_checksum,
       xrd_port               => $dpm_xrootd_serverport,
       xrd_network            => 'nodnr',
       xrd_report             => $xrd_report,
@@ -163,10 +176,10 @@ class dmlite::xrootd (
       xrootd_monitor        => $xrootd_monitor,
       ofs_authlib           => $ofs_authlib,
       ofs_authorize         => true,
-      xrd_ofsosslib         => '+cksio libXrdDPMOss.so.3',
-      xrd_ofsckslib         => '= libXrdDPMCks.so.3',
+      xrd_ofsosslib         => $_xrd_ofsosslib,
+      xrd_ofsckslib         => $_xrd_ofsckslib,
+      xrootd_chksum         => $_xrd_checksum,
       ofs_cmslib            => 'libXrdDPMFinder.so.3',
-      xrootd_chksum         => $xrd_checksum,
       ofs_forward           => 'all',
       xrd_network           => 'nodnr',
       xrd_report            => $xrd_report,
