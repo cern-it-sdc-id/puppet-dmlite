@@ -97,7 +97,7 @@ class dmlite::xrootd (
 
     if $xrootd_use_voms {
       if $xrootd_use_delegation {
-          $sec_protocol_disk = "/usr/${xrootd::config::xrdlibdir} gsi -dlgpxy:1 -exppxy:=cred -crl:3 -key:/etc/grid-security/${lcgdm_user}/dpmkey.pem -cert:/etc/grid-security/${lcgdm_user}/dpmcert.pem -md:sha256:sha1 -ca:2 -gmapopt:10 -vomsfun:/usr/${xrootd::config::xrdlibdir}/libXrdSecgsiVOMS.so"
+          $sec_protocol_disk = "/usr/${xrootd::config::xrdlibdir} gsi -dlgpxy:1 -exppxy:=creds -crl:3 -key:/etc/grid-security/${lcgdm_user}/dpmkey.pem -cert:/etc/grid-security/${lcgdm_user}/dpmcert.pem -md:sha256:sha1 -ca:2 -gmapopt:10 -vomsfun:/usr/${xrootd::config::xrdlibdir}/libXrdSecgsiVOMS.so"
       } else {
           $sec_protocol_disk = "/usr/${xrootd::config::xrdlibdir} gsi -crl:3 -key:/etc/grid-security/${lcgdm_user}/dpmkey.pem -cert:/etc/grid-security/${lcgdm_user}/dpmcert.pem -md:sha256:sha1 -ca:2 -gmapopt:10 -vomsfun:/usr/${xrootd::config::xrdlibdir}/libXrdSecgsiVOMS.so"
       }
@@ -109,7 +109,7 @@ class dmlite::xrootd (
         if $xrootd_use_delegation == false {
             $ofs_tpc = 'pgm /usr/bin/xrdcp --server'
         } else {
-            $ofs_tpc = 'fcreds gsi =X509_USER_PROXY pgm /usr/bin/xrdcp --server'
+            $ofs_tpc = 'oids fcreds gsi =X509_USER_PROXY pgm /usr/bin/xrdcp --server'
         }
     } 
 
