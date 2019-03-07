@@ -12,7 +12,7 @@ class dmlite::dome::params (
     $db_user  		= hiera('dmlite::dome::params::db_user', 'dpmmgr')
     $db_password	= undef
     $db_port		= hiera('dmlite::dome::params::db_port', 0)
-    $db_pool_size	= hiera('dmlite::dome::params::db_pool_size', 512)
+    $db_pool_size	= hiera('dmlite::dome::params::db_pool_size', 128)
     $cnsdb_name         = hiera('dmlite::dome::params::cnsdb_name', 'cns_db')
     $dpmdb_name         = hiera('dmlite::dome::params::dpmdb_name', 'dpm_db')
     $head_task_maxrunningtime = hiera('dmlite::dome::params::head_task_maxrunningtime', 3600)
