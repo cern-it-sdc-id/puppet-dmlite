@@ -16,7 +16,7 @@ class dmlite::dav::params (
     $ssl_cert           = hiera('dmlite::dav::params::ssl_cert', '/etc/grid-security/hostcert.pem')
     $ssl_key            = hiera('dmlite::dav::params::ssl_key', '/etc/grid-security/hostkey.pem')
     $ssl_capath         = hiera('dmlite::dav::params::ssl_capath', '/etc/grid-security/certificates')
-    $ssl_ciphersuite    = hiera('dmlite::dav::params::ssl_ciphersuite', 'NULL-MD5:NULL:RC4-MD5:RC4:+LOW:+MEDIUM:+HIGH:+EXP')
+    $ssl_ciphersuite    = hiera('dmlite::dav::params::ssl_ciphersuite', 'RC4-SHA:AES128-SHA:HIGH:!aNULL:!MD5:!RC4')
     $ssl_options        = hiera('dmlite::dav::params::ssl_options','+StdEnvVars')
     $log_error          = hiera('dmlite::dav::params::log_error', 'logs/ssl_error_log')
     $log_transfer       = hiera('dmlite::dav::params::log_transfer', 'logs/ssl_access_log')
