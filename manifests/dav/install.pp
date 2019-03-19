@@ -16,6 +16,7 @@ class dmlite::dav::install (
   $ssl_key            = $dmlite::dav::ssl_key,
   $ssl_capath         = $dmlite::dav::ssl_capath,
   $ssl_options        = $dmlite::dav::ssl_options,
+  $ssl_ciphersuite    = $dmlite::dav::ssl_ciphersuite,
   $log_error          = $dmlite::dav::log_error,
   $log_transfer       = $dmlite::dav::log_transfer,
   $log_level          = $dmlite::dav::log_level,
