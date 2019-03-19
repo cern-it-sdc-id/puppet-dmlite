@@ -35,7 +35,7 @@ class dmlite::xrootd (
   $xrd_checksum_enabled = false,
   $xrd_checksum = 'max 100 adler32 md5 crc32',
   $dpm_xrd_packagename = 'dmlite-dpm-xrootd',
-  $dpm_xrdhttp_cipherlist = 'ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256'
+  $dpm_xrdhttp_cipherlist = 'HIGH'
 ) {
 
   validate_bool($xrootd_use_voms)
