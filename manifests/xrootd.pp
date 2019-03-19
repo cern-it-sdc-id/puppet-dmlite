@@ -34,7 +34,8 @@ class dmlite::xrootd (
   $runtime_dir = 'dpmxrootd',
   $xrd_checksum_enabled = false,
   $xrd_checksum = 'max 100 adler32 md5 crc32',
-  $dpm_xrd_packagename = 'dmlite-dpm-xrootd'
+  $dpm_xrd_packagename = 'dmlite-dpm-xrootd',
+  $dpm_xrdhttp_cipherlist = 'ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256'
 ) {
 
   validate_bool($xrootd_use_voms)
@@ -143,7 +144,8 @@ class dmlite::xrootd (
       use_dmlite_io          => $enable_hdfs,
       dpm_enable_dome        => $dpm_enable_dome,
       dpm_xrdhttp_secret_key => $dpm_xrdhttp_secret_key,
-      dpm_dome_conf_file     => '/etc/domedisk.conf'   
+      dpm_dome_conf_file     => '/etc/domedisk.conf',
+      dpm_xrdhttp_cipherlist => $dpm_xrdhttp_cipherlist
     }
   } else {
     $xrootd_instances_options_disk = {}
@@ -198,7 +200,8 @@ class dmlite::xrootd (
       dpm_xrootd_fedredirs  => $dpm_xrootd_fedredirs,
       dpm_enable_dome       => $dpm_enable_dome,
       dpm_xrdhttp_secret_key => $dpm_xrdhttp_secret_key,
-      dpm_dome_conf_file    => '/etc/domehead.conf'
+      dpm_dome_conf_file    => '/etc/domehead.conf',
+      dpm_xrdhttp_cipherlist => $dpm_xrdhttp_cipherlist
     }
     $l = size("${::fqdn}")
     if $l > 16 {

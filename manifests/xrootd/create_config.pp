@@ -64,7 +64,7 @@ define dmlite::xrootd::create_config (
   $dpm_enable_dome = false,
   $dpm_xrdhttp_secret_key = undef,
   $dpm_dome_conf_file = undef,
-  $dpm_xrdhttp_cipher_list = 'ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256',
+  $dpm_xrdhttp_cipher_list = undef
 ) {
   include xrootd::config
 
