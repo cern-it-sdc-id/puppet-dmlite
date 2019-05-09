@@ -15,6 +15,7 @@ class dmlite::gridftp (
   $remote_nodes        = undef,
   $enable_dome_checksum = false,
   $legacy              = true,
+  $dsi_package_name    = dmlite-dpm-dsi
 ) {
   File['/var/log/dpm-gsiftp'] -> Class[gridftp::config]
   Package['dpm-dsi'] -> Class[gridftp::config]
@@ -42,7 +43,7 @@ class dmlite::gridftp (
       $epsv_ip = true
     }
   }
-  package{'dpm-dsi': ensure => present}
+  package{$dsi_package_name: ensure => present}
 
   file {
     '/etc/sysconfig/dpm-gsiftp':
