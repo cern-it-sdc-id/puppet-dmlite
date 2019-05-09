@@ -51,7 +51,8 @@ class dmlite::dome::config (
   	file {
 	    '/etc/domehead.conf':
 	      ensure  => present,
-	      content => template("${domehead_template}");
+	      content => template("${domehead_template}"),
+              notify => Class[xrootd::service];
 	  }
   }
 
@@ -59,7 +60,8 @@ class dmlite::dome::config (
         file {
             '/etc/domedisk.conf':
               ensure  => present,
-              content => template("${domedisk_template}");
+              content => template("${domedisk_template}"),
+              notify => Class[xrootd::service];
           }
   }
 
