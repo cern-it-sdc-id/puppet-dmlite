@@ -18,8 +18,8 @@ class dmlite::gridftp (
   $dsi_package_name    = dmlite-dpm-dsi
 ) {
   File['/var/log/dpm-gsiftp'] -> Class[gridftp::config]
-  Package['dpm-dsi'] -> Class[gridftp::config]
-  Package['dpm-dsi'] -> File['/etc/sysconfig/dpm-gsiftp']
+  Package[$dsi_package_name] -> Class[gridftp::config]
+  Package[$dsi_package_name] -> File['/etc/sysconfig/dpm-gsiftp']
   Class['gridftp::config'] -> Exec['remove_globus-gridftp-server_init_management']
   Class[dmlite::gridftp] ~> Class['gridftp::service']
 
