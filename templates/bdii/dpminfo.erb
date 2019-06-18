@@ -4,8 +4,8 @@
 # "dome" : use the Dome info provider
 # "dpm-listspaces" : use dpm-listspaces
 # "none" or "" or unset : don't run
-DPM_INFO_PROVIDER=<%= @dpm_info_provider -%>
+DPM_INFO_PROVIDER=<%= @dpm_info_provider %>
 # Other variables
-DPM_INFO_CERT=<%= @ldap_host_cert -%>
-DPM_INFO_KEY=<%= @ldap_host_key -%>
-DPM_INFO_SITENAME=<%= @site_name -%>
+DPM_INFO_CERT=<%= @ldap_user_cert %>
+DPM_INFO_KEY=<%= @ldap_user_key %>
+DPM_INFO_SITENAME=<%= @site_name %>
