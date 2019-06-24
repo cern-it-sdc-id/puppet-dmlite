@@ -1,4 +1,5 @@
 class dmlite::dav::install (
+  $package_name       = $dmlite::dav::package_name,
   $dmlite_conf        = $dmlite::dav::dmlite_conf,
   $dmlite_disk_conf   = $dmlite::dav::dmlite_disk_conf,
   $ns_type            = $dmlite::dav::ns_type,
@@ -35,10 +36,9 @@ class dmlite::dav::install (
   $dav_https_port     = $dmlite::dav::dav_https_port,
 ) {
 
-    package {
-      'lcgdm-dav-server':
-        ensure => present;
-    }
+  package { $package_name:
+    ensure => present;
+  }
 
   $filecontent= template('dmlite/dav/fetch-crl-patch')
 

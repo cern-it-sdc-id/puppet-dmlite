@@ -1,5 +1,6 @@
 class dmlite::dav::params (
 ) inherits dmlite::params {
+    $package_name       = hiera('dmlite::dav::params::package_name','dmlite-apache-httpd')
     $dmlite_conf        = hiera('dmlite::dav::params::dmlite_conf','/etc/dmlite.conf')
     $dmlite_disk_conf   = hiera('dmlite::dav::params::dmlite_disk_conf','/etc/dmlite-disk.conf')
     $ns_type            = hiera('dmlite::dav::params::ns_type', 'Head')

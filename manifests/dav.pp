@@ -1,4 +1,5 @@
 class dmlite::dav (
+  $package_name       = $dmlite::dav::params::package_name,
   $dmlite_conf        = $dmlite::dav::params::dmlite_conf,
   $dmlite_disk_conf   = $dmlite::dav::params::dmlite_disk_conf,
   $ns_type            = $dmlite::dav::params::ns_type,
