@@ -8,6 +8,7 @@ class dmlite::xrootd (
   $ns_basepath = 'dpm',
   $xrootd_use_voms = true,
   $xrootd_use_delegation = false,
+  $xrootd_tpc_options = '',
   $xrootd_monitor = undef,
   $xrd_report = undef,
   $xrd_dpmclassic = false,
@@ -108,9 +109,9 @@ class dmlite::xrootd (
 
     if $xrd_dpmclassic == false {
         if $xrootd_use_delegation == false {
-            $ofs_tpc = 'pgm /usr/bin/xrdcp --server'
+            $ofs_tpc = "${xrootd_tpc_options} pgm /usr/bin/xrdcp --server"
         } else {
-            $ofs_tpc = 'oids fcreds gsi =X509_USER_PROXY pgm /usr/bin/xrdcp --server'
+            $ofs_tpc = "${xrootd_tpc_options} oids fcreds gsi =X509_USER_PROXY pgm /usr/bin/xrdcp --server"
         }
     } 
 
