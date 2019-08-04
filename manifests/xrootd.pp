@@ -307,7 +307,7 @@ class dmlite::xrootd (
 
   #use syconfig in SL6, systemd otherwise
 
-  if $::operatingsystemmajrelease and ($::operatingsystemmajrelease + 0) >= 7 {
+  if versioncmp($facts['os']['release']['major'], '7') >= 0 {
 
         if member($nodetype, 'disk') {
 
@@ -381,7 +381,7 @@ class dmlite::xrootd (
     content => $dpm_xrootd_sharedkey
   }
 
-  if $::operatingsystemmajrelease and ($::operatingsystemmajrelease + 0) >= 7 {
+  if versioncmp($facts['os']['release']['major'], '7') >= 0 {
 
 	 if member($nodetype, 'head') and  member($nodetype, 'disk') {
 		class{'xrootd::service':

@@ -24,7 +24,7 @@ class dmlite::plugins::domeadapter::config (
     dome_disk_url      => $dome_disk_url,    
     dome_head_url      => $dome_head_url,
     davix_ca_path      => $davix_ca_path,
-    davix_cert_path    => $davix_ca_cert_path,
+    davix_cert_path    => $davix_cert_path,
     davix_private_key_path => $davix_private_key_path,
     enable_io          => $enable_io,
     enable_ns          => $enable_ns,
