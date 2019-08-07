@@ -214,6 +214,8 @@ class dmlite::head (
        db_host      => "${mysql_host}",
        db_user      => "${mysql_username}",
        db_password  => "${mysql_password}",
+       cnsdb_name   => "${ns_db}",
+       dpmdb_name   => "${dpm_db}",
        headnode_domeurl => "http://${dpmhost}:1094/domehead",
        restclient_cli_xrdhttpkey => "${token_password}"
      } 
