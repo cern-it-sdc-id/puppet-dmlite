@@ -80,6 +80,7 @@ class dmlite::head (
     Package['dmlite-dpmhead-domeonly']
     ->
     class{'dmlite::db::dpm':
+      dbname => "${dpm_db}",
       dbuser => "${mysql_username}",
       dbpass => "${mysql_password}",
       dbhost => "${mysql_host}",
@@ -89,6 +90,7 @@ class dmlite::head (
     ->
     class{'dmlite::db::ns': 
       flavor => 'mysql',
+      dbname => "${ns_db}",
       dbuser => "${mysql_username}", 
       dbpass => "${mysql_password}",
       dbhost => "${mysql_host}",
