@@ -167,7 +167,7 @@ class dmlite::dav::config (
     }
   }
  #centOS7 changes
- if $::operatingsystemmajrelease and ($::operatingsystemmajrelease + 0) >= 7 { 
+ if versioncmp($facts['os']['release']['major'], '7') >= 0 {
    file {
      '/etc/httpd/conf.modules.d/00-dav.conf':
       ensure  => present,

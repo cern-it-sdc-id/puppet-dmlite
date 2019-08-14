@@ -1,6 +1,6 @@
 class dmlite::plugins::domeadapter::config::disk (
   $davix_ca_path      = $dmlite::plugins::domeadapter::params::davix_ca_path,
-  $davix_cert_path    = $dmlite::plugins::domeadapter::params::davix_ca_cert_path,
+  $davix_cert_path    = $dmlite::plugins::domeadapter::params::davix_cert_path,
   $davix_private_key_path = $dmlite::plugins::domeadapter::params::davix_private_key_path,
   $dome_head_url      = $dmlite::plugins::domeadapter::params::dome_head_url,
   $dome_disk_url      = $dmlite::plugins::domeadapter::params::dome_disk_url,
