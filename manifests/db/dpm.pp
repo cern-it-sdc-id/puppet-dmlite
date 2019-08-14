@@ -1,4 +1,5 @@
-class dmlite::db::dpm ($dbuser, $dbpass, $dbhost) inherits dmlite::db::params {
+class dmlite::db::dpm ($dbname, $dbuser, $dbpass, $dbhost) inherits dmlite::db::params {
+  include 'mysql::server'
 
   # the packaged db script explicitly creates the db, we don't want that
   file_line { 'dpm mysql commentcreate':
@@ -8,7 +9,7 @@ class dmlite::db::dpm ($dbuser, $dbpass, $dbhost) inherits dmlite::db::params {
     path   => '/usr/share/dmlite/dbscripts/dpm_mysql_db.sql'
   }
 
-  mysql::db { $dmlite::db::params::dpm_db:
+  mysql::db { $dbname:
     user     => "${dbuser}",
     password => "${dbpass}",
     host     => "${dbhost}",
@@ -24,14 +25,14 @@ class dmlite::db::dpm ($dbuser, $dbpass, $dbhost) inherits dmlite::db::params {
             password_hash => mysql_password($dbpass),
             provider      => 'mysql',
         }
-        mysql_grant { "${dbuser}@${::fqdn}/${dmlite::db::params::dpm_db}.*":
+        mysql_grant { "${dbuser}@${::fqdn}/${dbname}.*":
             ensure     => 'present',
             options    => ['GRANT'],
             privileges => ['ALL'],
             provider   => 'mysql',
             user       => "${dbuser}@${::fqdn}",
-            table      => "${dmlite::db::params::dpm_db}.*",
-            require    => [Mysql_database["${dmlite::db::params::dpm_db}"], Mysql_user["${dbuser}@${::fqdn}"], ],
+            table      => "${dbname}.*",
+            require    => [Mysql_database["${dbname}"], Mysql_user["${dbuser}@${::fqdn}"], ],
         }
   } 
 }
