@@ -8,7 +8,14 @@ class dmlite::db::ns ($flavor , $dbname, $dbuser, $dbpass, $dbhost) inherits dml
     line   => '-- CREATE DATABASE.*',
     path   => "/usr/share/dmlite/dbscripts/cns_mysql_db.sql"
   }
-
+  
+  # the packaged db script hardcode  the db name, we don't want that
+  file_line { 'cns mysql commentuse':
+    ensure => present,
+    match  => 'USE cns_db.*',
+    line   => '-- USE cns_db',
+    path   => '/usr/share/dmlite/dbscripts/cns_mysql_db.sql'
+  }
   #workaroundworkaround for missing / db creation
 
   file_line { 'workaround for missing / db creation':

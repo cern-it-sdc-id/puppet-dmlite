@@ -8,7 +8,14 @@ class dmlite::db::dpm ($dbname, $dbuser, $dbpass, $dbhost) inherits dmlite::db::
     line   => '-- CREATE DATABASE.*',
     path   => '/usr/share/dmlite/dbscripts/dpm_mysql_db.sql'
   }
-
+  # the packaged db script hardcode  the db name, we don't want that
+  file_line { 'dpm mysql commentuse':
+    ensure => present,
+    match  => 'USE dpm_db.*',
+    line   => '-- USE dpm_db',
+    path   => '/usr/share/dmlite/dbscripts/dpm_mysql_db.sql'
+  }
+  
   mysql::db { $dbname:
     user     => "${dbuser}",
     password => "${dbpass}",

@@ -174,7 +174,6 @@ class dmlite::head (
        }     
        exec{'upgradedb350':
          command => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/DPM_upgrade_mysql \"${mysql_host}\" \"${mysql_username}\" \"${mysql_password}\" \"${dpm_db}\" \"${ns_db}\"",
-         unless => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/check_schema_version \"${mysql_host}\" \"${mysql_username}\" \"${mysql_password}\" \"${dpm_db}\" \"${ns_db}\"",
          require => [ Class['dmlite::db::dpm'], Class['dmlite::db::ns'], Package['dmlite-dpmhead-domeonly']]
        }
      } else {
@@ -186,7 +185,6 @@ class dmlite::head (
        }      
        exec{'upgradedb350':
          command => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/DPM_upgrade_mysql \"${mysql_host}\" \"${mysql_username}\" \"${mysql_password}\" \"${dpm_db}\" \"${ns_db}\" ",
-         unless => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/check_schema_version \"${mysql_host}\" \"${mysql_username}\" \"${mysql_password}\" \"${dpm_db}\" \"${ns_db}\" ",
          require =>  [ Class['lcgdm'],  Package['dmlite-dpmhead']]
        }
      }
