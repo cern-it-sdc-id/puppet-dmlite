@@ -34,6 +34,7 @@ class dmlite::dav::config (
   $libdir             = $dmlite::dav::libdir,
   $dav_http_port      = $dmlite::dav::dav_http_port,
   $dav_https_port     = $dmlite::dav::dav_https_port,
+  $enable_srr_cgi     = $dmlite::dav::enable_srr_cgi,
 ) {
   validate_bool($enable_ns)
   validate_bool($enable_disk)
