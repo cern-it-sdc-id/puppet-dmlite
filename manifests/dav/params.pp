@@ -33,4 +33,5 @@ class dmlite::dav::params (
     $enable_keep_alive  = hiera('dmlite::dav::params::enable_keep_alive', true)
     $mpm_model          = hiera('dmlite::dav::params::mpm_model', '/usr/sbin/httpd.event')
     $enable_hdfs        = hiera('dmlite::dav::params::enable_hdfs', false)
+    $enable_srr_cgi     = hiera('dmlite::dav::params::enable_srr_cgi', true)
 }
