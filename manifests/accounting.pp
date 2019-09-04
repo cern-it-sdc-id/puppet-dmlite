@@ -22,7 +22,14 @@ class dmlite::accounting (
   $messaging_path = hiera('dmlite::accounting::messaging_path','/var/spool/apel/outgoing'),
 
   $site_name = hiera('dmlite::accounting::site_name',''),
-  $nsconfig =  hiera('dmlite::accounting::nsconfig','/usr/etc/NSCONFIG'), 
+  
+  $nsconfig = hiera('dmlite::accounting::nsconfig','/usr/etc/NSCONFIG'),
+
+  $dbhost = hiera('dmlite::accounting::dbhost','localhost'),
+  $dbuser = hiera('dmlite::accounting::dbuser',''),
+  $dbpwd = hiera('dmlite::accounting::dbpwd',''),
+  $nsdbname = hiera('dmlite::accounting::nsdbname','cns_db'),
+  $dpmdbname = hiera('dmlite::accounting::dpmdbname','dpm_db'),
 
   $log_file =  hiera('dmlite::accounting::log_file','/var/log/apel/ssmsend.log'),
   $log_level = hiera('dmlite::accounting::log_level', 'INFO'),
@@ -67,23 +74,30 @@ class dmlite::accounting (
     require => Package['apel-ssm']
   }
 
+  # do not break in case the new parameters are not defined
+  if $dbuser == '' {
+    $cron_content = inline_template("#!/bin/sh
+/bin/mkdir -p /var/spool/apel/outgoing/`date +%Y%m%d` && /usr/share/dmlite/StAR-accounting/star-accounting.py --reportgroups --nsconfig=<%= @nsconfig %> --site=<%= @site_name %> > /var/spool/apel/outgoing/`date +%Y%m%d`/`date +%Y%m%d%H%M%S` && ssmsend
+")  
+  } else {
+    $cron_content = inline_template("#!/bin/sh
+/bin/mkdir -p /var/spool/apel/outgoing/`date +%Y%m%d` && /usr/share/dmlite/StAR-accounting/star-accounting.py --reportgroups  --dbhost==<%= @dbhost =%> --dbuser==<%= @dbuser =%> --dbpwd==<%= @dbpwd =%> --nsdbname==<%= @nsdbname =%> --dpmdbname==<%= @dpmdbname =%> --site=<%= @site_name %> > /var/spool/apel/outgoing/`date +%Y%m%d`/`date +%Y%m%d%H%M%S` && ssmsend
+") 
+
+  }
+
   file {"/etc/cron.${cron_interval}/dmlite-StAR-accounting":
     ensure  => present,
     owner   => root,
     group   => root,
     mode    => '0755',
-    content => inline_template("#!/bin/sh
-/bin/mkdir -p /var/spool/apel/outgoing/`date +%Y%m%d` && /usr/share/dmlite/StAR-accounting/star-accounting.py --reportgroups --nsconfig=<%= @nsconfig %> --site=<%= @site_name %> > /var/spool/apel/outgoing/`date +%Y%m%d`/`date +%Y%m%d%H%M%S` && ssmsend
-"),
+    content => $cron_content,
     require => Package['apel-ssm']
   }
-
-  #cron { 'dmlite-star-accounting':
-  #  command => 'mkdir -p /var/spool/apel/outgoing/`date +\%Y\%m\%d` && /usr/share/dmlite/StAR-accounting/star-accounting.py --reportgroups --nsconfig=<%= @nsconfig %> --site="<%= @site_name %>" > /var/spool/apel/outgoing/`date +\%Y\%m\%d`/`date +\%Y\%m\%d\%H\%M\%S` && ssmsend',
-  #  user    => 'root',
-  #  hour    => fqdn_rand(6),
-  #  minute  => fqdn_rand(60),
-  #  require => Package['apel-ssm']
-  #}
+  
+  #purge old cron
+  cron { 'dmlite-star-accounting':
+    ensure => absent,
+  }
 
 }
