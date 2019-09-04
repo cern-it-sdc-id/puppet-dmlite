@@ -7,6 +7,7 @@
 #     site_name => 'praguelcg2',
 #   }
 class dmlite::accounting (
+  $enabled = hiera('dmlite::accounting::enabled',true),
   $cron_interval = hiera('dmlite::accounting::cron_interval','daily'),
   $bdii_url = hiera('dmlite::accounting::bdii_url','ldap://lcg-bdii.cern.ch:2170'),
   $broker_network = hiera('dmlite::accounting::broker_network','PROD'),
@@ -43,8 +44,10 @@ class dmlite::accounting (
   }
 
   # install
-  package {['python-daemon','python-ldap','python-lockfile','stomppy']:
-    ensure   => 'installed',
+  if $enabled {
+    package {['python-daemon','python-ldap','python-lockfile','stomppy']:
+      ensure => 'installed',
+    }
   }
   # apel-ssm also available in UMD repository
   if $ssm_url == '' {
@@ -61,13 +64,19 @@ class dmlite::accounting (
     fail("missing ssm_url on unsupported os ${facts['os']['family']} (${facts['os']['name']} ${facts['os']['release']['major']})")
   }
   package { 'apel-ssm':
-    ensure   => 'installed',
+    ensure => $enabled ? {
+      true => 'installed',
+      false => absent,
+    },
     source   => $ssm_package_url,
     provider => 'rpm'
   }
 
   file {'/etc/apel/sender.cfg':
-    ensure  => present,
+    ensure  => $enabled ? {
+      true => present,
+      false => absent,
+    },
     owner   => root,
     group   => root,
     content => template('dmlite/ssm/sender.cfg.erb'),
@@ -84,9 +93,12 @@ class dmlite::accounting (
 /bin/mkdir -p /var/spool/apel/outgoing/`date +%Y%m%d` && /usr/share/dmlite/StAR-accounting/star-accounting.py --reportgroups --dbhost=<%= @dbhost %> --dbuser=<%= @dbuser %> --dbpwd=<%= @dbpwd %> --nsdbname=<%= @nsdbname %> --dpmdbname=<%= @dpmdbname %> --site=<%= @site_name %> > /var/spool/apel/outgoing/`date +%Y%m%d`/`date +%Y%m%d%H%M%S` && ssmsend
 ')
   }
-
+  
   file {"/etc/cron.${cron_interval}/dmlite-StAR-accounting":
-    ensure  => present,
+    ensure  => $enabled ? {
+      true => present,
+      false => absent,
+    },
     owner   => root,
     group   => root,
     mode    => '0755',
