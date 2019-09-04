@@ -76,14 +76,13 @@ class dmlite::accounting (
 
   # do not break in case the new parameters are not defined
   if $dbuser == '' {
-    $cron_content = inline_template("#!/bin/sh
+    $cron_content = inline_template('#!/bin/sh
 /bin/mkdir -p /var/spool/apel/outgoing/`date +%Y%m%d` && /usr/share/dmlite/StAR-accounting/star-accounting.py --reportgroups --nsconfig=<%= @nsconfig %> --site=<%= @site_name %> > /var/spool/apel/outgoing/`date +%Y%m%d`/`date +%Y%m%d%H%M%S` && ssmsend
-")  
+')
   } else {
-    $cron_content = inline_template("#!/bin/sh
-/bin/mkdir -p /var/spool/apel/outgoing/`date +%Y%m%d` && /usr/share/dmlite/StAR-accounting/star-accounting.py --reportgroups  --dbhost==<%= @dbhost =%> --dbuser==<%= @dbuser =%> --dbpwd==<%= @dbpwd =%> --nsdbname==<%= @nsdbname =%> --dpmdbname==<%= @dpmdbname =%> --site=<%= @site_name %> > /var/spool/apel/outgoing/`date +%Y%m%d`/`date +%Y%m%d%H%M%S` && ssmsend
-") 
-
+    $cron_content = inline_template('#!/bin/sh
+/bin/mkdir -p /var/spool/apel/outgoing/`date +%Y%m%d` && /usr/share/dmlite/StAR-accounting/star-accounting.py --reportgroups --dbhost=<%= @dbhost %> --dbuser=<%= @dbuser %> --dbpwd=<%= @dbpwd %> --nsdbname=<%= @nsdbname %> --dpmdbname=<%= @dpmdbname %> --site=<%= @site_name %> > /var/spool/apel/outgoing/`date +%Y%m%d`/`date +%Y%m%d%H%M%S` && ssmsend
+')
   }
 
   file {"/etc/cron.${cron_interval}/dmlite-StAR-accounting":
