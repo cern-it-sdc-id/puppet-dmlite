@@ -1,3 +1,8 @@
+2019-09-05 Petr Vokac <petr.vokac@cern.ch>
+    * simpify StAR accounting
+    * configure SSR via CGI
+    * fix DB names conf
+    * fix deprecations
 2019-02-26 Andrea Manzi  <andrea.manzi@cern.ch>
     * fix conf for xrootd tpc delegation
     * raise dome limits
