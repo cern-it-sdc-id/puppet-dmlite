@@ -80,6 +80,7 @@ class dmlite::head (
     Package['dmlite-dpmhead-domeonly']
     ->
     class{'dmlite::db::dpm':
+      dbname => "${dpm_db}",
       dbuser => "${mysql_username}",
       dbpass => "${mysql_password}",
       dbhost => "${mysql_host}",
@@ -89,6 +90,7 @@ class dmlite::head (
     ->
     class{'dmlite::db::ns': 
       flavor => 'mysql',
+      dbname => "${ns_db}",
       dbuser => "${mysql_username}", 
       dbpass => "${mysql_password}",
       dbhost => "${mysql_host}",
@@ -172,7 +174,6 @@ class dmlite::head (
        }     
        exec{'upgradedb350':
          command => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/DPM_upgrade_mysql \"${mysql_host}\" \"${mysql_username}\" \"${mysql_password}\" \"${dpm_db}\" \"${ns_db}\"",
-         unless => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/check_schema_version \"${mysql_host}\" \"${mysql_username}\" \"${mysql_password}\" \"${dpm_db}\" \"${ns_db}\"",
          require => [ Class['dmlite::db::dpm'], Class['dmlite::db::ns'], Package['dmlite-dpmhead-domeonly']]
        }
      } else {
@@ -184,7 +185,6 @@ class dmlite::head (
        }      
        exec{'upgradedb350':
          command => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/DPM_upgrade_mysql \"${mysql_host}\" \"${mysql_username}\" \"${mysql_password}\" \"${dpm_db}\" \"${ns_db}\" ",
-         unless => "/bin/sh /usr/share/dmlite/dbscripts/upgrade/check_schema_version \"${mysql_host}\" \"${mysql_username}\" \"${mysql_password}\" \"${dpm_db}\" \"${ns_db}\" ",
          require =>  [ Class['lcgdm'],  Package['dmlite-dpmhead']]
        }
      }
@@ -214,6 +214,8 @@ class dmlite::head (
        db_host      => "${mysql_host}",
        db_user      => "${mysql_username}",
        db_password  => "${mysql_password}",
+       cnsdb_name   => "${ns_db}",
+       dpmdb_name   => "${dpm_db}",
        headnode_domeurl => "http://${dpmhost}:1094/domehead",
        restclient_cli_xrdhttpkey => "${token_password}"
      } 

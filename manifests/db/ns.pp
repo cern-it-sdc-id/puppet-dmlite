@@ -1,4 +1,5 @@
-class dmlite::db::ns ($flavor , $dbuser, $dbpass, $dbhost) inherits dmlite::db::params {
+class dmlite::db::ns ($flavor , $dbname, $dbuser, $dbpass, $dbhost) inherits dmlite::db::params {
+  include 'mysql::server'
 
   # the packaged db script explicitly creates the db, we don't want that
   file_line { "${flavor} mysql commentcreate":
@@ -7,7 +8,14 @@ class dmlite::db::ns ($flavor , $dbuser, $dbpass, $dbhost) inherits dmlite::db::
     line   => '-- CREATE DATABASE.*',
     path   => "/usr/share/dmlite/dbscripts/cns_mysql_db.sql"
   }
-
+  
+  # the packaged db script hardcode  the db name, we don't want that
+  file_line { 'cns mysql commentuse':
+    ensure => present,
+    match  => 'USE cns_db.*',
+    line   => '-- USE cns_db',
+    path   => '/usr/share/dmlite/dbscripts/cns_mysql_db.sql'
+  }
   #workaroundworkaround for missing / db creation
 
   file_line { 'workaround for missing / db creation':
@@ -16,7 +24,7 @@ class dmlite::db::ns ($flavor , $dbuser, $dbpass, $dbhost) inherits dmlite::db::
     path   => "/usr/share/dmlite/dbscripts/cns_mysql_db.sql"
   }
 
-  mysql::db { $dmlite::db::params::ns_db:
+  mysql::db { $dbname:
     user     => "${dbuser}",
     password => "${dbpass}",
     host     => "${dbhost}",
@@ -26,14 +34,14 @@ class dmlite::db::ns ($flavor , $dbuser, $dbpass, $dbhost) inherits dmlite::db::
 
   if $dbhost != 'localhost'  and $dbhost != "${::fqdn}" {
         #create the database grants for the user
-        mysql_grant { "${dbuser}@${::fqdn}/${dmlite::db::params::ns_db}.*":
+        mysql_grant { "${dbuser}@${::fqdn}/${dbname}.*":
             ensure     => 'present',
             options    => ['GRANT'],
             privileges => ['ALL'],
             provider   => 'mysql',
             user       => "${dbuser}@${::fqdn}",
-            table      => "${dmlite::db::params::ns_db}.*",
-            require    => [Mysql_database["${dmlite::db::params::ns_db}"], Mysql_user["${dbuser}@${::fqdn}"], ],
+            table      => "${dbname}.*",
+            require    => [Mysql_database["${dbname}"], Mysql_user["${dbuser}@${::fqdn}"], ],
         }
   }
 

@@ -1,7 +1,8 @@
-2019-08-04 Petr Vokac <petr.vokac@cern.ch>
-    * fix deprecation warnings
-2019-07-14 Petr Vokac <petr.vokac@cern.ch>
-    * LCGDM-2817 allow to configure epsv_match
+2019-09-05 Petr Vokac <petr.vokac@cern.ch>
+    * simpify StAR accounting
+    * configure SSR via CGI
+    * fix DB names conf
+    * fix deprecations
 2019-02-26 Andrea Manzi  <andrea.manzi@cern.ch>
     * fix conf for xrootd tpc delegation
     * raise dome limits
